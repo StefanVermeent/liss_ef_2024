@@ -19,7 +19,7 @@ trials <- tibble(
 trials <- trials |>
   mutate(
     valid1 = ifelse(type == lag(type,1) & type == lag(type,2) & type == lag(type,3), FALSE, TRUE),
-    valid2 = ifelse(stimulus == lag(stimulus,1) & type == lag(stimulus,2), FALSE, TRUE)
+    valid2 = ifelse(stimulus == lag(stimulus,1) & stimulus == lag(stimulus,2), FALSE, TRUE)
   )
 n = 1
 while(any(c(trials$valid1, trials$valid2) == FALSE, na.rm = T)) {
@@ -28,7 +28,7 @@ while(any(c(trials$valid1, trials$valid2) == FALSE, na.rm = T)) {
       type = c('first', sample(c(rep('repeat',32), rep('switch',32)), size = 64, replace = F)),
       stimulus = sample(c('1', '2', '3', '4', '6', '7', '8', '9'), 65, replace = T),
       valid1 = ifelse(type == lag(type,1) & type == lag(type,2) & type == lag(type,3), FALSE, TRUE),
-      valid2 = ifelse(stimulus == lag(stimulus,1) & type == lag(stimulus,2), FALSE, TRUE)
+      valid2 = ifelse(stimulus == lag(stimulus,1) & stimulus == lag(stimulus,2), FALSE, TRUE)
       )
 }
 
@@ -62,6 +62,6 @@ trials <- trials |>
 
 glue_data(
   trials,
-  "{{stimulus: {stimulus}, key_answer: '{key_answer}', data: {{rule: '{rule}', type: '{type}', variable: '{variable}', task: '{task}'}}}},"
+  "{{stim: {stimulus}, key_answer: '{key_answer}', data: {{rule: '{rule}', type: '{type}', variable: '{variable}', task: '{task}'}}}},"
 )
 

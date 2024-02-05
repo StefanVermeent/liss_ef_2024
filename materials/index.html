@@ -16,12 +16,18 @@
     <script src="global_variables.js"></script>
 
     <script src="P_posner/0_posner_setup.js"></script>
+    <script src="P_posner/1_posner_instructions.js"></script>
     <script src="P_posner/2_posner_procedure.js"></script>
 
     <script src="S_letter/0_letter_setup.js"></script>
     <script src="S_letter/2_letter_procedure.js"></script>
 
+    <script src="S_globallocal/0_globallocal_setup.js"></script>
+    <script src="S_globallocal/1_globallocal_instructions.js"></script>
+    <script src="S_globallocal/2_globallocal_procedure.js"></script>
+
     <script src="I_simon/0_simon_setup.js"></script>
+    <script src="I_simon/1_simon_instructions.js"></script>
     <script src="I_simon/2_simon_procedure.js"></script>
 
     <script src="I_flanker/0_flanker_setup.js"></script>
@@ -80,9 +86,15 @@ var cursor_on = {
  // SHUFFLE SHIFTING ORDER
 
 var posner_timeline = [
+  posner_welcome,
+  posner_instructions,
   cursor_off,
+  posner_practice_start,
+  posner_practice_procedure,
+  posner_practice_finish,
   posner_test_procedure,
-  cursor_on
+  cursor_on,
+  posner_end
 ]
 
 var letter_timeline = [
@@ -92,8 +104,15 @@ var letter_timeline = [
 ]
 
 var simon_timeline = [
+  simon_welcome,
+  simon_instructions,
+  cursor_off,
+  simon_practice_start,
+  simon_practice_procedure,
+  simon_practice_finish,
   simon_test_procedure,
-  cursor_on
+  cursor_on,
+  simon_end
 ]
 
 var colorshape_timeline = [
@@ -118,6 +137,10 @@ var colorshape_timeline = [
   colorshape_end
  ]
 
+ var globallocal_timeline = [
+   globallocal_welcome,
+   globallocal_instructions
+ ]
 var flanker_timeline = [
   flanker_welcome,
   flanker_instructions,
@@ -137,6 +160,6 @@ var jsPsych = initJsPsych({
   }
 });
 
-jsPsych.run(flanker_timeline);
+jsPsych.run(globallocal_timeline);
 </script>
 </html>

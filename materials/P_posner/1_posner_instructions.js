@@ -2,13 +2,13 @@
 var posner_welcome = {
   type: jsPsychInstructions,
   pages: [
-    "Welcome to the <b>posner</b> game!"
+    "Welkom bij het <b>Vergelijk</b> spel!"
   ],
   show_clickable_nav: true,
   allow_backward: true,
   key_forward: -1,
   key_backward: -1,
-  button_label_next: "continue",
+  button_label_next: "verder",
   data: {variable: 'welcome', task: "posner_practice"}
 };
 
@@ -17,38 +17,30 @@ var posner_instructions = {
   type: jsPsychInstructions,
   pages: [
     "<p style = 'text-align: center;'>"+
-      "In this game, you will see five arrows like the ones below.<br><br><br>" +
-      "<div style = 'font-size: 30px'>&larr;&larr;&larr;&larr;&larr;</div><br><br><br>" +
-      "Your job is to decide which way the <strong>middle arrow</strong> is pointing.<br><br><br>",
+      "In dit spel ziet u steeds twee letters naast elkaar<br><br>" +
+      "Uw taak is steeds om aan te geven of het <strong>dezelfde</strong> of <strong>verschillende</strong> letters zijn.<br><br>" +
+      "Dit is een voorbeeld van twee <i>dezelfde</i> letters: <strong>AA</strong><br>" +
+      "Dit is een voorbeeld van twee <i>verschillende</i> letters: <strong>bq</strong><br>",
 
-     "<p style = 'text-align: center;'>"+
-      "Sometimes, all the arrows point the <strong>same</strong> way.<br><br><br>" +
-      "<div style = 'font-size: 30px'>&larr;&larr;&larr;&larr;&larr;</div><br><br><br>",
-
-     "<p style = 'text-align: center;'>"+
-      "Other times, the arrows point a <strong>different</strong> way.<br><br><br>" +
-      "<div style = 'font-size: 30px'>&larr;&larr;&rarr;&larr;&larr;</div><br><br><br>",
+      "De letters kunnen zowel <i>hoofdletters</i> als <i>kleine letters</i> zijn.<br>" +
+      "Dit maakt niet uit voor uw keuze.<br><br>" +
+      "<strong>bB</strong> en <strong>bb</strong> zijn allebei voorbeelden van twee <i>dezelfde</i> letters.<br>" +
+      "<strong>aq</strong> en <strong>Aq</strong> zijn allebei voorbeelden van twee <i>verschillende</i> letters.<br>",
 
       "<p style = 'text-align: center;'>"+
-      "You should <i>always</i> look at the <strong>middle arrow</strong> and ignore the others.<br><br>" +
-
-      "<div style = 'float: left;'>If it points LEFT<br>press the LEFT (&larr;) key.</div>" +
-      "<div style = 'float: right;'>If it points RIGHT<br>press the RIGHT (&rarr;) key.</div><br><br><br><br>" +
-
-      "In the example below, the middle arrow points left,<br>" +
-      "so you would press the left key.<br><br>" +
-      "<div style = 'font-size: 30px'>&rarr;&rarr;&larr;&rarr;&rarr;</div></p><br><br><br>",
+      "<div style = 'width: 200px; padding: 20px; float: left;'>Als het dezelfde<br>letters zijn,<br>druk dan op de<br>'A'-toets.<br><br><strong>fF</strong></div>" +
+      "<div style = 'width: 200px; padding: 20px; float: right;'>Als het verschillende<br>letters zijn,<br>druk dan op de<br>'L'-toets.<br><br><strong>Qa</strong></div><br><br><br><br>",
 
      "<p style = 'text-align: center;'>"+
-      "Try to respond as fast and as correctly as possible.<br><br>" +
-      "Click 'continue' to practice this game<br><br><br>"
+      "Antwoord zo snel als u kunt zonder fouten te maken.<br>Af en toe een fout maken is niet erg. Ga in dat geval gewoon door.<br><br>" +
+      "Klik op 'verder' om het spel te oefenen.<br><br><br>"
   ],
   show_clickable_nav: true,
   allow_backward: true,
   key_forward: -1,
   key_backward: -1,
-  button_label_next: "continue",
-  button_label_previous: "go back",
+  button_label_next: "verder",
+  button_label_previous: "ga terug",
   data: {variable: "instructions", task: "posner_practice"}
 };
 
@@ -57,31 +49,34 @@ var posner_instructions = {
 var posner_practice_start = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus:    "<p style = 'text-align: center;'>" +
-      "You will practice the game <strong>8 times</strong>.<br><br>" +
-      "Place your fingers on the left (&larr;) and right (&rarr;) arrow keys.<br><br>" +
-      "When you are ready to practice, press any key to start.",
+      "U gaat het spel nu <strong>8 keer</strong> oefenen.<br><br>" +
+      "Plaats uw vingers op de 'A'-toets (HETZELFDE) en 'L'-toets (VERSCHILLEND) op uw toetsenbord.<br><br>" +
+      "Druk op een willekeurige toets als u klaar bent om te oefenen.",
   choices: "ALL_KEYS",
   data: {variable: "practice_start", task: "posner_practice"}
 };
 
 
-var posner_practice = {
+var posner_practice_letters = {
     type: jsPsychHtmlKeyboardResponse,
-    stimulus: function() {
-      return jsPsych.timelineVariable('practice_stim')
-    },
-    choices: ['ArrowLeft', 'ArrowRight'],
+  stimulus: function(){
+    var stim = '<p style="font-size:80px;font-weight:bold;">'+jsPsych.timelineVariable('stim1')+jsPsych.timelineVariable('stim2')+'</p>'
+    return stim
+  },
+  choices: ['A', 'L'],
     data: {
       variable: 'practice',
       task: 'posner_practice',
-      location: function(){
-        return jsPsych.timelineVariable('location')
-      },
-      stimtype: function(){
-        return jsPsych.timelineVariable('stimtype')
-      }
+      condition: function(){
+      return jsPsych.timelineVariable('condition')
+    },
+    correct_response: function(){
+      return jsPsych.timelineVariable('correct_response')
+    }
     },
     on_finish: function(data) {
+      console.log(data.response)
+      console.log(jsPsych.timelineVariable('correct_response', true))
       if(jsPsych.pluginAPI.compareKeys(data.response, jsPsych.timelineVariable('correct_response', true))) {
         data.correct = true;
       } else {
@@ -90,20 +85,18 @@ var posner_practice = {
     }
 };
 
-
 var posner_practice_procedure = {
-  timeline: [posner_fixation, posner_practice, feedback],
+  timeline: [posner_fixation, posner_practice_letters, feedback],
   timeline_variables: [
-    {location: 'top',    correct_response: 'ArrowLeft',  stimtype: 'congruent_left',    practice_stim: location_stim(up='&larr;&larr;&larr;&larr;&larr;', down=null)},
-    {location: 'top',    correct_response: 'ArrowRight', stimtype: 'congruent_right',   practice_stim: location_stim(up='&rarr;&rarr;&rarr;&rarr;&rarr;', down=null)},
-    {location: 'top',    correct_response: 'ArrowLeft',  stimtype: 'incongruent_left',  practice_stim: location_stim(up='&rarr;&rarr;&larr;&rarr;&rarr;', down=null)},
-    {location: 'top',    correct_response: 'ArrowRight', stimtype: 'incongruent_right', practice_stim: location_stim(up='&larr;&larr;&rarr;&larr;&larr;', down=null)},
-    {location: 'bottom', correct_response: 'ArrowLeft',  stimtype: 'congruent_left',    practice_stim: location_stim(up=null, down='&larr;&larr;&larr;&larr;&larr;')},
-    {location: 'bottom', correct_response: 'ArrowRight', stimtype: 'congruent_right',   practice_stim: location_stim(up=null, down='&rarr;&rarr;&rarr;&rarr;&rarr;')},
-    {location: 'bottom', correct_response: 'ArrowLeft',  stimtype: 'incongruent_left',  practice_stim: location_stim(up=null, down='&rarr;&rarr;&larr;&rarr;&rarr;')},
-    {location: 'bottom', correct_response: 'ArrowRight', stimtype: 'incongruent_right', practice_stim: location_stim(up=null, down='&larr;&larr;&rarr;&larr;&larr;')},
+    {stim1: 'Q', stim2: 'q', condition: 'same',      correct_response: 'A'},
+    {stim1: 'a', stim2: 'a', condition: 'same',      correct_response: 'A'},
+    {stim1: 'h', stim2: 'b', condition: 'different', correct_response: 'L'},
+    {stim1: 'B', stim2: 'b', condition: 'same',      correct_response: 'A'},
+    {stim1: 'A', stim2: 'F', condition: 'different', correct_response: 'L'},
+    {stim1: 'q', stim2: 'B', condition: 'different', correct_response: 'L'},
+    {stim1: 'f', stim2: 'f', condition: 'same',      correct_response: 'A'},
+    {stim1: 'B', stim2: 'a', condition: 'different', correct_response: 'L'},
   ],
-  randomize_order: true,
   repetitions: 1,
 };
 
@@ -113,10 +106,10 @@ var posner_practice_procedure = {
 var posner_practice_finish = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: "<p style = 'text-align: center;'>" +
-  "Great job!<br><br>" +
-  "You will now play the actual game.<br><br>" +
-  "The game will last for about two minutes. From now on you will not receive feedback after each response.<br><br>" +
-  "Press any key to begin! <br><br>",
+  "Goed gedaan!<br><br>" +
+  "U gaat nu het echte spel spelen.<br><br>" +
+  "Het spel duurt ongeveer 2 minuten. Vanaf nu ontvangt u geen feedback meer.<br><br>" +
+  "Druk op een willekeurige knop om te beginnen! <br><br>",
   choices: "ALL_KEYS",
   data: {variable: "practice_finish", task: "posner_practice"}
 };
@@ -124,9 +117,9 @@ var posner_practice_finish = {
 var posner_end = {
   type: jsPsychHtmlButtonResponse,
   stimulus:
-  "Great job!<br><br>" +
-  "You are now finished playing the <strong>posner</strong> game.<br><br>" +
-  "Click 'finish' to continue.<br><br>",
-  choices: ['Finish'],
+  "Goed gedaan!<br><br>" +
+  "U bent nu klaar met het spelen van het <strong>Vergelijk</strong> spel.<br><br>" +
+  "Klik op 'verder' om verder te gaan.<br><br>",
+  choices: ['verder'],
   data: {variable: "end", task: "posner_practice"}
 };

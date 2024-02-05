@@ -2,13 +2,13 @@
 var simon_welcome = {
   type: jsPsychInstructions,
   pages: [
-    "Welcome to the <b>simon</b> game!"
+    "Welkom bij het <b>Richtingen</b> spel!"
   ],
   show_clickable_nav: true,
   allow_backward: true,
   key_forward: -1,
   key_backward: -1,
-  button_label_next: "continue",
+  button_label_next: "verder",
   data: {variable: 'welcome', task: "simon_practice"}
 };
 
@@ -17,38 +17,21 @@ var simon_instructions = {
   type: jsPsychInstructions,
   pages: [
     "<p style = 'text-align: center;'>"+
-      "In this game, you will see five arrows like the ones below.<br><br><br>" +
-      "<div style = 'font-size: 30px'>&larr;&larr;&larr;&larr;&larr;</div><br><br><br>" +
-      "Your job is to decide which way the <strong>middle arrow</strong> is pointing.<br><br><br>",
+      "In dit spel ziet u steeds het woord 'LINKS' of 'RECHTS'.<br><br>" +
+      "Als u het woord 'LINKS' ziet, drukt u op de 'A'-toets op uw toetsenbord.<br>" +
+      "Als u het woord 'RECHTS' ziet, drukt u op de 'L'-toets op uw toetsenbord.<br>",
+
 
      "<p style = 'text-align: center;'>"+
-      "Sometimes, all the arrows point the <strong>same</strong> way.<br><br><br>" +
-      "<div style = 'font-size: 30px'>&larr;&larr;&larr;&larr;&larr;</div><br><br><br>",
-
-     "<p style = 'text-align: center;'>"+
-      "Other times, the arrows point a <strong>different</strong> way.<br><br><br>" +
-      "<div style = 'font-size: 30px'>&larr;&larr;&rarr;&larr;&larr;</div><br><br><br>",
-
-      "<p style = 'text-align: center;'>"+
-      "You should <i>always</i> look at the <strong>middle arrow</strong> and ignore the others.<br><br>" +
-
-      "<div style = 'float: left;'>If it points LEFT<br>press the LEFT (&larr;) key.</div>" +
-      "<div style = 'float: right;'>If it points RIGHT<br>press the RIGHT (&rarr;) key.</div><br><br><br><br>" +
-
-      "In the example below, the middle arrow points left,<br>" +
-      "so you would press the left key.<br><br>" +
-      "<div style = 'font-size: 30px'>&rarr;&rarr;&larr;&rarr;&rarr;</div></p><br><br><br>",
-
-     "<p style = 'text-align: center;'>"+
-      "Try to respond as fast and as correctly as possible.<br><br>" +
-      "Click 'continue' to practice this game<br><br><br>"
+      "Antwoord zo snel als u kunt zonder fouten te maken.<br>Af en toe een fout maken is niet erg. Ga in dat geval gewoon door.<br><br>" +
+      "Klik op 'verder' om het spel te oefenen.<br><br><br>"
   ],
   show_clickable_nav: true,
   allow_backward: true,
   key_forward: -1,
   key_backward: -1,
-  button_label_next: "continue",
-  button_label_previous: "go back",
+  button_label_next: "verder",
+  button_label_previous: "ga terug",
   data: {variable: "instructions", task: "simon_practice"}
 };
 
@@ -57,54 +40,69 @@ var simon_instructions = {
 var simon_practice_start = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus:    "<p style = 'text-align: center;'>" +
-      "You will practice the game <strong>8 times</strong>.<br><br>" +
-      "Place your fingers on the left (&larr;) and right (&rarr;) arrow keys.<br><br>" +
-      "When you are ready to practice, press any key to start.",
+      "U gaat het spel nu <strong> 8 keer</strong> oefenen.<br><br>" +
+      "Plaats uw vingers op de 'A'-toets en 'L'-toets op uw toetsenbord.<br><br>" +
+      "Druk op een willekeurige knop als u klaar bent om te oefenen.",
   choices: "ALL_KEYS",
   data: {variable: "practice_start", task: "simon_practice"}
 };
 
 
 var simon_practice = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: function() {
-      return jsPsych.timelineVariable('practice_stim')
-    },
-    choices: ['ArrowLeft', 'ArrowRight'],
-    data: {
-      variable: 'practice',
-      task: 'simon_practice',
-      location: function(){
-        return jsPsych.timelineVariable('location')
-      },
-      stimtype: function(){
-        return jsPsych.timelineVariable('stimtype')
-      }
-    },
-    on_finish: function(data) {
-      if(jsPsych.pluginAPI.compareKeys(data.response, jsPsych.timelineVariable('correct_response', true))) {
-        data.correct = true;
-      } else {
-        data.correct = false;
-      }
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: function(){
+    var stim = ""
+
+    if (jsPsych.timelineVariable('location') == 'left'){
+      stim += "<div class='grid-container'>" +
+                "<div style='font-size: 30px;'>" + jsPsych.timelineVariable('stim') + "</div>" +
+                "<div style='font-size: 60px'>+</div>" +
+                "<div style='font-size: 30px;'></div>" +
+              "</div>"
     }
+    if (jsPsych.timelineVariable('location') == 'right'){
+      stim += "<div class='grid-container'>" +
+                "<div style='font-size: 30px;'></div>" +
+                "<div style='font-size: 60px'>+</div>" +
+                "<div style='font-size: 30px;'>" + jsPsych.timelineVariable('stim') + "</div>" +
+              "</div>"
+    }
+    return stim
+  },
+  choices: ['A', 'L'],
+  data: {
+    variable: 'practice',
+    task: 'simon_practice',
+    location: function(){
+      return jsPsych.timelineVariable('location')
+    },
+    stimtype: function(){
+      return jsPsych.timelineVariable('stimtype')
+    },
+    correct_response: function(){
+      return jsPsych.timelineVariable('correct_response')
+    }
+  },
+  on_finish: function(data) {
+    if(jsPsych.pluginAPI.compareKeys(data.response, jsPsych.timelineVariable('correct_response', true))) {
+      data.correct = true;
+    } else {
+      data.correct = false;
+    }
+  }
 };
 
 
 var simon_practice_procedure = {
   timeline: [simon_fixation, simon_practice, feedback],
   timeline_variables: [
-    {location: 'top',    correct_response: 'ArrowLeft',  stimtype: 'congruent_left',    practice_stim: location_stim(up='&larr;&larr;&larr;&larr;&larr;', down=null)},
-    {location: 'top',    correct_response: 'ArrowRight', stimtype: 'congruent_right',   practice_stim: location_stim(up='&rarr;&rarr;&rarr;&rarr;&rarr;', down=null)},
-    {location: 'top',    correct_response: 'ArrowLeft',  stimtype: 'incongruent_left',  practice_stim: location_stim(up='&rarr;&rarr;&larr;&rarr;&rarr;', down=null)},
-    {location: 'top',    correct_response: 'ArrowRight', stimtype: 'incongruent_right', practice_stim: location_stim(up='&larr;&larr;&rarr;&larr;&larr;', down=null)},
-    {location: 'bottom', correct_response: 'ArrowLeft',  stimtype: 'congruent_left',    practice_stim: location_stim(up=null, down='&larr;&larr;&larr;&larr;&larr;')},
-    {location: 'bottom', correct_response: 'ArrowRight', stimtype: 'congruent_right',   practice_stim: location_stim(up=null, down='&rarr;&rarr;&rarr;&rarr;&rarr;')},
-    {location: 'bottom', correct_response: 'ArrowLeft',  stimtype: 'incongruent_left',  practice_stim: location_stim(up=null, down='&rarr;&rarr;&larr;&rarr;&rarr;')},
-    {location: 'bottom', correct_response: 'ArrowRight', stimtype: 'incongruent_right', practice_stim: location_stim(up=null, down='&larr;&larr;&rarr;&larr;&larr;')},
+    {location: 'left',    correct_response: 'A', stimtype: 'congruent',   stim: "LINKS"},
+    {location: 'left',    correct_response: 'L', stimtype: 'incongruent', stim: "RECHTS"},
+    {location: 'right',   correct_response: 'L', stimtype: 'congruent',   stim: "RECHTS"},
+    {location: 'right',   correct_response: 'A', stimtype: 'incongruent', stim: "LINKS"},
   ],
   randomize_order: true,
-  repetitions: 1,
+  repetitions: 2,
 };
 
 
@@ -113,10 +111,10 @@ var simon_practice_procedure = {
 var simon_practice_finish = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: "<p style = 'text-align: center;'>" +
-  "Great job!<br><br>" +
-  "You will now play the actual game.<br><br>" +
-  "The game will last for about two minutes. From now on you will not receive feedback after each response.<br><br>" +
-  "Press any key to begin! <br><br>",
+  "Goed gedaan!<br><br>" +
+  "U gaat nu het echte spel spelen.<br><br>" +
+  "Dit spel duurt ongeveer 2 minuten. Vanaf nu krijgt u geen feedback meer.<br><br>" +
+  "Druk op een willekeurige knop om te beginnen! <br><br>",
   choices: "ALL_KEYS",
   data: {variable: "practice_finish", task: "simon_practice"}
 };
@@ -124,9 +122,9 @@ var simon_practice_finish = {
 var simon_end = {
   type: jsPsychHtmlButtonResponse,
   stimulus:
-  "Great job!<br><br>" +
-  "You are now finished playing the <strong>simon</strong> game.<br><br>" +
-  "Click 'finish' to continue.<br><br>",
-  choices: ['Finish'],
+  "Goed gedaan!<br><br>" +
+  "U bent nu klaar met het <strong>Richtingen</strong> spel.<br><br>" +
+  "Klik op 'verder' om verder te gaan.<br><br>",
+  choices: ['verder'],
   data: {variable: "end", task: "simon_practice"}
 };
