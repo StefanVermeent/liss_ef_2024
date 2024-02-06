@@ -19,8 +19,16 @@
     <script src="P_posner/1_posner_instructions.js"></script>
     <script src="P_posner/2_posner_procedure.js"></script>
 
-    <script src="S_letter/0_letter_setup.js"></script>
-    <script src="S_letter/2_letter_procedure.js"></script>
+    <script src="S_colorshape/0_colorshape_setup.js"></script>
+    <script src="S_colorshape/1_colorshape_practice.js"></script>
+    <script src="S_colorshape/2_colorshape_procedure.js"></script>
+    <script src="S_colorshape/3_colorshape_end.js"></script>
+
+    <script src="S_animacysize/0_animacysize_setup.js"></script>
+    <script src="S_animacysize/1_animacysize_practice.js"></script>
+    <script src="S_animacysize/2_animacysize_procedure.js"></script>
+    <script src="S_animacysize/3_animacysize_end.js"></script>
+
 
     <script src="S_globallocal/0_globallocal_setup.js"></script>
     <script src="S_globallocal/1_globallocal_instructions.js"></script>
@@ -34,10 +42,7 @@
     <script src="I_flanker/1_flanker_instructions.js"></script>
     <script src="I_flanker/2_flanker_procedure.js"></script>
 
-    <script src="S_colorshape/0_colorshape_setup.js"></script>
-    <script src="S_colorshape/1_colorshape_practice.js"></script>
-    <script src="S_colorshape/2_colorshape_procedure.js"></script>
-    <script src="S_colorshape/3_colorshape_end.js"></script>
+
 
     <link href="https://unpkg.com/jspsych@7.3.2/css/jspsych.css" rel="stylesheet" type="text/css" />
     <style>
@@ -57,33 +62,14 @@
   <body></body>
   <script>
 
-  // General variables
-var fullscreenmode = {
-  type: jsPsychFullscreen,
-  fullscreen_mode: true
-};
 
-var cursor_off = {
-    type: jsPsychCallFunction,
-    func: function() {
-        document.body.style.cursor= "none";
-    }
-};
-
-var cursor_on = {
-    type: jsPsychCallFunction,
-    func: function() {
-        document.body.style.cursor= "auto";
-    }
-};
 
 // START OF TIMELINE
   timeline_start = [
     fullscreenmode
   ]
 
-
- // SHUFFLE SHIFTING ORDER
+// PROCESSING SPEED TASK
 
 var posner_timeline = [
   posner_welcome,
@@ -97,11 +83,7 @@ var posner_timeline = [
   posner_end
 ]
 
-var letter_timeline = [
-  cursor_off,
-  letter_test_procedure01,
-  cursor_on,
-]
+// INHIBITION TASKS
 
 var simon_timeline = [
   simon_welcome,
@@ -115,32 +97,6 @@ var simon_timeline = [
   simon_end
 ]
 
-var colorshape_timeline = [
-  colorshape_shape_instructions,
-  cursor_off,
-  colorshape_shape_practice_loop,
-  cursor_on,
-  colorshape_shape_confirmation,
-  colorshape_color_instructions,
-  cursor_off,
-  colorshape_color_practice_loop,
-  cursor_on,
-  colorshape_color_confirmation,
-  colorshape_full_instructions,
-  cursor_off,
-  colorshape_procedure1,
-  cursor_on,
-  colorshape_interblock,
-  cursor_off,
-  colorshape_procedure2,
-  cursor_on,
-  colorshape_end
- ]
-
- var globallocal_timeline = [
-   globallocal_welcome,
-   globallocal_instructions
- ]
 var flanker_timeline = [
   flanker_welcome,
   flanker_instructions,
@@ -153,6 +109,74 @@ var flanker_timeline = [
   flanker_end
 ]
 
+// ATTENTION SHIFTING TASKS
+
+var colorshape_timeline = [
+  colorshape_welcome,
+  colorshape_shape_instructions,
+  cursor_off,
+  colorshape_shape_practice_loop,
+  cursor_on,
+  colorshape_color_instructions,
+  cursor_off,
+  colorshape_color_practice_loop,
+  cursor_on,
+  colorshape_full_instructions,
+  cursor_off,
+  colorshape_test_start,
+  colorshape_procedure1,
+  cursor_on,
+  colorshape_interblock,
+  cursor_off,
+  colorshape_procedure2,
+  cursor_on,
+  colorshape_end
+ ]
+
+ var animacysize_timeline = [
+  animacysize_test_start,
+  animacysize_procedure1,
+  animacysize_welcome,
+  animacysize_animacy_instructions,
+  cursor_off,
+  animacysize_animacy_practice_loop,
+  cursor_on,
+  animacysize_size_instructions,
+  cursor_off,
+  animacysize_size_practice_loop,
+  cursor_on,
+  animacysize_full_instructions,
+  cursor_off,
+
+  cursor_on,
+  animacysize_interblock,
+  cursor_off,
+  animacysize_procedure2,
+  cursor_on,
+  animacysize_end
+ ]
+
+ var globallocal_timeline = [
+   globallocal_welcome,
+   globallocal_instructions,
+   cursor_off,
+   globallocal_practice_start,
+   globallocal_practice,
+   cursor_on,
+   globallocal_practice_end,
+   cursor_off,
+   globallocal_test_start,
+   globallocal_procedure1,
+   cursor_on,
+   globallocal_interblock,
+   cursor_off,
+   globallocal_test_start,
+   globallocal_procedure2,
+   cursor_on,
+   globallocal_end
+ ]
+
+
 var jsPsych = initJsPsych({
   on_finish: function() {
     tasks_start            = jsPsych.getStartTime();
@@ -160,6 +184,6 @@ var jsPsych = initJsPsych({
   }
 });
 
-jsPsych.run(globallocal_timeline);
+jsPsych.run(animacysize_timeline);
 </script>
 </html>

@@ -59,24 +59,24 @@ var globallocal_practice_start = {
 
 var globallocal_practice = {
   type: jsPsychCategorizeHtml,
-  choices: ['g','l'],
+  choices: ['A','L'],
   correct_text: "<h1 style='text-align:center;'>Goed</h1>",
   incorrect_text:"<h1 style='text-align:center;'>Fout</h1>",
   show_stim_with_feedback: false,
   feedback_duration: 1000,
   stimulus: function(){return(jsPsych.timelineVariable('stimulus'))},
   timeline: [
-    {stimulus: Gh_Lt, key_answer: 'g', data: {rule: 'global', type: 'first', variable: 'globallocal_prac', task: 'globallocal'}},
-    {stimulus: Ge_Lf, key_answer: 'g', data: {rule: 'global', type: 'repeat', variable: 'globallocal_prac', task: 'globallocal'}},
-    {stimulus: Gh_Lt, key_answer: 'g', data: {rule: 'global', type: 'repeat', variable: 'globallocal_prac', task: 'globallocal'}},
-    {stimulus: Gf_Le, key_answer: 'l', data: {rule: 'local', type: 'switch', variable: 'globallocal_prac', task: 'globallocal'}},
-    {stimulus: Ge_Lf, key_answer: 'g', data: {rule: 'global', type: 'switch', variable: 'globallocal_prac', task: 'globallocal'}},
-    {stimulus: Gt_Le, key_answer: 'l', data: {rule: 'local', type: 'switch', variable: 'globallocal_prac', task: 'globallocal'}},
-    {stimulus: Gp_Le, key_answer: 'l', data: {rule: 'local', type: 'repeat', variable: 'globallocal_prac', task: 'globallocal'}},
-    {stimulus: Gp_Le, key_answer: 'l', data: {rule: 'local', type: 'repeat', variable: 'globallocal_prac', task: 'globallocal'}},
-    {stimulus: Gh_Lt, key_answer: 'g', data: {rule: 'global', type: 'switch', variable: 'globallocal_prac', task: 'globallocal'}},
-    {stimulus: Ge_Lf, key_answer: 'g', data: {rule: 'global', type: 'repeat', variable: 'globallocal_prac', task: 'globallocal'}},
-    {stimulus: Gt_Le, key_answer: 'l', data: {rule: 'local', type: 'switch', variable: 'globallocal_prac', task: 'globallocal'}},
+    {stimulus: Gh_Lt, key_answer: 'A', data: {rule: 'global', type: 'first', variable: 'globallocal_prac', task: 'globallocal'}},
+    {stimulus: Ge_Lf, key_answer: 'A', data: {rule: 'global', type: 'repeat', variable: 'globallocal_prac', task: 'globallocal'}},
+    {stimulus: Gh_Lt, key_answer: 'A', data: {rule: 'global', type: 'repeat', variable: 'globallocal_prac', task: 'globallocal'}},
+    {stimulus: Gf_Le, key_answer: 'L', data: {rule: 'local', type: 'switch', variable: 'globallocal_prac', task: 'globallocal'}},
+    {stimulus: Ge_Lf, key_answer: 'A', data: {rule: 'global', type: 'switch', variable: 'globallocal_prac', task: 'globallocal'}},
+    {stimulus: Gt_Le, key_answer: 'L', data: {rule: 'local', type: 'switch', variable: 'globallocal_prac', task: 'globallocal'}},
+    {stimulus: Gp_Le, key_answer: 'L', data: {rule: 'local', type: 'repeat', variable: 'globallocal_prac', task: 'globallocal'}},
+    {stimulus: Gp_Le, key_answer: 'L', data: {rule: 'local', type: 'repeat', variable: 'globallocal_prac', task: 'globallocal'}},
+    {stimulus: Gh_Lt, key_answer: 'A', data: {rule: 'global', type: 'switch', variable: 'globallocal_prac', task: 'globallocal'}},
+    {stimulus: Ge_Lf, key_answer: 'A', data: {rule: 'global', type: 'repeat', variable: 'globallocal_prac', task: 'globallocal'}},
+    {stimulus: Gt_Le, key_answer: 'L', data: {rule: 'local', type: 'switch', variable: 'globallocal_prac', task: 'globallocal'}},
   ]
 }
 
@@ -104,7 +104,7 @@ var globallocal_test_start = {
     stimulus: "<p style = 'text-align: center;'>" +
       "Onthoud dat u op zoek moet naar de letters <strong>H</strong> OF <strong>'E'</strong>.<br><br>" +
       "Plaats uw vingers op de 'A'-toets (GROTE letter) en 'L'-toets (KLEINE letters) op uw toetsenbord.<br><br><br>" +
-      "Druk op een willekeurige toets as u klaar bent om te oefenen.",
+      "Druk op een willekeurige toets as u klaar bent om te starten.",
   choices: "ALL_KEYS",
   data: {
     variable: 'test_start', task: 'globallocal'
@@ -139,3 +139,13 @@ var globallocal_test_start = {
     variable: 'test_start', task: 'globallocal'
   }
 }
+
+var globallocal_end = {
+  type: jsPsychHtmlButtonResponse,
+  stimulus:
+  "Goed gedaan!<br><br>" +
+  "U bent nu klaar met het spelen van het <strong>Figuren</strong> spel.<br><br>" +
+  "Klik op 'verder' om verder te gaan.<br><br>",
+  choices: ['verder'],
+  data: {variable: "end", task: "globallocal_end"}
+};

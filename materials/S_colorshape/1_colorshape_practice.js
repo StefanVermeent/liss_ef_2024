@@ -43,13 +43,25 @@ var colorshape_shape_instructions = {
 
 // Shape practice
 
+var colorshape_shape_practice_start = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: "<p style = 'text-align: center;'>" +
+      "U gaat het VORMEN-spel nu 4 keer oefenen.<br>" +
+      "Plaats uw vingers op de 'A'-toets en 'L'-toets op uw toetsenbord.<br><br><br>" +
+      "Druk op een willekeurige toets as u klaar bent om te oefenen.",
+  choices: "ALL_KEYS",
+  data: {
+    variable: 'instructions', task: 'colorshape_practice'
+  }
+}
+
 var colorshape_shape_practice = {
   timeline: [
     {
       type: jsPsychCategorizeHtml,
       choices: ['A','L'],
-      correct_text: "<h1 style='text-align:center;'>Goed</h1>",
-      incorrect_text:"<h1 style='text-align:center;'>Fout</h1>",
+      correct_text: "<p style = 'color:green;font-size:40px'>Goed!</p>",
+      incorrect_text:"<p style = 'color:red;font-size:40px'>Fout!</p>",
       show_stim_with_feedback: false,
       feedback_duration: 500,
       prompt: "<div style='width: 500px; height:50px;'>" + prompt_tri + prompt_circle + "</div><br><br>"+
@@ -83,9 +95,10 @@ var colorshape_shape_confirmation = {
 };
 
 var colorshape_shape_practice_loop = {
-  timeline: [colorshape_shape_practice,colorshape_shape_confirmation],
+  timeline: [colorshape_shape_practice_start,colorshape_shape_practice,cursor_on,colorshape_shape_confirmation],
   loop_function: function(data){
-    if(jsPsych.data.get().last(1).values()[0].button_pressed == 1){
+    console.log(jsPsych.data.get().last(1).values()[0].response == 1)
+    if(jsPsych.data.get().last(1).values()[0].response == 1){
       return true;
     } else {
       return false;
@@ -120,13 +133,25 @@ var colorshape_color_instructions = {
 
 // Color practice
 
+var colorshape_color_practice_start = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: "<p style = 'text-align: center;'>" +
+      "U gaat het KLEUREN-spel nu 4 keer oefenen.<br>" +
+      "Plaats uw vingers op de 'A'-toets en 'L'-toets op uw toetsenbord.<br><br><br>" +
+      "Druk op een willekeurige toets as u klaar bent om te oefenen.",
+  choices: "ALL_KEYS",
+  data: {
+    variable: 'instructions', task: 'colorshape_practice'
+  }
+}
+
 var colorshape_color_practice = {
   timeline: [
     {
       type: jsPsychCategorizeHtml,
       choices: ['A','L'],
-      correct_text: "<h1 style='text-align:center;'>Goed</h1>",
-      incorrect_text:"<h1 style='text-align:center;'>Fout</h1>",
+      correct_text: "<p style = 'color:green;font-size:40px'>Correct!</p>",
+      incorrect_text:"<p style = 'color:red;font-size:40px'>Incorrect!</p>",
       show_stim_with_feedback: false,
       feedback_duration: 500,
       prompt: "<div style='width: 500px; height:50px;'>" + prompt_yellow + prompt_blue + "</div><br><br>"+
@@ -160,9 +185,9 @@ var colorshape_color_confirmation = {
 };
 
 var colorshape_color_practice_loop = {
-  timeline: [colorshape_color_practice,colorshape_color_confirmation],
+  timeline: [colorshape_color_practice_start, colorshape_color_practice,cursor_on,colorshape_color_confirmation],
   loop_function: function(data){
-    if(jsPsych.data.get().last(1).values()[0].button_pressed == 1){
+    if(jsPsych.data.get().last(1).values()[0].response == 1){
       return true;
     } else {
       return false;
@@ -183,9 +208,7 @@ var colorshape_full_instructions = {
             "<div>" + prompt_yellow + prompt_tri + prompt_circle + prompt_blue + "</div><br><br><br><br>" +
             "<div><h1 style='float: left; margin:0;'>A</h1><h1 style='float: right; margin:0;'>L</h1></div><br>" +
             "<div><p style='float: left; margin:0;'>altijd links</p><p style='float: right; margin:0;'>altijd rechts</p></div>" +
-            "</div><br><br>" +
-            "<p style = 'text-align: center;'><b>Vanaf nu krijgt u geen feedback meer.</b><br><br>" +
-            "Klik op 'verder' om te beginnen!</p>"],
+            "</div><br><br>"],
     show_clickable_nav: true,
     allow_backward: true,
     key_forward: -1,
@@ -193,3 +216,17 @@ var colorshape_full_instructions = {
     button_label_next: "verder",
     data: {variable: "colorshape_instructions", task: "colorshape_instructions"}
 };
+
+var colorshape_test_start = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: "<p style = 'text-align: center;'>" +
+      "Vanaf nu krijgt u geen feedback meer.<br><br>" +
+      "Plaats uw vingers op de 'A'-toets en 'L'-toets op uw toetsenbord.<br><br><br>" +
+      "Druk op een willekeurige toets as u klaar bent om te starten.",
+  choices: "ALL_KEYS",
+  data: {
+    variable: 'test_start', task: 'colorshape'
+  }
+}
+
+

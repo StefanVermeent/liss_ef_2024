@@ -9,9 +9,9 @@ var fixation = {
   }
 };
 
-var globloc01 = {
+var globallocal_procedure1 = {
   type: jsPsychCategorizeHtml,
-  choices: ['g','l'],
+  choices: ['A','L'],
   correct_text: "",
   incorrect_text: "",
   feedback_duration: 1000,
@@ -55,9 +55,9 @@ var globloc01 = {
   ]
 }
 
-var globloc02 = {
+var globallocal_procedure2 = {
   type: jsPsychCategorizeHtml,
-  choices: ['g','l'],
+  choices: ['A','L'],
   correct_text: "",
   incorrect_text: "",
   feedback_duration: 1000,
