@@ -21,7 +21,7 @@ var simon_target = {
   },
   choices: ['A', 'L'],
   data: {
-    variable: 'simon_test',
+    variable: 'test',
     task: 'simon',
     location: function(){
       return jsPsych.timelineVariable('location')
@@ -44,7 +44,7 @@ var simon_target = {
 };
 
 
-var simon_test_procedure = {
+var simon_test_procedure01 = {
   timeline: [simon_fixation, simon_target],
   timeline_variables: [
     {location: 'left', correct_response: 'L', condition: 'incongruent', stim: 'RECHTS'},
@@ -79,37 +79,64 @@ var simon_test_procedure = {
     {location: 'right', correct_response: 'A', condition: 'incongruent', stim: 'LINKS'},
     {location: 'right', correct_response: 'L', condition: 'congruent', stim: 'RECHTS'},
     {location: 'right', correct_response: 'L', condition: 'congruent', stim: 'RECHTS'},
-    {location: 'left', correct_response: 'A', condition: 'congruent', stim: 'LINKS'},
-    {location: 'left', correct_response: 'L', condition: 'incongruent', stim: 'RECHTS'},
-    {location: 'right', correct_response: 'L', condition: 'congruent', stim: 'RECHTS'},
-    {location: 'right', correct_response: 'L', condition: 'congruent', stim: 'RECHTS'},
-    {location: 'right', correct_response: 'A', condition: 'incongruent', stim: 'LINKS'},
-    {location: 'left', correct_response: 'A', condition: 'congruent', stim: 'LINKS'},
-    {location: 'left', correct_response: 'L', condition: 'incongruent', stim: 'RECHTS'},
-    {location: 'right', correct_response: 'A', condition: 'incongruent', stim: 'LINKS'},
-    {location: 'right', correct_response: 'A', condition: 'incongruent', stim: 'LINKS'},
-    {location: 'left', correct_response: 'A', condition: 'congruent', stim: 'LINKS'},
-    {location: 'left', correct_response: 'L', condition: 'incongruent', stim: 'RECHTS'},
-    {location: 'right', correct_response: 'A', condition: 'incongruent', stim: 'LINKS'},
-    {location: 'right', correct_response: 'L', condition: 'congruent', stim: 'RECHTS'},
-    {location: 'left', correct_response: 'L', condition: 'incongruent', stim: 'RECHTS'},
-    {location: 'left', correct_response: 'A', condition: 'congruent', stim: 'LINKS'},
-    {location: 'right', correct_response: 'L', condition: 'congruent', stim: 'RECHTS'},
-    {location: 'left', correct_response: 'L', condition: 'incongruent', stim: 'RECHTS'},
-    {location: 'left', correct_response: 'A', condition: 'congruent', stim: 'LINKS'},
-    {location: 'right', correct_response: 'L', condition: 'congruent', stim: 'RECHTS'},
-    {location: 'left', correct_response: 'A', condition: 'congruent', stim: 'LINKS'},
-    {location: 'left', correct_response: 'L', condition: 'incongruent', stim: 'RECHTS'},
-    {location: 'right', correct_response: 'L', condition: 'congruent', stim: 'RECHTS'},
-    {location: 'right', correct_response: 'A', condition: 'incongruent', stim: 'LINKS'},
-    {location: 'left', correct_response: 'A', condition: 'congruent', stim: 'LINKS'},
-    {location: 'right', correct_response: 'A', condition: 'incongruent', stim: 'LINKS'},
-    {location: 'left', correct_response: 'L', condition: 'incongruent', stim: 'RECHTS'},
-    {location: 'right', correct_response: 'L', condition: 'congruent', stim: 'RECHTS'},
-    {location: 'left', correct_response: 'L', condition: 'incongruent', stim: 'RECHTS'},
-    {location: 'left', correct_response: 'A', condition: 'congruent', stim: 'LINKS'},
-    {location: 'left', correct_response: 'L', condition: 'incongruent', stim: 'RECHTS'},
-    {location: 'left', correct_response: 'A', condition: 'congruent', stim: 'LINKS'},
-    {location: 'right', correct_response: 'A', condition: 'incongruent', stim: 'LINKS'},
-  ],
+
 };
+
+var simon_interblock = {
+  type: jsPsychHtmlButtonResponse,
+  stimulus: "Goed gedaan! U bent nu halverwege.<br>Neem even pauze als u dat nodig heeft en druk op 'verder' als u klaar bent voor de rest van het spel.<br><br>",
+  choices: ['verder'],
+  data: {
+    task: 'simon',
+    variable: 'interblock'
+  }
+}
+
+var simon_test_start = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: "<p style = 'text-align: center;'>" +
+      "Plaats uw vingers op de 'A'-toets en 'L'-toets op uw toetsenbord.<br><br><br>" +
+      "Druk op een willekeurige toets als u klaar ben om door te gaan.",
+  choices: "ALL_KEYS",
+  data: {
+    variable: 'test_start', task: 'simon'
+  }
+}
+
+var simon_test_procedure02 = {
+  timeline: [simon_fixation, simon_target],
+  timeline_variables: [
+    {location: 'left', correct_response: 'A', condition: 'congruent', stim: 'LINKS'},
+    {location: 'left', correct_response: 'L', condition: 'incongruent', stim: 'RECHTS'},
+    {location: 'right', correct_response: 'L', condition: 'congruent', stim: 'RECHTS'},
+    {location: 'right', correct_response: 'L', condition: 'congruent', stim: 'RECHTS'},
+    {location: 'right', correct_response: 'A', condition: 'incongruent', stim: 'LINKS'},
+    {location: 'left', correct_response: 'A', condition: 'congruent', stim: 'LINKS'},
+    {location: 'left', correct_response: 'L', condition: 'incongruent', stim: 'RECHTS'},
+    {location: 'right', correct_response: 'A', condition: 'incongruent', stim: 'LINKS'},
+    {location: 'right', correct_response: 'A', condition: 'incongruent', stim: 'LINKS'},
+    {location: 'left', correct_response: 'A', condition: 'congruent', stim: 'LINKS'},
+    {location: 'left', correct_response: 'L', condition: 'incongruent', stim: 'RECHTS'},
+    {location: 'right', correct_response: 'A', condition: 'incongruent', stim: 'LINKS'},
+    {location: 'right', correct_response: 'L', condition: 'congruent', stim: 'RECHTS'},
+    {location: 'left', correct_response: 'L', condition: 'incongruent', stim: 'RECHTS'},
+    {location: 'left', correct_response: 'A', condition: 'congruent', stim: 'LINKS'},
+    {location: 'right', correct_response: 'L', condition: 'congruent', stim: 'RECHTS'},
+    {location: 'left', correct_response: 'L', condition: 'incongruent', stim: 'RECHTS'},
+    {location: 'left', correct_response: 'A', condition: 'congruent', stim: 'LINKS'},
+    {location: 'right', correct_response: 'L', condition: 'congruent', stim: 'RECHTS'},
+    {location: 'left', correct_response: 'A', condition: 'congruent', stim: 'LINKS'},
+    {location: 'left', correct_response: 'L', condition: 'incongruent', stim: 'RECHTS'},
+    {location: 'right', correct_response: 'L', condition: 'congruent', stim: 'RECHTS'},
+    {location: 'right', correct_response: 'A', condition: 'incongruent', stim: 'LINKS'},
+    {location: 'left', correct_response: 'A', condition: 'congruent', stim: 'LINKS'},
+    {location: 'right', correct_response: 'A', condition: 'incongruent', stim: 'LINKS'},
+    {location: 'left', correct_response: 'L', condition: 'incongruent', stim: 'RECHTS'},
+    {location: 'right', correct_response: 'L', condition: 'congruent', stim: 'RECHTS'},
+    {location: 'left', correct_response: 'L', condition: 'incongruent', stim: 'RECHTS'},
+    {location: 'left', correct_response: 'A', condition: 'congruent', stim: 'LINKS'},
+    {location: 'left', correct_response: 'L', condition: 'incongruent', stim: 'RECHTS'},
+    {location: 'left', correct_response: 'A', condition: 'congruent', stim: 'LINKS'},
+    {location: 'right', correct_response: 'A', condition: 'incongruent', stim: 'LINKS'},
+  ]
+}

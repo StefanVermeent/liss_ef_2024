@@ -6,7 +6,7 @@ var posner_letters = {
   },
   choices: ['A', 'L'],
   data: {
-    variable: 'posner_test',
+    variable: 'test',
     task: 'posner',
     condition: function(){
       return jsPsych.timelineVariable('condition')
@@ -26,7 +26,7 @@ var posner_letters = {
 };
 
 
-var posner_test_procedure = {
+var posner_test_procedure01 = {
   timeline: [posner_fixation, posner_letters],
   timeline_variables: [
     {stim1: 'B', stim2: 'q', condition: 'different', correct_response: 'L'},
@@ -61,6 +61,33 @@ var posner_test_procedure = {
     {stim1: 'q', stim2: 'f', condition: 'different', correct_response: 'L'},
     {stim1: 'Q', stim2: 'Q', condition: 'same',      correct_response: 'A'},
     {stim1: 'h', stim2: 'h', condition: 'same',      correct_response: 'A'},
+  ],
+};
+
+var posner_interblock = {
+  type: jsPsychHtmlButtonResponse,
+  stimulus: "Goed gedaan! U bent nu halverwege.<br>Neem even pauze als u dat nodig heeft en druk op 'verder' als u klaar bent voor de rest van het spel.<br><br>",
+  choices: ['verder'],
+  data: {
+    task: 'posner',
+    variable: 'interblock'
+  }
+}
+
+var posner_test_start = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: "<p style = 'text-align: center;'>" +
+      "Plaats uw vingers op de 'A'-toets en 'L'-toets op uw toetsenbord.<br><br><br>" +
+      "Druk op een willekeurige toets als u klaar ben om door te gaan.",
+  choices: "ALL_KEYS",
+  data: {
+    variable: 'test_start', task: 'posner'
+  }
+}
+
+var posner_test_procedure02 = {
+  timeline: [posner_fixation, posner_letters],
+  timeline_variables: [
     {stim1: 'a', stim2: 'q', condition: 'different', correct_response: 'L'},
     {stim1: 'h', stim2: 'q', condition: 'different', correct_response: 'L'},
     {stim1: 'Q', stim2: 'H', condition: 'different', correct_response: 'L'},
@@ -109,5 +136,5 @@ var posner_test_procedure = {
     {stim1: 'H', stim2: 'H', condition: 'same',      correct_response: 'A'},
     {stim1: 'H', stim2: 'f', condition: 'different', correct_response: 'L'},
     {stim1: 'F', stim2: 'f', condition: 'same',      correct_response: 'A'},
-  ],
-};
+    ]
+}

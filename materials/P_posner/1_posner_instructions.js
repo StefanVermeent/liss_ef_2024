@@ -121,5 +121,5 @@ var posner_end = {
   "U bent nu klaar met het spelen van het <strong>Vergelijk</strong> spel.<br><br>" +
   "Klik op 'verder' om verder te gaan.<br><br>",
   choices: ['verder'],
-  data: {variable: "end", task: "posner_practice"}
+  data: {variable: "end", task: "posner"}
 };

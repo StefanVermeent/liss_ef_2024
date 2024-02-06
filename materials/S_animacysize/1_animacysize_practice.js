@@ -43,7 +43,7 @@ var animacysize_animacy_instructions = {
     key_backward: -1,
     button_label_next: "verder",
     button_label_previous: "ga terug",
-    data: {variable: "animacy_instructions", task: "animacysize_instruction"}
+    data: {variable: "instructions", task: "animacysize_practice"}
 };
 
 // Animacy practice
@@ -56,7 +56,7 @@ var animacysize_animacy_practice_start = {
       "Druk op een willekeurige toets as u klaar bent om te oefenen.",
   choices: "ALL_KEYS",
   data: {
-    variable: 'instructions', task: 'animacysize_practice'
+    variable: 'practice_start', task: 'animacysize_practice'
   }
 }
 
@@ -137,7 +137,7 @@ var animacysize_size_instructions = {
     key_backward: -1,
     button_label_next: "verder",
     button_label_previous: "ga terug",
-    data: {variable: "size_instructions", task: "animacysize_instructions"}
+    data: {variable: "instructions", task: "animacysize_instructions"}
 };
 
 // animacy practice
@@ -150,7 +150,7 @@ var animacysize_size_practice_start = {
       "Druk op een willekeurige toets as u klaar bent om te oefenen.",
   choices: "ALL_KEYS",
   data: {
-    variable: 'instructions', task: 'animacysize_practice'
+    variable: 'practice_start', task: 'animacysize_practice'
   }
 }
 

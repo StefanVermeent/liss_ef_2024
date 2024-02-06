@@ -38,7 +38,7 @@ var colorshape_shape_instructions = {
     key_backward: -1,
     button_label_next: "verder",
     button_label_previous: "ga terug",
-    data: {variable: "shape_instructions", task: "colorshape_instruction"}
+    data: {variable: "instructions", task: "colorshape_practice"}
 };
 
 // Shape practice
@@ -128,7 +128,7 @@ var colorshape_color_instructions = {
     key_backward: -1,
     button_label_next: "verder",
     button_label_previous: "ga terug",
-    data: {variable: "color_instructions", task: "colorshape_instructions"}
+    data: {variable: "instructions", task: "colorshape_practice"}
 };
 
 // Color practice
@@ -214,7 +214,7 @@ var colorshape_full_instructions = {
     key_forward: -1,
     key_backward: -1,
     button_label_next: "verder",
-    data: {variable: "colorshape_instructions", task: "colorshape_instructions"}
+    data: {variable: "instructions", task: "colorshape_practice"}
 };
 
 var colorshape_test_start = {

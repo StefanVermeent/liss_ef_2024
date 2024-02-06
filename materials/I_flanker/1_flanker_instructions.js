@@ -128,5 +128,5 @@ var flanker_end = {
   "U bent nu klaar met het <strong>Pijlen</strong> spel.<br><br>" +
   "Klik op 'verder' om verder te gaan.<br><br>",
   choices: ['verder'],
-  data: {variable: "end", task: "flanker_practice"}
+  data: {variable: "end", task: "flanker"}
 };

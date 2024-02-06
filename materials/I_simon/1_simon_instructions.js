@@ -126,5 +126,5 @@ var simon_end = {
   "U bent nu klaar met het <strong>Richtingen</strong> spel.<br><br>" +
   "Klik op 'verder' om verder te gaan.<br><br>",
   choices: ['verder'],
-  data: {variable: "end", task: "simon_practice"}
+  data: {variable: "end", task: "simon"}
 };
