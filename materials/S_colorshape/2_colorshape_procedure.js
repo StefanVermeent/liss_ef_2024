@@ -102,3 +102,15 @@ var colorshape_interblock = {
     variable: 'colorshape_interblock'
   }
 }
+
+
+var colorshape_pp_feedback = {
+  type: jsPsychSurveyText,
+  questions: [
+    {prompt: 'Heb je feedback op dit spel (bijvoorbeeld: duidelijkheid van de instructies; moeilijkheidsgraad; iets wat niet goed leek te werken)?<br>We zouden het op prijs stellen als je het ons hieronder laat weten!', name: 'user_feedback', rows:5, required: false},
+  ],
+  data: {
+    variable: "pp_feedback",
+    task: "colorshape_feedback"
+  }
+}

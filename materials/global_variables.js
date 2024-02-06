@@ -66,3 +66,4 @@ var cursor_on = {
         document.body.style.cursor= "auto";
     }
 };
+

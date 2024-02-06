@@ -12,6 +12,8 @@
     <script src="https://unpkg.com/@jspsych/plugin-fullscreen@1.1.2"></script>
     <script src="https://unpkg.com/@jspsych/plugin-instructions@1.1.2"></script>
     <script src="https://unpkg.com/@jspsych/plugin-survey-html-form@1.0.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-text@1.1.3"></script>
+
 
     <script src="global_variables.js"></script>
 
@@ -83,7 +85,8 @@ posner_timeline = [
   posner_test_start,
   posner_test_procedure02,
   cursor_on,
-  posner_end
+  posner_end,
+  posner_pp_feedback
 ]
 
 // INHIBITION TASKS
@@ -102,10 +105,12 @@ simon_timeline = [
   simon_test_start,
   simon_test_procedure02,
   cursor_on,
-  simon_end
+  simon_end,
+  simon_pp_feedback
 ]
 
 flanker_timeline = [
+  flanker_pp_feedback,
   flanker_welcome,
   flanker_instructions,
   cursor_off,
@@ -119,7 +124,8 @@ flanker_timeline = [
   flanker_test_start,
   flanker_test_procedure02,
   cursor_on,
-  flanker_end
+  flanker_end,
+  flanker_pp_feedback
 ]
 
 // ATTENTION SHIFTING TASKS
@@ -143,7 +149,8 @@ colorshape_timeline = [
   cursor_off,
   colorshape_procedure2,
   cursor_on,
-  colorshape_end
+  colorshape_end,
+  colorshape_pp_feedback
  ]
 
 animacysize_timeline = [
@@ -165,7 +172,8 @@ animacysize_timeline = [
   cursor_off,
   animacysize_procedure02,
   cursor_on,
-  animacysize_end
+  animacysize_end,
+  animacysize_pp_feedback
  ]
 
 globallocal_timeline = [
@@ -185,7 +193,8 @@ globallocal_timeline = [
   globallocal_test_start,
   globallocal_procedure02,
   cursor_on,
-  globallocal_end
+  globallocal_end,
+  flanker_pp_feedback
  ]
 
 // COMBINE ALL TASKS
@@ -213,21 +222,27 @@ var jsPsych = initJsPsych({
 
     data_globallocal_prac  = jsPsych.data.get().filter({task: 'globallocal_practice'});
     data_globallocal       = jsPsych.data.get().filter({task: 'globallocal'});
+    data_globallocal_fb    = jsPsych.data.get().filter({task: 'globallocal_feedback'});
 
     data_animacysize_prac  = jsPsych.data.get().filter({task: 'animacysize_practice'});
     data_animacysize       = jsPsych.data.get().filter({task: 'animacysize'});
+    data_animacysize_fb    = jsPsych.data.get().filter({task: 'animacysize_feedback'});
 
     data_colorshape_prac   = jsPsych.data.get().filter({task: 'colorshape_practice'});
     data_colorshape        = jsPsych.data.get().filter({task: 'colorshape'});
+    data_colorshape_fb     = jsPsych.data.get().filter({task: 'colorshape_feedback'});
 
     data_flanker_prac      = jsPsych.data.get().filter({task: 'flanker_practice'});
     data_flanker           = jsPsych.data.get().filter({task: 'flanker'});
+    data_flanker_fb        = jsPsych.data.get().filter({task: 'flanker_feedback'});
 
     data_simon_prac        = jsPsych.data.get().filter({task: 'simon_practice'});
     data_simon             = jsPsych.data.get().filter({task: 'simon'});
+    data_simon_fb          = jsPsych.data.get().filter({task: 'simon_feedback'});
 
     data_posner_prac       = jsPsych.data.get().filter({task: 'posner_practice'});
     data_posner            = jsPsych.data.get().filter({task: 'posner'});
+    data_posner_fb         = jsPsych.data.get().filter({task: 'posner_feedback'});
 
     tasks_browser          = jsPsych.data.getInteractionData().json();
   }
