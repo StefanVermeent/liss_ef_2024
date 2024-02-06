@@ -245,7 +245,6 @@ var jsPsych = initJsPsych({
     data_posner_fb         = jsPsych.data.get().filter({task: 'posner_feedback'});
 
     tasks_browser          = jsPsych.data.getInteractionData().json();
-  },
 
   window.parent.postMessage([
       tasks_start,
