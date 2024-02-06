@@ -219,7 +219,7 @@ var full_timeline_random = [timeline_start, shuffle(full_timeline)].flat(2)
 var jsPsych = initJsPsych({
   on_finish: function() {
     tasks_start            = jsPsych.getStartTime();
-    tasks_end              = jsPsych.getEndTime();
+    tasks_end              = jsPsych.getTotalTime();;
 
     data_globallocal_prac  = jsPsych.data.get().filter({task: 'globallocal_practice'});
     data_globallocal       = jsPsych.data.get().filter({task: 'globallocal'});
