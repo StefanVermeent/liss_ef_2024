@@ -6,7 +6,7 @@
 var animacysize_welcome = {
   type: jsPsychInstructions,
   pages: [
-    "Welkom bij het <b>Dieren en Objecten</b> spel!"
+    "Welkom bij het <b>Dieren en Objecten</b> spel!<br><br><br><br>"
   ],
   show_clickable_nav: true,
   allow_backward: true,

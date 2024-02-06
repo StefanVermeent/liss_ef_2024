@@ -2,7 +2,7 @@
 var flanker_welcome = {
   type: jsPsychInstructions,
   pages: [
-    "Welkom bij het <b>Pijlen</b> spel!"
+    "Welkom bij het <b>Pijlen</b> spel!<br><br><br><br>"
   ],
   show_clickable_nav: true,
   allow_backward: true,

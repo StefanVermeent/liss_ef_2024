@@ -29,7 +29,6 @@
     <script src="S_animacysize/2_animacysize_procedure.js"></script>
     <script src="S_animacysize/3_animacysize_end.js"></script>
 
-
     <script src="S_globallocal/0_globallocal_setup.js"></script>
     <script src="S_globallocal/1_globallocal_instructions.js"></script>
     <script src="S_globallocal/2_globallocal_procedure.js"></script>
@@ -49,7 +48,6 @@
       body {
         background-color: #bdc4ca;
       }
-
       .grid-container {
         display: grid;
         justify-content: space-evenly;
@@ -71,7 +69,7 @@
 
 // PROCESSING SPEED TASK
 
-var posner_timeline = [
+posner_timeline = [
   posner_welcome,
   posner_instructions,
   cursor_off,
@@ -85,7 +83,7 @@ var posner_timeline = [
 
 // INHIBITION TASKS
 
-var simon_timeline = [
+simon_timeline = [
   simon_welcome,
   simon_instructions,
   cursor_off,
@@ -97,7 +95,7 @@ var simon_timeline = [
   simon_end
 ]
 
-var flanker_timeline = [
+flanker_timeline = [
   flanker_welcome,
   flanker_instructions,
   cursor_off,
@@ -111,7 +109,7 @@ var flanker_timeline = [
 
 // ATTENTION SHIFTING TASKS
 
-var colorshape_timeline = [
+colorshape_timeline = [
   colorshape_welcome,
   colorshape_shape_instructions,
   cursor_off,
@@ -133,9 +131,7 @@ var colorshape_timeline = [
   colorshape_end
  ]
 
- var animacysize_timeline = [
-  animacysize_test_start,
-  animacysize_procedure1,
+animacysize_timeline = [
   animacysize_welcome,
   animacysize_animacy_instructions,
   cursor_off,
@@ -147,7 +143,8 @@ var colorshape_timeline = [
   cursor_on,
   animacysize_full_instructions,
   cursor_off,
-
+  animacysize_test_start,
+  animacysize_procedure1,
   cursor_on,
   animacysize_interblock,
   cursor_off,
@@ -156,26 +153,43 @@ var colorshape_timeline = [
   animacysize_end
  ]
 
- var globallocal_timeline = [
-   globallocal_welcome,
-   globallocal_instructions,
-   cursor_off,
-   globallocal_practice_start,
-   globallocal_practice,
-   cursor_on,
-   globallocal_practice_end,
-   cursor_off,
-   globallocal_test_start,
-   globallocal_procedure1,
-   cursor_on,
-   globallocal_interblock,
-   cursor_off,
-   globallocal_test_start,
-   globallocal_procedure2,
-   cursor_on,
-   globallocal_end
+globallocal_timeline = [
+  globallocal_welcome,
+  globallocal_instructions,
+  cursor_off,
+  globallocal_practice_start,
+  globallocal_practice,
+  cursor_on,
+  globallocal_practice_end,
+  cursor_off,
+  globallocal_test_start,
+  globallocal_procedure1,
+  cursor_on,
+  globallocal_interblock,
+  cursor_off,
+  globallocal_test_start,
+  globallocal_procedure2,
+  cursor_on,
+  globallocal_end
  ]
 
+// COMBINE ALL TASKS
+
+var full_timeline = [
+     globallocal_timeline,
+     animacysize_timeline,
+     colorshape_timeline,
+     flanker_timeline,
+     simon_timeline,
+     posner_timeline
+    ];
+
+
+// RANDOMIZE TASK ORDER
+
+var full_timeline_random = shuffle(full_timeline).flat(2)
+
+// INITIATE jsPsych
 
 var jsPsych = initJsPsych({
   on_finish: function() {
@@ -184,6 +198,6 @@ var jsPsych = initJsPsych({
   }
 });
 
-jsPsych.run(animacysize_timeline);
+jsPsych.run(full_timeline_random)
 </script>
 </html>

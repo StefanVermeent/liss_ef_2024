@@ -2,7 +2,7 @@
 var globallocal_welcome = {
   type: jsPsychInstructions,
   pages: [
-    "Welkom bij de <strong>Figuren</strong> taak!<br><br><br><br><br>"
+    "Welkom bij de <strong>Figuren</strong> taak!<br><br><br><br>"
   ],
   show_clickable_nav: true,
   allow_backward: true,

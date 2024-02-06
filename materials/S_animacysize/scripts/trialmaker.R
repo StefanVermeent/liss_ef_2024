@@ -79,8 +79,8 @@ trials01 <- trials01 |>
     key_answer = case_when(
       rule == 'size' & str_detect(correct, "larger") ~ 'L',
       rule == 'size' & str_detect(correct, "smaller") ~ 'A',
-      rule == 'animacy' & str_detect(correct, "living") ~ 'A',
-      rule == 'animacy' & str_detect(correct, "nonliving") ~ 'L'
+      rule == 'animacy' & str_detect(correct, "^living") ~ 'A',
+      rule == 'animacy' & str_detect(correct, "^nonliving") ~ 'L'
     )
   )
 
@@ -139,8 +139,8 @@ trials02 <- trials02 |>
     key_answer = case_when(
       rule == 'size' & str_detect(correct, "larger") ~ 'L',
       rule == 'size' & str_detect(correct, "smaller") ~ 'A',
-      rule == 'animacy' & str_detect(correct, "living") ~ 'A',
-      rule == 'animacy' & str_detect(correct, "nonliving") ~ 'L'
+      rule == 'animacy' & str_detect(correct, "^living") ~ 'A',
+      rule == 'animacy' & str_detect(correct, "^nonliving") ~ 'L'
     )
   )
 
