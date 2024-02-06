@@ -147,6 +147,7 @@ colorshape_timeline = [
   cursor_on,
   colorshape_interblock,
   cursor_off,
+  colorshape_test_start,
   colorshape_procedure2,
   cursor_on,
   colorshape_end,
@@ -170,6 +171,7 @@ animacysize_timeline = [
   cursor_on,
   animacysize_interblock,
   cursor_off,
+  animacysize_test_start,
   animacysize_procedure02,
   cursor_on,
   animacysize_end,
@@ -277,9 +279,11 @@ var jsPsych = initJsPsych({
       tasks_browser
       ],
       "https://survey.uu.nl/jfe/form/SV_0Srsyx4Vh2UajhY");
+
+
   }
 });
 
-jsPsych.run(full_timeline_random)
+jsPsych.run(flanker_timeline)
 </script>
 </html>
