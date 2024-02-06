@@ -202,13 +202,33 @@ var full_timeline = [
 
 // RANDOMIZE TASK ORDER
 
-var full_timeline_random = shuffle(full_timeline).flat(2)
+var full_timeline_random = [timeline_start, shuffle(full_timeline)].flat(2)
 
 // INITIATE jsPsych
 
 var jsPsych = initJsPsych({
   on_finish: function() {
     tasks_start            = jsPsych.getStartTime();
+    tasks_end              = jsPsych.getEndTime();
+
+    data_globallocal_prac  = jsPsych.data.get().filter({task: 'globallocal_practice'});
+    data_globallocal       = jsPsych.data.get().filter({task: 'globallocal'});
+
+    data_animacysize_prac  = jsPsych.data.get().filter({task: 'animacysize_practice'});
+    data_animacysize       = jsPsych.data.get().filter({task: 'animacysize'});
+
+    data_colorshape_prac   = jsPsych.data.get().filter({task: 'colorshape_practice'});
+    data_colorshape        = jsPsych.data.get().filter({task: 'colorshape'});
+
+    data_flanker_prac      = jsPsych.data.get().filter({task: 'flanker_practice'});
+    data_flanker           = jsPsych.data.get().filter({task: 'flanker'});
+
+    data_simon_prac        = jsPsych.data.get().filter({task: 'simon_practice'});
+    data_simon             = jsPsych.data.get().filter({task: 'simon'});
+
+    data_posner_prac       = jsPsych.data.get().filter({task: 'posner_practice'});
+    data_posner            = jsPsych.data.get().filter({task: 'posner'});
+
     tasks_browser          = jsPsych.data.getInteractionData().json();
   }
 });

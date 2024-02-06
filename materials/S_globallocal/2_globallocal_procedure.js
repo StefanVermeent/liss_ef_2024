@@ -9,7 +9,7 @@ var fixation = {
   }
 };
 
-var globallocal_procedure1 = {
+var globallocal_procedure01 = {
   type: jsPsychCategorizeHtml,
   choices: ['A','L'],
   correct_text: "",
@@ -54,7 +54,7 @@ var globallocal_procedure1 = {
   ]
 }
 
-var globallocal_procedure2 = {
+var globallocal_procedure02 = {
   type: jsPsychCategorizeHtml,
   choices: ['A','L'],
   correct_text: "",

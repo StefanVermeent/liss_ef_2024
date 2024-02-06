@@ -79,7 +79,7 @@ var simon_test_procedure01 = {
     {location: 'right', correct_response: 'A', condition: 'incongruent', stim: 'LINKS'},
     {location: 'right', correct_response: 'L', condition: 'congruent', stim: 'RECHTS'},
     {location: 'right', correct_response: 'L', condition: 'congruent', stim: 'RECHTS'},
-
+    ]
 };
 
 var simon_interblock = {

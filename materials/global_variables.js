@@ -45,10 +45,12 @@ var feedback = {
 };
 
 
-  // General variables
+// General variables
 var fullscreenmode = {
   type: jsPsychFullscreen,
-  fullscreen_mode: true
+  fullscreen_mode: true,
+  message: "<p>De spelletjes zullen verder gaan in <i>volledig scherm modus</i>.<br>We verzoeken u om in <i>volledig scherm modus</i> te blijven tijdens de gehele duur van de spelletjes.</p>",
+  button_label: "Ga verder"
 };
 
 var cursor_off = {
