@@ -16,6 +16,7 @@ var globallocal_procedure01 = {
   incorrect_text: "",
   feedback_duration: 1000,
   show_stim_with_feedback: false,
+  prompt: "<br><br><div style='width: 600px;'><h1 style='float: left; font-size: 20px; margin:0;'>GROOT<br><br>A</h1><h1 style='float: right; margin:0; font-size: 20px;'>KLEIN<br><br>L</h1></div>",
   stimulus: function(){return(jsPsych.timelineVariable('stimulus'))},
   timeline: [
     {stimulus: Ge_Lp, key_answer: 'A', data: {rule: 'global', type: 'first', variable: 'test', task: 'globloc'}},

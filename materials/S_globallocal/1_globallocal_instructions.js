@@ -60,10 +60,11 @@ var globallocal_practice_start = {
 var globallocal_practice = {
   type: jsPsychCategorizeHtml,
   choices: ['A','L'],
-  correct_text: "<h1 style='text-align:center;'>Goed</h1>",
-  incorrect_text:"<h1 style='text-align:center;'>Fout</h1>",
+  correct_text: "<p style = 'color:green;font-size:40px'>Correct!</p>",
+  incorrect_text:"<p style = 'color:red;font-size:40px'>Incorrect!</p>",
   show_stim_with_feedback: false,
   feedback_duration: 1000,
+  prompt: "<br><br><div style='width: 600px;'><h1 style='float: left; font-size: 20px; margin:0;'>GROOT<br><br>A</h1><h1 style='float: right; margin:0; font-size: 20px;'>KLEIN<br><br>L</h1></div>",
   stimulus: function(){return(jsPsych.timelineVariable('stimulus'))},
   timeline: [
     {stimulus: Gh_Lt, key_answer: 'A', data: {rule: 'global', type: 'first', variable: 'globallocal_prac', task: 'globallocal'}},
