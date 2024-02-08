@@ -48,7 +48,7 @@ var globallocal_practice_start = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: "<p style = 'text-align: center;'>" +
       "U gaat het spel nu 10 keer oefenen.<br>" +
-      "Onthoud dat u op zoek moet naar de letters <strong>H</strong> OF <strong>'E'</strong>.<br>" +
+      "Onthoud dat u op zoek moet naar de letters <strong>'H'</strong> OF <strong>'E'</strong>.<br>" +
       "Plaats uw vingers op de 'A'-toets (KLEINE letter) en 'L'-toets (GROTE letter) op uw toetsenbord.<br><br><br>" +
       "Druk op een willekeurige toets as u klaar bent om te oefenen.",
   choices: "ALL_KEYS",

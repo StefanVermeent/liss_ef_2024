@@ -119,11 +119,11 @@ var animacysize_size_instructions = {
     pages: [
         "<p style = 'text-align: center;'>We kunnen ook vergelijken of iets <strong>KLEINER of GROTER is dan een <i>voetbal</i></strong>.<br><br>" +
         "In het KLEINER/GROTER spel bepaald u of een woord verwijst naar iets dat KLEINER of GROTER is dan een <i>voetbal</i>.<br><br></p>",
-        "Als het woord verwijst naar iets dan KLEINER is dan een voetbal, druk dan op de <strong>'A'-toets</strong> op uw toetsenbord:<br><br><br>Voorbeeld:<br><br>"+
+        "Als het woord verwijst naar iets dat KLEINER is dan een voetbal, druk dan op de <strong>'A'-toets</strong> op uw toetsenbord:<br><br><br>Voorbeeld:<br><br>"+
         "<div style = 'text-align: center; font-size: 60px;'>schoen</div>" +
         "<br><br><br><div>" + prompt_smaller + prompt_larger + "</div><br><br><br>",
 
-        "as het woord verwijst naar iets dan GROTER is dan een voetbal, druk dan op de <strong>'L'-toets</strong> op uw toetsenbord:<br><br><br>Voorbeeld:<br><br>"+
+        "als het woord verwijst naar iets dan GROTER is dan een voetbal, druk dan op de <strong>'L'-toets</strong> op uw toetsenbord:<br><br><br>Voorbeeld:<br><br>"+
         "<div style = 'text-align: center; font-size: 60px;'>vliegtuig</div>" +
         "<br><br><br><div>" + prompt_smaller + prompt_larger + "</div><br><br><br>",
 
