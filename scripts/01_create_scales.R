@@ -56,172 +56,130 @@ flanker_prac <-
   select(id, prolific_pid, time_elapsed, rt, variable, task, response, stimtype, correct) |>
   mutate(condition = ifelse(str_detect(stimtype, "^incongruent"), "incongruent", "congruent"))
 
-
-
-
-# Binding-Updating Color --------------------------------------------------
-
-
-
-bind_upd_color_practice <-
+flanker_data <-
   pilot_data |>
-  select(id, prolific_pid, data_bind_upd_color_practice) |>
-  filter(!is.na(data_bind_upd_color_practice)) |>
-  mutate(across(c(matches("data_bind_upd_color_practice")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
-  mutate(data_bind_upd_color_practice = pmap(list(data_bind_upd_color_practice), function(data_bind_upd_color_practice) {
-    data_bind_upd_color_practice |> mutate(recall = as.character(recall))})) |>
-  unnest(data_bind_upd_color_practice) |>
-  select(id, prolific_pid, rt, stimulus, step_type, variable, nBind, nUpd, task, counterbalance, position, recall, stimuli, accuracy, time_elapsed) |>
-  filter(variable == "recall") |>
-  mutate(version = ifelse(nUpd == 0, "binding", "updating"))
+  select(id, prolific_pid, data_flanker) |>
+  filter(!is.na(data_flanker)) |>
+  mutate(across(c(matches("data_flanker")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
+  unnest(data_flanker) |>
+  select(id, prolific_pid, rt, response, variable, task, stimtype, correct, time_elapsed) |>
+  mutate(condition = ifelse(str_detect(stimtype, "^incongruent"), "incongruent", "congruent")) |>
+  filter(!variable %in% c("interblock", "test_start"))
 
-bind_upd_color_data <-
+
+# Simon Task --------------------------------------------------------------
+
+simon_prac <-
   pilot_data |>
-  select(id, prolific_pid, data_bind_upd_color01, data_bind_upd_color02, data_bind_upd_color03) |>
-  filter(!is.na(data_bind_upd_color01), !is.na(data_bind_upd_color02), !is.na(data_bind_upd_color03)) |>
-  mutate(across(c(matches("data_bind_upd_color(01|02|03)")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
-  mutate(data_bind_upd_color = pmap(list(data_bind_upd_color01, data_bind_upd_color02, data_bind_upd_color03), function(data_bind_upd_color01, data_bind_upd_color02, data_bind_upd_color03) {
-    bind_rows(data_bind_upd_color01 |> mutate(recall = as.character(recall)), data_bind_upd_color02 |> mutate(recall = as.character(recall)), data_bind_upd_color03 |> mutate(recall = as.character(recall)))})) |>
-  unnest(data_bind_upd_color) |>
-  select(id, prolific_pid, rt, stimulus, step_type, variable, nBind, nUpd, task, counterbalance, position, recall, stimuli, accuracy, time_elapsed) |>
-  mutate(version = ifelse(nUpd == 0, "binding", "updating"))
+  select(id, prolific_pid, data_simon_prac) |>
+  filter(!is.na(data_simon_prac)) |>
+  mutate(across(c(matches("data_simon_prac")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
+  unnest(data_simon_prac) |>
+  mutate(condition = ifelse(str_detect(stimtype, "^incongruent"), "incongruent", "congruent")) |>
+  select(id, prolific_pid, time_elapsed, rt, variable, task, response, condition, correct)
 
-bind_upd_color_clean <- bind_upd_color_data |>
-  filter(variable == "recall") |>
-  mutate(task = str_replace_all(task, "_test\\d\\d", "")) |>
-  group_by(prolific_pid, version, task) |>
-  summarise(color_acc = sum(accuracy)/n()) |>
-  ungroup()
 
-# Binding-Updating Number -------------------------------------------------
-
-bind_upd_number_practice <-
+simon_data <-
   pilot_data |>
-  select(id, prolific_pid, data_bind_upd_number_practice) |>
-  filter(!is.na(data_bind_upd_number_practice)) |>
-  mutate(across(c(matches("data_bind_upd_number_practice")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
-  mutate(data_bind_upd_number_practice = pmap(list(data_bind_upd_number_practice), function(data_bind_upd_number_practice) {
-    data_bind_upd_number_practice |> mutate(recall = as.character(recall))})) |>
-  unnest(data_bind_upd_number_practice) |>
-  select(id, prolific_pid, rt, stimulus, step_type, variable, nBind, nUpd, task, counterbalance, position, recall, stimuli, accuracy, time_elapsed) |>
-  mutate(version = ifelse(nUpd == 0, "binding", "updating"))
+  select(id, prolific_pid, data_simon) |>
+  filter(!is.na(data_simon)) |>
+  mutate(across(c(matches("data_simon")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
+  unnest(data_simon) |>
+  mutate(condition = ifelse(str_detect(stimtype, "^incongruent"), "incongruent", "congruent")) |>
+  select(id, prolific_pid, time_elapsed, rt, variable, task, response, condition, correct) |>
+  filter(!variable %in% c("interblock", "test_start"))
 
-bind_upd_number_data <-
+
+# Global Local Task -------------------------------------------------------
+
+globallocal_prac <-
   pilot_data |>
-  select(id, prolific_pid, data_bind_upd_number01, data_bind_upd_number02, data_bind_upd_number03) |>
-  filter(!is.na(data_bind_upd_number01), !is.na(data_bind_upd_number02), !is.na(data_bind_upd_number03)) |>
-  mutate(across(c(matches("data_bind_upd_number(01|02|03)")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
-  mutate(data_bind_upd_number = pmap(list(data_bind_upd_number01, data_bind_upd_number02, data_bind_upd_number03), function(data_bind_upd_number01, data_bind_upd_number02, data_bind_upd_number03) {
-    bind_rows(data_bind_upd_number01 |> mutate(recall = as.character(recall)), data_bind_upd_number02 |> mutate(recall = as.character(recall)), data_bind_upd_number03 |> mutate(recall = as.character(recall)))})) |>
-  unnest(data_bind_upd_number) |>
-  select(id, prolific_pid, rt, stimulus, step_type, variable, nBind, nUpd, task, counterbalance, position, recall, stimuli, accuracy, time_elapsed) |>
-  mutate(version = ifelse(nUpd == 0, "binding", "updating"))
-
-bind_upd_number_clean <- bind_upd_number_data |>
-  filter(variable == "recall") |>
-  mutate(task = str_replace_all(task, "_test\\d\\d", "")) |>
-  group_by(prolific_pid, version, task) |>
-  summarise(number_acc = sum(accuracy)/n()) |>
-  ungroup()
-
-## Ospan ----
-
-ospan_practice <-
-  pilot_data %>%
-  select(id, prolific_pid, data_ospan_practice) %>%
-  filter(!is.na(data_ospan_practice)) |>
-  mutate(across(c(starts_with("data_ospan_practice")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) %>%
-  unnest(data_ospan_practice) |>
-  select(id, prolific_pid, rt, response, task, set_size, variable, block, counterbalance, correct, step_number, recall, stimuli, accuracy, time_elapsed)
-
-ospan_data <-
-  pilot_data %>%
-  select(id, prolific_pid, data_ospan) %>%
-  filter(!is.na(data_ospan)) |>
-  mutate(across(c(starts_with("data_ospan")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) %>%
-  unnest(data_ospan) |>
-  select(id, prolific_pid, rt, response, task, set_size, variable, block, counterbalance, correct, step_number, recall, stimuli, accuracy, time_elapsed)
-
-ospan_data_letter_clean <-
-  ospan_data |>
-  filter(variable == "recall") |>
-  select(id, prolific_pid, block, counterbalance, stimuli, set_size, accuracy) |>
-  mutate(acc_prop = accuracy / set_size) |>
-  group_by(prolific_pid) |>
-  summarise(ospan_cap = mean(acc_prop))
+  select(id, prolific_pid, data_globallocal_prac) |>
+  filter(!is.na(data_globallocal_prac)) |>
+  mutate(across(c(matches("data_globallocal_prac")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
+  unnest(data_globallocal_prac) |>
+  select(id, prolific_pid, time_elapsed, rt, variable, task, response, condition, correct)
 
 
-ospan_data_math_clean <-
-  ospan_data |>
-  filter(variable == "math") |>
-  select(id, prolific_pid, rt, block, counterbalance, correct) |>
-  group_by(prolific_pid) |>
-  summarise(ospan_sec_acc = sum(correct) / n())
-
-## Rspan ----
-
-rspan_practice <-
-  pilot2_data %>%
-  select(id, prolific_pid, data_rspan_practice) %>%
-  filter(!is.na(data_rspan_practice)) |>
-  mutate(across(c(starts_with("data_rspan_practice")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) %>%
-  unnest(data_rspan_practice) |>
-  select(id, prolific_pid, rt, response, task, set_size, variable, block, correct, step_number, recall, stimuli, accuracy, time_elapsed)
-
-rspan_data <-
-  pilot2_data %>%
-  select(id, prolific_pid, data_rspan) %>%
-  filter(!is.na(data_rspan)) |>
-  mutate(across(c(starts_with("data_rspan")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) %>%
-  unnest(data_rspan) |>
-  select(id, prolific_pid, rt, response, task, set_size, variable, block, correct, step_number, recall, stimuli, accuracy, time_elapsed)
-
-rspan_data_arrow_clean <-
-  rspan_data |>
-  filter(variable == "recall") |>
-  select(id, prolific_pid, block, stimuli, set_size, accuracy) |>
-  mutate(acc_prop = accuracy / set_size) |>
-  group_by(prolific_pid) |>
-  summarise(rspan_cap = mean(acc_prop))
+globallocal_data <-
+  pilot_data |>
+  select(id, prolific_pid, data_globallocal) |>
+  filter(!is.na(data_globallocal)) |>
+  mutate(across(c(matches("data_globallocal")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
+  unnest(data_globallocal) |>
+  mutate(condition = ifelse(str_detect(stimtype, "^incongruent"), "incongruent", "congruent")) |>
+  select(id, prolific_pid, time_elapsed, rt, variable, task, response, condition, correct) |>
+  filter(!variable %in% c("interblock", "test_start"))
 
 
-rspan_data_rotation_clean <-
-  rspan_data |>
-  filter(variable == "rotation") |>
-  select(id, prolific_pid, rt, block, correct) |>
-  group_by(prolific_pid) |>
-  summarise(rspan_sec_acc = sum(correct) / n())
+
+# Color Shape Task --------------------------------------------------------
+
+colorshape_prac <-
+  pilot_data |>
+  select(id, prolific_pid, data_colorshape_prac) |>
+  filter(!is.na(data_colorshape_prac)) |>
+  mutate(across(c(matches("data_colorshape_prac")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
+  unnest(data_colorshape_prac) |>
+  select(id, prolific_pid, variable, task, rt, correct, rule, type, response, time_elapsed)
 
 
-# Combine All Data --------------------------------------------------------
+colorshape_data <-
+  pilot_data |>
+  select(id, prolific_pid, data_colorshape) |>
+  filter(!is.na(data_colorshape)) |>
+  mutate(across(c(matches("data_colorshape")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
+  unnest(data_colorshape) |>
+  select(id, prolific_pid, variable, task, rt, correct, rule, type, response, time_elapsed) |>
+  filter(!variable %in% c("interblock", "test_start"))
 
-pilot_full_data <-
-  left_join(ospan_data_letter_clean, rspan_data_arrow_clean) |>
-  left_join(ospan_data_math_clean) |>
-  left_join(rspan_data_rotation_clean) |>
-  left_join(
-    bind_upd_color_clean |>
-      pivot_wider(names_from = "version", values_from = 'color_acc') |>
-      select(-task) |>
-      rename(
-        binding_color = binding,
-        updating_color = updating
-      )
-  ) |>
-  left_join(
-    bind_upd_number_clean |>
-      pivot_wider(names_from = "version", values_from = 'number_acc') |>
-      select(-task) |>
-      rename(
-        binding_number = binding,
-        updating_number = updating
-      )
-  ) |>
-  left_join(vars03_unp |> select(prolific_pid, pcunp_mean)) |>
-  left_join(vars04_vio |> select(prolific_pid, vio_comp)) |>
-  left_join(vars05_ses |> select(prolific_pid, ses_subj_comp)) |>
-  left_join(vars10_dems |> select(prolific_pid, dems_age)) |>
-  mutate(id = 1:n()) |>
-  select(-prolific_pid)
+
+
+# Animacy Size Task -------------------------------------------------------
+
+animacysize_prac <-
+  pilot_data |>
+  select(id, prolific_pid, data_animacysize_prac) |>
+  filter(!is.na(data_animacysize_prac)) |>
+  mutate(across(c(matches("data_animacysize_prac")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
+  unnest(data_animacysize_prac) |>
+  select(id, prolific_pid, variable, task, rt, correct, rule, type, response, time_elapsed)
+
+
+animacysize_data <-
+  pilot_data |>
+  select(id, prolific_pid, data_animacysize) |>
+  filter(!is.na(data_animacysize)) |>
+  mutate(across(c(matches("data_animacysize")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
+  unnest(data_animacysize) |>
+  select(id, prolific_pid, variable, task, rt, correct, rule, type, response, time_elapsed)|>
+  filter(!variable %in% c("interblock", "test_start"))
+
+
+
+# Posner Task -------------------------------------------------------------
+
+posner_prac <-
+  pilot_data |>
+  select(id, prolific_pid, data_posner_prac) |>
+  filter(!is.na(data_posner_prac)) |>
+  mutate(across(c(matches("data_posner_prac")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
+  unnest(data_posner_prac) |>
+  select(id, prolific_pid, variable, task, rt, correct, condition, response)
+
+
+posner_data <-
+  pilot_data |>
+  select(id, prolific_pid, data_posner) |>
+  filter(!is.na(data_posner)) |>
+  mutate(across(c(matches("data_posner")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
+  unnest(data_posner) |>
+  select(id, prolific_pid, variable, task, rt, correct, condition, response)|>
+  filter(!variable %in% c("interblock", "test_start"))
+
+
+
+
+
 
 save(pilot_full_data, file = "data/pilot_full_data.RData")

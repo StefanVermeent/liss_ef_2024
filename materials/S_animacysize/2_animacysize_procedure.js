@@ -19,6 +19,12 @@ var animacysize_test = {
       },
   prompt: "<br><br><br><div style='width: 600px; height:50px;'>" + prompt_living + prompt_smaller + prompt_larger + prompt_nonliving + "</div><br><br>" +
           "<div style='width: 600px;'><h1 style='float: left; margin:0;'>A</h1><h1 style='float: right; margin:0;'>L</h1></div>",
+  data: {
+    rule: jsPsych.timelineVariable('data')['rule'],
+    type: jsPsych.timelineVariable('data')['type'],
+    variable: jsPsych.timelineVariable('data')['variable'],
+    task: jsPsych.timelineVariable('data')['task'],
+  },
 };
 
 var animacysize_procedure01 = {
