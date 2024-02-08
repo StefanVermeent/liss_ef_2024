@@ -73,17 +73,17 @@ var globallocal_practice = {
     task: function(){return jsPsych.timelineVariable('data')['task']},
   },
   timeline: [
-    {stimulus: Gh_Lt, key_answer: 'A', data: {rule: 'global', type: 'first', variable: 'globallocal_prac', task: 'globallocal'}},
-    {stimulus: Ge_Lf, key_answer: 'A', data: {rule: 'global', type: 'repeat', variable: 'globallocal_prac', task: 'globallocal'}},
-    {stimulus: Gh_Lt, key_answer: 'A', data: {rule: 'global', type: 'repeat', variable: 'globallocal_prac', task: 'globallocal'}},
-    {stimulus: Gf_Le, key_answer: 'L', data: {rule: 'local', type: 'switch', variable: 'globallocal_prac', task: 'globallocal'}},
-    {stimulus: Ge_Lf, key_answer: 'A', data: {rule: 'global', type: 'switch', variable: 'globallocal_prac', task: 'globallocal'}},
-    {stimulus: Gt_Le, key_answer: 'L', data: {rule: 'local', type: 'switch', variable: 'globallocal_prac', task: 'globallocal'}},
-    {stimulus: Gp_Le, key_answer: 'L', data: {rule: 'local', type: 'repeat', variable: 'globallocal_prac', task: 'globallocal'}},
-    {stimulus: Gp_Le, key_answer: 'L', data: {rule: 'local', type: 'repeat', variable: 'globallocal_prac', task: 'globallocal'}},
-    {stimulus: Gh_Lt, key_answer: 'A', data: {rule: 'global', type: 'switch', variable: 'globallocal_prac', task: 'globallocal'}},
-    {stimulus: Ge_Lf, key_answer: 'A', data: {rule: 'global', type: 'repeat', variable: 'globallocal_prac', task: 'globallocal'}},
-    {stimulus: Gt_Le, key_answer: 'L', data: {rule: 'local', type: 'switch', variable: 'globallocal_prac', task: 'globallocal'}},
+    {stimulus: Gh_Lt, key_answer: 'A', data: {rule: 'global', type: 'first', variable: 'globallocal_prac', task: 'globallocal_practice'}},
+    {stimulus: Ge_Lf, key_answer: 'A', data: {rule: 'global', type: 'repeat', variable: 'globallocal_prac', task: 'globallocal_practice'}},
+    {stimulus: Gh_Lt, key_answer: 'A', data: {rule: 'global', type: 'repeat', variable: 'globallocal_prac', task: 'globallocal_practice'}},
+    {stimulus: Gf_Le, key_answer: 'L', data: {rule: 'local', type: 'switch', variable: 'globallocal_prac', task: 'globallocal_practice'}},
+    {stimulus: Ge_Lf, key_answer: 'A', data: {rule: 'global', type: 'switch', variable: 'globallocal_prac', task: 'globallocal_practice'}},
+    {stimulus: Gt_Le, key_answer: 'L', data: {rule: 'local', type: 'switch', variable: 'globallocal_prac', task: 'globallocal_practice'}},
+    {stimulus: Gp_Le, key_answer: 'L', data: {rule: 'local', type: 'repeat', variable: 'globallocal_prac', task: 'globallocal_practice'}},
+    {stimulus: Gp_Le, key_answer: 'L', data: {rule: 'local', type: 'repeat', variable: 'globallocal_prac', task: 'globallocal_practice'}},
+    {stimulus: Gh_Lt, key_answer: 'A', data: {rule: 'global', type: 'switch', variable: 'globallocal_prac', task: 'globallocal_practice'}},
+    {stimulus: Ge_Lf, key_answer: 'A', data: {rule: 'global', type: 'repeat', variable: 'globallocal_prac', task: 'globallocal_practice'}},
+    {stimulus: Gt_Le, key_answer: 'L', data: {rule: 'local', type: 'switch', variable: 'globallocal_prac', task: 'globallocal_practice'}},
   ]
 }
 
@@ -154,5 +154,5 @@ var globallocal_end = {
   "U bent nu klaar met het spelen van het <strong>Figuren</strong> spel.<br><br>" +
   "Klik op 'verder' om verder te gaan.<br><br>",
   choices: ['verder'],
-  data: {variable: "end", task: "globallocal_end"}
+  data: {variable: "end", task: "globallocal"}
 };

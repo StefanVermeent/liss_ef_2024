@@ -23,8 +23,7 @@ pilot_data <-
     id = "Blinded participant ID"
   ) |>
   filter(finished==1, status == 0, `duration (in seconds)` > 0) |>
-  select(-session_id) |>
-  filter(responseid == "R_6UrJ4lwCVCCHkaZ")
+  select(-session_id)
 
 
 # Self-report -------------------------------------------------------------
@@ -67,6 +66,16 @@ flanker_data <-
   mutate(condition = ifelse(str_detect(stimtype, "^incongruent"), "incongruent", "congruent")) |>
   filter(!variable %in% c("interblock", "test_start"))
 
+flanker_fb <-
+  pilot_data |>
+  select(id, prolific_pid, data_flanker_fb) |>
+  filter(!is.na(data_flanker_fb)) |>
+  mutate(across(c(matches("data_flanker_fb")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
+  unnest(data_flanker_fb) |>
+  unnest(response) |>
+  select(id, prolific_pid, user_feedback)
+
+
 
 # Simon Task --------------------------------------------------------------
 
@@ -90,6 +99,14 @@ simon_data <-
   select(id, prolific_pid, time_elapsed, rt, variable, task, response, condition, correct) |>
   filter(!variable %in% c("interblock", "test_start"))
 
+simon_fb <-
+  pilot_data |>
+  select(id, prolific_pid, data_simon_fb) |>
+  filter(!is.na(data_simon_fb)) |>
+  mutate(across(c(matches("data_simon_fb")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
+  unnest(data_simon_fb) |>
+  unnest(response) |>
+  select(id, prolific_pid, user_feedback)
 
 # Global Local Task -------------------------------------------------------
 
@@ -111,6 +128,14 @@ globallocal_data <-
   select(id, prolific_pid, time_elapsed, rt, variable, task, rule, type, response, correct) |>
   filter(!variable %in% c("interblock", "test_interblock", "test_start"))
 
+globallocal_fb <-
+  pilot_data |>
+  select(id, prolific_pid, data_globallocal_fb) |>
+  filter(!is.na(data_globallocal_fb)) |>
+  mutate(across(c(matches("data_globallocal_fb")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
+  unnest(data_globallocal_fb) |>
+  unnest(response) |>
+  select(id, prolific_pid, user_feedback)
 
 
 # Color Shape Task --------------------------------------------------------
@@ -133,6 +158,14 @@ colorshape_data <-
   select(id, prolific_pid, variable, task, rt, correct, rule, type, response, time_elapsed) |>
   filter(!variable %in% c("interblock", "test_start"))
 
+colorshape_fb <-
+  pilot_data |>
+  select(id, prolific_pid, data_colorshape_fb) |>
+  filter(!is.na(data_colorshape_fb)) |>
+  mutate(across(c(matches("data_colorshape_fb")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
+  unnest(data_colorshape_fb) |>
+  unnest(response) |>
+  select(id, prolific_pid, user_feedback)
 
 
 # Animacy Size Task -------------------------------------------------------
@@ -143,7 +176,7 @@ animacysize_prac <-
   filter(!is.na(data_animacysize_prac)) |>
   mutate(across(c(matches("data_animacysize_prac")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
   unnest(data_animacysize_prac) |>
-  select(id, prolific_pid, variable, task, rt, correct, rule, type, response, time_elapsed)
+  select(id, prolific_pid, variable, task, rt, correct, rule, condition, response, time_elapsed)
 
 
 animacysize_data <-
@@ -175,7 +208,7 @@ posner_prac <-
   filter(!is.na(data_posner_prac)) |>
   mutate(across(c(matches("data_posner_prac")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
   unnest(data_posner_prac) |>
-  select(id, prolific_pid, variable, task, rt, correct, condition, response)
+  select(id, prolific_pid, variable, task, rt, correct, condition, response, time_elapsed)
 
 
 posner_data <-
@@ -184,10 +217,38 @@ posner_data <-
   filter(!is.na(data_posner)) |>
   mutate(across(c(matches("data_posner")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
   unnest(data_posner) |>
-  select(id, prolific_pid, variable, task, rt, correct, condition, response)|>
+  select(id, prolific_pid, variable, task, rt, correct, condition, response, time_elapsed)|>
   filter(!variable %in% c("interblock", "test_start"))
 
+posner_fb <-
+  pilot_data |>
+  select(id, prolific_pid, data_posner_fb) |>
+  filter(!is.na(data_posner_fb)) |>
+  mutate(across(c(matches("data_posner_fb")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
+  unnest(data_posner_fb) |>
+  unnest(response) |>
+  select(id, prolific_pid, user_feedback)
 
+
+# Task durations ----------------------------------------------------------
+
+posner_data |>
+  group_by(id) |>
+  mutate(rownum = row_number()) |>
+  filter(variable == "end") |>
+  ungroup() |>
+  select(id, variable, time_elapsed) |>
+  left_join(posner_prac |> filter(variable == "welcome") |> select(id, practice_start = time_elapsed)) |>
+  summarise(posner_duration = (time_elapsed - practice_start)/60/60)
+
+globallocal_data |>
+  group_by(id) |>
+  mutate(rownum = row_number()) |>
+  filter(rownum == 64) |>
+  ungroup() |>
+  select(id, variable, time_elapsed) |>
+  left_join(globallocal_prac |> filter(variable == "welcome") |> select(id, practice_start = time_elapsed)) |>
+  summarise(globallocal_duration = (time_elapsed - practice_start)/60/60)
 
 
 
