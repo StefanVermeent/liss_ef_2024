@@ -116,7 +116,7 @@ globallocal_prac <-
   filter(!is.na(data_globallocal_prac)) |>
   mutate(across(c(matches("data_globallocal_prac")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
   unnest(data_globallocal_prac) |>
-  select(id, prolific_pid, time_elapsed, rt, variable, task, response, condition, correct)
+  select(id, prolific_pid, time_elapsed, rt, variable, task, response, correct)
 
 
 globallocal_data <-
@@ -252,5 +252,14 @@ globallocal_data |>
 
 
 
+# Performance -------------------------------------------------------------
+
+globallocal_data |>
+  filter(!id %in% 1:5, variable != "end", type != "first") |>
+  group_by(id, type) |>
+  summarise(
+    mean_rt = mean(rt, na.rm = T),
+    acc     = sum(correct)/n()*100
+  )
 
 save(pilot_full_data, file = "data/pilot_full_data.RData")
