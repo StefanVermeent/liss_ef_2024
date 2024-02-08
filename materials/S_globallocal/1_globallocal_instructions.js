@@ -65,12 +65,12 @@ var globallocal_practice = {
   show_stim_with_feedback: false,
   feedback_duration: 1000,
   prompt: "<br><br><div style='width: 600px;'><h1 style='float: left; font-size: 20px; margin:0;'>GROOT<br><br>A</h1><h1 style='float: right; margin:0; font-size: 20px;'>KLEIN<br><br>L</h1></div>",
-  stimulus: function(){return(jsPsych.timelineVariable('stimulus'))},
+  stimulus: function(){return jsPsych.timelineVariable('stimulus')},
   data: {
-    rule: jsPsych.timelineVariable('data')['rule'],
-    type: jsPsych.timelineVariable('data')['type'],
-    variable: jsPsych.timelineVariable('data')['variable'],
-    task: jsPsych.timelineVariable('data')['task'],
+    rule: function(){return returnjsPsych.timelineVariable('data')['rule']},
+    type: function(){return jsPsych.timelineVariable('data')['type'])},
+    variable: function(){return jsPsych.timelineVariable('data')['variable']},
+    task: function(){return jsPsych.timelineVariable('data')['task']},
   },
   timeline: [
     {stimulus: Gh_Lt, key_answer: 'A', data: {rule: 'global', type: 'first', variable: 'globallocal_prac', task: 'globallocal'}},

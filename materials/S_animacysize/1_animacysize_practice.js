@@ -74,11 +74,11 @@ var animacysize_animacy_practice = {
       data: {variable: "living_practice", rule: "animacy", type: "repeat", task: "animacysize_practice"},
       stimulus: function(){
         stim = jsPsych.timelineVariable('stimulus');
-        return(stim)
+        return stim
       },
       key_answer: function(){
         key = jsPsych.timelineVariable('key_answer');
-        return(key)
+        return key
     }
     }
   ],
@@ -168,11 +168,11 @@ var animacysize_size_practice = {
       data: {variable: "size_practice",rule: "size", type: "repeat", task: "animacysize_practice"},
       stimulus: function(){
         stim = jsPsych.timelineVariable('stimulus');
-        return(stim)
+        return stim
       },
       key_answer: function(){
         key = jsPsych.timelineVariable('key_answer');
-        return(key)
+        return key
     }
     }
   ],

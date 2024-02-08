@@ -69,11 +69,11 @@ var colorshape_shape_practice = {
       data: {variable: "shape_practice", rule: "shape", type: "repeat", task: "colorshape_practice"},
       stimulus: function(){
         stim = jsPsych.timelineVariable('stimulus');
-        return(stim)
+        return stim
       },
       key_answer: function(){
         key = jsPsych.timelineVariable('key_answer');
-        return(key)
+        return key
     }
     }
   ],
@@ -97,7 +97,6 @@ var colorshape_shape_confirmation = {
 var colorshape_shape_practice_loop = {
   timeline: [colorshape_shape_practice_start,colorshape_shape_practice,cursor_on,colorshape_shape_confirmation],
   loop_function: function(data){
-    console.log(jsPsych.data.get().last(1).values()[0].response == 1)
     if(jsPsych.data.get().last(1).values()[0].response == 1){
       return true;
     } else {
@@ -159,11 +158,11 @@ var colorshape_color_practice = {
       data: {variable: "color_practice",rule: "color", type: "repeat", task: "colorshape_practice"},
       stimulus: function(){
         stim = jsPsych.timelineVariable('stimulus');
-        return(stim)
+        return stim
       },
       key_answer: function(){
         key = jsPsych.timelineVariable('key_answer');
-        return(key)
+        return key
     }
     }
   ],

@@ -7,7 +7,6 @@ var animacysize_test = {
   feedback_duration: 250,
   show_stim_with_feedback: false,
   stimulus: function(){
-    console.log(jsPsych.timelineVariable('data'))
     var stim = ""
     if(jsPsych.timelineVariable('data')['rule'] == "size") {
       stim += "<div style = 'text-align: center;'><h1>KLEINER of GROTER?<br></h1><br><br><br><div style = 'font-size:60px'>" + jsPsych.timelineVariable('stim') + "</div></div>";
@@ -15,15 +14,15 @@ var animacysize_test = {
     if(jsPsych.timelineVariable('data')['rule'] == "animacy") {
       stim += "<div style = 'text-align: center;'><h1>LEVEND of NIET-LEVEND?<br></h1><br><br><br><div style = 'font-size:60px'>" + jsPsych.timelineVariable('stim') + "</div></div>";
     }
-        return(stim)
+        return stim
       },
   prompt: "<br><br><br><div style='width: 600px; height:50px;'>" + prompt_living + prompt_smaller + prompt_larger + prompt_nonliving + "</div><br><br>" +
           "<div style='width: 600px;'><h1 style='float: left; margin:0;'>A</h1><h1 style='float: right; margin:0;'>L</h1></div>",
   data: {
-    rule: jsPsych.timelineVariable('data')['rule'],
-    type: jsPsych.timelineVariable('data')['type'],
-    variable: jsPsych.timelineVariable('data')['variable'],
-    task: jsPsych.timelineVariable('data')['task'],
+    rule: function(){return returnjsPsych.timelineVariable('data')['rule']},
+    type: function(){return jsPsych.timelineVariable('data')['type'])},
+    variable: function(){return jsPsych.timelineVariable('data')['variable']},
+    task: function(){return jsPsych.timelineVariable('data')['task']},
   },
 };
 
