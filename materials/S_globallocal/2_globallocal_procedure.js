@@ -19,8 +19,8 @@ var globallocal_procedure01 = {
   prompt: "<br><br><div style='width: 600px;'><h1 style='float: left; font-size: 20px; margin:0;'>GROOT<br><br>A</h1><h1 style='float: right; margin:0; font-size: 20px;'>KLEIN<br><br>L</h1></div>",
   stimulus: function(){return jsPsych.timelineVariable('stimulus')},
   data: {
-    rule: function(){return returnjsPsych.timelineVariable('data')['rule']},
-    type: function(){return jsPsych.timelineVariable('data')['type'])},
+    rule: function(){return jsPsych.timelineVariable('data')['rule']},
+    type: function(){return jsPsych.timelineVariable('data')['type']},
     variable: function(){return jsPsych.timelineVariable('data')['variable']},
     task: function(){return jsPsych.timelineVariable('data')['task']},
   },
@@ -70,8 +70,8 @@ var globallocal_procedure02 = {
   show_stim_with_feedback: false,
   stimulus: function(){return jsPsych.timelineVariable('stimulus')},
   data: {
-    rule: function(){return returnjsPsych.timelineVariable('data')['rule']},
-    type: function(){return jsPsych.timelineVariable('data')['type'])},
+    rule: function(){return jsPsych.timelineVariable('data')['rule']},
+    type: function(){return jsPsych.timelineVariable('data')['type']},
     variable: function(){return jsPsych.timelineVariable('data')['variable']},
     task: function(){return jsPsych.timelineVariable('data')['task']},
   },

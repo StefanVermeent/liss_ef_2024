@@ -6,6 +6,7 @@ var animacysize_test = {
   incorrect_text: "",
   feedback_duration: 250,
   show_stim_with_feedback: false,
+  key_answer: function(){return jsPsych.timelineVariable('key_answer')},
   stimulus: function(){
     var stim = ""
     if(jsPsych.timelineVariable('data')['rule'] == "size") {
@@ -19,8 +20,8 @@ var animacysize_test = {
   prompt: "<br><br><br><div style='width: 600px; height:50px;'>" + prompt_living + prompt_smaller + prompt_larger + prompt_nonliving + "</div><br><br>" +
           "<div style='width: 600px;'><h1 style='float: left; margin:0;'>A</h1><h1 style='float: right; margin:0;'>L</h1></div>",
   data: {
-    rule: function(){return returnjsPsych.timelineVariable('data')['rule']},
-    type: function(){return jsPsych.timelineVariable('data')['type'])},
+    rule: function(){return jsPsych.timelineVariable('data')['rule']},
+    type: function(){return jsPsych.timelineVariable('data')['type']},
     variable: function(){return jsPsych.timelineVariable('data')['variable']},
     task: function(){return jsPsych.timelineVariable('data')['task']},
   },
