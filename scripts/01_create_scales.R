@@ -24,7 +24,7 @@ pilot_data <-
   ) |>
   filter(finished==1, status == 0, `duration (in seconds)` > 0) |>
   select(-session_id) |>
-  filter(responseid == "R_7Gk2xg6DndORWvx")
+  filter(responseid == "R_6UrJ4lwCVCCHkaZ")
 
 
 # Self-report -------------------------------------------------------------
@@ -152,8 +152,18 @@ animacysize_data <-
   filter(!is.na(data_animacysize)) |>
   mutate(across(c(matches("data_animacysize")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
   unnest(data_animacysize) |>
-  select(id, prolific_pid, variable, task, rt, correct, rule, trial_type, response, time_elapsed)|>
+  select(id, prolific_pid, variable, task, rt, correct, rule, condition, response, time_elapsed)|>
   filter(!variable %in% c("interblock", "test_start"))
+
+
+animacysize_fb <-
+  pilot_data |>
+  select(id, prolific_pid, data_animacysize_fb) |>
+  filter(!is.na(data_animacysize_fb)) |>
+  mutate(across(c(matches("data_animacysize_fb")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
+  unnest(data_animacysize_fb) |>
+  unnest(response) |>
+  select(id, prolific_pid, user_feedback)
 
 
 
