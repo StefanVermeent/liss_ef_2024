@@ -71,7 +71,7 @@ var animacysize_animacy_practice = {
       feedback_duration: 500,
       prompt: "<br><br><br><div style='width: 500px; height:50px;'>" + prompt_living + prompt_nonliving + "</div><br><br>"+
               "<div style='width: 500px;'><h1 style='float: left; margin:0;'>A</h1><h1 style='float: right; margin:0;'>L</h1></div>",
-      data: {variable: "living_practice", rule: "animacy", type: "repeat", task: "animacysize_practice"},
+      data: {variable: "living_practice", rule: "animacy", condition: "repeat", task: "animacysize_practice"},
       stimulus: function(){
         stim = jsPsych.timelineVariable('stimulus');
         return stim
@@ -165,7 +165,7 @@ var animacysize_size_practice = {
       feedback_duration: 500,
       prompt: "<br><br><br><div style='width: 500px; height:50px;'>" + prompt_smaller + prompt_larger + "</div><br><br>"+
               "<div style='width: 500px;'><h1 style='float: left; margin:0;'>A</h1><h1 style='float: right; margin:0'>L</h1></div>",
-      data: {variable: "size_practice",rule: "size", type: "repeat", task: "animacysize_practice"},
+      data: {variable: "size_practice",rule: "size", condition: "repeat", task: "animacysize_practice"},
       stimulus: function(){
         stim = jsPsych.timelineVariable('stimulus');
         return stim

@@ -23,7 +23,8 @@ pilot_data <-
     id = "Blinded participant ID"
   ) |>
   filter(finished==1, status == 0, `duration (in seconds)` > 0) |>
-  select(-session_id)
+  select(-session_id) |>
+  filter(responseid == "R_7Gk2xg6DndORWvx")
 
 
 # Self-report -------------------------------------------------------------
@@ -107,9 +108,8 @@ globallocal_data <-
   filter(!is.na(data_globallocal)) |>
   mutate(across(c(matches("data_globallocal")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
   unnest(data_globallocal) |>
-  mutate(condition = ifelse(str_detect(stimtype, "^incongruent"), "incongruent", "congruent")) |>
-  select(id, prolific_pid, time_elapsed, rt, variable, task, response, condition, correct) |>
-  filter(!variable %in% c("interblock", "test_start"))
+  select(id, prolific_pid, time_elapsed, rt, variable, task, rule, type, response, correct) |>
+  filter(!variable %in% c("interblock", "test_interblock", "test_start"))
 
 
 
@@ -152,7 +152,7 @@ animacysize_data <-
   filter(!is.na(data_animacysize)) |>
   mutate(across(c(matches("data_animacysize")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
   unnest(data_animacysize) |>
-  select(id, prolific_pid, variable, task, rt, correct, rule, type, response, time_elapsed)|>
+  select(id, prolific_pid, variable, task, rt, correct, rule, trial_type, response, time_elapsed)|>
   filter(!variable %in% c("interblock", "test_start"))
 
 

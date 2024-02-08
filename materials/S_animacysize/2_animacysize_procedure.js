@@ -21,7 +21,9 @@ var animacysize_test = {
           "<div style='width: 600px;'><h1 style='float: left; margin:0;'>A</h1><h1 style='float: right; margin:0;'>L</h1></div>",
   data: {
     rule: function(){return jsPsych.timelineVariable('data')['rule']},
-    type: function(){return jsPsych.timelineVariable('data')['type']},
+    condition: function(){
+      return jsPsych.timelineVariable('data')['type']
+    },
     variable: function(){return jsPsych.timelineVariable('data')['variable']},
     task: function(){return jsPsych.timelineVariable('data')['task']},
   },
