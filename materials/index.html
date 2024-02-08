@@ -211,11 +211,15 @@ var full_timeline = [
      posner_timeline
     ];
 
+var debug_timeline = [
+  globallocal_timeline,
+  animacysize_timeline
+]
 
 // RANDOMIZE TASK ORDER
 
 var full_timeline_random = [timeline_start, shuffle(full_timeline)].flat(2)
-
+var full_debug_timeline = [timeline_start, shuffle(debug_timeline)].flat(2)
 // INITIATE jsPsych
 
 var jsPsych = initJsPsych({
@@ -283,6 +287,6 @@ var jsPsych = initJsPsych({
   }
 });
 
-jsPsych.run(globallocal_timeline)
+jsPsych.run(full_debug_timeline)
 </script>
 </html>
