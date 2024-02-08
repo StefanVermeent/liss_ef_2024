@@ -49,7 +49,7 @@ var globallocal_practice_start = {
     stimulus: "<p style = 'text-align: center;'>" +
       "U gaat het spel nu 10 keer oefenen.<br>" +
       "Onthoud dat u op zoek moet naar de letters <strong>'H'</strong> OF <strong>'E'</strong>.<br>" +
-      "Plaats uw vingers op de 'A'-toets (KLEINE letter) en 'L'-toets (GROTE letter) op uw toetsenbord.<br><br><br>" +
+      "Plaats uw vingers op de 'A'-toets (GROTE letter) en 'L'-toets (KLEINE letter) op uw toetsenbord.<br><br><br>" +
       "Druk op een willekeurige toets as u klaar bent om te oefenen.",
   choices: "ALL_KEYS",
   data: {
@@ -93,7 +93,7 @@ var globallocal_practice_end = {
   type: jsPsychInstructions,
   pages: [
     "<p style = 'text-align: center;'>" +
-      "Goed gedaan! U gaat nu het echte spel spelen.<br><br>" +
+      "Goed gedaan! U gaat nu het echte spel spelen.<br>Het spel duurt ongeveer twee minuten<br><br>" +
       "U krijgt vanaf nu geen feedback meer."
   ],
   show_clickable_nav: true,

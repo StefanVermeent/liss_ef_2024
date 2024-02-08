@@ -17,7 +17,7 @@ var posner_instructions = {
   type: jsPsychInstructions,
   pages: [
     "<p style = 'text-align: center;'>"+
-      "In dit spel ziet u steeds twee letters naast elkaar<br><br>" +
+      "In dit spel ziet u steeds twee letters naast elkaar.<br><br>" +
       "Uw taak is steeds om aan te geven of het <strong>dezelfde</strong> of <strong>verschillende</strong> letters zijn.<br><br>" +
       "Dit is een voorbeeld van twee <i>dezelfde</i> letters: <strong>AA</strong><br>" +
       "Dit is een voorbeeld van twee <i>verschillende</i> letters: <strong>bq</strong><br>",

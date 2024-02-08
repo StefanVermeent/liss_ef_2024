@@ -110,8 +110,8 @@ var colorshape_shape_practice_loop = {
 var colorshape_color_instructions = {
     type: jsPsychInstructions,
     pages: [
-        "<p style = 'text-align: center;'>We kunnen ook vergelijken op KLEUR. <br><br>In het KLEUREN-spel kiest u het plaatje dat dezelfde KLEUR heeft as het plaatje in het midden van het scherm.<br><br></p>",
-        "as het plaatje GEEL is, druk dan op de 'A'-toets op uw toetsenbord:<br><br><br>Voorbeeld:"+
+        "<p style = 'text-align: center;'>We kunnen ook vergelijken op KLEUR. <br><br>In het KLEUREN-spel kiest u het plaatje dat dezelfde KLEUR heeft als het plaatje in het midden van het scherm.<br><br></p>",
+        "als het plaatje GEEL is, druk dan op de 'A'-toets op uw toetsenbord:<br><br><br>Voorbeeld:"+
         "<div style = 'text-align: center;'>" + yellowcircle + "</div>" +
         "<br><br><br><div>" + prompt_yellow + prompt_blue + "</div><br><br><br>",
         "Als het plaatje BLAUW is, druk dan op de 'L'-toets op uw toetsenbord:<br><br><br>Voorbeeld:"+

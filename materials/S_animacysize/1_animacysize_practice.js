@@ -24,7 +24,7 @@ var animacysize_animacy_instructions = {
         "<li>KLEINER of GROTER is dan een voetbal.<br>",
 
         "<p style = 'text-align: center;'> We zullen eerst het LEVEND/NIET-LEVEND spel spelen.<br><br>" +
-        "In het LEVEND/NIET-LEVEND spel bepaald u of een woord verwijst naar iets <strong>LEVENDS of iets NIET-LEVENDS</strong>.<br><br>" +
+        "In het LEVEND/NIET-LEVEND spel bepaalt u of een woord verwijst naar iets <strong>LEVENDS of iets NIET-LEVENDS</strong>.<br><br>" +
         "Als het woord verwijst naar iets dat LEVEND is, druk dan op de <strong>'A'-toets</strong> op uw toetsenbord.<br><br><br>Voorbeeld:<br><br>" +
         "<div style = 'text-align: center; font-size:60px'>hond</div>" +
         "<br><br><br><div>" + prompt_living + prompt_nonliving + "</div><br><br><br>",
@@ -52,7 +52,7 @@ var animacysize_animacy_practice_start = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: "<p style = 'text-align: center;'>" +
       "U gaat het LEVEND/NIET-LEVEND spel nu 6 keer oefenen.<br>" +
-      "Plaats uw vingers op de 'A'-toets en 'L'-toets op uw toetsenbord.<br><br><br>" +
+      "Plaats uw vingers op de 'A'-toets (LEVEND) en 'L'-toets (NIET-LEVEND) op uw toetsenbord.<br><br><br>" +
       "Druk op een willekeurige toets as u klaar bent om te oefenen.",
   choices: "ALL_KEYS",
   data: {
@@ -118,12 +118,12 @@ var animacysize_size_instructions = {
     type: jsPsychInstructions,
     pages: [
         "<p style = 'text-align: center;'>We kunnen ook vergelijken of iets <strong>KLEINER of GROTER is dan een <i>voetbal</i></strong>.<br><br>" +
-        "In het KLEINER/GROTER spel bepaald u of een woord verwijst naar iets dat KLEINER of GROTER is dan een <i>voetbal</i>.<br><br></p>",
+        "In het KLEINER/GROTER spel bepaalt u of een woord verwijst naar iets dat KLEINER of GROTER is dan een <i>voetbal</i>.<br><br></p>",
         "Als het woord verwijst naar iets dat KLEINER is dan een voetbal, druk dan op de <strong>'A'-toets</strong> op uw toetsenbord:<br><br><br>Voorbeeld:<br><br>"+
         "<div style = 'text-align: center; font-size: 60px;'>schoen</div>" +
         "<br><br><br><div>" + prompt_smaller + prompt_larger + "</div><br><br><br>",
 
-        "als het woord verwijst naar iets dan GROTER is dan een voetbal, druk dan op de <strong>'L'-toets</strong> op uw toetsenbord:<br><br><br>Voorbeeld:<br><br>"+
+        "als het woord verwijst naar iets dat GROTER is dan een voetbal, druk dan op de <strong>'L'-toets</strong> op uw toetsenbord:<br><br><br>Voorbeeld:<br><br>"+
         "<div style = 'text-align: center; font-size: 60px;'>vliegtuig</div>" +
         "<br><br><br><div>" + prompt_smaller + prompt_larger + "</div><br><br><br>",
 
@@ -146,7 +146,7 @@ var animacysize_size_practice_start = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: "<p style = 'text-align: center;'>" +
       "U gaat het KLEINER/GROTER spel nu 6 keer oefenen.<br>" +
-      "Plaats uw vingers op de 'A'-toets en 'L'-toets op uw toetsenbord.<br><br><br>" +
+      "Plaats uw vingers op de 'A'-toets (KLEINER) en 'L'-toets (GROTER) op uw toetsenbord.<br><br><br>" +
       "Druk op een willekeurige toets as u klaar bent om te oefenen.",
   choices: "ALL_KEYS",
   data: {
