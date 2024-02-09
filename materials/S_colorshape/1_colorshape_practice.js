@@ -48,7 +48,7 @@ var colorshape_shape_practice_start = {
     stimulus: "<p style = 'text-align: center;'>" +
       "U gaat het VORMEN-spel nu 4 keer oefenen.<br>" +
       "Plaats uw vingers op de 'A'-toets en 'L'-toets op uw toetsenbord.<br><br><br>" +
-      "Druk op een willekeurige toets as u klaar bent om te oefenen.",
+      "Druk op een willekeurige toets als u klaar bent om te oefenen.",
   choices: "ALL_KEYS",
   data: {
     variable: 'instructions', task: 'colorshape_practice'
@@ -137,7 +137,7 @@ var colorshape_color_practice_start = {
     stimulus: "<p style = 'text-align: center;'>" +
       "U gaat het KLEUREN-spel nu 4 keer oefenen.<br>" +
       "Plaats uw vingers op de 'A'-toets en 'L'-toets op uw toetsenbord.<br><br><br>" +
-      "Druk op een willekeurige toets as u klaar bent om te oefenen.",
+      "Druk op een willekeurige toets als u klaar bent om te oefenen.",
   choices: "ALL_KEYS",
   data: {
     variable: 'instructions', task: 'colorshape_practice'
@@ -221,7 +221,7 @@ var colorshape_test_start = {
     stimulus: "<p style = 'text-align: center;'>" +
       "Vanaf nu krijgt u geen feedback meer.<br><br>" +
       "Plaats uw vingers op de 'A'-toets en 'L'-toets op uw toetsenbord.<br><br><br>" +
-      "Druk op een willekeurige toets as u klaar bent om te starten.",
+      "Druk op een willekeurige toets als u klaar bent om te starten.",
   choices: "ALL_KEYS",
   data: {
     variable: 'test_start', task: 'colorshape'

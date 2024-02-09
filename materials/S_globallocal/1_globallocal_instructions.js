@@ -71,7 +71,7 @@ var globallocal_practice_start = {
       "U gaat het spel nu 10 keer oefenen.<br>" +
       "Onthoud dat u op zoek moet naar de letters <strong>'H'</strong> OF <strong>'E'</strong>.<br>" +
       "Plaats uw vingers op de 'A'-toets (GROTE letter) en 'L'-toets (KLEINE letter) op uw toetsenbord.<br><br><br>" +
-      "Druk op een willekeurige toets as u klaar bent om te oefenen.",
+      "Druk op een willekeurige toets als u klaar bent om te oefenen.",
   choices: "ALL_KEYS",
   data: {
     variable: 'instructions', task: 'globallocal_practice'
@@ -132,7 +132,7 @@ var globallocal_test_start = {
     stimulus: "<p style = 'text-align: center;'>" +
       "Onthoud dat u op zoek moet naar de letters <strong>H</strong> OF <strong>'E'</strong>.<br><br>" +
       "Plaats uw vingers op de 'A'-toets (GROTE letter) en 'L'-toets (KLEINE letters) op uw toetsenbord.<br><br><br>" +
-      "Druk op een willekeurige toets as u klaar bent om te starten.",
+      "Druk op een willekeurige toets als u klaar bent om te starten.",
   choices: "ALL_KEYS",
   data: {
     variable: 'test_start', task: 'globallocal'
@@ -161,7 +161,7 @@ var globallocal_test_start = {
     stimulus: "<p style = 'text-align: center;'>" +
       "Onthoud dat u op zoek moet naar de letters <strong>H</strong> OF <strong>'E'</strong>.<br><br>" +
       "Plaats uw vingers op de 'A'-toets (GROTE letter) en 'L'-toets (KLEINE letters) op uw toetsenbord.<br><br><br>" +
-      "Druk op een willekeurige toets as u klaar bent om te oefenen.",
+      "Druk op een willekeurige toets als u klaar bent om te oefenen.",
   choices: "ALL_KEYS",
   data: {
     variable: 'test_start', task: 'globallocal'

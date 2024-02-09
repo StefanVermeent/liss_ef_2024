@@ -53,7 +53,7 @@ var animacysize_animacy_practice_start = {
     stimulus: "<p style = 'text-align: center;'>" +
       "U gaat het LEVEND/NIET-LEVEND spel nu 6 keer oefenen.<br>" +
       "Plaats uw vingers op de 'A'-toets (LEVEND) en 'L'-toets (NIET-LEVEND) op uw toetsenbord.<br><br><br>" +
-      "Druk op een willekeurige toets as u klaar bent om te oefenen.",
+      "Druk op een willekeurige toets als u klaar bent om te oefenen.",
   choices: "ALL_KEYS",
   data: {
     variable: 'practice_start', task: 'animacysize_practice'
@@ -147,7 +147,7 @@ var animacysize_size_practice_start = {
     stimulus: "<p style = 'text-align: center;'>" +
       "U gaat het KLEINER/GROTER spel nu 6 keer oefenen.<br>" +
       "Plaats uw vingers op de 'A'-toets (KLEINER) en 'L'-toets (GROTER) op uw toetsenbord.<br><br><br>" +
-      "Druk op een willekeurige toets as u klaar bent om te oefenen.",
+      "Druk op een willekeurige toets als u klaar bent om te oefenen.",
   choices: "ALL_KEYS",
   data: {
     variable: 'practice_start', task: 'animacysize_practice'
@@ -232,7 +232,7 @@ var animacysize_test_start = {
     stimulus: "<p style = 'text-align: center;'>" +
       "Vanaf nu krijgt u geen feedback meer.<br><br>" +
       "Plaats uw vingers op de 'A'-toets en 'L'-toets op uw toetsenbord.<br><br><br>" +
-      "Druk op een willekeurige toets as u klaar bent om te starten.",
+      "Druk op een willekeurige toets als u klaar bent om te starten.",
   choices: "ALL_KEYS",
   data: {
     variable: 'test_start', task: 'animacysize'
