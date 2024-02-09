@@ -51,6 +51,7 @@ flanker_prac <-
   pilot_data |>
   select(id, prolific_pid, data_flanker_prac) |>
   filter(!is.na(data_flanker_prac)) |>
+  filter(data_flanker_prac != "[]") |>
   mutate(across(c(matches("data_flanker_prac")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
   unnest(data_flanker_prac) |>
   select(id, prolific_pid, time_elapsed, rt, variable, task, response, stimtype, correct) |>
@@ -60,6 +61,7 @@ flanker_data <-
   pilot_data |>
   select(id, prolific_pid, data_flanker) |>
   filter(!is.na(data_flanker)) |>
+  filter(data_flanker != "[]") |>
   mutate(across(c(matches("data_flanker")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
   unnest(data_flanker) |>
   select(id, prolific_pid, rt, response, variable, task, stimtype, correct, time_elapsed) |>
@@ -70,6 +72,7 @@ flanker_fb <-
   pilot_data |>
   select(id, prolific_pid, data_flanker_fb) |>
   filter(!is.na(data_flanker_fb)) |>
+  filter(data_flanker_fb != "[]") |>
   mutate(across(c(matches("data_flanker_fb")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
   unnest(data_flanker_fb) |>
   unnest(response) |>
@@ -83,6 +86,7 @@ simon_prac <-
   pilot_data |>
   select(id, prolific_pid, data_simon_prac) |>
   filter(!is.na(data_simon_prac)) |>
+  filter(data_simon_prac != "[]") |>
   mutate(across(c(matches("data_simon_prac")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
   unnest(data_simon_prac) |>
   mutate(condition = ifelse(str_detect(stimtype, "^incongruent"), "incongruent", "congruent")) |>
@@ -93,6 +97,7 @@ simon_data <-
   pilot_data |>
   select(id, prolific_pid, data_simon) |>
   filter(!is.na(data_simon)) |>
+  filter(data_simon != "[]") |>
   mutate(across(c(matches("data_simon")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
   unnest(data_simon) |>
   mutate(condition = ifelse(str_detect(stimtype, "^incongruent"), "incongruent", "congruent")) |>
@@ -103,6 +108,7 @@ simon_fb <-
   pilot_data |>
   select(id, prolific_pid, data_simon_fb) |>
   filter(!is.na(data_simon_fb)) |>
+  filter(data_simon_fb != "[]") |>
   mutate(across(c(matches("data_simon_fb")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
   unnest(data_simon_fb) |>
   unnest(response) |>
@@ -144,6 +150,7 @@ colorshape_prac <-
   pilot_data |>
   select(id, prolific_pid, data_colorshape_prac) |>
   filter(!is.na(data_colorshape_prac)) |>
+  filter(data_colorshape_prac != "[]") |>
   mutate(across(c(matches("data_colorshape_prac")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
   unnest(data_colorshape_prac) |>
   select(id, prolific_pid, variable, task, rt, correct, rule, type, response, time_elapsed)
@@ -153,6 +160,7 @@ colorshape_data <-
   pilot_data |>
   select(id, prolific_pid, data_colorshape) |>
   filter(!is.na(data_colorshape)) |>
+  filter(data_colorshape != "[]") |>
   mutate(across(c(matches("data_colorshape")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
   unnest(data_colorshape) |>
   select(id, prolific_pid, variable, task, rt, correct, rule, type, response, time_elapsed) |>
@@ -162,6 +170,7 @@ colorshape_fb <-
   pilot_data |>
   select(id, prolific_pid, data_colorshape_fb) |>
   filter(!is.na(data_colorshape_fb)) |>
+  filter(data_colorshape_fb != "[]") |>
   mutate(across(c(matches("data_colorshape_fb")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
   unnest(data_colorshape_fb) |>
   unnest(response) |>
@@ -174,6 +183,7 @@ animacysize_prac <-
   pilot_data |>
   select(id, prolific_pid, data_animacysize_prac) |>
   filter(!is.na(data_animacysize_prac)) |>
+  filter(data_animacysize_prac != "[]") |>
   mutate(across(c(matches("data_animacysize_prac")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
   unnest(data_animacysize_prac) |>
   select(id, prolific_pid, variable, task, rt, correct, rule, condition, response, time_elapsed)
@@ -183,6 +193,7 @@ animacysize_data <-
   pilot_data |>
   select(id, prolific_pid, data_animacysize) |>
   filter(!is.na(data_animacysize)) |>
+  filter(data_animacysize != "[]") |>
   mutate(across(c(matches("data_animacysize")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
   unnest(data_animacysize) |>
   select(id, prolific_pid, variable, task, rt, correct, rule, condition, response, time_elapsed)|>
@@ -193,6 +204,7 @@ animacysize_fb <-
   pilot_data |>
   select(id, prolific_pid, data_animacysize_fb) |>
   filter(!is.na(data_animacysize_fb)) |>
+  filter(data_animacysize_fb != "[]") |>
   mutate(across(c(matches("data_animacysize_fb")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
   unnest(data_animacysize_fb) |>
   unnest(response) |>
@@ -206,6 +218,7 @@ posner_prac <-
   pilot_data |>
   select(id, prolific_pid, data_posner_prac) |>
   filter(!is.na(data_posner_prac)) |>
+  filter(data_posner_prac != "[]") |>
   mutate(across(c(matches("data_posner_prac")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
   unnest(data_posner_prac) |>
   select(id, prolific_pid, variable, task, rt, correct, condition, response, time_elapsed)
@@ -215,6 +228,7 @@ posner_data <-
   pilot_data |>
   select(id, prolific_pid, data_posner) |>
   filter(!is.na(data_posner)) |>
+  filter(data_posner != "[]") |>
   mutate(across(c(matches("data_posner")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
   unnest(data_posner) |>
   select(id, prolific_pid, variable, task, rt, correct, condition, response, time_elapsed)|>
@@ -224,6 +238,7 @@ posner_fb <-
   pilot_data |>
   select(id, prolific_pid, data_posner_fb) |>
   filter(!is.na(data_posner_fb)) |>
+  filter(data_posner_fb != "[]") |>
   mutate(across(c(matches("data_posner_fb")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
   unnest(data_posner_fb) |>
   unnest(response) |>
@@ -231,32 +246,145 @@ posner_fb <-
 
 
 # Task durations ----------------------------------------------------------
+task_durations <-
+  reduce(
+    list(
+      posner_data |>
+        group_by(id) |>
+        mutate(rownum = row_number()) |>
+        filter(variable == "end") |>
+        ungroup() |>
+        select(id, variable, time_elapsed) |>
+        left_join(posner_prac |> filter(variable == "welcome") |> select(id, practice_start = time_elapsed)) |>
+        mutate(
+          starttime = practice_start/1000,
+          endtime   = time_elapsed / 1000,
+          posner_total_time = (endtime - starttime) / 60
+        ) |>
+        select(id, posner_total_time),
 
-posner_data |>
-  group_by(id) |>
-  mutate(rownum = row_number()) |>
-  filter(variable == "end") |>
-  ungroup() |>
-  select(id, variable, time_elapsed) |>
-  left_join(posner_prac |> filter(variable == "welcome") |> select(id, practice_start = time_elapsed)) |>
-  summarise(posner_duration = (time_elapsed - practice_start)/60/60)
+      globallocal_data |>
+        group_by(id) |>
+        mutate(rownum = row_number()) |>
+        filter(rownum == 64) |>
+        ungroup() |>
+        select(id, variable, time_elapsed) |>
+        left_join(globallocal_prac |> filter(variable == "welcome") |> select(id, practice_start = time_elapsed)) |>
+        mutate(
+          starttime = practice_start/1000,
+          endtime   = time_elapsed / 1000,
+          globallocal_total_time = (endtime - starttime) / 60
+        ) |>
+        select(id, globallocal_total_time),
 
-globallocal_data |>
-  group_by(id) |>
-  mutate(rownum = row_number()) |>
-  filter(rownum == 64) |>
-  ungroup() |>
-  select(id, variable, time_elapsed) |>
-  left_join(globallocal_prac |> filter(variable == "welcome") |> select(id, practice_start = time_elapsed)) |>
-  summarise(globallocal_duration = (time_elapsed - practice_start)/60/60)
+      colorshape_data |>
+        group_by(id) |>
+        filter(variable == "colorshape_finish") |>
+        ungroup() |>
+        select(id, variable, time_elapsed) |>
+        left_join(colorshape_prac |> filter(variable == "welcome") |> select(id, practice_start = time_elapsed)) |>
+        mutate(
+          starttime = practice_start/1000,
+          endtime   = time_elapsed / 1000,
+          colorshape_total_time = (endtime - starttime) / 60
+        ) |>
+        select(id, colorshape_total_time),
 
+      animacysize_data |>
+        group_by(id) |>
+        filter(variable == "end") |>
+        ungroup() |>
+        select(id, variable, time_elapsed) |>
+        left_join(animacysize_prac |> filter(variable == "welcome") |> select(id, practice_start = time_elapsed)) |>
+        mutate(
+          starttime = practice_start/1000,
+          endtime   = time_elapsed / 1000,
+          animacysize_total_time = (endtime - starttime) / 60
+        ) |>
+        select(id, animacysize_total_time),
 
+      flanker_data |>
+        group_by(id) |>
+        filter(variable == "end") |>
+        ungroup() |>
+        select(id, variable, time_elapsed) |>
+        left_join(flanker_prac |> filter(variable == "welcome") |> select(id, practice_start = time_elapsed)) |>
+        mutate(
+          starttime = practice_start/1000,
+          endtime   = time_elapsed / 1000,
+          flanker_total_time = (endtime - starttime) / 60
+        )|>
+        select(id, flanker_total_time),
+
+      simon_data |>
+        group_by(id) |>
+        filter(variable == "end") |>
+        ungroup() |>
+        select(id, variable, time_elapsed) |>
+        left_join(simon_prac |> filter(variable == "welcome") |> select(id, practice_start = time_elapsed)) |>
+        mutate(
+          starttime = practice_start/1000,
+          endtime   = time_elapsed / 1000,
+          simon_total_time = (endtime - starttime) / 60
+        ) |>
+        select(id, simon_total_time)
+    ),
+    left_join, by = "id"
+  ) |>
+  rowwise() |>
+  drop_na() |>
+  mutate(
+    experiment_time = across(-id) |>  rowSums(na.rm = T)
+  )
+
+ggplot(task_durations, aes(experiment_time)) +
+  geom_histogram()
 
 # Performance -------------------------------------------------------------
 
 globallocal_data |>
   filter(!id %in% 1:5, variable != "end", type != "first") |>
   group_by(id, type) |>
+  summarise(
+    mean_rt = mean(rt, na.rm = T),
+    acc     = sum(correct)/n()*100
+  ) |> View()
+
+animacysize_data |>
+  filter(!id %in% 1:5, variable != "end", condition != "first") |>
+  group_by(id, condition) |>
+  summarise(
+    mean_rt = mean(rt, na.rm = T),
+    acc     = sum(correct)/n()*100
+  )
+
+colorshape_data |>
+  filter(!id %in% 1:5, variable != "end", type != "first") |>
+  group_by(id, type) |>
+  summarise(
+    mean_rt = mean(rt, na.rm = T),
+    acc     = sum(correct)/n()*100
+  )
+
+flanker_data |>
+  filter(!id %in% 1:5, variable != "end") |>
+  group_by(id, condition) |>
+  summarise(
+    mean_rt = mean(rt, na.rm = T),
+    acc     = sum(correct)/n()*100
+  )
+
+simon_data |>
+  filter(!id %in% 1:5, variable != "end") |>
+  group_by(id, condition) |>
+  summarise(
+    mean_rt = mean(rt, na.rm = T),
+    acc     = sum(correct)/n()*100
+  )
+
+posner_data |>
+  filter(!id %in% 1:5, variable != "end") |>
+  group_by(id) |>
   summarise(
     mean_rt = mean(rt, na.rm = T),
     acc     = sum(correct)/n()*100

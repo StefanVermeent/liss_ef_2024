@@ -23,11 +23,15 @@ var globallocal_instructions = {
       "<img height = 300 src = S_globallocal/img/black_h_of_p.png></img><br><br>",
 
       "<p style = 'text-align: center;'>" +
-      "De figuren bevatten altijd de letter <strong>'H'</strong> <i>OF</i> de letter <strong>'E'</strong>, maar nooit tegelijkertijd.<br><br>" +
+      "De figuren bevatten altijd in ieder geval de letter <strong>'H'</strong> <i>OF</i> de letter <strong>'E'</strong>, maar nooit tegelijkertijd.<br><br>" +
       "Links ziet u  een voorbeeld van een <strong>GROTE</strong> letter <strong>'F'</strong> die bestaat uit <strong>KLEINE</strong> letters <strong>'E'</strong>.<br>" +
       "Rechts ziet u een voorbeeld van een <strong>GROTE</strong> letter <strong>'H'</strong> die bestaat uit <strong>KLEINE</strong> letters <strong>'T'</strong>.<br><br>" +
-      "<img style = 'height: 200px; float: left' src = S_globallocal/img/black_f_of_e.png></img>" +
-      "<img style = 'height: 200px; float: right' src = S_globallocal/img/black_h_of_t.png></img>",
+
+      "<div class='grid-container' style='height:210px'>" +
+        "<div><img style = 'height: 200px; float: left' src = S_globallocal/img/black_f_of_e_example.png></img></div>" +
+        "<div></div>" +
+        "<div><img style = 'height: 200px; float: right' src = S_globallocal/img/black_h_of_t_example.png></img></div>" +
+      "</div><br><br>",
 
       "Uw taak is altijd om de letter <strong>'H'</strong> <i>OF</i> de letter <strong>'E'</strong> te vinden,<br>" +
       "en om aan te geven of het de <strong>GROTE letter</strong> is, of de <strong>KLEINE letter</strong>.",
@@ -38,13 +42,13 @@ var globallocal_instructions = {
     "<p style = 'text-align: center;'>" +
     "In het voorbeeld hieronder ziet u een <strong>GROTE</strong> letter <strong>'E'</strong> die bestaat uit <strong>KLEINE</strong> letters <strong>'T'</strong>.<br><br>" +
     "In dit geval zou u dus op de A-toets drukken, omdat de 'E' de GROTE letter is.<br><br>" +
-    "<img height = 200 src = S_globallocal/img/black_e_of_t.png></img>" +
+    "<img height = 300 src = S_globallocal/img/black_e_of_t_example.png></img>" +
     "<br><br><div style='width: 600px;'><h1 style='float: left; font-size: 20px; margin:0;'>GROOT<br><br>A</h1><h1 style='float: right; margin:0; font-size: 20px;'>KLEIN<br><br>L</h1></div>",
 
     "<p style = 'text-align: center;'>" +
     "In het voorbeeld hieronder ziet u een <strong>GROTE</strong> letter <strong>'F'</strong> die bestaat uit <strong>KLEINE</strong> letters <strong>'H'</strong>.<br><br>" +
     "In dit geval zou u dus op de L-toets drukken, omdat de 'H' de KLEINE letter is.<br><br>" +
-    "<img height = 200 src = S_globallocal/img/black_f_of_h.png></img>" +
+    "<img height = 300 src = S_globallocal/img/black_f_of_h_example.png></img>" +
     "<br><br><div style='width: 600px;'><h1 style='float: left; font-size: 20px; margin:0;'>GROOT<br><br>A</h1><h1 style='float: right; margin:0; font-size: 20px;'>KLEIN<br><br>L</h1></div>",
 
     "<p style = 'text-align: center;'>"+
