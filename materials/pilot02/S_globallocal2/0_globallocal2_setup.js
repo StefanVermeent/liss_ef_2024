@@ -25,6 +25,8 @@ var preload_globloc02 = {
       'S_globallocal2/img/SQrec_global.png',
       'S_globallocal2/img/RECrec_global.png',
       'S_globallocal2/img/RECsq_global.png',
+      'S_globallocal2/img/square.png',
+      'S_globallocal2/img/rectangle.png',
       ]
 }
 

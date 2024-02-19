@@ -86,7 +86,13 @@ var globallocal2_local_practice = {
       show_stim_with_feedback: false,
       feedback_duration: 500,
       prompt: "<br><br><br><br><div style='width: 600px;'><h1 style='float: left; font-size: 20px; margin:0;'>" + prompt_square + "<br><br>A</h1><h1 style='float: right; margin:0; font-size: 20px;'><br>" + prompt_rectangle +"<br><br>L</h1></div>",
-      data: {variable: "local_practice", rule: "local", type: "repeat", task: "globallocal2_practice"},
+      data: {
+        variable: "local_practice",
+        rule: "local",
+        type: "repeat",
+        task: "globallocal2_practice",
+        stimulus: function(){return jsPsych.timelineVariable('stimulus')}
+      },
       stimulus: function(){
         var stim = "<div class='grid-container'>" +
                 "<div>" + mouseleft + "</div>" +
@@ -201,7 +207,13 @@ var globallocal2_global_practice = {
       show_stim_with_feedback: false,
       feedback_duration: 500,
       prompt: "<br><br><br><br><div style='width: 600px;'><h1 style='float: left; font-size: 20px; margin:0;'>" + prompt_square + "<br><br>A</h1><h1 style='float: right; margin:0; font-size: 20px;'><br>" + prompt_rectangle +"<br><br>L</h1></div>",
-      data: {variable: "global_practice", rule: "global", type: "repeat", task: "globallocal2_practice"},
+      data: {
+        variable: "global_practice",
+        rule: "global",
+        type: "repeat",
+        task: "globallocal2_practice",
+        stimulus: function(){return jsPsych.timelineVariable('stimulus')}
+      },
       stimulus: function(){
         var stim = "<div class='grid-container'>" +
                 "<div>" + elephantleft + "</div>" +
@@ -252,7 +264,7 @@ var globallocal2_full_instructions = {
     pages: ["<div style = 'text-align: center;'>Goed gedaan!<br><br>" +
             "Nu gaan we beide spellen tegelijk spelen.<br><ul>" +
             "<li>Als u de <strong>MUIZEN</strong> ziet, bepaal dan of de <strong>KLEINE</strong> figuren VIERKANTEN of RECHTHOEKEN zijn.</li>" +
-            "<li>Als u de <strong>OLIFANTEN</strong> ziet, bepaal dan of de <strong>GROTE</strong> figuur VIERKANTEN of RECHTHOEKEN zijn.</li>" +
+            "<li>Als u de <strong>OLIFANTEN</strong> ziet, bepaal dan of de <strong>GROTE</strong> figuur een VIERKANT of RECHTHOEK is.</li>" +
             "</ul><p>U ziet steeds de volgende plaatjes ter herinnering:</p></div><br><br>" +
             "<br><br><br><div style='float:left;'>" + prompt_square + '<br>' + "A<br>Altijd LINKS</div>" + "<div style=float:right;'>" + prompt_rectangle + "<br>" + "<br>L<br>Altijd RECHTS</div><br><br><br>" +
             "</div><br><br>"],

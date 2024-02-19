@@ -25,6 +25,23 @@ pilot_data <-
   filter(finished==1, status == 0, `duration (in seconds)` > 0) |>
   select(-session_id)
 
+pilot2_data <-
+  fetch_survey(
+    surveyID = "SV_5tp0I8hsA2YGMyG",
+    verbose  = T,
+    force_request = T,
+    label = F,
+    convert = F,
+    add_var_labels = F
+  ) %>%
+  rename_with(tolower) %>%
+  mutate(id = 1:n()) %>%
+  sjlabelled::var_labels(
+    id = "Blinded participant ID"
+  ) |>
+  filter(finished==1, status == 0, `duration (in seconds)` > 0) |>
+  select(-session_id)
+
 
 
 # Exclusions --------------------------------------------------------------
@@ -248,6 +265,40 @@ posner_fb <-
   unnest(data_posner_fb) |>
   unnest(response) |>
   select(id, prolific_pid, user_feedback)
+
+
+# Global Local2 Task --------------------------------------------------------
+
+globallocal2_prac <-
+  pilot2_data |>
+  select(id, prolific_pid, data_globallocal2_prac) |>
+  filter(!is.na(data_globallocal2_prac)) |>
+  filter(data_globallocal2_prac != "[]") |>
+  mutate(across(c(matches("data_globallocal2_prac")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
+  unnest(data_globallocal2_prac) |>
+  select(id, prolific_pid, variable, task, rt, correct, rule, type, congruency, response, time_elapsed)
+
+
+globallocal2_data <-
+  pilot2_data |>
+  select(id, prolific_pid, data_globallocal2) |>
+  filter(!is.na(data_globallocal2)) |>
+  filter(data_globallocal2 != "[]") |>
+  mutate(across(c(matches("data_globallocal2")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
+  unnest(data_globallocal2) |>
+  select(id, prolific_pid, variable, task, rt, correct, rule, type, response, time_elapsed) |>
+  filter(!variable %in% c("interblock", "test_start"))
+
+globallocal2_fb <-
+  pilot2_data |>
+  select(id, prolific_pid, data_globallocal2_fb) |>
+  filter(!is.na(data_globallocal2_fb)) |>
+  filter(data_globallocal2_fb != "[]") |>
+  mutate(across(c(matches("data_globallocal2_fb")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
+  unnest(data_globallocal2_fb) |>
+  unnest(response) |>
+  select(id, prolific_pid, user_feedback)
+
 
 
 # Task durations ----------------------------------------------------------
