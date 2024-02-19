@@ -24,24 +24,24 @@ var globallocal2_local_instructions = {
         "In dit spel bepaalt u of de KLEINE figuren VIERKANTEN of RECHTHOEKEN zijn.<br></p>" +
         "Het maakt hierbij niet uit in welke vorm ze naast elkaar staan.<br><br>" +
         "<div class='grid-container-practice'>" +
-          "<div>" + SQsq + "</div>" +
+          "<div>" + SQsq_local + "</div>" +
           "<div></div>" +
-          "<div>" + RECsq + "</div>" +
+          "<div>" + RECsq_local + "</div>" +
           "</div>",
 
         "Als de kleine figuren <strong>VIERKANTEN</strong> zijn zoals hieronder, druk dan op de 'A'-toets op uw toetsenbord:<br><br><br>Voorbeeld:<br><br>"+
         "<div class='grid-container-practice'>" +
-          "<div>" + SQsq + "</div>" +
+          "<div>" + SQsq_local + "</div>" +
           "<div></div>" +
-          "<div>" + RECsq + "</div>" +
+          "<div>" + RECsq_local + "</div>" +
           "</div>" +
         "<br><br><br><div style='float:left;'>" + prompt_square + '<br>' + "A</div>" + "<div style=float:right;'>" + prompt_rectangle + "<br>" + "<br>L</div><br><br><br>",
 
         "Als de kleine figuren <strong>RECHTHOEKEN</strong> zijn zoals hieronder, druk dan op de 'L'-toets op uw toetsenbord:<br><br><br>Voorbeeld:<br><br>"+
         "<div class='grid-container-practice'>" +
-          "<div>" + SQrec + "</div>" +
+          "<div>" + SQrec_local + "</div>" +
           "<div></div>" +
-          "<div>" + RECrec + "</div>" +
+          "<div>" + RECrec_local + "</div>" +
           "</div>" +
         "<br><br><br><div style='float:left;'>" + prompt_square + '<br>' + "A</div>" + "<div style=float:right;'>" + prompt_rectangle + "<br>" + "<br>L</div><br><br><br>",
 
@@ -139,24 +139,24 @@ var globallocal2_global_instructions = {
         "<br><br>In dit spel bepaalt u of de GROTE figuur een VIERKANT of RECHTHOEK is.<br></p>" +
          "Het maakt hierbij niet uit welke vorm de kleine figuren hebben.<br><br>" +
          "<div class='grid-container-practice'>" +
-          "<div>" + SQsq + "</div>" +
+          "<div>" + SQsq_global + "</div>" +
           "<div></div>" +
-          "<div>" + SQrec + "</div>" +
+          "<div>" + SQrec_global + "</div>" +
           "</div>",
 
          "Als de GROTE figuur een <strong>VIERKANT</strong> is zoals hieronder, druk dan op de 'A'-toets op uw toetsenbord:<br><br><br>Voorbeeld:<br><br>"+
         "<div class='grid-container-practice'>" +
-          "<div>" + SQsq + "</div>" +
+          "<div>" + SQsq_global + "</div>" +
           "<div></div>" +
-          "<div>" + SQrec + "</div>" +
+          "<div>" + SQrec_global + "</div>" +
           "</div>" +
         "<br><br><br><div style='float:left;'>" + prompt_square + '<br>' + "A</div>" + "<div style=float:right;'>" + prompt_rectangle + "<br>" + "<br>L</div><br><br><br>",
 
         "Als de GROTE figuur een <strong>RECHTHOEK</strong> is zoals hieronder, druk dan op de 'L'-toets op uw toetsenbord:<br><br><br>Voorbeeld:<br><br>"+
         "<div class='grid-container-practice'>" +
-          "<div>" + RECrec + "</div>" +
+          "<div>" + RECrec_global + "</div>" +
           "<div></div>" +
-          "<div>" + RECsq + "</div>" +
+          "<div>" + RECsq_global + "</div>" +
           "</div>" +
         "<br><br><br><div style='float:left;'>" + prompt_square + '<br>' + "A</div>" + "<div style=float:right;'>" + prompt_rectangle + "<br>" + "<br>L</div><br><br><br>",
 
@@ -251,8 +251,8 @@ var globallocal2_full_instructions = {
     type: jsPsychInstructions,
     pages: ["<div style = 'text-align: center;'>Goed gedaan!<br><br>" +
             "Nu gaan we beide spellen tegelijk spelen.<br><ul>" +
-            "<li>Als u de <strong>MUIZEN</strong> ziet, bepaal dan of de <strong>KLEINE</strong> figuren VIERKANTEN of DRIEHOEKEN zijn.</li>" +
-            "<li>Als u de <strong>OLIFANTEN</strong> ziet, bepaal dan of de <strong>GROTE</strong> figuur VIERKANTEN of DRIEHOEKEN zijn.</li>" +
+            "<li>Als u de <strong>MUIZEN</strong> ziet, bepaal dan of de <strong>KLEINE</strong> figuren VIERKANTEN of RECHTHOEKEN zijn.</li>" +
+            "<li>Als u de <strong>OLIFANTEN</strong> ziet, bepaal dan of de <strong>GROTE</strong> figuur VIERKANTEN of RECHTHOEKEN zijn.</li>" +
             "</ul><p>U ziet steeds de volgende plaatjes ter herinnering:</p></div><br><br>" +
             "<br><br><br><div style='float:left;'>" + prompt_square + '<br>' + "A<br>Altijd LINKS</div>" + "<div style=float:right;'>" + prompt_rectangle + "<br>" + "<br>L<br>Altijd RECHTS</div><br><br><br>" +
             "</div><br><br>"],
@@ -275,3 +275,31 @@ var globallocal2_test_start = {
     variable: 'test_start', task: 'globallocal2'
   }
 }
+
+
+var globallocal2_interblock = {
+  type: jsPsychInstructions,
+  pages: [
+    "<p style = 'text-align: center;'>" +
+      "Goed gedaan! U bent nu halverwege het spel.<br><br>" +
+      "Als u wilt kunt u even pauzeren voordat u verder gaat."
+  ],
+  show_clickable_nav: true,
+  allow_backward: true,
+  key_forward: -1,
+  key_backward: -1,
+  button_label_next: "verder",
+  button_label_previous: "ga terug",
+  data: {variable: "test_interblock", task: "globallocal2"}
+};
+
+
+var globallocal2_end = {
+  type: jsPsychHtmlButtonResponse,
+  stimulus:
+  "Goed gedaan!<br><br>" +
+  "U bent nu klaar met het spelen van het <strong>VIERKANTEN en RECHTHOEKEN</strong> spel.<br><br>" +
+  "Klik op 'verder' om verder te gaan.<br><br>",
+  choices: ['verder'],
+  data: {variable: "end", task: "globallocal2"}
+};

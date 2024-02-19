@@ -35,10 +35,6 @@
     <script src="S_globallocal/1_globallocal_instructions.js"></script>
     <script src="S_globallocal/2_globallocal_procedure.js"></script>
 
-    <script src="S_globallocal2/0_globallocal2_setup.js"></script>
-    <script src="S_globallocal2/1_globallocal2_instructions.js"></script>
-    <script src="S_globallocal2/2_globallocal2_procedure.js"></script>
-
     <script src="I_simon/0_simon_setup.js"></script>
     <script src="I_simon/1_simon_instructions.js"></script>
     <script src="I_simon/2_simon_procedure.js"></script>
@@ -214,31 +210,6 @@ globallocal_timeline = [
   globallocal_pp_feedback
  ]
 
-globallocal2_timeline = [
-  fullscreenmode,
-  globallocal2_welcome,
-  globallocal2_local_instructions,
-  cursor_off,
-  globallocal2_local_practice_loop,
-  cursor_on,
-  globallocal2_global_instructions,
-  cursor_off,
-  globallocal2_global_practice_loop,
-  cursor_on,
-  globallocal2_full_instructions,
-  cursor_off,
-  globallocal2_test_start,
-  globallocal2_procedure01,
-  cursor_on,
-  globallocal2_interblock,
-  cursor_off,
-  globallocal2_test_start,
-  globallocal2_procedure02,
-  cursor_on,
-  globallocal2_end,
-  globallocal2_pp_feedback
-]
-
 // COMBINE ALL TASKS
 
 var full_timeline = [
@@ -322,6 +293,6 @@ var jsPsych = initJsPsych({
   }
 });
 
-jsPsych.run(globallocal2_timeline)
+jsPsych.run(full_timeline_random)
 </script>
 </html>

@@ -105,7 +105,7 @@ timeline: [globallocal2_fixation, globallocal2_target],
 }
 
 
-var globallocal2_procedure01 = {
+var globallocal2_procedure02 = {
 timeline: [globallocal2_fixation, globallocal2_target],
   timeline_variables: [
     {stimulus: SQsq, key_answer: 'A', data: {rule: 'global', type: 'first', congruency: 'congruent', variable: 'globallocal2_01', task: 'globallocal'}},

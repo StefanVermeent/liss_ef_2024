@@ -1,0 +1,115 @@
+<html>
+  <head>
+    <title>Cognitive Tasks</title>
+    <script src="https://unpkg.com/jspsych@7.3.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.1.1"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-categorize-html@1.1.1"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-multi-select@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-call-function@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-fullscreen@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-instructions@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-html-form@1.0.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-text@1.1.3"></script>
+
+
+    <script src="global_variables.js"></script>
+
+    <script src="S_globallocal2/0_globallocal2_setup.js"></script>
+    <script src="S_globallocal2/1_globallocal2_instructions.js"></script>
+    <script src="S_globallocal2/2_globallocal2_procedure.js"></script>
+
+    <link href="https://unpkg.com/jspsych@7.3.2/css/jspsych.css" rel="stylesheet" type="text/css" />
+    <style>
+      body {
+        background-color: #bdc4ca;
+      }
+      .grid-container {
+        display: grid;
+        justify-content: space-evenly;
+        grid-template-columns: 100px 400px 100px;
+        height: 150px;
+        text-align: center;
+        align-items: center;
+      }
+
+      .grid-container-practice {
+        display: grid;
+        justify-content: space-evenly;
+        grid-template-columns: 200px 100px 200px;
+        height: 150px;
+        text-align: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body></body>
+  <script>
+
+
+
+// START OF TIMELINE
+  timeline_start = [
+    fullscreenmode,
+    preload_globloc01
+  ]
+
+globallocal2_timeline = [
+  fullscreenmode,
+  globallocal2_welcome,
+  globallocal2_local_instructions,
+  cursor_off,
+  globallocal2_local_practice_loop,
+  cursor_on,
+  globallocal2_global_instructions,
+  cursor_off,
+  globallocal2_global_practice_loop,
+  cursor_on,
+  globallocal2_full_instructions,
+  cursor_off,
+  globallocal2_test_start,
+  globallocal2_procedure01,
+  cursor_on,
+  globallocal2_interblock,
+  cursor_off,
+  globallocal2_test_start,
+  globallocal2_procedure02,
+  cursor_on,
+  globallocal2_end,
+  globallocal2_pp_feedback
+]
+
+// RANDOMIZE TASK ORDER
+
+// INITIATE jsPsych
+
+var jsPsych = initJsPsych({
+  on_finish: function() {
+    tasks_start            = jsPsych.getStartTime();
+    tasks_end              = jsPsych.getTotalTime();;
+
+    data_globallocal2_prac  = jsPsych.data.get().filter({task: 'globallocal2_practice'});
+    data_globallocal2       = jsPsych.data.get().filter({task: 'globallocal2'});
+    data_globallocal2_fb    = jsPsych.data.get().filter({task: 'globallocal2_feedback'});
+
+    tasks_browser          = jsPsych.data.getInteractionData().json();
+
+  window.parent.postMessage([
+      tasks_start,
+      tasks_end,
+
+      data_globallocal2_prac.json(),
+      data_globallocal2.json(),
+      data_globallocal2_fb.json(),
+
+      tasks_browser
+      ],
+      "https://survey.uu.nl/jfe/form/SV_0Srsyx4Vh2UajhY");
+  }
+});
+
+jsPsych.run(globallocal2_timeline)
+</script>
+</html>

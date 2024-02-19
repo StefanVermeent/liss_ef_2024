@@ -26,6 +26,11 @@ pilot_data <-
   select(-session_id)
 
 
+
+# Exclusions --------------------------------------------------------------
+
+pilot_data <-  pilot_data |>
+  filter(id > 15)
 # Self-report -------------------------------------------------------------
 
 
@@ -340,6 +345,9 @@ task_durations <-
 ggplot(task_durations, aes(experiment_time)) +
   geom_histogram()
 
+median(task_durations$experiment_time)
+quantile(task_durations$experiment_time, probs = c(0.25, 0.50, 0.75, 0.90, 0.95))
+
 # Performance -------------------------------------------------------------
 
 globallocal_data |>
@@ -348,7 +356,12 @@ globallocal_data |>
   summarise(
     mean_rt = mean(rt, na.rm = T),
     acc     = sum(correct)/n()*100
-  ) |> View()
+  ) |>
+  pivot_longer(c(mean_rt, acc), names_to = "name", values_to = "value") |>
+  ggplot(aes(value)) +
+  geom_histogram() +
+  facet_grid(type~name, scales = "free") +
+  geom_vline(xintercept = 50)
 
 animacysize_data |>
   filter(!id %in% 1:5, variable != "end", condition != "first") |>
@@ -356,7 +369,12 @@ animacysize_data |>
   summarise(
     mean_rt = mean(rt, na.rm = T),
     acc     = sum(correct)/n()*100
-  )
+  ) |>
+  pivot_longer(c(mean_rt, acc), names_to = "name", values_to = "value") |>
+  ggplot(aes(value)) +
+  geom_histogram() +
+  facet_grid(condition~name, scales = "free") +
+  geom_vline(xintercept = 50)
 
 colorshape_data |>
   filter(!id %in% 1:5, variable != "end", type != "first") |>
@@ -364,7 +382,13 @@ colorshape_data |>
   summarise(
     mean_rt = mean(rt, na.rm = T),
     acc     = sum(correct)/n()*100
-  )
+  ) |>
+  pivot_longer(c(mean_rt, acc), names_to = "name", values_to = "value") |>
+  ggplot(aes(value)) +
+  geom_histogram() +
+  facet_grid(type~name, scales = "free") +
+  geom_vline(xintercept = 50)
+
 
 flanker_data |>
   filter(!id %in% 1:5, variable != "end") |>
@@ -372,7 +396,13 @@ flanker_data |>
   summarise(
     mean_rt = mean(rt, na.rm = T),
     acc     = sum(correct)/n()*100
-  )
+  ) |>
+  pivot_longer(c(mean_rt, acc), names_to = "name", values_to = "value") |>
+  ggplot(aes(value)) +
+  geom_histogram() +
+  facet_grid(condition~name, scales = "free") +
+  geom_vline(xintercept = 50)
+
 
 simon_data |>
   filter(!id %in% 1:5, variable != "end") |>
@@ -380,7 +410,13 @@ simon_data |>
   summarise(
     mean_rt = mean(rt, na.rm = T),
     acc     = sum(correct)/n()*100
-  )
+  ) |>
+  pivot_longer(c(mean_rt, acc), names_to = "name", values_to = "value") |>
+  ggplot(aes(value)) +
+  geom_histogram() +
+  facet_grid(condition~name, scales = "free") +
+  geom_vline(xintercept = 50)
+
 
 posner_data |>
   filter(!id %in% 1:5, variable != "end") |>
@@ -388,6 +424,14 @@ posner_data |>
   summarise(
     mean_rt = mean(rt, na.rm = T),
     acc     = sum(correct)/n()*100
-  )
+  ) |>
+  pivot_longer(c(mean_rt, acc), names_to = "name", values_to = "value") |>
+  ggplot(aes(value)) +
+  geom_histogram() +
+  facet_wrap(~name, scales = "free") +
+  geom_vline(xintercept = 50)
 
-save(pilot_full_data, file = "data/pilot_full_data.RData")
+
+# Combine data ------------------------------------------------------------
+
+save(animacysize_data, colorshape_data, flanker_data, globallocal_data, posner_data, simon_data, file = "data/pilot_data.RData")
