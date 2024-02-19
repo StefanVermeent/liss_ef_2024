@@ -299,7 +299,7 @@ var globallocal2_end = {
   stimulus:
   "Goed gedaan!<br><br>" +
   "U bent nu klaar met het spelen van het <strong>VIERKANTEN en RECHTHOEKEN</strong> spel.<br><br>" +
-  "Hartelijk dank voor uw deelname!<br><br>"
+  "Hartelijk dank voor uw deelname!<br><br>" +
   "Klik op 'verder' om verder te gaan.<br><br>",
   choices: ['verder'],
   data: {variable: "end", task: "globallocal2"}
