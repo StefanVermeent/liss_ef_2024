@@ -90,24 +90,20 @@ var jsPsych = initJsPsych({
   on_finish: function() {
     tasks_start            = jsPsych.getStartTime();
     tasks_end              = jsPsych.getTotalTime();;
-
     data_globallocal2_prac  = jsPsych.data.get().filter({task: 'globallocal2_practice'});
     data_globallocal2       = jsPsych.data.get().filter({task: 'globallocal2'});
     data_globallocal2_fb    = jsPsych.data.get().filter({task: 'globallocal2_feedback'});
-
     tasks_browser          = jsPsych.data.getInteractionData().json();
 
   window.parent.postMessage([
       tasks_start,
       tasks_end,
-
       data_globallocal2_prac.json(),
       data_globallocal2.json(),
       data_globallocal2_fb.json(),
-
       tasks_browser
       ],
-      "https://survey.uu.nl/jfe/form/SV_0Srsyx4Vh2UajhY");
+      "https://survey.uu.nl/jfe/form/SV_5tp0I8hsA2YGMyG");
   }
 });
 
