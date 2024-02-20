@@ -57,8 +57,8 @@ var globallocal2_target = {
   },
   data: {
     rule: function(){return jsPsych.timelineVariable('data')['rule']},
-    type: function(){return jsPsych.timelineVariable('data')['type']},
-    congruency: function(){return jsPsych.timelineVariable('data')['type']},
+    condition: function(){return jsPsych.timelineVariable('data')['type']},
+    congruency: function(){return jsPsych.timelineVariable('data')['congruency']},
     variable: function(){return jsPsych.timelineVariable('data')['variable']},
     task: function(){return jsPsych.timelineVariable('data')['task']},
     stimulus: function(){return jsPsych.timelineVariable('stimulus')}
