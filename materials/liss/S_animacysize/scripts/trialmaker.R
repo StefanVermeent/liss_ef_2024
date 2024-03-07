@@ -3,9 +3,9 @@ set.seed(4785)
 
 # Stimulus sets -----------------------------------------------------------
 
-lsm_test_words <- c("egel", "goudvis", "kever", "kikker", "konijn", "mier",
+lsm_test_words <- c("egel", "goudvis", "kever", "kikker", "mier",
                     "mug", "muis", "mus", "rat", "rups", "slak", "spin",
-                    "vlinder", "wesp", "worm")
+                    "vlinder", "wesp", "worm", "kuiken")
 
 lbi_test_words <- c( "beer", "dolfijn", "ezel", "geit", "hert", "ijsbeer",
                      "kameel", "leeuw", "olifant", "ooievaar", "orka",
@@ -18,7 +18,7 @@ nlsm_test_words <- c("blik", "bril", "kam", "lepel", "mok", "naald", "pen",
 
 
 nlbi_test_words <- c("bus", "caravan", "fiets", "iglo",  "kano", "kanon",
-                     "kraan",  "lantaarn", "piano", "raket", "saxofoon",
+                     "matras",  "lantaarn", "piano", "raket", "saxofoon",
                      "tent", "toren", "tractor", "vulkaan", "windmolen")
 
 lsm_test_words <- sample(lsm_test_words, size = 16, replace = F)
