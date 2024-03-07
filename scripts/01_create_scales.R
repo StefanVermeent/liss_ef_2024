@@ -8,7 +8,7 @@ library(sjlabelled)
 
 
 # Data --------------------------------------------------------------------
-pilot_data <-
+pilot1_data <-
   fetch_survey(
     surveyID = "SV_0Srsyx4Vh2UajhY",
     verbose  = T,
@@ -18,12 +18,8 @@ pilot_data <-
     add_var_labels = F
   ) %>%
   rename_with(tolower) %>%
-  mutate(id = 1:n()) %>%
-  sjlabelled::var_labels(
-    id = "Blinded participant ID"
-  ) |>
   filter(finished==1, status == 0, `duration (in seconds)` > 0) |>
-  select(-session_id)
+  select(prolific_pid, starts_with("data"))
 
 pilot2_data <-
   fetch_survey(
@@ -35,19 +31,30 @@ pilot2_data <-
     add_var_labels = F
   ) %>%
   rename_with(tolower) %>%
-  mutate(id = 1:n()) %>%
-  sjlabelled::var_labels(
-    id = "Blinded participant ID"
-  ) |>
   filter(finished==1, status == 0, `duration (in seconds)` > 0) |>
-  select(-session_id)
+  select(-session_id) |>
+  select(prolific_pid, starts_with("data"))
+
+pilot3_data <-
+  fetch_survey(
+    surveyID = "SV_3kot0l1n43R9DU2",
+    verbose  = T,
+    force_request = T,
+    label = F,
+    convert = F,
+    add_var_labels = F
+  ) %>%
+  rename_with(tolower) %>%
+  filter(finished==1, status == 0, `duration (in seconds)` > 0) |>
+  select(-session_id) |>
+  select(prolific_pid, starts_with("data"))
+
+pilot_data <- left_join(pilot1_data, pilot2_data) |>
+  bind_rows(pilot3_data |> select(starts_with('data'))) |>
+  mutate(id = 1:n())
 
 
 
-# Exclusions --------------------------------------------------------------
-
-pilot_data <-  pilot_data |>
-  filter(id > 15)
 # Self-report -------------------------------------------------------------
 
 
@@ -270,27 +277,27 @@ posner_fb <-
 # Global Local2 Task --------------------------------------------------------
 
 globallocal2_prac <-
-  pilot2_data |>
+  pilot_data |>
   select(id, prolific_pid, data_globallocal2_prac) |>
   filter(!is.na(data_globallocal2_prac)) |>
   filter(data_globallocal2_prac != "[]") |>
   mutate(across(c(matches("data_globallocal2_prac")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
   unnest(data_globallocal2_prac) |>
-  select(id, prolific_pid, variable, task, rt, correct, rule, type, congruency, response, time_elapsed)
+  select(id, prolific_pid, variable, task, rt, correct, rule, type, response, time_elapsed)
 
 
 globallocal2_data <-
-  pilot2_data |>
+  pilot_data |>
   select(id, prolific_pid, data_globallocal2) |>
   filter(!is.na(data_globallocal2)) |>
   filter(data_globallocal2 != "[]") |>
   mutate(across(c(matches("data_globallocal2")), ~map_if(., .p =  ~!is.na(.x), .f = jsonlite::fromJSON))) |>
   unnest(data_globallocal2) |>
-  select(id, prolific_pid, variable, task, rt, correct, rule, type, response, time_elapsed) |>
-  filter(!variable %in% c("interblock", "test_start"))
+  select(id, prolific_pid, variable, task, rt, stimulus, correct, rule, condition, congruency, response, time_elapsed) |>
+  filter(!variable %in% c("interblock", "test_start", 'fixation'))
 
 globallocal2_fb <-
-  pilot2_data |>
+  pilot_data |>
   select(id, prolific_pid, data_globallocal2_fb) |>
   filter(!is.na(data_globallocal2_fb)) |>
   filter(data_globallocal2_fb != "[]") |>
@@ -332,6 +339,20 @@ task_durations <-
           globallocal_total_time = (endtime - starttime) / 60
         ) |>
         select(id, globallocal_total_time),
+
+      globallocal2_data |>
+        group_by(id) |>
+        mutate(rownum = row_number()) |>
+        filter(rownum == 64) |>
+        ungroup() |>
+        select(id, variable, time_elapsed) |>
+        left_join(globallocal2_prac |> filter(variable == "welcome") |> select(id, practice_start = time_elapsed)) |>
+        mutate(
+          starttime = practice_start/1000,
+          endtime   = time_elapsed / 1000,
+          globallocal2_total_time = (endtime - starttime) / 60
+        ) |>
+        select(id, globallocal2_total_time),
 
       colorshape_data |>
         group_by(id) |>
@@ -385,19 +406,23 @@ task_durations <-
         ) |>
         select(id, simon_total_time)
     ),
-    left_join, by = "id"
+    full_join, by = "id"
   ) |>
   rowwise() |>
   drop_na() |>
   mutate(
-    experiment_time = across(-id) |>  rowSums(na.rm = T)
+    experiment_time1 = across(c(-id, -globallocal2_total_time)) |>  rowSums(na.rm = T),
+    experiment_time2 = across(c(-id, -globallocal_total_time, -experiment_time1)) |> rowSums(na.rm = T)
   )
 
-ggplot(task_durations, aes(experiment_time)) +
+ggplot(task_durations, aes(experiment_time1)) +
   geom_histogram()
 
-median(task_durations$experiment_time)
-quantile(task_durations$experiment_time, probs = c(0.25, 0.50, 0.75, 0.90, 0.95))
+median(task_durations$experiment_time1)
+median(task_durations$experiment_time2)
+
+quantile(task_durations$experiment_time1, probs = c(0.25, 0.50, 0.75, 0.90, 0.95))
+quantile(task_durations$experiment_time2, probs = c(0.25, 0.50, 0.75, 0.90, 0.95))
 
 # Performance -------------------------------------------------------------
 
@@ -483,6 +508,24 @@ posner_data |>
   geom_vline(xintercept = 50)
 
 
+globallocal2_data |>
+  filter(id != 10) |>
+  filter(rt >250 & rt < 5000) |>
+  filter(condition != "first", !variable %in% c("test_interblock", "end")) |>
+  mutate(prev_error = ifelse(lag(correct,1) == FALSE, TRUE, FALSE)) |>
+  group_by(id,congruency, condition) |>
+  summarise(
+    mean_rt = mean(rt, na.rm = T),
+    accuracy = sum(correct)/n()*100
+  ) |>
+  filter(accuracy > 61) |>
+  group_by(congruency, condition) |>
+  summarise(
+    mean_rt = mean(mean_rt, na.rm = T),
+    accuracy = mean(accuracy)
+  )
+
+
 # Combine data ------------------------------------------------------------
 
-save(animacysize_data, colorshape_data, flanker_data, globallocal_data, posner_data, simon_data, file = "data/pilot_data.RData")
+save(animacysize_data, colorshape_data, flanker_data, globallocal_data, posner_data, simon_data, globallocal2_data, file = "data/pilot_data.RData")
