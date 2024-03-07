@@ -14,3 +14,4 @@ var prompt_larger   = "<div style='float:right; text-align: right;' >" + larger 
 
 
 
+// stimuli retrieved from https://osf.io/h3e7w/
