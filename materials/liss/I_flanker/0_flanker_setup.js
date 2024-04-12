@@ -54,7 +54,8 @@ var location_stim = function(up, down){
   choices: 'NO_KEYS',
   trial_duration: 1000,
   data: {
-    variable: 'fixation'
+    variable: 'fixation',
+    stimulus: ""
   }
 }
 

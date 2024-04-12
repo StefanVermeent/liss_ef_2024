@@ -63,7 +63,7 @@ trials01 <- trials01 |>
       rule == 'shape' & str_detect(stimulus, "^yellow_circle") ~ 'yellowcircle_shape',
       rule == 'shape' & str_detect(stimulus, "^yellow_triangle") ~ 'yellowtriangle_shape',
     ),
-    stim = case_when(
+    stim_chr = case_when(
       str_detect(stimulus, "yellowtriangle") ~ "yellowtriangle",
       str_detect(stimulus, "yellowcircle") ~ "yellowcircle",
       str_detect(stimulus, "bluecircle") ~ "bluecircle",
@@ -139,7 +139,7 @@ trials02 <- trials02 |>
       rule == 'shape' & str_detect(stimulus, "^yellow_circle") ~ 'yellowcircle_shape',
       rule == 'shape' & str_detect(stimulus, "^yellow_triangle") ~ 'yellowtriangle_shape',
     ),
-    stim = case_when(
+    stim_chr = case_when(
       str_detect(stimulus, "yellowtriangle") ~ "yellowtriangle",
       str_detect(stimulus, "yellowcircle") ~ "yellowcircle",
       str_detect(stimulus, "bluecircle") ~ "bluecircle",
@@ -149,12 +149,12 @@ trials02 <- trials02 |>
 
 glue_data(
   trials01,
-  "{{stimulus: {stimulus}, key_answer: '{key_answer}', data: {{stimulus: '{stim}', rule: '{rule}', type: '{type}', variable: '{variable}', task: '{task}'}}}},"
+  "{{stimulus: {stimulus}, stim_chr: '{stim_chr}', key_answer: '{key_answer}', data: {{rule: '{rule}', type: '{type}', variable: '{variable}', task: '{task}'}}}},"
 )
 
 glue_data(
   trials02,
-  "{{stimulus: {stimulus}, key_answer: '{key_answer}', data: {{stimulus: '{stim}', rule: '{rule}', type: '{type}', variable: '{variable}', task: '{task}'}}}},"
+  "{{stimulus: {stimulus}, stim_chr: '{stim_chr}', key_answer: '{key_answer}', data: {{rule: '{rule}', type: '{type}', variable: '{variable}', task: '{task}'}}}},"
 )
 
 

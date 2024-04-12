@@ -81,8 +81,8 @@ var jsPsych = initJsPsych({
     tasks_start            = jsPsych.getStartTime();
     tasks_end              = jsPsych.getTotalTime();;
 
-    data_animacysize_prac  = jsPsych.data.get().filter({task: 'animacysize_practice'});
-    data_animacysize       = jsPsych.data.get().filter({task: 'animacysize'});
+    data_colorshape_prac   = jsPsych.data.get().filter({task: 'animacysize_practice'});
+    data_colorshape        = jsPsych.data.get().filter({task: 'animacysize'});
 
     tasks_browser          = jsPsych.data.getInteractionData().json();
 
@@ -90,14 +90,15 @@ var jsPsych = initJsPsych({
       tasks_start,
       tasks_end,
 
-      data_animacysize_prac.json(),
-      data_animacysize.json(),
+      data_colorshape_prac.json(),
+      data_colorshape.json(),
 
       tasks_browser
       ],
       "https://survey.uu.nl/jfe/form/SV_3kot0l1n43R9DU2");
   }
 });
+
 
 jsPsych.run(animacysize_timeline)
 </script>

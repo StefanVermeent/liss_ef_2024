@@ -72,27 +72,11 @@ flanker_timeline = [
 // INITIATE jsPsych
 
 var jsPsych = initJsPsych({
-  on_finish: function() {
-    tasks_start            = jsPsych.getStartTime();
-    tasks_end              = jsPsych.getTotalTime();
-
-    data_flanker_prac      = jsPsych.data.get().filter({task: 'flanker_practice'});
-    data_flanker           = jsPsych.data.get().filter({task: 'flanker'});
-
-    tasks_browser          = jsPsych.data.getInteractionData().json();
-
-  window.parent.postMessage([
-      tasks_start,
-      tasks_end,
-
-      data_flanker_prac.json(),
-      data_flanker.json(),
-
-      tasks_browser
-      ],
-      "https://survey.uu.nl/jfe/form/SV_3kot0l1n43R9DU2");
+  on_finish: function(){
+    jsPsych.data.get().localSave('csv', 'data.csv')
   }
 });
+
 
 jsPsych.run(flanker_timeline)
 </script>
