@@ -6,6 +6,9 @@ var posner_letters = {
   },
   choices: ['A', 'L'],
   data: {
+    stimulus: function(){
+      return jsPsych.timelineVariable('stim1') + jsPsych.timelineVariable('stim2')
+    },
     variable: 'test',
     task: 'posner',
     condition: function(){

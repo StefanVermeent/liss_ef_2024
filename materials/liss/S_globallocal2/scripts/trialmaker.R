@@ -251,11 +251,11 @@ trials02 <- trials02 |>
 
 glue_data(
   trials01,
-  "{{stimulus: {stimulus}, key_answer: '{key_answer}', data: {{rule: '{rule}', type: '{type}', congruency: '{congruency}', variable: '{variable}', task: '{task}'}}}},"
+  "{{stimulus: {stimulus}, key_answer: '{key_answer}', data: {{stimulus: '{stimulus}', rule: '{rule}', type: '{type}', congruency: '{congruency}', variable: '{variable}', task: '{task}'}}}},"
 )
 
 glue_data(
   trials02,
-  "{{stimulus: {stimulus}, key_answer: '{key_answer}', data: {{rule: '{rule}', type: '{type}', congruency: '{congruency}', variable: '{variable}', task: '{task}'}}}},"
+  "{{stimulus: {stimulus}, key_answer: '{key_answer}', data: {{stimulus: '{stimulus}', rule: '{rule}', type: '{type}', congruency: '{congruency}', variable: '{variable}', task: '{task}'}}}},"
 )
 

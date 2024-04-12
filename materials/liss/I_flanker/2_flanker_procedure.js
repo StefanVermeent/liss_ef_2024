@@ -7,6 +7,7 @@ var flanker_present_arrows = {
   data: {
     variable: 'test',
     task: 'flanker',
+    stimulus: "",
     location: function(){
       return jsPsych.timelineVariable('location')
     },

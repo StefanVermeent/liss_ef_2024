@@ -23,6 +23,7 @@ var simon_target = {
   data: {
     variable: 'test',
     task: 'simon',
+    stimulus: "",
     location: function(){
       return jsPsych.timelineVariable('location')
     },
