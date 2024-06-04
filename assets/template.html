@@ -5,7 +5,7 @@
 <head>
 
 <meta charset="utf-8" />
-<meta name="generator" content="pandoc" />
+<meta name="generator" content="quarto" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 $if(theme)$
@@ -13,15 +13,15 @@ $else$
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 $endif$
 
-$for(author-meta)$
-<meta name="author" content="$author-meta$" />
+$for(author)$
+<meta name="author" content="$author$" />
 $endfor$
 
-$if(date-meta)$
-<meta name="date" content="$date-meta$" />
+$if(date)$
+<meta name="date" content="$date$" />
 $endif$
 
-<title>$if(title-prefix)$$title-prefix$ - $endif$$pagetitle$</title>
+<title>$title$</title>
 
 $for(header-includes)$
 $header-includes$
@@ -55,17 +55,6 @@ if (window.hljs) {
 </script>
 $endif$
 
-$if(highlight-downlit)$
-<style type="text/css">
-  /* from bookdown::bs4_book() css */
-  code a:any-link {
-    color: inherit; /* use colour from syntax highlighting */
-    text-decoration: underline;
-    text-decoration-color: #ccc;
-  }
-</style>
-$endif$
-
 $if(highlighting-css)$
 <style type="text/css">
   code {
@@ -75,7 +64,7 @@ $if(highlighting-css)$
     overflow: visible;
   }
 </style>
-<style type="text/css" data-origin="pandoc">
+<style type="text/css" data-origin="quarto">
 $highlighting-css$
 
 $if(code_folding)$
@@ -91,11 +80,11 @@ $if(code_folding)$
 $endif$
 </style>
 <script>
-// apply pandoc div.sourceCode style to pre.sourceCode instead
+// apply quarto div.sourceCode style to pre.sourceCode instead
 (function() {
   var sheets = document.styleSheets;
   for (var i = 0; i < sheets.length; i++) {
-    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    if (sheets[i].ownerNode.dataset["origin"] !== "quarto") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
     var j = 0;
     while (j < rules.length) {
@@ -135,7 +124,7 @@ $endif$
 
 $if(source_embed)$
 <style type="text/css">
-#rmd-source-code {
+#quarto-source-code {
   display: none;
 }
 </style>
@@ -143,7 +132,7 @@ $endif$
 
 $if(csl-css)$
 <style type="text/css">
-/* for pandoc --citeproc since 2.11 */
+/* for quarto --citeproc */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
@@ -173,10 +162,8 @@ $for(css)$
 <link rel="stylesheet" href="$css$" $if(html5)$$else$type="text/css" $endif$/>
 $endfor$
 
-
-
 $if(theme)$
-<style type = "text/css">
+<style type="text/css">
 .main-container {
   max-width: 940px;
   margin-left: auto;
@@ -308,9 +295,7 @@ $$(document).ready(function () {
 });
 </script>
 $endif$
-
 <!-- tabsets -->
-
 <style type="text/css">
 .tabset-dropdown > .nav-tabs {
   display: inline-table;
@@ -364,7 +349,6 @@ $if(code_menu)$
 .code-folding-btn { margin-bottom: 4px; }
 </style>
 $endif$
-
 
 $if(toc_float)$
 
@@ -495,14 +479,14 @@ $if(code_menu)$
 <button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
 <ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
 $if(code_folding)$
-<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
-<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li><a id="quarto-show-all-code" href="#">Show All Code</a></li>
+<li><a id="quarto-hide-all-code" href="#">Hide All Code</a></li>
 $if(source_embed)$
 <li role="separator" class="divider"></li>
 $endif$
 $endif$
 $if(source_embed)$
-<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+<li><a id="quarto-download-source" href="#">Download Qmd</a></li>
 $endif$
 </ul>
 </div>
@@ -523,7 +507,7 @@ $if(author.affiliation)$
 <address class="author_afil">
 $author.affiliation$<br>$endif$
 $if(author.email)$
-<a class="author_email" href="mailto:#">$author.email$</a>
+<a class="author_email" href="mailto:$author.email$">$author.email$</a>
 </address>
 $endif$
 $else$
@@ -575,7 +559,6 @@ $endif$
     </div>
 </nav>
 
-
 $body$
 
 $for(include-after)$
@@ -593,12 +576,12 @@ $endif$
 
 <script>
 
-// add bootstrap table styles to pandoc tables
-function bootstrapStylePandocTables() {
+// add bootstrap table styles to quarto tables
+function bootstrapStyleQuartoTables() {
   $$('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $$(document).ready(function () {
-  bootstrapStylePandocTables();
+  bootstrapStyleQuartoTables();
 });
 
 $if(kable-scroll)$
@@ -618,7 +601,6 @@ $endif$
 </script>
 
 <!-- tabsets -->
-
 <script>
 $$(document).ready(function () {
   window.buildTabsets("$idprefix$TOC");
@@ -650,7 +632,7 @@ $if(toc_float)$
 <script>
 $$(document).ready(function ()  {
 
-    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    // temporarily add toc-ignore selector to headers for the consistency with Quarto
     $$('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
