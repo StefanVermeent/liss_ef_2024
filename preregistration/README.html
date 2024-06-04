@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en"><head>
+<script src="README_files/libs/clipboard/clipboard.min.js"></script>
+<script src="README_files/libs/quarto-html/quarto.js"></script>
+<script src="README_files/libs/quarto-html/popper.min.js"></script>
+<script src="README_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="README_files/libs/quarto-html/anchor.min.js"></script>
+<link href="README_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="README_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="README_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="README_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="README_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><meta charset="utf-8">
+<meta name="generator" content="pandoc">
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+<title>readme</title>
+
+<link href="README_files/libs/tabwid-1.1.3/tabwid.css" rel="stylesheet">
+<script src="README_files/libs/tabwid-1.1.3/tabwid.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="../assets/style.css">
+
+
+
+
+</head>
+
+<body class="fullcontent">
+
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+
+<nav>
+    <div class="title"><a href="/liss_ef_2024/index.html">Vermeent et al. (in prep)</a></div>
+    <div class="dropdown">
+        <button class="dropbtn">
+            <div></div>
+            <div></div>
+            <div></div>
+        </button>
+        <div class="dropdown-content">
+            <a href="/liss_ef_2024/preregistration/README.html">Preregistration</a>
+            <a href="/liss_ef_2024/manuscript/README.html">Manuscript</a>
+            <a href="/liss_ef_2024/supplement/README.html">Supplement</a>
+            <a href="/liss_ef_2024/data/README.html">Data</a>
+            <a href="/liss_ef_2024/scripts/README.html">Scripts</a>
+            <a href="/liss_ef_2024/analysis_objects/README.html">Analysis Objects</a>
+        </div>
+    </div>
+</nav>
+
+
+<p><em>Last updated on Tuesday, June 04, 2024 at 10:50 AM</em></p>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>The independent measures used in this study are drawn from studies that were previously conducted in the Longitudinal Internet studies for the Social Sciences (LISS) panel. These data are openly available after signing an agreement with LISS. The dependent measures will be part of a new data collection in the LISS panel which is scheduled between May 2024 and July 2024.</p>
+<p>As this study partly uses secondary data, this preregistration document is based on the template by <span class="citation" data-cites="akker_2021">Akker et al. (<a href="#ref-akker_2021" role="doc-biblioref">2021</a>)</span>. Where necessary, we make clear which decisions relate to/are based on secondary data, and which decisions relate to/are based on newly collected data.</p>
+<p>There are six parts, which you can jump to following the links below:</p>
+<ul>
+<li><a href="#part-1---study-information">Part 1 - Study information</a></li>
+<li><a href="#part-2---data-description">Part 2 - Data Description</a></li>
+<li><a href="#part-3---variables">Part 3 - Variables</a></li>
+<li><a href="#part-4---knowledge-of-data">Part 4 - Knowledge of Data</a></li>
+<li><a href="#part-5---analyses">Part 5 - Analyses</a></li>
+<li><a href="#part-6---statement-of-integrity">Part 6 - Statement of Integrity</a></li>
+</ul>
+</section>
+<section id="part-1---study-information" class="level2">
+<h2 class="anchored" data-anchor-id="part-1---study-information">Part 1 - Study Information</h2>
+<section id="q1-preliminary-title-done" class="level3">
+<h3 class="anchored" data-anchor-id="q1-preliminary-title-done">Q1: Preliminary title DONE</h3>
+<p>“Attention shifting and inhibition abilities among people from adverse conditions”</p>
+</section>
+<section id="q2-authors-done" class="level3">
+<h3 class="anchored" data-anchor-id="q2-authors-done">Q2: Authors DONE</h3>
+<ul>
+<li>Stefan Vermeent<sup>1,2</sup></li>
+<li>Anna-Lena Schubert<sup>3</sup></li>
+<li>Jean-Louis van Gelder<sup>2</sup></li>
+<li>Willem E. Frankenhuis<sup>2,4</sup></li>
+</ul>
+<p><sup>1</sup>Utrecht University, Utrecht, The Netherlands</p>
+<p><sup>2</sup>Max Planck Institute for the Study of Crime, Security and Law, Freiburg, Germany</p>
+<p><sup>3</sup>University of Mainz, Mainz, Germany</p>
+<p><sup>3</sup>University of Amsterdam, Amsterdam, The Netherlands</p>
+</section>
+<section id="q3-research-questions-done" class="level3">
+<h3 class="anchored" data-anchor-id="q3-research-questions-done">Q3: Research Questions DONE</h3>
+<p><strong>R1:</strong> How is adversity associated with general speed of processing across all cognitive tasks?</p>
+<p><strong>R2:</strong> How is adversity associated with inhibition and attention shifting abilities after accounting for general speed of processing?</p>
+<p><strong>R3:</strong> How is adversity associated with task-general and task-specific response caution?</p>
+</section>
+<section id="q4-hypotheses-done" class="level3">
+<h3 class="anchored" data-anchor-id="q4-hypotheses-done">Q4: Hypotheses DONE</h3>
+<p>Data patterns that would be consistent with hypotheses about abilities generated from a <strong>deficit framework</strong>:</p>
+<p>A1. Adversity is negatively associated with general speed of processing.</p>
+<p>A2. Adversity is negatively associated with either or both latent estimates of inhibition and attention shifting, after accounting for general speed of processing.</p>
+<p>A3. If latent estimates of inhibition and attention shifting are highly correlated, adversity is negatively associated with a general EF factor spanning both.</p>
+<p>Data patterns that would be consistent with hypotheses about abilities generated from <strong>adaptation frameworks</strong>:</p>
+<p>B1. Adversity is positively associated with the latent estimate of attention shifting <em>regardless of the association with inhibition</em>, after accounting for general speed of processing. A positive association with inhibition would be unexpected yet interesting, and would require revising existing adaptation theoretical frameworks.</p>
+<p>B2. The association between adversity and the latent estimate of attention shifting is practically equivalent to zero <em>and</em> the association between adversity and the latent estimate of inhibition is negative.</p>
+<p>Finally, we have the following hypothesis about response caution:</p>
+<p>C1. Adversity is associated with more task-general response caution.</p>
+</section>
+</section>
+<section id="part-2---data-description" class="level2">
+<h2 class="anchored" data-anchor-id="part-2---data-description">Part 2 - Data Description</h2>
+<section id="q5-dataset-done" class="level3">
+<h3 class="anchored" data-anchor-id="q5-dataset-done">Q5: Dataset DONE</h3>
+<p>Our study will include 1000 participants who were randomly sampled from the LISS panel (Scherpenzeel, 2011). The LISS panel is a representative probability sample of roughly 5,000 Dutch households (~7,500 individuals) drawn from the population register by Statistics Netherlands on an invite-only basis. Households without a computer or internet connection are provided with these facilities by LISS. Each year, participants complete the same core battery of questionnaires about—among other topics—their financial situation in the past year. In addition, participants can complete additional online questionnaires every month, with variable content. The current study integrates two data sources. First, our sample of 1000 participants will participate in a new LISS study between May 2024 and July 2024 (hereafter referred to as ‘newly collected data’), in which we will include a measure of neighborhood threat, three cognitive tasks measuring attention shifting, two cognitive tasks measuring inhibition, and one cognitive task measuring processing speed. Second, we will access data that were previously collected in LISS (hereafter referred to as ‘the LISS archive’).</p>
+</section>
+<section id="q6-public-availability-done" class="level3">
+<h3 class="anchored" data-anchor-id="q6-public-availability-done">Q6: Public Availability DONE</h3>
+<p>All datasets are available in the LISS data archive. Researchers who want to access the data are required to sign a statement confirming that information about individual persons, households, etc., will not be released to others (go to <a href="https://statements.centerdata.nl" class="uri">https://statements.centerdata.nl</a> for more information).</p>
+</section>
+<section id="q7-data-access-done" class="level3">
+<h3 class="anchored" data-anchor-id="q7-data-access-done">Q7: Data Access DONE</h3>
+<p>Data can be accessed through the following links.</p>
+<ul>
+<li><a href="https://www.dataarchive.lissdata.nl/study-units/view/25">Convential and Computer Crime Victimization study</a>, doi: https://doi.org/10.17026/dans-zch-j8xt</li>
+<li><a href="https://www.dataarchive.lissdata.nl/study-units/view/35">Economic Situation: Income</a>, doi: https://doi.org/10.17026/dans-24y-dkqk</li>
+<li><a href="https://www.dataarchive.lissdata.nl/study-units/view/322">Background variables</a>, doi: https://doi.org/10.57990/qn3k-as78</li>
+</ul>
+<p>After the new data have been collected, they will become available in the general overview at <a href="https://www.dataarchive.lissdata.nl/study-units/view/1" class="uri">https://www.dataarchive.lissdata.nl/study-units/view/1</a></p>
+</section>
+<section id="q8-date-of-download-done" class="level3">
+<h3 class="anchored" data-anchor-id="q8-date-of-download-done">Q8: Date of Download DONE</h3>
+<ul>
+<li>Stefan Vermeent (lead author and data analyst)
+<ul>
+<li>For a full overview of when specific independent variables in the LISS data archive were previously accessed, see the ‘Overview of project milestones’ section at <a href="https://github.com/StefanVermeent/liss_ef_2024" class="uri">https://github.com/StefanVermeent/liss_ef_2024</a>.</li>
+</ul></li>
+<li>Anna-Lena Schubert will not access the data.</li>
+<li>Jean-Louis van Gelder will not access the data.</li>
+<li>Willem E. Frankenhuis will not access the data.</li>
+</ul>
+</section>
+<section id="q9-data-collection-done" class="level3">
+<h3 class="anchored" data-anchor-id="q9-data-collection-done">Q9: Data Collection DONE</h3>
+<p>General information about recruitment of participants into the LISS study can be found at <a href="https://www.lissdata.nl/methodology" class="uri">https://www.lissdata.nl/methodology</a>.</p>
+<p>Our study will include 1,000 participants who were randomly sampled from the LISS panel. The requirements will be that they are between 20 and 55 years old and have completed at least 1 wave of the Conventional and Computer Crime Victimization study (see Q10).</p>
+</section>
+<section id="q10-codebooks-done" class="level3">
+<h3 class="anchored" data-anchor-id="q10-codebooks-done">Q10: Codebooks DONE</h3>
+<p>Detailed codebooks for existing data in the LISS archive can be downloaded at the following links:</p>
+<ul>
+<li><a href="https://www.dataarchive.lissdata.nl/study-units/view/25">Convential and Computer Crime Victimization study</a>, doi: https://doi.org/10.17026/dans-zch-j8xt</li>
+<li><a href="https://www.dataarchive.lissdata.nl/study-units/view/35">Economic Situation: Income</a>, doi: https://doi.org/10.17026/dans-24y-dkqk</li>
+<li><a href="https://www.dataarchive.lissdata.nl/study-units/view/322">Background variables</a>, doi: https://doi.org/10.57990/qn3k-as78</li>
+</ul>
+<p>Codebooks for the newly collected data will become available later at <a href="https://github.com/StefanVermeent/liss_ef_2024" class="uri">https://github.com/StefanVermeent/liss_ef_2024</a></p>
+</section>
+</section>
+<section id="part-3---variables" class="level2">
+<h2 class="anchored" data-anchor-id="part-3---variables">Part 3 - Variables</h2>
+<section id="q11-manipulated-variables-done" class="level3">
+<h3 class="anchored" data-anchor-id="q11-manipulated-variables-done">Q11: Manipulated Variables: DONE</h3>
+<p><strong>Not applicable</strong></p>
+</section>
+<section id="q12-measured-variables" class="level3">
+<h3 class="anchored" data-anchor-id="q12-measured-variables">Q12: Measured Variables</h3>
+<section id="potential-confounders" class="level4">
+<h4 class="anchored" data-anchor-id="potential-confounders">Potential confounders</h4>
+<p>We identified potential confounders of the empirical estimands (i.e., the association between self-reported threat and deprivation with cognitive outcomes) using a Directed Acyclic Graph (DAG). We analyzed the following variables both conceptually (i.e., based on previous literature and/or our own assumptions) and, in cases of doubt, statistically: (1) age, (2) sex, (3) past adversity exposure (material deprivation and threat combined), (4) recent threat exposure, and (5) recent material deprivation. Statistical analysis of potential confounders was based on data from a previous LISS study (see Q17 and Q18) using the <code>dagitty</code> R package <span class="citation" data-cites="textor_2016">(<a href="#ref-textor_2016" role="doc-biblioref">Textor et al., 2016</a>)</span>. Specifically, we used the <code>dagitty::localTests()</code> function to establish whether DAG-implied conditional independencies between certain key variables were supported by the data <span class="citation" data-cites="ankan_2021">(<a href="#ref-ankan_2021" role="doc-biblioref">Ankan et al., 2021</a>)</span>. The outcome in these conceptual DAGs was working memory capacity, measured on a latent level in the previous LISS study. Code for these analyses can be found under <code>scripts/00_dag</code>.</p>
+<p>Figure 1A shows the initially conceptualized DAG. Black lines depict our estimands, and red lines depict potential confounding paths. Solid lines depict paths that we were reasonably sure about given previous literature. Dashed lines depict paths that we were less sure about, and therefore decided to statistically test as outlined above.</p>
+<ol type="1">
+<li><strong>Age.</strong> <em>Conceptual reasoning</em>: Age has a causal effect on processing speed <span class="citation" data-cites="salthouse_2016 salthouse_2019">(<a href="#ref-salthouse_2019" role="doc-biblioref">Salthouse, 2019</a>, <a href="#ref-salthouse_2016" role="doc-biblioref">2016</a>)</span> and on response caution <span class="citation" data-cites="starns_2010">(<a href="#ref-starns_2010" role="doc-biblioref">Starns &amp; Ratcliff, 2010</a>)</span>. Older adults may on average be more financially stable.</li>
+</ol>
+<p>We know of no evidence to consider age as a precedent for threat exposure, especially because we measure recent adversity and not cumulative lifetime adversity (which is likely related to age as older individuals on average will have more cumulative exposure to adverse events).</p>
+<ol start="2" type="1">
+<li><p><strong>Sex.</strong></p></li>
+<li><p><strong>Childhood adversity.</strong> <em>Conceptual reasoning</em>:</p></li>
+</ol>
+<p>childhood adversity on education: <span class="citation" data-cites="fry_2018">Fry et al. (<a href="#ref-fry_2018" role="doc-biblioref">2018</a>)</span> Education on poverty: <span class="citation" data-cites="hofmarcher_2021">Hofmarcher (<a href="#ref-hofmarcher_2021" role="doc-biblioref">2021</a>)</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/fig1.png" class="img-fluid figure-img" style="width:6in"></p>
+<p></p><figcaption class="figure-caption"><strong>Figure 1.</strong> Directed Acyclic Graph (DAG) depicting the empirical estimands (black lines) and presumed confounding effects (red lines). Age, education level, and childhood adversity are all conceptualized as confounding variables, as they are expected to Importantly, we consider deprivation to be a confounder in the effect of threat on cognitive ability, and conversely, we consider threat to be a mediator of the effect of deprivation on cognitive ability <span class="citation" data-cites="ning_2023">(<a href="#ref-ning_2023" role="doc-biblioref">Ning et al., 2023</a>)</span>. From this, it follows that deprivation should be adjusted for when estimating the effect of threat on cognitive ability. However, threat should <em>not</em> be adjusted for when estimating the effect of deprivation on cognitive ability.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+
+<div class="tabwid"><style>.cl-909c184e{}.cl-90826552{font-family:'Times';font-size:10pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-9082657a{font-family:'Times';font-size:10pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 255, 1.00);background-color:transparent;}.cl-9082657b{font-family:'Times';font-size:10pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-90826584{font-family:'Times';font-size:10pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 255, 1.00);background-color:transparent;}.cl-908d6e52{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:1pt;padding-top:1pt;padding-left:1pt;padding-right:1pt;line-height: 1;background-color:transparent;}.cl-908db9e8{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-908db9fc{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-908dba06{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-909c184e"><thead><tr style="overflow-wrap:break-word;"><th class="cl-908db9e8"><p class="cl-908d6e52"><span class="cl-90826552">(Potential) confounder</span></p></th><th class="cl-908db9e8"><p class="cl-908d6e52"><span class="cl-90826552">Causal effect on cognitive performance</span></p></th><th class="cl-908db9e8"><p class="cl-908d6e52"><span class="cl-90826552">Causal effect on recent threat</span></p></th><th class="cl-908db9e8"><p class="cl-908d6e52"><span class="cl-90826552">Causal effect on recent material deprivation</span></p></th><th class="cl-908db9e8"><p class="cl-908d6e52"><span class="cl-90826552">Statistical (non-)support</span></p></th><th class="cl-908db9e8"><p class="cl-908d6e52"><span class="cl-90826552">Confounder in threat model</span></p></th><th class="cl-908db9e8"><p class="cl-908d6e52"><span class="cl-90826552">Confounder in deprivation model</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552">Age</span></p></td><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552">Salthouse</span><span class="cl-90826552"> </span><span class="cl-90826552">(</span><a href="#ref-salthouse_2016"><span class="cl-9082657a">2016</span></a><span class="cl-90826552">)</span><span class="cl-90826552">;</span><span class="cl-90826552"> </span><span class="cl-90826552">Salthouse</span><span class="cl-90826552"> </span><span class="cl-90826552">(</span><a href="#ref-salthouse_2019"><span class="cl-9082657a">2019</span></a><span class="cl-90826552">)</span><span class="cl-90826552">;</span><span class="cl-90826552"> </span><span class="cl-90826552">Starns</span><span class="cl-90826552"> </span><span class="cl-90826552">&amp;</span><span class="cl-90826552"> </span><span class="cl-90826552">Ratcliff</span><span class="cl-90826552"> </span><span class="cl-90826552">(</span><a href="#ref-starns_2010"><span class="cl-9082657a">2010</span></a><span class="cl-90826552">)</span></p></td><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552">Unclear</span></p></td><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552">Older</span><span class="cl-90826552"> </span><span class="cl-90826552">adults</span><span class="cl-90826552"> </span><span class="cl-90826552">may</span><span class="cl-90826552"> </span><span class="cl-90826552">have</span><span class="cl-90826552"> </span><span class="cl-90826552">more</span><span class="cl-90826552"> </span><span class="cl-90826552">financial</span><span class="cl-90826552"> </span><span class="cl-90826552">resources</span></p></td><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552">Conditional</span><span class="cl-90826552"> </span><span class="cl-90826552">on</span><span class="cl-90826552"> </span><span class="cl-90826552">childhood</span><span class="cl-90826552"> </span><span class="cl-90826552">adversity</span><span class="cl-90826552"> </span><span class="cl-90826552">and</span><span class="cl-90826552"> </span><span class="cl-90826552">recent</span><span class="cl-90826552"> </span><span class="cl-90826552">deprivation,</span><span class="cl-90826552"> </span><span class="cl-9082657b">r</span><span class="cl-90826552"> </span><span class="cl-90826552">=</span><span class="cl-90826552"> </span><span class="cl-90826552">-0.06</span><span class="cl-90826552"> </span><span class="cl-90826552">SE</span><span class="cl-90826552"> </span><span class="cl-90826552">=</span><span class="cl-90826552"> </span><span class="cl-90826552">0.04,</span><span class="cl-90826552"> </span><span class="cl-90826552">95%</span><span class="cl-90826552"> </span><span class="cl-90826552">CI</span><span class="cl-90826552"> </span><span class="cl-90826552">=</span><span class="cl-90826552"> </span><span class="cl-90826552">[-0.14,</span><span class="cl-90826552"> </span><span class="cl-90826552">0.03].</span></p></td><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552">Yes</span></p></td><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552">Yes</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552">Education</span></p></td><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552">Lövdén</span><span class="cl-90826552"> </span><span class="cl-90826552">et</span><span class="cl-90826552"> </span><span class="cl-90826552">al.</span><span class="cl-90826552"> </span><span class="cl-90826552">(</span><a href="#ref-lovden_2020"><span class="cl-9082657a">2020</span></a><span class="cl-90826552">)</span></p></td><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552">Unclear</span></p></td><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552">Fry</span><span class="cl-90826552"> </span><span class="cl-90826552">et</span><span class="cl-90826552"> </span><span class="cl-90826552">al.</span><span class="cl-90826552"> </span><span class="cl-90826552">(</span><a href="#ref-fry_2018"><span class="cl-9082657a">2018</span></a><span class="cl-90826552">)</span></p></td><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552">Conditional</span><span class="cl-90826552"> </span><span class="cl-90826552">on</span><span class="cl-90826552"> </span><span class="cl-90826552">childhood</span><span class="cl-90826552"> </span><span class="cl-90826552">adversity,</span><span class="cl-90826552"> </span><span class="cl-90826552">recent</span><span class="cl-90826552"> </span><span class="cl-90826552">deprivation,</span><span class="cl-90826552"> </span><span class="cl-90826552">and</span><span class="cl-90826552"> </span><span class="cl-90826552">age,</span><span class="cl-90826552"> </span><span class="cl-9082657b">r</span><span class="cl-90826552"> </span><span class="cl-90826552">=</span><span class="cl-90826552"> </span><span class="cl-90826552">-0.01</span><span class="cl-90826552"> </span><span class="cl-90826552">SE</span><span class="cl-90826552"> </span><span class="cl-90826552">=</span><span class="cl-90826552"> </span><span class="cl-90826552">0.04,</span><span class="cl-90826552"> </span><span class="cl-90826552">95%</span><span class="cl-90826552"> </span><span class="cl-90826552">CI</span><span class="cl-90826552"> </span><span class="cl-90826552">=</span><span class="cl-90826552"> </span><span class="cl-90826552">[-0.09,</span><span class="cl-90826552"> </span><span class="cl-90826552">0.07].</span></p></td><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552">No</span></p></td><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552">Yes</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552">Sex</span></p></td><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552">Ning</span><span class="cl-90826552"> </span><span class="cl-90826552">et</span><span class="cl-90826552"> </span><span class="cl-90826552">al.</span><span class="cl-90826552"> </span><span class="cl-90826552">(</span><a href="#ref-ning_2023"><span class="cl-9082657a">2023</span></a><span class="cl-90826552">)</span></p></td><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552">Ning</span><span class="cl-90826552"> </span><span class="cl-90826552">et</span><span class="cl-90826552"> </span><span class="cl-90826552">al.</span><span class="cl-90826552"> </span><span class="cl-90826552">(</span><a href="#ref-ning_2023"><span class="cl-9082657a">2023</span></a><span class="cl-90826552">)</span></p></td><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552">Ning</span><span class="cl-90826552"> </span><span class="cl-90826552">et</span><span class="cl-90826552"> </span><span class="cl-90826552">al.</span><span class="cl-90826552"> </span><span class="cl-90826552">(</span><a href="#ref-ning_2023"><span class="cl-9082657a">2023</span></a><span class="cl-90826552">)</span></p></td><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552"></span></p></td><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552">Yes</span></p></td><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552">Yes</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552">Childhood</span><span class="cl-90826552"> </span><span class="cl-90826552">adversity</span></p></td><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552">(</span><a href="#ref-bos_2009"><span class="cl-90826584">bos_2009?</span></a><span class="cl-90826552">)</span><span class="cl-90826552">;</span><span class="cl-90826552"> </span><span class="cl-90826552">(</span><a href="#ref-goodman_2019"><span class="cl-90826584">goodman_2019?</span></a><span class="cl-90826552">)</span></p></td><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552">(</span><a href="#ref-bywaters_2016"><span class="cl-90826584">bywaters_2016?</span></a><span class="cl-90826552">)</span></p></td><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552">(</span><a href="#ref-bywaters_2016"><span class="cl-90826584">bywaters_2016?</span></a><span class="cl-90826552">)</span></p></td><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552"></span></p></td><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552">Yes</span></p></td><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552">Yes</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552">Recent</span><span class="cl-90826552"> </span><span class="cl-90826552">material</span><span class="cl-90826552"> </span><span class="cl-90826552">deprivation</span></p></td><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-9082657b">Estimand</span><span class="cl-9082657b"> </span><span class="cl-9082657b">of</span><span class="cl-9082657b"> </span><span class="cl-9082657b">interest</span></p></td><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552">(</span><a href="#ref-bywaters_2016"><span class="cl-90826584">bywaters_2016?</span></a><span class="cl-90826552">)</span><span class="cl-90826552">;</span><span class="cl-90826552"> </span><span class="cl-90826552">Ning</span><span class="cl-90826552"> </span><span class="cl-90826552">et</span><span class="cl-90826552"> </span><span class="cl-90826552">al.</span><span class="cl-90826552"> </span><span class="cl-90826552">(</span><a href="#ref-ning_2023"><span class="cl-9082657a">2023</span></a><span class="cl-90826552">)</span><span class="cl-90826552">;</span></p></td><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552"></span></p></td><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552">conditional</span><span class="cl-90826552"> </span><span class="cl-90826552">on</span><span class="cl-90826552"> </span><span class="cl-90826552">childhood</span><span class="cl-90826552"> </span><span class="cl-90826552">adversity</span><span class="cl-90826552"> </span><span class="cl-90826552">and</span><span class="cl-90826552"> </span><span class="cl-90826552">age,</span><span class="cl-90826552"> </span><span class="cl-90826552">deprivation</span><span class="cl-90826552"> </span><span class="cl-90826552">is</span><span class="cl-90826552"> </span><span class="cl-90826552">a</span><span class="cl-90826552"> </span><span class="cl-90826552">significant</span><span class="cl-90826552"> </span><span class="cl-90826552">confounder</span><span class="cl-90826552"> </span><span class="cl-90826552">of</span><span class="cl-90826552"> </span><span class="cl-90826552">threat</span><span class="cl-90826552"> </span><span class="cl-9082657b">r</span><span class="cl-90826552"> </span><span class="cl-90826552">=</span><span class="cl-90826552"> </span><span class="cl-90826552">0.26</span><span class="cl-90826552"> </span><span class="cl-90826552">SE</span><span class="cl-90826552"> </span><span class="cl-90826552">=</span><span class="cl-90826552"> </span><span class="cl-90826552">0.05,</span><span class="cl-90826552"> </span><span class="cl-90826552">95%</span><span class="cl-90826552"> </span><span class="cl-90826552">CI</span><span class="cl-90826552"> </span><span class="cl-90826552">=</span><span class="cl-90826552"> </span><span class="cl-90826552">[0.17,</span><span class="cl-90826552"> </span><span class="cl-90826552">0.35].</span></p></td><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552">Yes</span></p></td><td class="cl-908db9fc"><p class="cl-908d6e52"><span class="cl-90826552"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-908dba06"><p class="cl-908d6e52"><span class="cl-90826552">Recent</span><span class="cl-90826552"> </span><span class="cl-90826552">threat</span></p></td><td class="cl-908dba06"><p class="cl-908d6e52"><span class="cl-9082657b">Estimand</span><span class="cl-9082657b"> </span><span class="cl-9082657b">of</span><span class="cl-9082657b"> </span><span class="cl-9082657b">interest</span></p></td><td class="cl-908dba06"><p class="cl-908d6e52"><span class="cl-90826552"></span></p></td><td class="cl-908dba06"><p class="cl-908d6e52"><span class="cl-90826552"></span></p></td><td class="cl-908dba06"><p class="cl-908d6e52"><span class="cl-90826552"></span></p></td><td class="cl-908dba06"><p class="cl-908d6e52"><span class="cl-90826552"></span></p></td><td class="cl-908dba06"><p class="cl-908d6e52"><span class="cl-90826552">No,</span><span class="cl-90826552"> </span><span class="cl-90826552">is</span><span class="cl-90826552"> </span><span class="cl-90826552">a</span><span class="cl-90826552"> </span><span class="cl-90826552">mediator</span></p></td></tr></tbody></table></div>
+</div>
+</div>
+</section>
+<section id="independent-variables" class="level4">
+<h4 class="anchored" data-anchor-id="independent-variables">Independent Variables</h4>
+<p>Our plan for IV computation is identical to that in a previous project using LISS data (see Q17 and Q18). While we know how the different subscales correlated with each other in that project, the current project will consist of a (partially) different subsample of the LISS panel. While we expect that IV computation will be identical to that project, we leave open the possibility that correlations could fall out differently, thus requiring different approaches.</p>
+<p><em>Perceived resource scarcity (Mean).</em> This is a measure of perceived deprivation. It will consist of</p>
+<p><em>Perceived resource scarcity (Coefficient of variation).</em> This is a measure of unpredictability</p>
+<p><em>Income-to-needs ratio (Mean).</em> This is a measure of objective deprivation.</p>
+<p><em>Income-to-needs ration (Coefficient of variation).</em> This is a measure of unpredictability</p>
+<p><em>Neighborhood threat.</em> This is a measure of neighborhood threat.</p>
+</section>
+<section id="dependent-variables-done" class="level4">
+<h4 class="anchored" data-anchor-id="dependent-variables-done">Dependent Variables DONE</h4>
+<p>The exact nature and number of dependent variables will depend on the final latent model that will be selected (see Part 5, Q19). As a rule, we will estimate associations between each measure of adversity and each latent factor that is estimated.</p>
+</section>
+</section>
+<section id="q14-missing-data-done" class="level3">
+<h3 class="anchored" data-anchor-id="q14-missing-data-done">Q14: Missing data DONE</h3>
+<p>We will use Full Information Maximum Likelihood (FIML) to handle missing data.</p>
+</section>
+<section id="q15-outliers" class="level3">
+<h3 class="anchored" data-anchor-id="q15-outliers">Q15: Outliers</h3>
+<p>For each cognitive task, we will remove trials with: (1) Response times (RTs) &lt; 250 ms; (2) RTs &gt; 3 SD above the participant-level average log-transformed mean RT, separately for different task conditions (e.g., congruent and incongruent). Finally, if a participant performs at chance level on a task, we will exclude task data of that particular task only. Chance level will be determined using the accuracy rate at the 97.5% tail of a binomial distribution if a participant would be purely guessing.</p>
+</section>
+<section id="q16-sample-weights-done" class="level3">
+<h3 class="anchored" data-anchor-id="q16-sample-weights-done">Q16: Sample Weights DONE</h3>
+<p><strong>Not applicable</strong></p>
+</section>
+</section>
+<section id="part-4---knowledge-of-data" class="level2">
+<h2 class="anchored" data-anchor-id="part-4---knowledge-of-data">Part 4 - Knowledge of Data</h2>
+<section id="q17-relevant-publications-done" class="level3">
+<h3 class="anchored" data-anchor-id="q17-relevant-publications-done">Q17: Relevant Publications DONE</h3>
+<p>All authors have previously used the same independent adversity measures to measure their associations with working memory performance. The Registered Report associated with this project has received Stage 1 In-Principle Acceptance at <em>Peer Community in Registered Reports</em> (<a href="https://osf.io/dp7wc" class="uri">https://osf.io/dp7wc</a>). The sample in this study consisted of ~800 people from the LISS panel. An unknown portion of these people is also expected to participate in the current study.</p>
+</section>
+<section id="q18-prior-knowledge" class="level3">
+<h3 class="anchored" data-anchor-id="q18-prior-knowledge">Q18: Prior Knowledge</h3>
+<p>In a previous study (mentioned in Q17) we used the same independent adversity measures. From this study, we know that the perceived scarcity measures correlated &gt; .60 with each other, allowing computation of uniformly weighted averages. We also know that correlations among the three threat measures, a well as the perceived scarcity coefficients of variation, were low, thus requiring PCA. Although the current study will consist of a (partially) different sample, we expect to reach the same conclusions here.</p>
+<p>From this study, we know that none of the adversity measures was significantly associated with working memory capacity or working memory updating. The inhibition and attention shifting data have not yet been collected at the time of writing this preregistration. Therefore, we do not know how the adversity measures are associated with inhibition and attention shifting.</p>
+</section>
+</section>
+<section id="part-5---analyses" class="level2">
+<h2 class="anchored" data-anchor-id="part-5---analyses">Part 5 - Analyses</h2>
+<section id="q19-hypotheses---statistical-tests-done" class="level3">
+<h3 class="anchored" data-anchor-id="q19-hypotheses---statistical-tests-done">Q19: Hypotheses -&gt; Statistical Tests DONE</h3>
+<p><strong>Step 1: DDM estimation.</strong> We will fit all DDM models as hierarchical Bayesian models in JAGS using the <code>runjags</code> package <span class="citation" data-cites="denwood_2016">(<a href="#ref-denwood_2016" role="doc-biblioref">Denwood, 2016</a>)</span>.</p>
+<p>For the Posner Task, we will estimate a single drift rate, non-decision time, and boundary separation across all trials:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="st">"model {</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="st">  #likelihood function</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="st">  for (t in 1:nTrials) {</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="st">    y[t] ~ dwiener(alpha[subject[t]], </span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="st">                   tau[subject[t]], </span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="st">                   0.5, </span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="st">                   delta[subject[t]])</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st">  }</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="st">  for (s in 1:nSubjects) {</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="st">    tau[s]  ~ dnorm(muTau, precTau) T(.0001, 1)</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="st">    delta[s] ~ dnorm(muDelta, precDelta) T(-10, 10)</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="st">    alpha[s]  ~ dnorm(muAlpha, precAlpha) T(.1, 5)</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="st">  }</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="st">  #priors</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="st">  muTau ~ dunif(.0001, 1)</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="st">  muDelta ~ dunif(-10, 10)</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="st">  muAlpha~ dunif(.1, 5) </span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="st">  precAlpha  ~ dgamma(.001, .001)</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="st">  precTau ~ dgamma(.001, .001)</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="st">  precDelta ~ dgamma(.001, .001)</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="st">}"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>For all other tasks, we will estimate drift rate and non-decision time separately for each task condition (e.g., incongruent and congruent), while keeping boundary separation equal across conditions:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="st">"model {</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="st">  #likelihood function</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="st">  for (t in 1:nTrials) {</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="st">    y[t] ~ dwiener(alpha[subject[t]], </span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">                   tau[condition[t], subject[t]], </span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="st">                   0.5, </span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="st">                   delta[condition[t], subject[t]])</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="st">  }</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="st">  for (s in 1:nSubjects) {</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="st">    for (c in 1:nCon) {</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="st">      tau[c, s]  ~ dnorm(muTau[c], precTau) T(.0001, 1)</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="st">      delta[c, s] ~ dnorm(muDelta[c] , precDelta) T(-10, 10)</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="st">    }</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="st">    alpha[s]  ~ dnorm(muAlpha, precAlpha) T(.1, 5)</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="st">  }</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="st">  #priors</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="st">  for (c in 1:nCon){ </span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="st">    muTau[c] ~ dunif(.0001, 1)</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="st">    muDelta[c] ~ dunif(-10, 10)</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="st">  } </span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="st">  muAlpha~ dunif(.1, 5) </span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="st">  precAlpha  ~ dgamma(.001, .001)</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="st">  precTau ~ dgamma(.001, .001)</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="st">  precDelta ~ dgamma(.001, .001)</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="st">}"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Each model will be fitted using three Markov Chain Monte Carlo (MCMC) chains. Each chain will start with 2,000 burn-in samples, followed by 10,000 additional samples. Of these 10,000 samples, every 10th sample will be retained to limit autocorrelation, resulting in a total of 3,000 posterior samples across all chains.</p>
+<p>Model fit will be assessed in three ways. First, we will visually inspect the traces of the group-level parameter estimates, which should not contain large jumps or drifts. Second, we will calculate the Gelman-Rubin statistic (R^), which should be lower than 1.1 <span class="citation" data-cites="gelman_1992">(<a href="#ref-gelman_1992" role="doc-biblioref">Gelman &amp; Rubin, 1992</a>)</span>. Third, we will conduct simulation-based parameter recovery. From each participant’s DDM parameter estimates, we will simulate 500 RTs and corresponding accuracies. We will calculate Pearson correlations between simulated and observed RTs (at the 25th, 50th, and 75th percentile) as well as simulated and observed accuracy rates. RT correlations need to be .80 or higher to indicate good fit. For accuracy rates, we will use the same cut-off, unless there are ceiling effects (&gt; 95%), which is likely for congruent/repeat trials. Thus, if accuracy for one condition shows poor recovery, but accuracy for the other condition and all RT quantiles are recovered well, we will still consider this good model fit.</p>
+<p><strong>Step 2: SEM.</strong> We will construct the final SEM sequentially. First, we will optimize the fit of the drift rate, boundary separation, and non-decision time sub-models. Second, we will combine these three models into a single measurement model. Third, we will add the regression paths between measures of adversity and the latent factors.</p>
+<p><strong>Drift rate sub-model.</strong> The baseline drift rate model will be a bi-factor model which accounts for general processing speed. A latent processing speed factor will load on all the manifest drift rates. A latent inhibition factor will load on the manifest drift rates of incongruent trials of the Flanker and Simon Task. A latent Attention Shifting Task will load on the manifest drift rates of switch trials of the Color-shape, Global-local, and Animacy-size Task.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/fig2.png" class="img-fluid figure-img" style="width:6in"></p>
+<p></p><figcaption class="figure-caption"><strong>Figure 2.</strong> Overview of the drift rate models. Blue ovals represent latent factors that will be use as dependent variables. Rectangles represent manifest variables. Bidirectional arrows represent (co-)variances. Unidirectional arrows represent factor loadings. Covariances in red are constrained to 1. If a constrained version of the model provides better fit, the final model will collapse the latent factors into a single factor.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p><br></p>
+<p>We will first fit the model as specified in Figure 2A (see <code>mod_v1a</code> in the code block below). Then, we will fit a second version of this model in which a single common EF factor is estimated, covering both inhibition and attention shifting tasks. Using <code>lavaan::anova</code>, we will then test whether the second, more constrained model leads to worse model fit, qualified as a significant chi squared change test, and an AIC value &gt; 10. If so, we will include submodel 2 in our final model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drift rate model 1 (see Figure 1A)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>mod_v1a <span class="ot">&lt;-</span> <span class="st">'</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="st">  # Latent factors</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="st">  ps   =~ 1*pos_v + flanker_inc_v + flanker_con_v + simon_inc_v + simon_con_v + cs_sw_v + cs_rep_v + gl_sw_v + gl_rep_v + as_sw_v + as_rep_v</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="st">  inh  =~ 1*flanker_inc_v + simon_inc_v</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="st">  as =~ 1*cs_sw_v + gl_sw_v + as_sw_v</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="st">  # Covariances</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="st">  inh  ~~ as + 0*ps</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="st">  as ~~ 0*ps</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="st">'</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>fit_v1a <span class="ot">&lt;-</span> lavaan<span class="sc">::</span><span class="fu">sem</span>(</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> mod_v1a, </span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> data</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Drift rate model 1, constrained version (see Figure 1B)</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>mod_v1b <span class="ot">&lt;-</span> <span class="st">'</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="st">  # Latent factors</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="st">  ps_v =~ 1*pos_v + flanker_inc_v + flanker_con_v + simon_inc_v + simon_con_v + cs_sw_v + cs_rep_v + gl_sw_v + gl_rep_v + ansi_sw_v + ansi_rep_v</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="st">  ef_v =~ 1*flanker_inc_v + simon_inc_v + cs_sw_v + gl_sw_v + ansi_sw_v</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="st"> </span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="st"> # Covariances</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="st"> ps_v ~~ 0*ef_v</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="st">'</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>fit_v1b <span class="ot">&lt;-</span> lavaan<span class="sc">::</span><span class="fu">sem</span>(</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> mod_v1b, </span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> data</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>lavaan<span class="sc">::</span><span class="fu">anova</span>(fit_v1a, fit_v1b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Boundary separation sub-model.</strong> Like the drift rate model, the baseline boundary separation model will be a bi-factor model containing a general boundary separation factor, as well as inhibition- and attention shifting-specific factors (see Figure 3A). We will use the same procedure to choose between the baseline model, and a second model estimating a common boundary separation factor.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/fig3.png" class="img-fluid figure-img" style="width:6in"></p>
+<p></p><figcaption class="figure-caption"><strong>Figure 3.</strong> Overview of the boundary separation models. Blue ovals represent latent factors that will be use as dependent variables. Rectangles represent manifest variables. Bidirectional arrows represent (co-)variances. Unidirectional arrows represent factor loadings. Covariances in red are constrained to 1. If a constrained version of the model provides better fit, the final model will collapse the latent factors into a single factor.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Non-decision time sub-model.</strong> The baseline model for the non-decision time, as well as the model selectin procedure, will be identical to the drift rate and boundary separation models (see Figure 3A).</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/fig4.png" class="img-fluid figure-img" style="width:6in"></p>
+<p></p><figcaption class="figure-caption"><strong>Figure 4.</strong> Overview of the drift rate models. Blue ovals represent latent factors that will be use as dependent variables. Rectangles represent manifest variables. Bidirectional arrows represent (co-)variances. Unidirectional arrows represent factor loadings. Covariances in red are constrained to 1. If a constrained version of the model provides better fit, the final model will collapse the latent factors into a single factor.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p><br></p>
+<p><strong>Full measurement model.</strong> After determining the final sub-model for all three DDM parameters, we will combine them all into a single model. We expect that we will have to estimate covariances between latent factors of different DDM parameters that share at least one manifest variable (e.g., inhibition drift rates and general boundary separation). However, we foresee that we might have to add or remove covariances to improve model fit. These steps will be taken before accessing and adding the independent variables.</p>
+<p><strong>Final model.</strong> After finalizing the full measurement model, we will add the adversity measures as predictors to the model. Each adversity measure will be regressed on each latent factor. We will estimate covariances between each pair of adversity measures.</p>
+</section>
+<section id="q20-predicted-effect-sizes-done" class="level3">
+<h3 class="anchored" data-anchor-id="q20-predicted-effect-sizes-done">Q20: Predicted effect sizes DONE</h3>
+<p>We do not have specific predictions for effect sizes but we deem standardized regression coefficients for interaction effects = .10 (or higher) and -.10 (or lower) meaningful. These effects would indicate that an effect of adversity on a a particular aspect of performance score is meaningfully more negative or more positive.</p>
+<p>Effects between -.10 and .10 are not of interest for determining differences between adversity and aspects of performance. However, we are interested in determining if simple effects falling between -.10 and .10 are consistent with an effect of 0. For this scenario, we will use Two One-Sided T-tests (TOST) equivalence testing with -.10 and .10 as bounds.</p>
+</section>
+<section id="q21-statistical-power-done" class="level3">
+<h3 class="anchored" data-anchor-id="q21-statistical-power-done">Q21: Statistical Power DONE</h3>
+<p>A power analysis based on <span class="citation" data-cites="Kretzschmar_2019">(<a href="#ref-Kretzschmar_2019" role="doc-biblioref"><strong>Kretzschmar_2019?</strong></a>)</span> indicated that with an alpha of α = 0.05, we will have &gt; 90% power to detect small effect sizes (β = 0.1) with a sample size ranging between N = 730 and N = 980 when the reliability of the measures is at least moderate (0.6 – 0.7). Therefore, we aim for a total sample size of N = 1,000.</p>
+</section>
+<section id="q22-inferential-criteria-done" class="level3">
+<h3 class="anchored" data-anchor-id="q22-inferential-criteria-done">Q22: Inferential Criteria DONE</h3>
+<p>We will use an alpha level of .05 throughout. p-values will be corrected for multiple testing using the false discovery rate. We will do so separately for tests involving drift rates, non-decision times, and boundary separations, as we have different hypotheses for each of these parameters.</p>
+<p>We will test for three types of associations between different types of adversity and cognitive ability (as indexed by the drift rates): enhanced ability, impaired ability, or intact ability. Enhanced cognitive ability is defined as a <em>positive</em> association between adversity and drift rate. Impaired cognitive ability is defined as a <em>negative</em> association between adversity and drift rate. intact ability is defined as an association that is practically equivalent to zero. We define practical equivalence as a standardized effect falling between -0.10 and 0.10. We will use two one-sided tests (TOST) equivalence testing against these bounds to test for practical equivalence.</p>
+</section>
+<section id="q23-assumption-violationsmodel-non-convergence-done" class="level3">
+<h3 class="anchored" data-anchor-id="q23-assumption-violationsmodel-non-convergence-done">Q23: Assumption Violations/Model Non-Convergence DONE</h3>
+<p>In case of non-normally distributed variables, we will use</p>
+<p>If any assumptions are violated, we will update the preregistration and/or report deviations from the preregistration. However, we do not anticipate any serious violations.</p>
+</section>
+<section id="q24-reliability-and-robustness-testing" class="level3">
+<h3 class="anchored" data-anchor-id="q24-reliability-and-robustness-testing">Q24: Reliability and Robustness Testing</h3>
+<p>NA</p>
+</section>
+<section id="q25-exploratory-analyses-done" class="level3">
+<h3 class="anchored" data-anchor-id="q25-exploratory-analyses-done">Q25: Exploratory Analyses DONE</h3>
+<p>We do not preregister any exploratory analyses.</p>
+</section>
+</section>
+<section id="part-6---statement-of-integrity" class="level2">
+<h2 class="anchored" data-anchor-id="part-6---statement-of-integrity">Part 6 - Statement of Integrity</h2>
+<p>We state that we filled out this preregistration to the best of our knowledge and that no other preregistration exists pertaining to the same hypotheses and dataset.</p>
+</section>
+<section id="references" class="level2">
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
+<div id="ref-akker_2021" class="csl-entry" role="doc-biblioentry">
+Akker, O. R. van den, Weston, S., Campbell, L., Chopik, B., Damian, R., Davis-Kean, P., Hall, A., Kosie, J., Kruse, E., Olsen, J., Ritchie, S., Valentine, K. D., Veer, A. van ’t., &amp; Bakker, M. (2021). Preregistration of secondary data analysis: <span>A</span> template and tutorial. <em>Meta-Psychology</em>, <em>5</em>. <a href="https://doi.org/10.15626/MP.2020.2625">https://doi.org/10.15626/MP.2020.2625</a>
+</div>
+<div id="ref-ankan_2021" class="csl-entry" role="doc-biblioentry">
+Ankan, A., Wortel, I. M. N., &amp; Textor, J. (2021). Testing graphical causal models using the <span>R</span> package <span>“dagitty.”</span> <em>Current Protocols</em>, <em>1</em>(2), e45. <a href="https://doi.org/10.1002/cpz1.45">https://doi.org/10.1002/cpz1.45</a>
+</div>
+<div id="ref-denwood_2016" class="csl-entry" role="doc-biblioentry">
+Denwood, M. J. (2016). Runjags: <span>An</span> <span>R</span> package providing interface utilities, model templates,parallel computing methods and additional distributions for <span>MCMC</span> models in <span>JAGS</span>. <em>Journal of Statistical Software</em>, <em>71</em>, 1–25. <a href="https://doi.org/10.18637/jss.v071.i09">https://doi.org/10.18637/jss.v071.i09</a>
+</div>
+<div id="ref-fry_2018" class="csl-entry" role="doc-biblioentry">
+Fry, D., Fang, X., Elliott, S., Casey, T., Zheng, X., Li, J., Florian, L., &amp; McCluskey, G. (2018). The relationships between violence in childhood and educational outcomes: <span>A</span> global systematic review and meta-analysis. <em>Child Abuse &amp; Neglect</em>, <em>75</em>, 6–28. <a href="https://doi.org/10.1016/j.chiabu.2017.06.021">https://doi.org/10.1016/j.chiabu.2017.06.021</a>
+</div>
+<div id="ref-gelman_1992" class="csl-entry" role="doc-biblioentry">
+Gelman, A., &amp; Rubin, D. B. (1992). Inference from iterative simulation using multiple sequences. <em>Statistical Science</em>, 457–472. <a href="https://doi.org/10.1214/ss/1177011136">https://doi.org/10.1214/ss/1177011136</a>
+</div>
+<div id="ref-hofmarcher_2021" class="csl-entry" role="doc-biblioentry">
+Hofmarcher, T. (2021). The effect of education on poverty: <span>A</span> <span>European</span> perspective. <em>Economics of Education Review</em>, <em>83</em>, 102124. <a href="https://doi.org/10.1016/j.econedurev.2021.102124">https://doi.org/10.1016/j.econedurev.2021.102124</a>
+</div>
+<div id="ref-lovden_2020" class="csl-entry" role="doc-biblioentry">
+Lövdén, M., Fratiglioni, L., Glymour, M. M., Lindenberger, U., &amp; Tucker-Drob, E. M. (2020). Education and cognitive functioning across the life span. <em>Psychological Science in the Public Interest</em>, <em>21</em>(1), 6–41. <a href="https://doi.org/10.1177/1529100620920576">https://doi.org/10.1177/1529100620920576</a>
+</div>
+<div id="ref-ning_2023" class="csl-entry" role="doc-biblioentry">
+Ning, K., Gondek, D., Pereira, S. M. P., &amp; Lacey, R. E. (2023). Mediating mechanisms of the relationship between exposure to deprivation and threat during childhood and adolescent psychopathology: Evidence from the <span>Millennium</span> <span>Cohort</span> <span>Study</span>. <em>European Child &amp; Adolescent Psychiatry</em>. <a href="https://doi.org/10.1007/s00787-023-02289-3">https://doi.org/10.1007/s00787-023-02289-3</a>
+</div>
+<div id="ref-salthouse_2019" class="csl-entry" role="doc-biblioentry">
+Salthouse, T. A. (2019). Trajectories of normal cognitive aging. <em>Psychology and Aging</em>, <em>34</em>(1), 17–24. <a href="https://doi.org/10.1037/pag0000288">https://doi.org/10.1037/pag0000288</a>
+</div>
+<div id="ref-salthouse_2016" class="csl-entry" role="doc-biblioentry">
+Salthouse, T. A. (2016). Little relation of adult age on cognition after controlling general influences. <em>Developmental Psychology</em>, <em>52</em>(10), 1545–1554. <a href="https://doi.org/10.1037/dev0000162">https://doi.org/10.1037/dev0000162</a>
+</div>
+<div id="ref-starns_2010" class="csl-entry" role="doc-biblioentry">
+Starns, J. J., &amp; Ratcliff, R. (2010). The effects of aging on the speed–accuracy compromise: <span>Boundary</span> optimality in the diffusion model. <em>Psychology and Aging</em>, <em>25</em>(2), 377–390. <a href="https://doi.org/10.1037/a0018022">https://doi.org/10.1037/a0018022</a>
+</div>
+<div id="ref-textor_2016" class="csl-entry" role="doc-biblioentry">
+Textor, J., Zander, B. van der, Gilthorpe, M. S., Liśkiewicz, M., &amp; Ellison, G. T. (2016). Robust causal inference using directed acyclic graphs: <span>The</span> <span>R</span> package <span>“dagitty.”</span> <em>International Journal of Epidemiology</em>, <em>45</em>(6), 1887–1894. <a href="https://doi.org/10.1093/ije/dyw341">https://doi.org/10.1093/ije/dyw341</a>
+</div>
+</div></section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+<!-- code folding -->
+
+
+
+
+
+</body></html>
