@@ -4,6 +4,7 @@ format:
   html:
     css: D:/repositories/liss_ef_2024/assets/style.css
     template: ../assets/template.html
+    keep_md: true
 bibliography: ../manuscript/references.bib
 csl: ../manuscript/apa.csl
 link-citations: true
@@ -37,20 +38,15 @@ set_flextable_defaults(
 
 *Last updated `r format(Sys.time(), "on %A, %B %d, %Y at %I:%M %p")`*
 
-```{r}
-#| include: false
-
-pagedown::chrome_print(input = "preregistration/README.html", output = "preregistration/preregistration.pdf")
-```
 
 
-[click here to download a pdf version](https://github.com/Schecher1/Minecraft-Server-Creator/blob/master/README.md)
+[click here to download a pdf version](https://github.com/StefanVermeent/liss_ef_2024/blob/main/preregistration/preregistration.pdf)
 
 ## Overview
 
 The independent measures used in this study are drawn from studies that were previously conducted in the Longitudinal Internet studies for the Social Sciences (LISS) panel.
 These data are openly available after signing an agreement with LISS.
-The dependent measures will be part of a new data collection in the LISS panel which is scheduled between May 2024 and July 2024.
+The dependent measures will be part of a new data collection in the LISS panel which is scheduled in May and June 2024.
 
 As this study partly uses secondary data, this preregistration document is based on the template by @akker_2021.
 Where necessary, we make clear which decisions relate to/are based on secondary data, and which decisions relate to/are based on newly collected data.
