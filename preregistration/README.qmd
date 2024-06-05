@@ -2,11 +2,14 @@
 title: ""
 format: 
   html:
+    css: D:/repositories/liss_ef_2024/assets/style.css
     template: ../assets/template.html
-    css: ../assets/style.css
 bibliography: ../manuscript/references.bib
 csl: ../manuscript/apa.csl
 link-citations: true
+editor: 
+  markdown: 
+    wrap: sentence
 ---
 
 ```{r setup, include=FALSE}
@@ -14,6 +17,7 @@ library(tidyverse)
 library(lmerTest)
 library(flextable)
 library(ftExtra)
+library(tinytable)
 
 load("../analysis_objects/dag_localtests.RData")
 
@@ -33,11 +37,23 @@ set_flextable_defaults(
 
 *Last updated `r format(Sys.time(), "on %A, %B %d, %Y at %I:%M %p")`*
 
+```{r}
+#| include: false
+
+pagedown::chrome_print(input = "preregistration/README.html", output = "preregistration/preregistration.pdf")
+```
+
+
+[click here to download a pdf version](https://github.com/Schecher1/Minecraft-Server-Creator/blob/master/README.md)
+
 ## Overview
 
-The independent measures used in this study are drawn from studies that were previously conducted in the Longitudinal Internet studies for the Social Sciences (LISS) panel. These data are openly available after signing an agreement with LISS. The dependent measures will be part of a new data collection in the LISS panel which is scheduled between May 2024 and July 2024.
+The independent measures used in this study are drawn from studies that were previously conducted in the Longitudinal Internet studies for the Social Sciences (LISS) panel.
+These data are openly available after signing an agreement with LISS.
+The dependent measures will be part of a new data collection in the LISS panel which is scheduled between May 2024 and July 2024.
 
-As this study partly uses secondary data, this preregistration document is based on the template by @akker_2021. Where necessary, we make clear which decisions relate to/are based on secondary data, and which decisions relate to/are based on newly collected data.
+As this study partly uses secondary data, this preregistration document is based on the template by @akker_2021.
+Where necessary, we make clear which decisions relate to/are based on secondary data, and which decisions relate to/are based on newly collected data.
 
 There are six parts, which you can jump to following the links below:
 
@@ -58,7 +74,7 @@ There are six parts, which you can jump to following the links below:
 
 -   Stefan Vermeent^1,2^
 -   Anna-Lena Schubert^3^
--   Jean-Louis van Gelder^2^
+-   Jean-Louis van Gelder^2^?
 -   Willem E. Frankenhuis^2,4^
 
 ^1^Utrecht University, Utrecht, The Netherlands
@@ -69,45 +85,57 @@ There are six parts, which you can jump to following the links below:
 
 ^3^University of Amsterdam, Amsterdam, The Netherlands
 
-### Q3: Research Questions DONE
+### Q3: Research Questions
 
-**R1:** How is adversity associated with general speed of processing across all cognitive tasks?
+-   **R1:** How is adversity associated with general speed of processing across all cognitive tasks?
 
-**R2:** How is adversity associated with inhibition and attention shifting abilities after accounting for general speed of processing?
+-   **R2:** How is adversity associated with inhibition and attention shifting abilities after accounting for general speed of processing?
 
-**R3:** How is adversity associated with task-general and task-specific response caution?
+-   **R3:** How is adversity associated with task-general and task-specific response caution?
 
-### Q4: Hypotheses DONE
+### Q4: Hypotheses
 
 Data patterns that would be consistent with hypotheses about abilities generated from a **deficit framework**:
 
-A1. Adversity is negatively associated with general speed of processing.
+-   **A1.** Adversity is negatively associated with general speed of processing.
 
-A2. Adversity is negatively associated with either or both latent estimates of inhibition and attention shifting, after accounting for general speed of processing.
+-   **A2.** Adversity is negatively associated with either or both latent estimates of inhibition and attention shifting, after accounting for general speed of processing.
 
-A3. If latent estimates of inhibition and attention shifting are highly correlated, adversity is negatively associated with a general EF factor spanning both.
+-   **A3.** If latent estimates of inhibition and attention shifting are highly correlated, adversity is negatively associated with a general EF factor spanning both.
 
 Data patterns that would be consistent with hypotheses about abilities generated from **adaptation frameworks**:
 
-B1. Adversity is positively associated with the latent estimate of attention shifting *regardless of the association with inhibition*, after accounting for general speed of processing. A positive association with inhibition would be unexpected yet interesting, and would require revising existing adaptation theoretical frameworks.
+-   **B1.** Adversity is positively associated with the latent estimate of attention shifting *regardless of the association with inhibition*, after accounting for general speed of processing.
+A positive association with inhibition would be unexpected yet interesting, and would require revising existing adaptation theoretical frameworks.
 
-B2. The association between adversity and the latent estimate of attention shifting is practically equivalent to zero *and* the association between adversity and the latent estimate of inhibition is negative.
+-   **B2.** The association between adversity and the latent estimate of attention shifting is practically equivalent to zero *and* the association between adversity and the latent estimate of inhibition is negative.
 
 Finally, we have the following hypothesis about response caution:
 
-C1. Adversity is associated with more task-general response caution.
+-   **C1.** Adversity is associated with more task-general response caution.
+
+Go back to [Overview].
 
 ## Part 2 - Data Description
 
-### Q5: Dataset DONE
+### Q5: Dataset
 
-Our study will include 1000 participants who were randomly sampled from the LISS panel (Scherpenzeel, 2011). The LISS panel is a representative probability sample of roughly 5,000 Dutch households (\~7,500 individuals) drawn from the population register by Statistics Netherlands on an invite-only basis. Households without a computer or internet connection are provided with these facilities by LISS. Each year, participants complete the same core battery of questionnaires about---among other topics---their financial situation in the past year. In addition, participants can complete additional online questionnaires every month, with variable content. The current study integrates two data sources. First, our sample of 1000 participants will participate in a new LISS study between May 2024 and July 2024 (hereafter referred to as 'newly collected data'), in which we will include a measure of neighborhood threat, three cognitive tasks measuring attention shifting, two cognitive tasks measuring inhibition, and one cognitive task measuring processing speed. Second, we will access data that were previously collected in LISS (hereafter referred to as 'the LISS archive').
+The LISS panel is a representative probability sample of roughly 5,000 Dutch households (\~7,500 individuals) drawn from the population register by Statistics Netherlands on an invite-only basis [@scherpenzeel_2011].
+Households without a computer or internet connection are provided with these facilities by LISS.
+Each year, participants complete the same core battery of questionnaires about---among other topics---their financial situation in the past year.
+In addition, participants can complete additional online questionnaires every month, with variable content.
 
-### Q6: Public Availability DONE
+The current study integrates two data sources.
+First, we will sample 1,000 participants in a new LISS study, collected between in May and June 2024 (hereafter referred to as 'newly collected data'), in which we will include measures of neighborhood threat and deprivation, three cognitive tasks measuring attention shifting, two cognitive tasks measuring inhibition, and one cognitive task measuring processing speed.
+Second, we will access data that were previously collected in LISS (hereafter referred to as 'the LISS archive').
+This preregistration is submitted before completion of (and access to) the newly collected data.
 
-All datasets are available in the LISS data archive. Researchers who want to access the data are required to sign a statement confirming that information about individual persons, households, etc., will not be released to others (go to <https://statements.centerdata.nl> for more information).
+### Q6: Public Availability
 
-### Q7: Data Access DONE
+All previously collected LISS data are available in the LISS data archive.
+Researchers who want to access the data are required to sign a statement confirming that information about individual persons, households, etc., will not be released to others (go to <https://statements.centerdata.nl> for more information).
+
+### Q7: Data Access
 
 Data can be accessed through the following links.
 
@@ -115,9 +143,9 @@ Data can be accessed through the following links.
 -   [Economic Situation: Income](https://www.dataarchive.lissdata.nl/study-units/view/35), doi: https://doi.org/10.17026/dans-24y-dkqk
 -   [Background variables](https://www.dataarchive.lissdata.nl/study-units/view/322), doi: https://doi.org/10.57990/qn3k-as78
 
-After the new data have been collected, they will become available in the general overview at <https://www.dataarchive.lissdata.nl/study-units/view/1>
+After the new data have been collected, they will become available in the general overview at <https://www.dataarchive.lissdata.nl/study-units/view/1>.
 
-### Q8: Date of Download DONE
+### Q8: Date of Download
 
 -   Stefan Vermeent (lead author and data analyst)
     -   For a full overview of when specific independent variables in the LISS data archive were previously accessed, see the 'Overview of project milestones' section at <https://github.com/StefanVermeent/liss_ef_2024>.
@@ -125,13 +153,12 @@ After the new data have been collected, they will become available in the genera
 -   Jean-Louis van Gelder will not access the data.
 -   Willem E. Frankenhuis will not access the data.
 
-### Q9: Data Collection DONE
+### Q9: Data Collection TBD (fix inclusion criteria)
 
 General information about recruitment of participants into the LISS study can be found at <https://www.lissdata.nl/methodology>.
+The inclusion criteria for the new data collection are that people are between 20 and 55 years old and have completed at least 1 wave of the Conventional and Computer Crime Victimization study (see Q10).
 
-Our study will include 1,000 participants who were randomly sampled from the LISS panel. The requirements will be that they are between 20 and 55 years old and have completed at least 1 wave of the Conventional and Computer Crime Victimization study (see Q10).
-
-### Q10: Codebooks DONE
+### Q10: Codebooks
 
 Detailed codebooks for existing data in the LISS archive can be downloaded at the following links:
 
@@ -139,11 +166,13 @@ Detailed codebooks for existing data in the LISS archive can be downloaded at th
 -   [Economic Situation: Income](https://www.dataarchive.lissdata.nl/study-units/view/35), doi: https://doi.org/10.17026/dans-24y-dkqk
 -   [Background variables](https://www.dataarchive.lissdata.nl/study-units/view/322), doi: https://doi.org/10.57990/qn3k-as78
 
-Codebooks for the newly collected data will become available later at <https://github.com/StefanVermeent/liss_ef_2024>
+Codebooks for the newly collected data will become available later at <https://www.dataarchive.lissdata.nl/study-units/view> and <https://github.com/StefanVermeent/liss_ef_2024>.
+
+Go back to [Overview].
 
 ## Part 3 - Variables
 
-### Q11: Manipulated Variables: DONE
+### Q11: Manipulated Variables
 
 **Not applicable**
 
@@ -151,31 +180,27 @@ Codebooks for the newly collected data will become available later at <https://g
 
 #### Potential confounders
 
-We identified potential confounders of the empirical estimands (i.e., the association between self-reported threat and deprivation with cognitive outcomes) using a Directed Acyclic Graph (DAG).
-We analyzed the following variables both conceptually (i.e., based on previous literature and/or our own assumptions) and, in cases of doubt, statistically: (1) age, (2) sex, (3) past adversity exposure (material deprivation and threat combined), (4) recent threat exposure, and (5) recent material deprivation.
+We used Directed Acyclic Graphs (DAG) to identify potential confounders of the empirical estimands (i.e., the association between self-reported threat and deprivation with cognitive outcomes).
+For more information on DAGs, see @rohrer_2018.
+
+We analyzed the following potential confounders both conceptually (i.e., based on previous literature and/or our own assumptions) and, in cases of doubt, statistically (see below): (1) age [@salthouse_2016; @salthouse_2019; @starns_2010], (2) biological sex [@ning_2023], (3) childhood adversity exposure (material deprivation and threat combined) [@bos_2009; @goodman_2019], and (4) recent material deprivation as a confounder for the effect of threat on cognitive performance [@bywaters_2016; @ning_2023].
+
+**Estimand 1: Material deprivation -\> Cognitive performance.** See Figure 2A for a visualization of the DAG for material deprivation.
+All models involving material deprivation as the main predictor will control for these four covariates.
+In line with recent work, we consider material deprivation to precede threat exposure [@bywaters_2016; @ning_2023].
+For this reason, we do not include threat exposure in models where we are interested in the total effect of material deprivation on cognitive performance.
+
+**Estimand 2: Threat exposure -\> Cognitive performance.** See Figure 2B for a visualization of the DAG for threat exposure.
+We considered the same set of confounders as for material deprivation.
+However, in the case of threat exposure, we were conceptually less sure about the potential effects of age and education on threat exposure.
+We also wanted to gather more empirical support for the assumption that material deprivation should be considered as a confounder of the effect of threat exposure on cognitive performance [@bywaters_2016; @ning_2023].
+
+Table 1 offers an overview of conceptual and statistical evidence for and against each potential confounder.
 Statistical analysis of potential confounders was based on data from a previous LISS study (see Q17 and Q18) using the `dagitty` R package [@textor_2016].
-Specifically, we used the `dagitty::localTests()` function to establish whether DAG-implied conditional independencies between certain key variables were supported by the data [@ankan_2021].
+Specifically, we used the `dagitty::localTests()` function to establish whether DAG-implied conditional independencies between certain key variables were supported by these data [@ankan_2021].
 The outcome in these conceptual DAGs was working memory capacity, measured on a latent level in the previous LISS study.
-Code for these analyses can be found under `scripts/00_dag`. 
-
-Figure 1A shows the initially conceptualized DAG. 
-Black lines depict our estimands, and red lines depict potential confounding paths.
-Solid lines depict paths that we were reasonably sure about given previous literature.
-Dashed lines depict paths that we were less sure about, and therefore decided to statistically test as outlined above.
-
-(1) **Age.** *Conceptual reasoning*: Age has a causal effect on processing speed [@salthouse_2016; @salthouse_2019] and on response caution [@starns_2010]. Older adults may on average be more financially stable.
-
-We know of no evidence to consider age as a precedent for threat exposure, especially because we measure recent adversity and not cumulative lifetime adversity (which is likely related to age as older individuals on average will have more cumulative exposure to adverse events).
-
-(2) **Sex.**
-
-
-(4) **Childhood adversity.** *Conceptual reasoning*: 
-
-
-childhood adversity on education: @fry_2018
-Education on poverty: @hofmarcher_2021
-
+For each of the three confounders under investigation, we removed the causal pathway between that variable and threat exposure from the DAG, and then tested whether this imposed independence (conditional on the other causal effects in the model) was consistent with the data.
+Code for these analyses can be found under `scripts/00_dag`.
 
 ```{r}
 #| label: Figure1
@@ -185,14 +210,14 @@ Education on poverty: @hofmarcher_2021
 #| dpi: 600
 #| out-width: 6in
 #| fig-cap: |
-#|   **Figure 1.** Directed Acyclic Graph (DAG) depicting the empirical estimands (black lines) and presumed confounding effects (red lines). Age, education level, and childhood adversity are all conceptualized as confounding variables, as they are expected to 
-#|   Importantly, we consider deprivation to be a confounder in the effect of threat on cognitive ability, and conversely, we consider threat to be a mediator of the effect of deprivation on cognitive ability [@ning_2023]. From this, it follows that deprivation should be adjusted for when estimating the effect of threat on cognitive ability. However, threat should *not* be adjusted for when estimating the effect of deprivation on cognitive ability. 
+#|   **Figure 1.** Directed Acyclic Graph (DAG) depicting the empirical estimands (blue lines) and presumed confounding effects (red lines). Importantly, we consider deprivation to be a confounder in the effect of threat on cognitive ability, and conversely, we consider threat to be a mediator of the effect of deprivation on cognitive ability [@ning_2023]. From this, it follows that deprivation should be adjusted for when estimating the effect of threat on cognitive ability. However, threat should *not* be adjusted for when estimating the effect of deprivation on cognitive ability. 
 
 knitr::include_graphics("figures/fig1.png")
 ```
 
 ```{r}
-#| echo: false
+#| include: false
+
 table1 <- 
   tibble(
     `(Potential) confounder` = c(
@@ -200,73 +225,90 @@ table1 <-
       "Education",
       "Sex",
       "Childhood adversity",
-      "Recent material deprivation",
-      "Recent threat"
+      "Recent material deprivation"
     ),
     `Causal effect on cognitive performance` = c(
-      "@salthouse_2016; \n @salthouse_2019; \n @starns_2010",
+      "@salthouse_2016 \n @salthouse_2019 \n @starns_2010",
       "@lovden_2020",
       "@ning_2023", 
-      "@bos_2009; \n @goodman_2019",
-      "*Estimand of interest*",
+      "@bos_2009 \n @goodman_2019",
       "*Estimand of interest*"
     ),
     `Causal effect on recent threat` = c(
-      "Unclear",
-      "Unclear",
+      "*Unclear*",
+      "*Unclear*",
       "@ning_2023", 
       "@bywaters_2016",
-      "@bywaters_2016; @ning_2023; ",
-      ""
+      "@bywaters_2016 \n @ning_2023"
     ),
-    `Causal effect on recent material deprivation` = c(
-      "Older adults may have more financial resources",
-      "@fry_2018",
-      "@ning_2023", 
-      "@bywaters_2016",
-      "",
-      ""
-    ),
-    `Statistical (non-)support` = c(
+    `Evidence for conditional independence` = c(
       paste0("Conditional on childhood adversity and recent deprivation, \n *r* = ", localTest_dag03 |> pull(estimate), " SE = ", localTest_dag03 |> pull(std.error), ", 95% CI = ", localTest_dag03 |> pull(ci), "."),
       
       paste0("Conditional on childhood adversity, recent deprivation, and age, \n *r* = ", localTest_dag01 |> pull(estimate), " SE = ", localTest_dag01 |> pull(std.error), ", 95% CI = ", localTest_dag01 |> pull(ci), "."),
       "", 
       "",
-      paste0("conditional on childhood adversity and age, deprivation is a significant confounder of threat \n *r* = ", localTest_dag04 |> pull(estimate), " SE = ", localTest_dag04 |> pull(std.error), ", 95% CI = ", localTest_dag04 |> pull(ci), "."),
-      ""
+      paste0("conditional on childhood adversity and age, deprivation is a significant confounder of threat \n *r* = ", localTest_dag04 |> pull(estimate), " SE = ", localTest_dag04 |> pull(std.error), ", 95% CI = ", localTest_dag04 |> pull(ci), ".")
     ),
     `Confounder in threat model` = c(
       "Yes",
       "No",
       "Yes", 
       "Yes",
-      "Yes",
-      ""
+      "Yes"
     ),
-    `Confounder in deprivation model` = c(
-      "Yes",
-      "Yes",
-      "Yes", 
-      "Yes",
-      "",
-      "No, is a mediator"
-    )
   ) |> 
   flextable() |> 
-  ftExtra::colformat_md()
+  ftExtra::colformat_md() |> 
+  mk_par(
+    j = 4,
+    value = as_paragraph(
+      gg_chunk(value = localTest_plot_list, width = 1, height = 1)
+    )
+  ) |> 
+  add_header_row(
+    values = " ",
+    colwidths = 5
+  ) |> # Add a new header row on top. We can use this new row to add the title
+  compose(
+    i = 1, j = 1,
+    as_paragraph(as_b("Table 1. "), "Conceptual and statistical confounder analysis for the threat exposure model."),
+    part = "header"
+  ) |>
+  add_footer_row(
+    values = " ",
+    colwidths = 5
+  ) %>% 
+  add_footer_row(
+    values = " ",
+    colwidths = 5
+  ) %>% 
+  compose(
+    i = 1, j = 1, 
+    as_paragraph(as_i("Note: "), "the second and third columns present conceptual support (based on previous literature and/or our own assumptions) in favor of a causal effect between the confounder and threat and cognitive performance. The embedded plots in column 4 present the outcome of statistical analyses that tested against independence between the confounder and threat exposure, conditional on other variables associated with both [see @ankan_2021 and the main text for more details]."), 
+    part = "footer"
+  ) |> 
+  autofit()
+```
+
+```{r}
+#| echo: false
 
 table1
 ```
 
-
-
+We found evidence against conditional independence between age and threat.
+We also found evidence against independence between material deprivation and threat exposure, conditional on age and childhood adversity.
+Finally, we did not find evidence against conditional independence between education and threat.
+Therefore, all models involving recent threat exposure as the main predictor will control for age, sex, childhood adversity, and recent material deprivation.
 
 #### Independent Variables
 
-Our plan for IV computation is identical to that in a previous project using LISS data (see Q17 and Q18). While we know how the different subscales correlated with each other in that project, the current project will consist of a (partially) different subsample of the LISS panel. While we expect that IV computation will be identical to that project, we leave open the possibility that correlations could fall out differently, thus requiring different approaches.
+Our plan for IV computation is identical to that in a previous project using LISS data (see Q17 and Q18).
+While we know how the different subscales correlated with each other in that project, the current project will consist of a (partially) different subsample of the LISS panel.
+While we expect that IV computation will be identical to that project, we leave open the possibility that correlations could fall out differently, thus requiring different approaches.
 
-*Perceived resource scarcity (Mean).* This is a measure of perceived deprivation. It will consist of
+*Perceived resource scarcity (Mean).* This is a measure of perceived deprivation.
+It will consist of
 
 *Perceived resource scarcity (Coefficient of variation).* This is a measure of unpredictability
 
@@ -278,7 +320,8 @@ Our plan for IV computation is identical to that in a previous project using LIS
 
 #### Dependent Variables DONE
 
-The exact nature and number of dependent variables will depend on the final latent model that will be selected (see Part 5, Q19). As a rule, we will estimate associations between each measure of adversity and each latent factor that is estimated.
+The exact nature and number of dependent variables will depend on the final latent model that will be selected (see Part 5, Q19).
+As a rule, we will estimate associations between each measure of adversity and each latent factor that is estimated.
 
 ### Q14: Missing data DONE
 
@@ -286,25 +329,37 @@ We will use Full Information Maximum Likelihood (FIML) to handle missing data.
 
 ### Q15: Outliers
 
-For each cognitive task, we will remove trials with: (1) Response times (RTs) \< 250 ms; (2) RTs \> 3 SD above the participant-level average log-transformed mean RT, separately for different task conditions (e.g., congruent and incongruent). 
-Finally, if a participant performs at chance level on a task, we will exclude task data of that particular task only. 
+For each cognitive task, we will remove trials with: (1) Response times (RTs) \< 250 ms; (2) RTs \> 3 SD above the participant-level average log-transformed mean RT, separately for different task conditions (e.g., congruent and incongruent).
+Finally, if a participant performs at chance level on a task, we will exclude task data of that particular task only.
 Chance level will be determined using the accuracy rate at the 97.5% tail of a binomial distribution if a participant would be purely guessing.
 
 ### Q16: Sample Weights DONE
 
 **Not applicable**
 
+Go back to [Overview].
+
 ## Part 4 - Knowledge of Data
 
 ### Q17: Relevant Publications DONE
 
-All authors have previously used the same independent adversity measures to measure their associations with working memory performance. The Registered Report associated with this project has received Stage 1 In-Principle Acceptance at *Peer Community in Registered Reports* (<https://osf.io/dp7wc>). The sample in this study consisted of \~800 people from the LISS panel. An unknown portion of these people is also expected to participate in the current study.
+All authors have previously used the same independent adversity measures to measure their associations with working memory performance.
+The Registered Report associated with this project has received Stage 1 In-Principle Acceptance at *Peer Community in Registered Reports* (<https://osf.io/dp7wc>).
+The sample in this study consisted of \~800 people from the LISS panel.
+An unknown portion of these people is also expected to participate in the current study.
 
 ### Q18: Prior Knowledge
 
-In a previous study (mentioned in Q17) we used the same independent adversity measures. From this study, we know that the perceived scarcity measures correlated \> .60 with each other, allowing computation of uniformly weighted averages. We also know that correlations among the three threat measures, a well as the perceived scarcity coefficients of variation, were low, thus requiring PCA. Although the current study will consist of a (partially) different sample, we expect to reach the same conclusions here.
+In a previous study (mentioned in Q17) we used the same independent adversity measures.
+From this study, we know that the perceived scarcity measures correlated \> .60 with each other, allowing computation of uniformly weighted averages.
+We also know that correlations among the three threat measures, a well as the perceived scarcity coefficients of variation, were low, thus requiring PCA.
+Although the current study will consist of a (partially) different sample, we expect to reach the same conclusions here.
 
-From this study, we know that none of the adversity measures was significantly associated with working memory capacity or working memory updating. The inhibition and attention shifting data have not yet been collected at the time of writing this preregistration. Therefore, we do not know how the adversity measures are associated with inhibition and attention shifting.
+From this study, we know that none of the adversity measures was significantly associated with working memory capacity or working memory updating.
+The inhibition and attention shifting data have not yet been collected at the time of writing this preregistration.
+Therefore, we do not know how the adversity measures are associated with inhibition and attention shifting.
+
+Go back to [Overview].
 
 ## Part 5 - Analyses
 
@@ -374,14 +429,29 @@ For all other tasks, we will estimate drift rate and non-decision time separatel
 }"
 ```
 
-Each model will be fitted using three Markov Chain Monte Carlo (MCMC) chains. Each chain will start with 2,000 burn-in samples, followed by 10,000 additional samples. Of these 10,000 samples, every 10th sample will be retained to limit autocorrelation, resulting in a total of 3,000 posterior samples across all chains.
+Each model will be fitted using three Markov Chain Monte Carlo (MCMC) chains.
+Each chain will start with 2,000 burn-in samples, followed by 10,000 additional samples.
+Of these 10,000 samples, every 10th sample will be retained to limit autocorrelation, resulting in a total of 3,000 posterior samples across all chains.
 
-Model fit will be assessed in three ways. First, we will visually inspect the traces of the group-level parameter estimates, which should not contain large jumps or drifts. Second, we will calculate the Gelman-Rubin statistic (R\^), which should be lower than 1.1 [@gelman_1992]. Third, we will conduct simulation-based parameter recovery. From each participant's DDM parameter estimates, we will simulate 500 RTs and corresponding accuracies. We will calculate Pearson correlations between simulated and observed RTs (at the 25th, 50th, and 75th percentile) as well as simulated and observed accuracy rates. RT correlations need to be .80 or higher to indicate good fit. For accuracy rates, we will use the same cut-off, unless there are ceiling effects (\> 95%), which is likely for congruent/repeat trials. Thus, if accuracy for one condition shows poor recovery, but accuracy for the other condition and all RT quantiles are recovered well, we will still consider this good model fit.
+Model fit will be assessed in three ways.
+First, we will visually inspect the traces of the group-level parameter estimates, which should not contain large jumps or drifts.
+Second, we will calculate the Gelman-Rubin statistic (R\^), which should be lower than 1.1 [@gelman_1992].
+Third, we will conduct simulation-based parameter recovery.
+From each participant's DDM parameter estimates, we will simulate 500 RTs and corresponding accuracies.
+We will calculate Pearson correlations between simulated and observed RTs (at the 25th, 50th, and 75th percentile) as well as simulated and observed accuracy rates.
+RT correlations need to be .80 or higher to indicate good fit.
+For accuracy rates, we will use the same cut-off, unless there are ceiling effects (\> 95%), which is likely for congruent/repeat trials.
+Thus, if accuracy for one condition shows poor recovery, but accuracy for the other condition and all RT quantiles are recovered well, we will still consider this good model fit.
 
-**Step 2: SEM.** We will construct the final SEM sequentially. First, we will optimize the fit of the drift rate, boundary separation, and non-decision time sub-models. Second, we will combine these three models into a single measurement model. Third, we will add the regression paths between measures of adversity and the latent factors.
+**Step 2: SEM.** We will construct the final SEM sequentially.
+First, we will optimize the fit of the drift rate, boundary separation, and non-decision time sub-models.
+Second, we will combine these three models into a single measurement model.
+Third, we will add the regression paths between measures of adversity and the latent factors.
 
-**Drift rate sub-model.** The baseline drift rate model will be a bi-factor model which accounts for general processing speed. A latent processing speed factor will load on all the manifest drift rates. A latent inhibition factor will load on the manifest drift rates of incongruent trials of the Flanker and Simon Task. A latent Attention Shifting Task will load on the manifest drift rates of switch trials of the Color-shape, Global-local, and Animacy-size Task.
-
+**Drift rate sub-model.** The baseline drift rate model will be a bi-factor model which accounts for general processing speed.
+A latent processing speed factor will load on all the manifest drift rates.
+A latent inhibition factor will load on the manifest drift rates of incongruent trials of the Flanker and Simon Task.
+A latent Attention Shifting Task will load on the manifest drift rates of switch trials of the Color-shape, Global-local, and Animacy-size Task.
 
 ```{r}
 #| label: Figure2
@@ -398,8 +468,9 @@ knitr::include_graphics("figures/fig2.png")
 
 <br>
 
-We will first fit the model as specified in Figure 2A (see `mod_v1a` in the code block below). Then, we will fit a second version of this model in which a single common EF factor is estimated, covering both inhibition and attention shifting tasks. 
-Using `lavaan::anova`, we will then test whether the second, more constrained model leads to worse model fit, qualified as a significant chi squared change test, and an AIC value > 10. 
+We will first fit the model as specified in Figure 2A (see `mod_v1a` in the code block below).
+Then, we will fit a second version of this model in which a single common EF factor is estimated, covering both inhibition and attention shifting tasks.
+Using `lavaan::anova`, we will then test whether the second, more constrained model leads to worse model fit, qualified as a significant chi squared change test, and an AIC value \> 10.
 If so, we will include submodel 2 in our final model.
 
 ```{r}
@@ -442,7 +513,8 @@ fit_v1b <- lavaan::sem(
 lavaan::anova(fit_v1a, fit_v1b)
 ```
 
-**Boundary separation sub-model.** Like the drift rate model, the baseline boundary separation model will be a bi-factor model containing a general boundary separation factor, as well as inhibition- and attention shifting-specific factors (see Figure 3A). We will use the same procedure to choose between the baseline model, and a second model estimating a common boundary separation factor.
+**Boundary separation sub-model.** Like the drift rate model, the baseline boundary separation model will be a bi-factor model containing a general boundary separation factor, as well as inhibition- and attention shifting-specific factors (see Figure 3A).
+We will use the same procedure to choose between the baseline model, and a second model estimating a common boundary separation factor.
 
 ```{r}
 #| label: Figure3
@@ -457,7 +529,7 @@ lavaan::anova(fit_v1a, fit_v1b)
 knitr::include_graphics("figures/fig3.png")
 ```
 
-**Non-decision time sub-model.** The baseline model for the non-decision time, as well as the model selectin procedure, will be identical to the drift rate and boundary separation models (see Figure 3A). 
+**Non-decision time sub-model.** The baseline model for the non-decision time, as well as the model selectin procedure, will be identical to the drift rate and boundary separation models (see Figure 3A).
 
 ```{r}
 #| label: Figure4
@@ -474,36 +546,48 @@ knitr::include_graphics("figures/fig4.png")
 
 <br>
 
-**Full measurement model.** After determining the final sub-model for all three DDM parameters, we will combine them all into a single model. 
-We expect that we will have to estimate covariances between latent factors of different DDM parameters that share at least one manifest variable (e.g., inhibition drift rates and general boundary separation). 
+**Full measurement model.** After determining the final sub-model for all three DDM parameters, we will combine them all into a single model.
+We expect that we will have to estimate covariances between latent factors of different DDM parameters that share at least one manifest variable (e.g., inhibition drift rates and general boundary separation).
 However, we foresee that we might have to add or remove covariances to improve model fit.
 These steps will be taken before accessing and adding the independent variables.
 
-**Final model.** After finalizing the full measurement model, we will add the adversity measures as predictors to the model. 
-Each adversity measure will be regressed on each latent factor. 
-We will estimate covariances between each pair of adversity measures. 
+**Final model.** After finalizing the full measurement model, we will add the adversity measures as predictors to the model.
+Each adversity measure will be regressed on each latent factor.
+We will estimate covariances between each pair of adversity measures.
 
 ### Q20: Predicted effect sizes DONE
 
-We do not have specific predictions for effect sizes but we deem standardized regression coefficients for interaction effects = .10 (or higher) and -.10 (or lower) meaningful. These effects would indicate that an effect of adversity on a a particular aspect of performance score is meaningfully more negative or more positive.
+We do not have specific predictions for effect sizes but we deem standardized regression coefficients for interaction effects = .10 (or higher) and -.10 (or lower) meaningful.
+These effects would indicate that an effect of adversity on a a particular aspect of performance score is meaningfully more negative or more positive.
 
-Effects between -.10 and .10 are not of interest for determining differences between adversity and aspects of performance. However, we are interested in determining if simple effects falling between -.10 and .10 are consistent with an effect of 0. For this scenario, we will use Two One-Sided T-tests (TOST) equivalence testing with -.10 and .10 as bounds.
+Effects between -.10 and .10 are not of interest for determining differences between adversity and aspects of performance.
+However, we are interested in determining if simple effects falling between -.10 and .10 are consistent with an effect of 0.
+For this scenario, we will use Two One-Sided T-tests (TOST) equivalence testing with -.10 and .10 as bounds.
 
 ### Q21: Statistical Power DONE
 
-A power analysis based on @Kretzschmar_2019 indicated that with an alpha of α = 0.05, we will have \> 90% power to detect small effect sizes (β = 0.1) with a sample size ranging between N = 730 and N = 980 when the reliability of the measures is at least moderate (0.6 -- 0.7). Therefore, we aim for a total sample size of N = 1,000.
+A power analysis based on @kretzschmar_2019 indicated that with an alpha of α = 0.05, we will have \> 90% power to detect small effect sizes (β = 0.1) with a sample size ranging between N = 730 and N = 980 when the reliability of the measures is at least moderate (0.6 -- 0.7).
+Therefore, we aim for a total sample size of N = 1,000.
 
 ### Q22: Inferential Criteria DONE
 
-We will use an alpha level of .05 throughout. p-values will be corrected for multiple testing using the false discovery rate. We will do so separately for tests involving drift rates, non-decision times, and boundary separations, as we have different hypotheses for each of these parameters.
+We will use an alpha level of .05 throughout.
+p-values will be corrected for multiple testing using the false discovery rate.
+We will do so separately for tests involving drift rates, non-decision times, and boundary separations, as we have different hypotheses for each of these parameters.
 
-We will test for three types of associations between different types of adversity and cognitive ability (as indexed by the drift rates): enhanced ability, impaired ability, or intact ability. Enhanced cognitive ability is defined as a *positive* association between adversity and drift rate. Impaired cognitive ability is defined as a *negative* association between adversity and drift rate. intact ability is defined as an association that is practically equivalent to zero. We define practical equivalence as a standardized effect falling between -0.10 and 0.10. We will use two one-sided tests (TOST) equivalence testing against these bounds to test for practical equivalence.
+We will test for three types of associations between different types of adversity and cognitive ability (as indexed by the drift rates): enhanced ability, impaired ability, or intact ability.
+Enhanced cognitive ability is defined as a *positive* association between adversity and drift rate.
+Impaired cognitive ability is defined as a *negative* association between adversity and drift rate.
+intact ability is defined as an association that is practically equivalent to zero.
+We define practical equivalence as a standardized effect falling between -0.10 and 0.10.
+We will use two one-sided tests (TOST) equivalence testing against these bounds to test for practical equivalence.
 
 ### Q23: Assumption Violations/Model Non-Convergence DONE
 
 In case of non-normally distributed variables, we will use
 
-If any assumptions are violated, we will update the preregistration and/or report deviations from the preregistration. However, we do not anticipate any serious violations.
+If any assumptions are violated, we will update the preregistration and/or report deviations from the preregistration.
+However, we do not anticipate any serious violations.
 
 ### Q24: Reliability and Robustness Testing
 
@@ -513,11 +597,13 @@ NA
 
 We do not preregister any exploratory analyses.
 
+Go back to [Overview].
+
 ## Part 6 - Statement of Integrity
 
 We state that we filled out this preregistration to the best of our knowledge and that no other preregistration exists pertaining to the same hypotheses and dataset.
 
 ## References
 
-
-<div id="refs"></div>
+::: {#refs}
+:::
