@@ -2,9 +2,8 @@
 title: ""
 format: 
   html:
-    css: D:/repositories/liss_ef_2024/assets/style.css
+    css: ../assets/style.css
     template: ../assets/template.html
-    keep_md: true
 bibliography: ../manuscript/references.bib
 csl: ../manuscript/apa.csl
 link-citations: true
