@@ -143,7 +143,7 @@ globallocal2_clean <- globallocal2_data |>
   filter(variable != "end", condition != "first") |>
   group_by(id, condition) |>
   mutate(
-    ex_fast = ifelse(rt < 250, TRUE, FALSE),
+    ex_fast = ifelse(rt < 1250, TRUE, FALSE),
     ex_slow = ifelse(scale(rt) |> as.numeric() > 3.2 | rt > 5000, TRUE, FALSE)
   ) |>
   group_by(id) |>
