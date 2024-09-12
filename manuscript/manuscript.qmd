@@ -1,0 +1,467 @@
+---
+bibliography: references.bib
+csl: apa.csl
+format: 
+  docx:
+    reference-doc: reference-doc.docx
+output:
+  officedown::rdocx_document:
+    page_margins:
+      bottom: 1
+      footer: 0
+      gutter: 0
+      header: 0.5
+      left: 1
+      right: 1
+      top: 1
+    plots:
+      align: center
+      caption:
+        pre: 'Figure '
+        sep: '. '
+        style: Image Caption
+    tables:
+      caption:
+        pre: 'Table '
+        sep: '. '
+        style: Table Caption
+  pdf_document: default
+  word_document: default
+editor: 
+  markdown: 
+    wrap: sentence
+---
+
+```{r include = FALSE}
+library(flextable)
+library(stringr)
+library(dplyr)
+library(tidyr)
+library(tibble)
+library(lavaan)
+library(officer)
+
+source('../scripts/0_functions/general-functions.R')
+
+load("../data/exclusions.RData")
+load("../analysis_objects/results_exploratory.RData")
+
+
+
+knitr::opts_chunk$set(
+  echo = F,
+  fig.align = "center",
+  fig.pos = "!t", 
+  out.extra = "",
+  fig.show = "asis",
+  message = FALSE,
+  tab.topcaption = T,
+  warning = FALSE
+)
+
+# set up flextable for tables
+set_flextable_defaults(
+  font.family = "Times", 
+  font.size = 10,
+  font.color = "black",
+  line_spacing = 1,
+  padding.bottom = 1, 
+  padding.top = 1,
+  padding.left = 1,
+  padding.right = 1
+)
+```
+
+#### **Attention shifting and inhibition abilities among people living in adverse conditions**
+
+<br>
+
+#### Stefan Vermeent^1,2^, Anna-Lena Schubert^3^, & Willem E. Frankenhuis^2,4^
+
+#### ^1^ Department of Psychology, Utrecht University, Utrecht, The Netherlands
+
+#### ^2^ Max Planck Institute for the Study of Crime, Security, and Law, Freiburg, Germany
+
+#### ^3^ Department of Psychology, University of Mainz, Mainz, Germany
+
+#### ^4^ Evolutionary and Population Biology, Institute for Biodiversity and Ecosystem Dynamics, University of Amsterdam, Amsterdam, the Netherlands
+
+<br>
+
+# Corresponding author
+
+Correspondence concerning this article should be addressed to Stefan Vermeent, Department of Psychology, Utrecht University, Heidelberglaan 1, 3584 CS Utrecht, The Netherlands. Email: p.c.s.vermeent@gmail.com / p.c.s.vermeent@uu.nl.
+
+# Data Availability
+
+All scripts and materials needed to reproduce the findings are available on the article's Github repository ([https://stefanvermeent.github.io/liss_ef_2024/](https://stefanvermeent.github.io/liss_ef_2024/)).
+In this paper, we make use of data from the LISS panel (Longitudinal Internet studies for the Social Sciences) managed by the non-profit research institute Centerdata (Tilburg University, the Netherlands). 
+All datasets are available in the LISS data archive ([https://www.dataarchive.lissdata.nl/study-units/view/1](https://www.dataarchive.lissdata.nl/study-units/view/1)). 
+Researchers who want to access the data are required to sign a statement confirming that information about individual persons, households, etc., will not be released to others (go to [https://statements.centerdata.nl](https://statements.centerdata.nl) for more information).
+
+# Funding statement
+This research was conducted in part using ODISSEI, the Open Data Infrastructure for Social Science and Economic Innovations (<https://ror.org/03m8v6t10>).
+WEF’s contributions have been supported by the Dutch Research Council (V1.Vidi.195.130) and the James S. McDonnell Foundation (https://doi.org/10.37717/220020502).
+
+
+# Disclosures
+
+We declare no conflicts of interest.
+
+# Ethics Approval Statement
+
+This study was approved by the Ethics Review Board of the Faculty of Social & Behavioural Sciences of Utrecht University (FETC20-490) and the Ethics committee for research in the Sciences and Life Sciences of the University of Amsterdam (FNWI-41_2023).
+
+\pagebreak
+
+People who live in adverse conditions tend to show lowered performance on executive functioning tasks [xxx].
+For example, exposure to deprivation has been linked to slower performance on inhibition tasks [@farah_2006; @fields_2021; @mezzacappa_2004; @noble_2005].
+This is typically interpreted as reflecting an impaired ability to maintain attentional focus on a central goal while ignoring distractions.
+These findings fit into a broader deficit framework, which emphasizes the ways in which adversity may hamper cognitive development across many different domains [xxx].
+
+In contrast, adaptation frameworks posit that people from adversity may develop specialized cognitive abilities through developmental adaptations in response to environmental challenges [@ellis_2022; @frankenhuis_2013; @frankenhuis_2020].
+This may result in enhanced or intact performance in specific EF abilities in relation to specific types of adversity.
+Consistent with these predictions, some studies have found intact or even enhanced performance in attention shifting, which is the ability to dynamically switch attention between two tasks [@fields_2021; @howard_2020; @nweze_2021; @young_2022; @mittal_2015].
+Thus, an important aim of both frameworks is to understand how adversity exposure is associated with differences in specific EF abilities.
+
+However, both deficit and adaptation interpretations suffer from a *performance-ability gap*.
+That is, lower task performance (e.g., slower response speed, lower accuracy) does not necessarily reflect lower cognitive ability.
+There are two reasons for this.
+First, raw performance *within* individual EF tasks is influenced by several processes besides the ability of interest, such as response caution and the speed of response execution [@hedge_2021; @ratcliff_2008; @stahl_2014].
+Second, raw performance *across* EF tasks is influenced by general processes, such as basic speed of processing [@loffler_2024].
+It therefore remains an open question to what extent adversity is associated with specific EF abilities after accounting for other sources of individual differences.
+In this study, we use cognitive modeling to more precisely estimate associations between adversity and two EF abilities: inhibition and attention shifting.
+
+## Separating EF ability from other decision-making processes
+
+Although mean RTs are routinely used as a direct proxy for cognitive ability, it is well-known that they confound multiple stages of processing, from initial preparations, to the active processing of task-relevant information, to deciding on and executing a response [@ratcliff_1978; @forstmann_2016; @wagenmakers_2009].
+In addition, people differ in how cautiously they make decisions.
+More cautious people tend to respond more slowly, but this does not necessarily indicate a lower ability.
+Differentiating between response caution and EF abilities on the basis of raw performance is difficult, especially because the trade-off between RTs and accuracy is often subtle [@domingue_2022].
+Thus, investigating how adversity is associated with inhibition and attention shifting requires isolating the factors that contribute to differences in RTs.
+
+One way of doing this is through the use of cognitive models like the Drift Diffusion Model [DDM\; @forstmann_2016; @ratcliff_1998; @ratcliff_2008; @wagenmakers_2009].
+The DDM assumes that people accumulate information for one of two responses (e.g., left or right button), until they have enough evidence for one response over the other (see Figure 1 for a visual overview of the DDM).
+When applied to trial-level RTs and accuracies, the DDM estimates four parameters that map onto theoretically meaningful cognitive processes.
+The *drift rate* reflects the rate at which the evidence accumulation process drifts towards the decision boundary, and thus provides a measure of the speed/efficiency of information processing.
+A higher drift rate leads to faster responses and higher accuracy (all else being equal).
+It is generally assumed that individual differences in EF abilities are captured in the drift rate (although not exclusively, see below\; @loffler_2024; @vermeent_2024a; @weigard_2021).
+The *boundary separation* reflects the width between the two decision boundaries, and provides a measure of a person's response caution.
+The *non-decision time* reflects a combination of preparation time (e.g., stimulus encoding) as well as execution time (e.g., time spent pressing the button).
+Finally, the *starting-point* (not considered here) allows for initial bias for one of two responses.
+
+# Accounting for task-impurity
+
+The EF literature has a long history of accounting for task impurity by using structural equation modeling (SEM) [@miyake_2000].
+Specific features of EF tasks may give rise to individual differences that do not purely reflect the EF ability.
+For example, content differences (e.g., numeric vs. figural, abstract vs. concrete) have been shown to affect cognitive performance (e.g., @duquennois_2022; @lerche_2020; @young_2022).
+SEM enables separating such method variance and variance associated with non-executive abilities from domain-specific variance (e.g., inhibition, shifting) (@miyake_2012).
+This requires including at least two or more different tasks that measure the same EF ability.
+The most widely used latent factor model of EF distinguishes between inhibition, attention shifting, and working memory updating, although several studies were unable to recover this factor structure, especially with regard to inhibition as a unitary and separate factor [@karr_2018; @rey_mermet_2018; @stahl_2014; @vonbastian_2020].
+
+Studies that combine SEM with cognitive modeling have found that shared variance across EF tasks largely reflects processing speed.
+One study was able to replicate the three-factor structure of EF when using raw performance measures.
+However, when modeling drift rates, all measures loaded on a single latent factor, which was fully explained by processing speed [@loffler_2024].
+Another investigation using an extension of the DDM for inhibition tasks found that shared variance across nine different tasks mostly reflected processing speed and strategy differences, not inhibition ability [@hedge_2021].
+
+This poses a challenge for adversity research, which often investigates associations between adversity and EF abilities based on a small set of tasks.
+Two recent studies suggest that this may overestimate the extent to which adversity lowers specific EF abilities.
+First, socioeconomic status (which is correlated with, but not the same as adversity) was mostly negatively associated with a task-general factor based on raw performance, while task-specific associations for the most part did not differ meaningfully from zero [@bignardi_2024].
+Second, household threat (but not material deprivation) was negatively associated with task-general drift rates, but not with task-specific variance on three EF tasks [@vermeent_2024a].
+However, both studies used data sets that only included a single task per ability, which may have contributed to the lack of task-specific associations.
+In this study, we built on this work to investigate how adversity is associated with differences in task-general speed, shifting and inhibition ability, and response caution.
+
+# The current study
+
+We analyzed performance on two inhibition tasks, three attention shifting tasks, and one basic processing speed task in relation to adversity exposure in a sample of adults.
+Using a combination of DDM and SEM, our aim was to answer three central questions.
+First, how is adversity associated with general speed of processing that is shared across all cognitive tasks?
+Second, how is adversity associated with inhibition and attention shifting ability after accounting for general speed of processing?
+Third, how is adversity associated with a general tendency for response caution (i.e., across all tasks and conditions), as well as with response caution associated with EF performance (i.e., in task conditions including an EF component)?
+We focused on two self-reported types of adversity: material deprivation (a lack of access to material resources) and threat (the potential for harm imposed by others).
+Both forms of adversity have been associated with both lowered and enhanced performance in EF [e.g., @fields_2021; @schafer_2022; @sheridan_2022; @vermeent_2024a; @young_2022], and are central to recent dimensional models of adversity [@mclaughlin_2021; @sheridan_2014].
+
+We preregistered potential data patterns that we considered consistent with hypotheses generated from deficit and adaptation frameworks.
+Any negative association between adversity and either general speed of processing or domain-specific processing would be consistent with deficit frameworks.
+Associations with response caution would not be consistent with deficit frameworks, as they reflect strategies rather than cognitive abilities.
+Two patterns would be consistent with adaptation frameworks. 
+First, if adversity is positively associated with attention shifting-related processing, regardless of the association with inhibition-related processing.
+Second, if adversity is associated with intact attention shifting-related processing *and* negatively associated with inhibition-related processing.
+If adversity is associated with intact performance in both abilities, this would suggest that adversity exposure is unrelated to the development of these abilities.
+
+# Methods
+
+## Participants
+
+The study was completed by a total of `r exclusions$sample$finish` participants who were drawn from the Dutch Longitudinal Internet Studies for the Social Sciences (LISS) panel [@scherpenzeel_2011].
+The LISS panel is an invite-only, representative probability sample of the Dutch population consisting of roughly 7,500 individuals across 5,000 households.
+LISS participants complete a yearly core battery of questionnaires about various key domains, among which their financial situation over the past year.
+In addition, they can participate in further monthly studies covering a wide range of different topics.
+The current study was fielded between May and August 2024.
+Participants were able to complete the cognitive tasks across two or more sessions to increase participation rates.
+People were eligible for participation if they were between 18 and 55 years old, and if they had agreed to linking their LISS data to government microdata (not relevant here).
+If performance on a specific task was at or below chance level, we excluded the data for that task but retained other task data of that participant.
+The final sample after exclusions consisted of `r exclusions$sample$final` participants.
+
+## Adversity measures
+
+We preregistered our approach to compute adversity composites based on observed correlations between measures.
+In short, if all measures of an adversity type correlated .60 or higher (indicating "strong" correlations), we calculated a uniformly weighted average.
+If one or more correlations were lower than .60, we used Principal Component Analysis (PCA) to the separate measures and extracted only the first principal component score.
+Perceived scarcity and income-to-needs were considered as two separate types of material deprivation (and unpredictability), regardless of their correlation.
+
+### Neighborhood threat
+
+Participants completed the Neighborhood Violence Scale [NVS\; @frankenhuis_2018; @frankenhuis_2020] in the current study.
+The NVS included seven items about current perceived neighborhood threat (e.g., “Where I live, it is important to be able to defend yourself against physical harm”), on a scale of 1 ("Completely disagree") to 7 ("Completely agree"). 
+All items of the NVS were averaged together and standardized.
+We also included four items on perceived neighborhood threat from the LISS archive (six waves: <https://doi.org/10.17026/dans-zch-j8xt>), in which participant reported how often it happens that they 1) “avoid certain areas in your place of residence because you perceive them as unsafe”, 2) “do not respond to a call at the door because you feel that it is unsafe”, 3) “leave valuable items at home to avoid theft or robbery in the street?”, 4) “make a detour, by car or on foot, to avoid unsafe areas?” on a scale of 1 (“(Almost) never”), 2 (“Sometimes”), or 3 (“Often”). 
+We recoded these items so that "(Almost) never" corresponded to zero.
+We summed the items within each wave, and then calculated an average across waves for which participants had data.
+
+We used seven items from the LISS archive (six waves: <https://doi.org/10.17026/dans-zch-j8xt>) in which participants reported whether or not they were the victim of eight types of crime in the last two years: (1) burglary or attempted burglary; (2) theft from their car; (3) theft of their wallet or purse, handbag, or other personal possession; (4) wreckage of their car or other private property; (5) intimidation by any other means; (6) maltreatment of such serious nature that it required medical attention; (7) maltreatment that did not require medical attention. 
+As the last wave occurred in 2018, we included the same items in the current study asking about people's crime exposure in the last two years.
+We computed the total number of distinct crimes that participants were exposed to at any moment in time (a 'variety score'\; @sweeten_2012).
+ 
+Correlations among the two measures of perceived neighborhood crime and crime victimization were low.
+Therefore, we used PCA to extract the first principal component score.
+This score accounted for XXX% of the variance in the three measures.
+
+### Perceived scarcity 
+
+Measures of perceived scarcity were derived from the LISS archive, using the yearly recurring core study on household and personal income (16 waves: <https://doi.org/10.57990/1gr4-bf42>).
+First, participants reported how difficult it currently is to live off the income of their household, on a scale from 0 (very hard) to 10 (very easy). 
+Second, participants reported which of the following best applied to their current financial situation: (1) “we are accumulating debt”; (2) “we are somewhat eating into savings”; (3) “we are just managing to make ends meet”; (4) “we have a little bit of money to spare”; (5) “we have a lot of money to spare”. 
+Third, participants reported which of the following applied to their current financial situation (0 = no, 1 = yes): (1) “having trouble making ends meet”; (2) unable to quickly replace things that break”; (3) “having to lend money for necessary expenditures”; (4) “running behind in paying rent/mortgage or general utilities”; (5) “debt collector/bailiff at the door in the last month”; (6) “received financial support from family or friends in the last month”.
+Responses were coded so that higher scores indicated more perceived scarcity.
+
+We first averaged each measure separately across waves, and then scaled them.
+As all item correlations were > .60, we computed a uniformly weighted average.
+
+### Cognitive measures
+
+All cognitive tasks were programmed in jsPsych 7.3 [@deleeuw_2015].
+At the start of the session, participants entered fullscreen mode to avoid distractions from other browser tabs.
+The tasks were presented against a light-gray background.
+
+*Flanker Task.* This task measures inhibition of distractor interference [@eriksen_1974].
+On each trial, participants saw five arrows side-by-side horizontally, pointing either left or right.
+Their task was to indicate the direction of the central arrow.
+The arrows were randomly presented 300 pixels above or below the center of the screen.
+On 50% of the trials, all arrows pointed in the same direction (congruent trials).
+On the other half, the arrows surrounding the central arrow pointed in the opposite direction (incongruent trials).
+Participants first completed eight practice trials, followed by two test blocks of 32 trials each, for a total of 64 trials.
+
+*Simon Task.* This task measures inhibition of prepotent responses [@simon_1969].
+On each trial, participants saw the word "LEFT" or "RIGHT" (printed in Dutch), presented either on the left or right side of the screen.
+Their task was to press the 'A' key if the word was "LEFT" and the 'L' key if the word was "RIGHT", regardless of the location on the screen.
+on 50% of the trials, the word matched the location (e.g., the word "LEFT" presented on the left side; congruent trials).
+On the other half, the word did not match the location (e.g., the word "LEFT" presented on the right side; incongruent trials).
+Participants first completed eight practice trials, followed by two test blocks of 32 trials each, for a total of 64 trials.
+
+*Color-Shape Task.* This task measures the ability to shift attention between different task goals [@miyake_2004].
+On each trial, participants saw a square or a circle in the center of the screen that was either blue or yellow.
+Depending on the task rule printed above the stimulus, their task was to classify the stimulus based on it's shape or color.
+On 50% of the trials, the rule was the same as on the preceding trial (repeat trials).
+On the other half, the rule was different than on the preceding trial (switch trials).
+The same stimulus was never presented more than twice in a row, and there were never more than three repeat or switch trials in a row. 
+Participants first completed eight practice trials, followed by two test blocks of 32 trials each, for a total of 64 trials.
+
+*Animacy-Size Task.* This task measures the ability to shift attention between different task goals [@arrington_2004].
+On each trial, participants saw a single noun (in Dutch) referring to an animal or object [adopted from @braem_2017].
+Depending on the task rule printed above the noun, their task was to classify it based on whether it referred to a living or non-living thing (e.g., wasp vs. piano), or whether it referred to something that was smaller or larger than a soccer ball (e.g., ring vs. dolphin).
+On 50% of the trials, the rule was the same as on the preceding trial (repeat trials).
+On the other half, the rule was different than on the preceding trial (switch trials).
+There were never more than three repeat or switch trials in a row.
+Participants first completed eight practice trials, followed by two test blocks of 32 trials each, for a total of 64 trials.
+
+*Global-local Task.* This task measures the ability to shift attention between task goals.
+Stimuli were adapted from @huizinga_2010.
+On each trial, participants saw a large square or rectangle which was composed of 16 small squares or rectangles.
+The stimulus where flanked on both side by a drawing of an elephant or mouse, which was presented 1,000 ms prior to the appearance of the stimulus.
+If the stimulus was flanked by the image of an elephant (50% of trials), participants had to indicate whether the global image was a square or rectangle.
+If the stimulus was flanked by the image of a mouse (50% of trials), participants had to indicate whether the local images were squares or rectangles.
+On 50 % of the trials, the rule was the same as on the preceding trial (repeat trials).
+On the other half, the rule was different than on the preceding trial (switch trials).
+Finally, the stimuli were congruent on 50% of the trials (e.g., large square consisting of small squares) and incongruent on the other half (e.g., large square consisting of small rectangles).
+Congruency, task rule (switch vs. repeat) or focus (global vs. local) where never repeated more than three times in a row.
+Participants first completed eight practice trials, followed by two test blocks of 32 trials each, for a total of 64 trials.
+
+*Posner Task.* This task measures basic speed of processing.
+On each trial, participants saw two letters in the center of the screen, drawn from the set A, B, F, H, Q, a, b, f, h , q.
+Their task was to indicate whether the letters were the same (e.g., "AA", "bB") or different (e.g., "AQ", "Fh").
+On 50% of the trials, the letters were the same, and on the other half they were different.
+Participants first completed 8 practice trials, followed by two test blocks of 32 trials each, for a total of 64 trials.
+
+### Covariates
+
+We used Directed Acyclic Graphs (DAG) to identify potential confounders of the key estimands (i.e., the association between self-reported threat and deprivation with cognitive outcomes).
+A DAG is a visual overview of our assumptions about how variables are causally related.
+They are graphs consisting of nodes (variables) and directed arrows (causal pathways).
+An arrow between two variables represents the assumption that experimentally manipulating the variable at the origin of the arrow will change the variable at the end of the arrow (but not the other way around).
+DAGs help in the identification of variables that need to be adjusted for in the statistical models (i.e., confounders with arrows to both the main predictor and the outcome), and, importantly, which variables should not be adjusted for (i.e., colliders and mediators).
+For more information on DAGs, see @rohrer_2018.
+
+We preregistered separate DAGs for threat and deprivation.
+As potential confounders of the effect of threat and deprivation on cognitive performance, we examined (1) age [@salthouse_2016; @salthouse_2019; @starns_2010], (2) education [@hofmarcher_2021], (3) sex [@ning_2023], and (4) childhood adversity exposure (material deprivation and threat combined) [@bos_2009; @goodman_2019].
+We also examined evidence for potential causal associations between threat and deprivation.
+Examinations were based on previous literature and/or our own assumptions.
+
+In the case of threat exposure, we were theoretically less sure about the potential effects of age and education.
+Therefore, we also statistically tested support for parts of the DAG for threat involving age, education, and deprivation using data from a previous LISS study [@vermeent_2024c], using working memory capacity as the outcome variable in the DAG.
+Specifically, we used the *dagitty* R package [@ankan_2021; @textor_2016] to test whether DAG-implied independencies between key variables (conditional on the other causal pathways) were supported by these data (see the preregistration for more details).
+
+Figure 2A depicts the final preregistered DAGs for material deprivation and threat exposure.
+For material deprivation, we decided to control for age, education, sex, and childhood adversity exposure on theoretical grounds.
+For threat exposure, we decided to control for age, sex, and childhood adversity, but *not* for education.
+We did not find theoretical support for an causal effect of education on threat exposure.
+In addition, our statistical analysis based on previously collected data did not provide evidence against independence between education and threat, suggesting that people with lower education did not report more exposure to threat.
+
+Some recent work suggests that material deprivation precedes exposure to adversities such as threat [@bywaters_2016; @lacey_2022; @ning_2023].
+If so, threat exposure is a mediator of the effect of material deprivation on cognitive performance, and should therefore not be controlled for when testing the total effect of material deprivation.
+However, establishing this causal relationship is difficult in our study for two reasons.
+First, The studies listed above all focused on childhood adversity, while we focus on adversity in adulthood.
+Second, our measures of threat and deprivation were measured at the same time, making it difficult to establish causality.
+Therefore, we will present two sets of results for the associations between material deprivation and threat exposure with cognitive performance.
+For material deprivation, our primary model did *not* include threat exposure as a confounder.
+A secondary model *did* include threat exposure, which we considered this a robustness check to assess the effect of our causal assumption.
+For threat exposure, our primary model included material deprivation as a confounder.
+A secondary model did *not* include material deprivation.
+
+## Procedure
+
+We obtained ethical approval from the first author's institutional ethical board. 
+The study was fielded on the LISS platform, and participants could only complete the study on a laptop or desktop PC.
+Participants started with the six cognitive tasks, in randomized order.
+After each task, they were asked if they wanted to continue to the next task or conclude the session. 
+If they choose for the latter, they were able to continue with the tasks at another time.
+The cognitive tasks took around 25 minutes to complete.
+After completing all cognitive tasks, participants completed questionnaires about past and present neighborhood threat and material deprivation, exposure to crime victimization in the past two years, trait impulsivity (not considered here) and trait future orientation (not considered here).
+Finally, they answered a few standard LISS evaluation questions about their experiences with the study, with the opportunity to provide written feedback.
+
+## Analysis plan
+
+### Data cleaning
+
+For all tasks, we removed trials with RTs < 250ms and trials with RTs more than 3.2 SD above the intra-individual log-transformed mean RT.
+In addition, if participants performed at chance level on a particular task, we excluded the data for that task only.
+The cut-off for chance performance was determined using the accuracy at the 97.5 % tail of a binomial distribution in the case of pure guessing.
+
+### DDM estimation
+
+We used an Hierarchical Bayesian implementation of the DDM (HDDM) [@vandekerckhove_2011; @wiecki_2013].
+The benefit of HDDM over traditional approaches is that the model uses information of the whole sample to inform individual parameter estimation.
+The HDDM was applied to each task separately.
+Across all tasks, the bias parameter was held constant, as this parameter is uninformative when the decision boundaries are coded as 'correct' and 'incorrect' (as opposed to mapping on the response options).
+For the Posner Task, we estimated a single drift rate, boundary separation, and non-decision time for each participant.
+For all other tasks, drift rates, boundary separation, and non-decision times were estimated separately for congruent (repeat) and incongruent (switch) trials.
+
+The DDM models were fit using the *runjags* package [@denwood_2016].
+Each model was fit with three Markov Chain Monte Carlo (MCMC) chains.
+We used 2,000 burn-in samples and 10,000 additional samples, of which every 10th sample was retained, resulting in a total of 3,000 posterior samples.
+See the supplemental materials for more information about model convergence and fit assessment.'
+
+We accounted for two potential sources of measurement error in the DDM estimates: (1) environmental noise and (2) state anxiety.
+Both measures were repeated after each cognitive task.
+We measured environmental noise with a single item, rated on a scale of 1 to 5: "How much noise was there in your environment during the reaction game?"
+We measured state anxiety with the shortened version of the State-Trait Anxiety Inventory [STAI\; @bij_2003; @marteau_1992], which asks participants how calm, tense, upset, relaxed, content, and worried they currently felt, on a scale of 1 ("not al all") to 4 ("very much").
+We recoded (when necessary) and then summed the answers with higher scores reflecting more state anxiety.
+For each task, we will then calculate the deviation from the intraindividual mean anxiety score.
+We residualized variance associated with noise and anxiety out of all the drift diffusion estimates using linear regression.
+
+### SEM
+
+We constructed the final SEM sequentially.
+First, we optimized the fit of the drift rate, boundary separation, and non-decision time sub-models.
+Second, we combined these three models into a single measurement model.
+Third, we added the regression paths between measures of adversity and the latent factors.
+To assess goodness-of-fit, we used the root mean square error of approximation (RMSEA) and the comparative fit index (CFI). 
+CFI values >.0.90 (>0.95) and RMSEA values <0.08 (≤0.06) were interpreted as acceptable (good) fit.
+
+Each sub-model was a bi-factor model, containing as manifest variables the parameter estimates of both conditions for each task.
+Within each sub-model, we estimated covariances between the conditions of each task.
+We estimated a general factor accounting for all manifest variables.
+A second domain-specific inhibition factor loaded on the parameter estimates of incongruent trials of the Flanker and Simon task.
+A third domain-specific Attention Shifting factor loaded on the parameter estimates of switch trials of the Color-shape, Global-local, and Animacy-size task.
+These two factors were allowed to covary.
+For each sub-model, we compared the fit of this model to a version with a common EF factor loading on incongruent/switch trials of all tasks.
+We deemed the second model a better fit when we observed a significant chi squared change test and an AIC value \> 10.
+
+For the drift rate model, we interpreted the general factor as basic speed of processing, and the domain-specific factors as reflecting specific inhibition and attention-shifting ability (or common EF in the case of model 2).
+For the boundary separation/non-decision time models, we interpreted the general factor as general response caution/speed of non-decision processes, and the domain-specific factors as reflecting response caution/speed of non-decision processes specific to conflict trials.
+
+After optimizing each sub-model, we combined them into a single measurement model.
+The general latent factors (processing speed, general caution, and general non-decision time) were allowed to covary, as well as the domain-specific latent factors (separately for inhibition and attention shifting, unless a common factor was favored).
+
+Finally, we constructed two versions of the final model, one to estimate the association between material deprivation and the outcome measures, and one to estimate the association between threat exposure and the outcome measures.
+In both models, the adversity measure was regressed on each latent factor, together with the control variables (see the Control Variables section for more details).
+We do not report regression coefficients of control variables to prevent their over-interpretation.
+
+# Results
+
+## Model fit
+
+### DDM convergence and fit
+
+The DDM converged normally for all tasks except for the Color-shape task, which showed large jumps in the traces.
+We solved this by increasing burnin and the number of posterior samples.
+In addition, model fit was above the preregistered cut-off of *r* = .80 for all tasks (all *r*s > XXX).
+(see the supplemental materials for a full overview of model convergence and fit results).
+
+### SEM
+
+As preregistered, we started with optimizing fit in SEM models for each DDM parameter separately before combining them all into a single model.
+For drift rates, both the model specifying separate inhibition and attention shifting factors (model 1) as well as the model specifying a common EF factor (model 2) provided a good fit to the data (model 1: CFI = `r fit_v1_fitstats[['cfi.robust']] |> round(2)`, RMSEA = `r fit_v1_fitstats[['rmsea.robust']] |> round(2)` [`r fit_v1_fitstats[['rmsea.ci.lower.robust']] |> round(2)`, `r fit_v1_fitstats[['rmsea.ci.upper.robust']] |> round(2)`]; model 2: CFI = `r fit_v2_fitstats[['cfi.robust']] |> round(2)`, RMSEA = `r fit_v2_fitstats[['rmsea.robust']] |> round(2)` [`r fit_v2_fitstats[['rmsea.ci.lower.robust']] |> round(2)`, `r fit_v2_fitstats[['rmsea.ci.upper.robust']] |> round(2)`]).
+Model comparison showed that model 2 led only to a slightly deteriorated fit, which was below the preregistered cut-off (AIC = `r fit_v_compare$AIC |> diff() |> formatC(digits = 2, width = 3, flag = "0", format = 'f')`).
+Therefore, we selected the drift rate model with a general processing speed factor loading on all manifest drift rates and a common EF factor loading on drift rates of conflict trials.
+For boundary separation, both the model specifying separate factors for response caution on conflict trials of inhibition and attention shifting tasks (model 1) as well as the model specifying a common factor for response caution on conflict trials (model 2) provided a good fit to the data (model 1: CFI = `r fit_a1_fitstats[['cfi.robust']] |> round(2)`, RMSEA = `r fit_a1_fitstats[['rmsea.robust']] |> round(2)` [`r fit_a1_fitstats[['rmsea.ci.lower.robust']] |> round(2)`, `r fit_a1_fitstats[['rmsea.ci.upper.robust']] |> round(2)`]; model 2: CFI = `r fit_a2_fitstats[['cfi.robust']] |> round(2)`, RMSEA = `r fit_a2_fitstats[['rmsea.robust']] |> round(2)` [`r fit_a2_fitstats[['rmsea.ci.lower.robust']] |> round(2)`, `r fit_a2_fitstats[['rmsea.ci.upper.robust']] |> round(2)`]).
+Model comparison showed that model 2 led only to a slightly deteriorated fit, which was below the preregistered cut-off (AIC = `r fit_a_compare$AIC |> diff() |> formatC(digits = 2, width = 3, flag = "0", format = 'f')`).
+Therefore, we selected the boundary separation model with a general response caution factor loading on all manifest boundary separations and a common response caution factor loading on boundary separations of conflict trials.
+For non-decision time, the two preregistered models did not converge.
+A third model only including a general non-decision time factor did converge and provided a good fit to the data, CFI = `r fit_t3_fitstats[['cfi.robust']] |> round(2)`, RMSEA = `r fit_t3_fitstats[['rmsea.robust']] |> round(2)` [`r fit_t3_fitstats[['rmsea.ci.lower.robust']] |> round(2)`, `r fit_t3_fitstats[['rmsea.ci.upper.robust']] |> round(2)`].
+The final model combining all three DDM parameters provided a good fit, although it required the addition of covariances between residual variances of manifest DDM parameters of the same task, CFI = `r fit_meas_fitstats[['cfi.robust']] |> round(2)`, RMSEA = `r fit_meas_fitstats[['rmsea.robust']] |> round(2)` [`r fit_meas_fitstats[['rmsea.ci.lower.robust']] |> round(2)`, `r fit_meas_fitstats[['rmsea.ci.upper.robust']] |> round(2)`]
+
+## Preregistered analyses
+
+
+
+## Non-preregistered analyses
+
+In our primary models, we found evidence suggesting an (indirect) association between childhood adversity and general speed of processing (note that in our DAGs, the effect of childhood adversity on cognitive processes is mediated by recent adversity).
+To explore potential *direct* effects of childhood adversity on task-general and domain-specific cognitive processes, we fitted an exploratory SEM model in which we evaluated associations between cognitive processes and childhood adversity *without including recent adversity*, and controlling for sex.
+We decided to include childhood exposure to threat and deprivation separately, in contrast to the primary model which included a composite of the two, consistent with the main analyses focusing on recent exposure to threat and deprivation.
+The results are summarised in Figure XX.
+
+For childhood exposure to deprivation, we found a significant negative association with general processing speed, $\beta$ = `r expl_reg_coef |> filter(lhs == 'gen_v', rhs == 'child_dep') |> pull(est.std) |> round(2)`, SE = `r expl_reg_coef |> filter(lhs == 'gen_v', rhs == 'child_dep') |> pull(se) |> round(2)`, 95% CI = [`r expl_reg_coef |> filter(lhs == 'gen_v', rhs == 'child_dep') |> pull(ci.lower) |> round(2)`, `r expl_reg_coef |> filter(lhs == 'gen_v', rhs == 'child_dep') |> pull(ci.upper) |> round(2)`] *p* `r expl_reg_coef |> filter(lhs == 'gen_v', rhs == 'child_dep') |> pull(pvalue_adj) |> format_p(pvalue = _)`.
+People who reported higher levels of childhood exposure to deprivation processed information more slowly across tasks.
+In addition, we found a significant positive association between childhood exposure to deprivation and non-decision time, $\beta$ = `r expl_reg_coef |> filter(lhs == 'gen_t', rhs == 'child_dep') |> pull(est.std) |> round(2)`, SE = `r expl_reg_coef |> filter(lhs == 'gen_t', rhs == 'child_dep') |> pull(se) |> round(2)`, 95% CI = [`r expl_reg_coef |> filter(lhs == 'gen_t', rhs == 'child_dep') |> pull(ci.lower) |> round(2)`, `r expl_reg_coef |> filter(lhs == 'gen_t', rhs == 'child_dep') |> pull(ci.upper) |> round(2)`] *p* `r expl_reg_coef |> filter(lhs == 'gen_t', rhs == 'child_dep') |> pull(pvalue_adj) |> format_p(pvalue = _)`.
+People who reported higher levels of childhood exposure to deprivation took more time encoding stimulus information and/or executing responses across tasks
+We did not find significant associations between childhood exposure to deprivation and general response caution, nor to domain-specific factors.
+Equivalence tests revealed that none of the associations fell within the region of practical equivalence.
+
+For childhood exposure to threat, we found a significant negative association with general processing speed, $\beta$ = `r expl_reg_coef |> filter(lhs == 'gen_v', rhs == 'child_thr') |> pull(est.std) |> round(2)`, SE = `r expl_reg_coef |> filter(lhs == 'gen_v', rhs == 'child_thr') |> pull(se) |> round(2)`, 95% CI = [`r expl_reg_coef |> filter(lhs == 'gen_v', rhs == 'child_thr') |> pull(ci.lower) |> round(2)`, `r expl_reg_coef |> filter(lhs == 'gen_v', rhs == 'child_thr') |> pull(ci.upper) |> round(2)`] *p* `r expl_reg_coef |> filter(lhs == 'gen_v', rhs == 'child_thr') |> pull(pvalue_adj) |> format_p(pvalue = _)`.
+People who reported higher levels of childhood exposure to threat processed information more slowly across tasks.
+We did not find significant associations between childhood exposure to threat and general response caution or general non-decision time, nor to domain-specific factors.
+Equivalence tests revealed that only the association between childhood exposure to threat and general response caution fell within the region of practical equivalence (*p* `r expl_eqtests |> filter(lhs == "gen_a", rhs == "child_thr") |> pull(eq_pvalue) |> format_p(pvalue = _)`).
+
+# Discussion
+
+The goal of this study was to investigate how exposure to two types of adversity---material deprivation and threat---in adulthood is associated to inhibition and attention shifting ability.
+Participants completed two inhibition tasks, three attention shifting tasks, and one basic processing speed task.
+First, we used DDM to 
+
+\pagebreak 
+
+## References
+
+::: {#refs}
+:::
+
+
+
+
+
+
+
+
+
