@@ -41,6 +41,7 @@ library(tibble)
 library(lavaan)
 library(officer)
 
+<<<<<<< HEAD
 source('../scripts/0_functions/general-functions.R')
 
 load("../data/exclusions.RData")
@@ -48,6 +49,8 @@ load("../analysis_objects/results_exploratory.RData")
 
 
 
+=======
+>>>>>>> 19cea5dd5cd24f7d6875416ff3ab67e30f0f3308
 knitr::opts_chunk$set(
   echo = F,
   fig.align = "center",
@@ -76,7 +79,11 @@ set_flextable_defaults(
 
 <br>
 
+<<<<<<< HEAD
 #### Stefan Vermeent^1,2^, Anna-Lena Schubert^3^, & Willem E. Frankenhuis^2,4^
+=======
+#### Stefan Vermeent^1,2^, Anna-Lena Schubert^3^, Jaap J. A. Denissen^1^, & Willem E. Frankenhuis^1,2,4^
+>>>>>>> 19cea5dd5cd24f7d6875416ff3ab67e30f0f3308
 
 #### ^1^ Department of Psychology, Utrecht University, Utrecht, The Netherlands
 
@@ -94,6 +101,7 @@ Correspondence concerning this article should be addressed to Stefan Vermeent, D
 
 # Data Availability
 
+<<<<<<< HEAD
 All scripts and materials needed to reproduce the findings are available on the article's Github repository ([https://stefanvermeent.github.io/liss_ef_2024/](https://stefanvermeent.github.io/liss_ef_2024/)).
 In this paper, we make use of data from the LISS panel (Longitudinal Internet studies for the Social Sciences) managed by the non-profit research institute Centerdata (Tilburg University, the Netherlands). 
 All datasets are available in the LISS data archive ([https://www.dataarchive.lissdata.nl/study-units/view/1](https://www.dataarchive.lissdata.nl/study-units/view/1)). 
@@ -101,6 +109,16 @@ Researchers who want to access the data are required to sign a statement confirm
 
 # Funding statement
 This research was conducted in part using ODISSEI, the Open Data Infrastructure for Social Science and Economic Innovations (<https://ror.org/03m8v6t10>).
+=======
+All scripts and materials needed to reproduce the findings are available on the article's Github repository ([https://stefanvermeent.github.io/liss_wm_profiles_2023/](https://stefanvermeent.github.io/liss_wm_profiles_2023/)).
+We also include instructions on how to reproduce each step of our analyses. 
+In this paper, we make use of data from the LISS panel (Longitudinal Internet studies for the Social Sciences) managed by the non-profit research institute Centerdata (Tilburg University, the Netherlands). 
+All datasets are available in the LISS data archive. 
+Researchers who want to access the data are required to sign a statement confirming that information about individual persons, households, etc., will not be released to others (go to [https://statements.centerdata.nl](https://statements.centerdata.nl) for more information).
+
+# Funding statement
+This research was conducted in whole or in part using ODISSEI, the Open Data Infrastructure for Social Science and Economic Innovations(<https://ror.org/03m8v6t10>).
+>>>>>>> 19cea5dd5cd24f7d6875416ff3ab67e30f0f3308
 WEF’s contributions have been supported by the Dutch Research Council (V1.Vidi.195.130) and the James S. McDonnell Foundation (https://doi.org/10.37717/220020502).
 
 
@@ -114,6 +132,7 @@ This study was approved by the Ethics Review Board of the Faculty of Social & Be
 
 \pagebreak
 
+<<<<<<< HEAD
 People who live in adverse conditions tend to show lowered performance on executive functioning tasks [xxx].
 For example, exposure to deprivation has been linked to slower performance on inhibition tasks [@farah_2006; @fields_2021; @mezzacappa_2004; @noble_2005].
 This is typically interpreted as reflecting an impaired ability to maintain attentional focus on a central goal while ignoring distractions.
@@ -188,11 +207,75 @@ Two patterns would be consistent with adaptation frameworks.
 First, if adversity is positively associated with attention shifting-related processing, regardless of the association with inhibition-related processing.
 Second, if adversity is associated with intact attention shifting-related processing *and* negatively associated with inhibition-related processing.
 If adversity is associated with intact performance in both abilities, this would suggest that adversity exposure is unrelated to the development of these abilities.
+=======
+Exposure to adversity (i.e., prolonged exposure to intense stress) is associated with robust, persisting changes in executive functioning (EF) [@ellis_2022; @farah_2006; @sheridan_2022; @sheridan_2014].
+Given the importance of EF---a set of abilities involved in the top-down, goal-directed regulation of behavior [@miyake_2000; @rey_mermet_2019]---much research has been devoted to understanding which EF abilities are most strongly associated with adversity.
+In some cases, these insights have already been used to screen for early EF deficits, and to develop interventions to help bridge performance gaps [@distefano_2021].
+
+A lot of what we know about the association between adversity and EF stems from analyzing raw performance, most often response times (RT) or accuracy rates.
+In addition, it is common for studies to only include a single task per EF ability.
+For example, previous studies have inferred difficulties in ignoring distractions (inhibition) in people from adversity using a single inhibition task [e.g., @farah_2006; @fields_2021; @mezzacappa_2004; @noble_2005].
+The same thing is true for observed adaptive benefits in the ability to shift attention between tasks (attention shifting) [@fields_2021; @howard_2020; @nweze_2021; @young_2022; @mittal_2015].
+In effect, an important assumption underlying many deficit and adaptation findings is that raw task performance offers a reliable, relatively pure estimate of the EF ability [@white_2022].
+
+Unfortunately, an increasing number of psychometric investigations into EF do not support this assumption [@krumm_2009; @loffler_2024; @rey_mermet_2019; @rouder_2019; @stahl_2014].
+A central issue is that raw task performance is not task-pure.
+Aside from the EF ability needed to solve the task, a person's RT is also influenced by other factors such as response caution (i.e., their relative emphasis on speed versus accuracy).
+Accounting for these factors using cognitive modeling, a recent study found that children with more household threat were slower on EF tasks partly because they were more cautious [@vermeent_2024a].
+
+Aside from different processing stages, performance across EF tasks is also influenced by general processing speed [@frischkorn_2019; @lerche_2020; @loffler_2024].
+
+
+[Might not be any ]
+Even more problematic are recent studies suggesting that performance on EF tasks taps into little more than general processing speed.
+For example, after accounting for other factors such as response caution, another study found that a common (latent) EF factor was fully explained by performance on really basic processing speed tasks [@loffler_2024].
+A few studies have focused on this distinction in the context of adversity and/or socioeconomical status.
+on a raw performance level, lower SES was found to be negatively correlated with a task-general factor, with additional associations on the task-specific level.
+In another 
+
+
+# # Implications and potential solutions for adversity research
+
+An important implication of this work is that standard assessments---based on raw performance of single EF tasks---may be ill-suited at estimating associations between adversity and specific EF abilities.
+Patterns that may look like deficits (or adaptations) in specific abilities may not be driven by these abilities at all.
+For example, if adversity is associated with slower task-general processing speed, analyses focused on individual EF tasks could make it seem like many different abilities impaired, instead of a single, general process.
+
+Fortunately, these challenges can be tackled using a combination of cognitive modeling and structural equation modeling.
+As a first step, ability-relevant processing should be separated from ability-irrelevant processes, such as response caution or the time taken to prepare for a task [...].
+One effective way of doing this is through the use of cognitive models like the Drift Diffusion Model [DDM\; @forstmann_2016; @ratcliff_1998; @ratcliff_2008; @wagenmakers_2009].
+The DDM broadly divides the time taken on speeded EF tasks into a decision-making stage and a non-decision-making stage [see Figure 1].
+In the decision-making stage, people accumulate evidence for one of two responses (e.g., left or right button), until they have enough evidence for one response over the other.
+The amount of evidence a person requires can vary between people (as well as between tasks within the same person) [XXX], and is modeled as the distance between the decision boundaries for each respective response.
+Finally, the DDM models two non-decision stages: one at the start of the trial (e.g., task preparations, stimulus encoding) and one at the end of the trial (i.e., response execution).
+
+When applied to empirical performance data, the DDM distinguishes between three parameters mapping onto distinct cognitive processes.
+The *drift rate* reflects the rate at which the evidence accumulation process drifts towards the decision boundary, and thus provides a measure of the speed/efficiency of information processing.
+The *boundary separation* reflects the width between the two decision boundaries, and provides a measure of a person's response caution.
+Finally, the *non-decision time* reflects a combination of preparation time (e.g., stimulus encoding) as well as execution time (e.g., time spent pressing the button).
+
+Researchers have argued that the drift rate on EF tasks is a more valid measure of EF ability, at least to the extent to which the tasks are reliable measures of EF ability [@loffler_2024; @vermeent_2024a; @weigard_2021].
+However, drift rates are still influenced at least partly by general speed of processing.
+Theoretically, this should be the part of the variance that is shared across drift rates of all tasks, and of conditions both including an EF component (e.g., incongruent trials) and excluding an EF component (e.g., congruent trials) [@loffler_2024].
+This part of the variance can be estimated on a latent level using SEM.
+Any remaining task-specific variance then contains EF-specific variance.
+
+As mentioned above, a recent investigation did not find significant associations between adversity and task-specific EF variances [@vermeent_2024a].
+This could mean one of two things.
+First, task-specific variance may reliably reflect specific EF abilities, and adversity may not be associated with these abilities.
+Second, task-specific variance may *not* reliably reflect specific EF abilities.
+That is, after accounting for general speed of processing, little more than measurement error may remain.
+Testing these hypotheses requires sampling two or more tasks that are supposed to measure the same ability, and using latent modeling to investigate whether they form a consistent latent factor after accounting for general speed of processing.
+
+# The current study
+
+
+>>>>>>> 19cea5dd5cd24f7d6875416ff3ab67e30f0f3308
 
 # Methods
 
 ## Participants
 
+<<<<<<< HEAD
 The study was completed by a total of `r exclusions$sample$finish` participants who were drawn from the Dutch Longitudinal Internet Studies for the Social Sciences (LISS) panel [@scherpenzeel_2011].
 The LISS panel is an invite-only, representative probability sample of the Dutch population consisting of roughly 7,500 individuals across 5,000 households.
 LISS participants complete a yearly core battery of questionnaires about various key domains, among which their financial situation over the past year.
@@ -202,6 +285,17 @@ Participants were able to complete the cognitive tasks across two or more sessio
 People were eligible for participation if they were between 18 and 55 years old, and if they had agreed to linking their LISS data to government microdata (not relevant here).
 If performance on a specific task was at or below chance level, we excluded the data for that task but retained other task data of that participant.
 The final sample after exclusions consisted of `r exclusions$sample$final` participants.
+=======
+Participants were 1,000 Dutch people randomly drawn from the Longitudinal Internet studies for the Social Sciences (LISS) panel [@scherpenzeel_2011].
+The LISS panel is an invite-only, representative probability sample of the Dutch population consisting of roughly 7,500 individuals across 5,000 households.
+LISS participants complete a yearly core battery of questionnaires about various key domains, among which their financial situation over the past year.
+In addition, they can participate in further monthly studies covering a wide range of different topics.
+The current study was fielded between May and June 2024.
+Participants were able to complete the cognitive tasks across two or more sessions to increase participation rates.
+People were eligible for participation if they (1) were between 18 and 55 years old; (2) if they had completed at least one wave of a study in the LISS archive assessing exposure to crime (see below); (3) if they had agreed to linking their LISS data to government microdata (not relevant here).
+Participants were excluded if they interacted with other browser tabs mid-trial on any of the cognitive tasks (but not during breaks or in-between tasks). 
+If performance on a specific task was at or below chance level, we excluded the data for that task but retained other task data of that participant.
+>>>>>>> 19cea5dd5cd24f7d6875416ff3ab67e30f0f3308
 
 ## Adversity measures
 
@@ -212,13 +306,18 @@ Perceived scarcity and income-to-needs were considered as two separate types of 
 
 ### Neighborhood threat
 
+<<<<<<< HEAD
 Participants completed the Neighborhood Violence Scale [NVS\; @frankenhuis_2018; @frankenhuis_2020] in the current study.
+=======
+*Perceived neighborhood crime.* Participants completed the Neighborhood Violence Scale [NVS\; @frankenhuis_2018; @frankenhuis_2020] in the current study.
+>>>>>>> 19cea5dd5cd24f7d6875416ff3ab67e30f0f3308
 The NVS included seven items about current perceived neighborhood threat (e.g., “Where I live, it is important to be able to defend yourself against physical harm”), on a scale of 1 ("Completely disagree") to 7 ("Completely agree"). 
 All items of the NVS were averaged together and standardized.
 We also included four items on perceived neighborhood threat from the LISS archive (six waves: <https://doi.org/10.17026/dans-zch-j8xt>), in which participant reported how often it happens that they 1) “avoid certain areas in your place of residence because you perceive them as unsafe”, 2) “do not respond to a call at the door because you feel that it is unsafe”, 3) “leave valuable items at home to avoid theft or robbery in the street?”, 4) “make a detour, by car or on foot, to avoid unsafe areas?” on a scale of 1 (“(Almost) never”), 2 (“Sometimes”), or 3 (“Often”). 
 We recoded these items so that "(Almost) never" corresponded to zero.
 We summed the items within each wave, and then calculated an average across waves for which participants had data.
 
+<<<<<<< HEAD
 We used seven items from the LISS archive (six waves: <https://doi.org/10.17026/dans-zch-j8xt>) in which participants reported whether or not they were the victim of eight types of crime in the last two years: (1) burglary or attempted burglary; (2) theft from their car; (3) theft of their wallet or purse, handbag, or other personal possession; (4) wreckage of their car or other private property; (5) intimidation by any other means; (6) maltreatment of such serious nature that it required medical attention; (7) maltreatment that did not require medical attention. 
 As the last wave occurred in 2018, we included the same items in the current study asking about people's crime exposure in the last two years.
 We computed the total number of distinct crimes that participants were exposed to at any moment in time (a 'variety score'\; @sweeten_2012).
@@ -230,6 +329,19 @@ This score accounted for XXX% of the variance in the three measures.
 ### Perceived scarcity 
 
 Measures of perceived scarcity were derived from the LISS archive, using the yearly recurring core study on household and personal income (16 waves: <https://doi.org/10.57990/1gr4-bf42>).
+=======
+*Crime victimization.* We used seven items from the LISS archive (six waves: <https://doi.org/10.17026/dans-zch-j8xt>) in which participants reported whether or not they were the victim of eight types of crime in the last two years: (1) burglary or attempted burglary; (2) theft from their car; (3) theft of their wallet or purse, handbag, or other personal possession; (4) wreckage of their car or other private property; (5) intimidation by any other means; (6) maltreatment of such serious nature that it required medical attention; (7) maltreatment that did not require medical attention. 
+As the last wave occurred in 2018, we included the same items in the current study asking about people's crime exposure in the last two years.
+We computed the total number of distinct crimes that participants were exposed to at any moment in time (a 'variety score'\; @sweeten_2012).
+ 
+*Neighborhood threat composite.* Correlations among the two measures of perceived neighborhood crime and crime victimization were low.
+Therefore, we used PCA to extract the first principal component score.
+This score accounted for XXX% of the variance in the three measures.
+
+### Material deprivation
+
+*Perceived scarcity (mean).* Measures of perceived scarcity were derived from the LISS archive, using the yearly recurring core study on household and personal income (16 waves: <https://doi.org/10.57990/1gr4-bf42>).
+>>>>>>> 19cea5dd5cd24f7d6875416ff3ab67e30f0f3308
 First, participants reported how difficult it currently is to live off the income of their household, on a scale from 0 (very hard) to 10 (very easy). 
 Second, participants reported which of the following best applied to their current financial situation: (1) “we are accumulating debt”; (2) “we are somewhat eating into savings”; (3) “we are just managing to make ends meet”; (4) “we have a little bit of money to spare”; (5) “we have a lot of money to spare”. 
 Third, participants reported which of the following applied to their current financial situation (0 = no, 1 = yes): (1) “having trouble making ends meet”; (2) unable to quickly replace things that break”; (3) “having to lend money for necessary expenditures”; (4) “running behind in paying rent/mortgage or general utilities”; (5) “debt collector/bailiff at the door in the last month”; (6) “received financial support from family or friends in the last month”.
@@ -238,13 +350,39 @@ Responses were coded so that higher scores indicated more perceived scarcity.
 We first averaged each measure separately across waves, and then scaled them.
 As all item correlations were > .60, we computed a uniformly weighted average.
 
+<<<<<<< HEAD
+=======
+*Income-to-needs (mean).* The income-to-needs ratio was derived from monthly self-reported net household income in the LISS archive (<https://doi.org/10.57990/qn3k-as78>).
+Reported income of zero was set to missing, as this could indicate an unwillingness to report on income rather than a true income of zero.
+If net household income data was missing (or zero) for an entire year, we imputed, if possible, the reported yearly net household income from the core study on income (<https://doi.org/10.57990/1gr4-bf42>), dividing by 12 to obtain monthly estimates.
+We then divided the income by the poverty threshold set by Statistics Netherlands (CBS) [@brakel_2023; CBS, personal communication, December 15, 2023].
+For households with more than three children, we used the threshold for a family with three children, as CBS does not calculate thresholds for families larger than three children.
+For the same reason, income of households with more than two adults was compared to the threshold for households with two adults.
+We computed the average income-to-needs ratio across years, reverse coding it so that higher scores indicated households further below the threshold.
+
+### Unpredictability
+
+*Perceived scarcity (SD/mean).* Unpredictability over time was computed using the coefficient of variation, which is the within-person standard deviation across years divided by the mean across years (@key_2017; @liu_2022; @ugarte_2023; @walasek_2024; @young_2020).
+This measure accounts for the fact that the mean and standard deviation tend to be highly positively correlated.
+Unpredictability in perceived scarcity was derived from the same measures as the mean level of perceived scarcity (see above).
+We first computed the standard deviation for each measure separately across years, and then scaled them.
+We then computed a uniformly weighted average, which was divided by the mean level of perceived scarcity across years.
+
+*Income-to-needs (SD/mean).* Unpredictability over time in the income-to-needs ratio was also computed using the coefficient of variation.
+We first computed the within-person standard deviation of the income-to-needs ratio across years, and then divided it by the mean income-to-needs ratio across years.
+
+>>>>>>> 19cea5dd5cd24f7d6875416ff3ab67e30f0f3308
 ### Cognitive measures
 
 All cognitive tasks were programmed in jsPsych 7.3 [@deleeuw_2015].
 At the start of the session, participants entered fullscreen mode to avoid distractions from other browser tabs.
 The tasks were presented against a light-gray background.
 
+<<<<<<< HEAD
 *Flanker Task.* This task measures inhibition of distractor interference [@eriksen_1974].
+=======
+*Flanker Task.* This task measures inhibition of distractor interference [...]
+>>>>>>> 19cea5dd5cd24f7d6875416ff3ab67e30f0f3308
 On each trial, participants saw five arrows side-by-side horizontally, pointing either left or right.
 Their task was to indicate the direction of the central arrow.
 The arrows were randomly presented 300 pixels above or below the center of the screen.
@@ -252,14 +390,22 @@ On 50% of the trials, all arrows pointed in the same direction (congruent trials
 On the other half, the arrows surrounding the central arrow pointed in the opposite direction (incongruent trials).
 Participants first completed eight practice trials, followed by two test blocks of 32 trials each, for a total of 64 trials.
 
+<<<<<<< HEAD
 *Simon Task.* This task measures inhibition of prepotent responses [@simon_1969].
+=======
+*Simon Task.* This task measures inhibition of prepotent responses [...].
+>>>>>>> 19cea5dd5cd24f7d6875416ff3ab67e30f0f3308
 On each trial, participants saw the word "LEFT" or "RIGHT" (printed in Dutch), presented either on the left or right side of the screen.
 Their task was to press the 'A' key if the word was "LEFT" and the 'L' key if the word was "RIGHT", regardless of the location on the screen.
 on 50% of the trials, the word matched the location (e.g., the word "LEFT" presented on the left side; congruent trials).
 On the other half, the word did not match the location (e.g., the word "LEFT" presented on the right side; incongruent trials).
 Participants first completed eight practice trials, followed by two test blocks of 32 trials each, for a total of 64 trials.
 
+<<<<<<< HEAD
 *Color-Shape Task.* This task measures the ability to shift attention between different task goals [@miyake_2004].
+=======
+*Color-Shape Task.* This task measures the ability to shift attention between different task goals [XXX].
+>>>>>>> 19cea5dd5cd24f7d6875416ff3ab67e30f0f3308
 On each trial, participants saw a square or a circle in the center of the screen that was either blue or yellow.
 Depending on the task rule printed above the stimulus, their task was to classify the stimulus based on it's shape or color.
 On 50% of the trials, the rule was the same as on the preceding trial (repeat trials).
@@ -267,16 +413,26 @@ On the other half, the rule was different than on the preceding trial (switch tr
 The same stimulus was never presented more than twice in a row, and there were never more than three repeat or switch trials in a row. 
 Participants first completed eight practice trials, followed by two test blocks of 32 trials each, for a total of 64 trials.
 
+<<<<<<< HEAD
 *Animacy-Size Task.* This task measures the ability to shift attention between different task goals [@arrington_2004].
 On each trial, participants saw a single noun (in Dutch) referring to an animal or object [adopted from @braem_2017].
+=======
+*Animacy-Size Task.* This task measures the ability to shift attention between different task goals [XXX].
+On each trial, participants saw a single noun (in Dutch) referring to an animal or object [adopted from XXX].
+>>>>>>> 19cea5dd5cd24f7d6875416ff3ab67e30f0f3308
 Depending on the task rule printed above the noun, their task was to classify it based on whether it referred to a living or non-living thing (e.g., wasp vs. piano), or whether it referred to something that was smaller or larger than a soccer ball (e.g., ring vs. dolphin).
 On 50% of the trials, the rule was the same as on the preceding trial (repeat trials).
 On the other half, the rule was different than on the preceding trial (switch trials).
 There were never more than three repeat or switch trials in a row.
 Participants first completed eight practice trials, followed by two test blocks of 32 trials each, for a total of 64 trials.
 
+<<<<<<< HEAD
 *Global-local Task.* This task measures the ability to shift attention between task goals.
 Stimuli were adapted from @huizinga_2010.
+=======
+*Global-local Task.* This task measures the ability to shift attention between task goals [XXX]
+Stimuli were adapted from [...].
+>>>>>>> 19cea5dd5cd24f7d6875416ff3ab67e30f0f3308
 On each trial, participants saw a large square or rectangle which was composed of 16 small squares or rectangles.
 The stimulus where flanked on both side by a drawing of an elephant or mouse, which was presented 1,000 ms prior to the appearance of the stimulus.
 If the stimulus was flanked by the image of an elephant (50% of trials), participants had to indicate whether the global image was a square or rectangle.
@@ -295,6 +451,7 @@ Participants first completed 8 practice trials, followed by two test blocks of 3
 
 ### Covariates
 
+<<<<<<< HEAD
 We used Directed Acyclic Graphs (DAG) to identify potential confounders of the key estimands (i.e., the association between self-reported threat and deprivation with cognitive outcomes).
 A DAG is a visual overview of our assumptions about how variables are causally related.
 They are graphs consisting of nodes (variables) and directed arrows (causal pathways).
@@ -327,6 +484,11 @@ For material deprivation, our primary model did *not* include threat exposure as
 A secondary model *did* include threat exposure, which we considered this a robustness check to assess the effect of our causal assumption.
 For threat exposure, our primary model included material deprivation as a confounder.
 A secondary model did *not* include material deprivation.
+=======
+We preregistered a Directed Acyclic Graph (DAG) to inform the inclusion of covariates to the model.
+Based on this DAG, we decided to control for age (in years), the quadratic effect of age, education level, and childhood adversity.
+Childhood adversity was the unweighted average across two scales measuring childhood threat and deprivation: (1) the Neighborhood Violence Scale [XXX], which consists of seven items (e.g., "Physical fights were common in the neighborhood where I grew up"), and (2) four items measuring access to housing, food, clothing, and medicine.
+>>>>>>> 19cea5dd5cd24f7d6875416ff3ab67e30f0f3308
 
 ## Procedure
 
@@ -339,26 +501,42 @@ The cognitive tasks took around 25 minutes to complete.
 After completing all cognitive tasks, participants completed questionnaires about past and present neighborhood threat and material deprivation, exposure to crime victimization in the past two years, trait impulsivity (not considered here) and trait future orientation (not considered here).
 Finally, they answered a few standard LISS evaluation questions about their experiences with the study, with the opportunity to provide written feedback.
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 19cea5dd5cd24f7d6875416ff3ab67e30f0f3308
 ## Analysis plan
 
 ### Data cleaning
 
 For all tasks, we removed trials with RTs < 250ms and trials with RTs more than 3.2 SD above the intra-individual log-transformed mean RT.
+<<<<<<< HEAD
 In addition, if participants performed at chance level on a particular task, we excluded the data for that task only.
 The cut-off for chance performance was determined using the accuracy at the 97.5 % tail of a binomial distribution in the case of pure guessing.
+=======
+>>>>>>> 19cea5dd5cd24f7d6875416ff3ab67e30f0f3308
 
 ### DDM estimation
 
 We used an Hierarchical Bayesian implementation of the DDM (HDDM) [@vandekerckhove_2011; @wiecki_2013].
 The benefit of HDDM over traditional approaches is that the model uses information of the whole sample to inform individual parameter estimation.
+<<<<<<< HEAD
 The HDDM was applied to each task separately.
 Across all tasks, the bias parameter was held constant, as this parameter is uninformative when the decision boundaries are coded as 'correct' and 'incorrect' (as opposed to mapping on the response options).
 For the Posner Task, we estimated a single drift rate, boundary separation, and non-decision time for each participant.
 For all other tasks, drift rates, boundary separation, and non-decision times were estimated separately for congruent (repeat) and incongruent (switch) trials.
+=======
+The model will be applied to each task separately.
+Across all tasks, the bias parameter was held constant, as there is no reason for participants to favor one response over the other across trials.
+For the Posner Task, we estimated a single drift rate, boundary separation, and non-decision time for each participant.
+For all other tasks, drift rates and non-decision times were estimated separately for congruent (repeat) and incongruent (switch) trials.
+Boundary separation was always fixed across conditions, following the assumption that people cannot anticipate the condition of the next trial, and hence cannot adjust their strategy on a trial-by-trial basis.
+>>>>>>> 19cea5dd5cd24f7d6875416ff3ab67e30f0f3308
 
 The DDM models were fit using the *runjags* package [@denwood_2016].
 Each model was fit with three Markov Chain Monte Carlo (MCMC) chains.
 We used 2,000 burn-in samples and 10,000 additional samples, of which every 10th sample was retained, resulting in a total of 3,000 posterior samples.
+<<<<<<< HEAD
 See the supplemental materials for more information about model convergence and fit assessment.'
 
 We accounted for two potential sources of measurement error in the DDM estimates: (1) environmental noise and (2) state anxiety.
@@ -456,6 +634,23 @@ First, we used DDM to
 
 ::: {#refs}
 :::
+=======
+See the supplemental materials for more information about model convergence and fit assessment.
+
+### SEM
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> 19cea5dd5cd24f7d6875416ff3ab67e30f0f3308
 
 
 

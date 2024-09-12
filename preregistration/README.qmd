@@ -207,7 +207,11 @@ An arrow between two variables represents the assumption that experimentally man
 DAGs help in the identification of variables that need to be adjusted for in the statistical models (i.e., confounders with arrows to both the main predictor and the outcome), and, importantly, which variables should not be adjusted for (i.e., colliders and mediators).
 For more information on DAGs, see @rohrer_2018.
 
+<<<<<<< HEAD
 We preregistered separate DAGs for threat and deprivation.
+=======
+We constructed separate DAGs for threat and deprivation.
+>>>>>>> 19cea5dd5cd24f7d6875416ff3ab67e30f0f3308
 As potential confounders of the effect of threat and deprivation on cognitive performance, we examined (1) age [@salthouse_2016; @salthouse_2019; @starns_2010], (2) education [@hofmarcher_2021], (3) sex [@ning_2023], and (4) childhood adversity exposure (material deprivation and threat combined) [@bos_2009; @goodman_2019].
 We also examined evidence for potential causal associations between threat and deprivation (more information below).
 Examinations were based on previous literature and/or our own assumptions.

@@ -3,5 +3,9 @@
 .RData
 .Ruserdata
 
+<<<<<<< HEAD
 data
 analysis_objects
+=======
+data
+>>>>>>> 19cea5dd5cd24f7d6875416ff3ab67e30f0f3308
