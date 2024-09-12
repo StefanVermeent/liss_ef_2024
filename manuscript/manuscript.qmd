@@ -446,7 +446,7 @@ Equivalence tests revealed that only the association between childhood exposure 
 
 # Discussion
 
-The goal of this study was to investigate how exposure to two types of adversity---material deprivation and threat---in adulthood is associated to inhibition and attention shifting ability.
+The goal of this study was to XXXinvestigate how exposure to two types of adversity---material deprivation and threat---in adulthood is associated to inhibition and attention shifting ability.
 Participants completed two inhibition tasks, three attention shifting tasks, and one basic processing speed task.
 First, we used DDM to 
 
