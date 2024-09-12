@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en"><head>
+<script src="README_files/libs/clipboard/clipboard.min.js"></script>
+<script src="README_files/libs/quarto-html/quarto.js"></script>
+<script src="README_files/libs/quarto-html/popper.min.js"></script>
+<script src="README_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="README_files/libs/quarto-html/anchor.min.js"></script>
+<link href="README_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="README_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="README_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="README_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="README_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><meta charset="utf-8">
+<meta name="generator" content="quarto">
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+<title></title>
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+
+
+<link rel="stylesheet" href="assets/style.css">
+
+
+</head>
+
+<body class="fullcontent">
+
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+
+<nav>
+    <div class="title"><a href="/liss_ef_2024/index.html">Vermeent et al. (in prep)</a></div>
+    <div class="dropdown">
+        <button class="dropbtn">
+            <div></div>
+            <div></div>
+            <div></div>
+        </button>
+        <div class="dropdown-content">
+            <a href="/liss_ef_2024/preregistration/README.html">Preregistration</a>
+            <a href="/liss_ef_2024/manuscript/README.html">Manuscript</a>
+            <a href="/liss_ef_2024/supplement/README.html">Supplement</a>
+            <a href="/liss_ef_2024/data/README.html">Data</a>
+            <a href="/liss_ef_2024/scripts/README.html">Scripts</a>
+            <a href="/liss_ef_2024/analysis_objects/README.html">Analysis Objects</a>
+        </div>
+    </div>
+</nav>
+
+<p><br></p>
+<p>This repository contains data, code, and output for a manuscript with the working title “Attention shifting and inhibition abilities among people from adverse conditions”.</p>
+<p>Do you want to download or clone the materials for this project? Go to <a href="https://github.com/stefanvermeent/liss_ef_2024">https://github.com/stefanvermeent/liss_ef_2024</a></p>
+<section id="structure" class="level2">
+<h2 class="anchored" data-anchor-id="structure">Directory Structure</h2>
+<p>The names of each folder are intended to be self-explanatory. There are eight top-level folders to organize the inputs and outputs of this project:</p>
+<ol type="1">
+<li><a href="https://stefanvermeent.github.io/liss_ef_2024/preregistration/README.html"><code>Preregistration</code></a>: The preregistration for the main analyses.</li>
+<li><a href="https://stefanvermeent.github.io/liss_ef_2024/manuscript/README.html"><code>Manuscript</code></a>: The manuscript written in Quarto.</li>
+<li><a href="https://stefanvermeent.github.io/liss_ef_2024/supplement/README.html"><code>Supplement</code></a>: a supplemental text (to be submitted with the manuscript) documenting all secondary analyses in detail.</li>
+<li><a href="https://stefanvermeent.github.io/liss_ef_2024/scripts/README.html"><code>Scripts</code></a>: R-scripts that read, analyze, and produce all analysis objects.</li>
+<li><a href="https://stefanvermeent.github.io/abcd_ddm/data/README.html"><code>Data</code></a>: Folder in which real LISS data can be placed to make the analyses fully reproducible. Note that we cannot openly share the raw data on the open repository.</li>
+<li><a href="https://stefanvermeent.github.io/liss_ef_2024/analysis_objects/README.html"><code>Analysis Objects</code></a>: Folder containing all analysis objects.</li>
+<li><a href="https://stefanvermeent.github.io/liss_ef_2024/codebooks/README.html"><code>Codebooks</code></a>: lists of variable names, labels, and value labels (where applicable).</li>
+</ol>
+<p>Click on each of the folders to get more details.</p>
+</section>
+<section id="overview-of-project-milestones" class="level2">
+<h2 class="anchored" data-anchor-id="overview-of-project-milestones">Overview of project milestones</h2>
+<p>Below is an overview of all the project milestones, such as first-time data access, submissions, and revisions. Data access events were automatically captured using custom code, which over the course of this project was collected in the R package <code>projectlog</code> <a href="https://stefanvermeent.github.io/projectlog/">https://stefanvermeent.github.io/projectlog/</a>.</p>
+<section id="contact" class="level3">
+<h3 class="anchored" data-anchor-id="contact">Contact</h3>
+<p>For questions or comments, feel free to contact me at p.c.s.vermeent@gmail.com.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+<!-- code folding -->
+
+
+
+
+
+</body></html>

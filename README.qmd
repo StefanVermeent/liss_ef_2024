@@ -1,0 +1,97 @@
+---
+title: ""
+format: 
+  html:
+    css: assets/style.css
+    template: assets/template.html
+bibliography: manuscript/references.bib
+csl: manuscript/apa.csl
+link-citations: true
+editor: 
+  markdown: 
+    wrap: sentence
+---
+
+
+```{r}
+#| include: false
+#| echo: false
+#| 
+library(tidyverse)
+library(gert)
+library(glue)
+#source('scripts/dependencies.R')
+knitr::opts_chunk$set(echo = F, message = F, warning = F)
+
+```
+<br>
+
+This repository contains data, code, and output for a manuscript with the working title "Attention shifting and inhibition abilities among people from adverse conditions". 
+
+Do you want to download or clone the materials for this project? Go to [https://github.com/stefanvermeent/liss_ef_2024](https://github.com/stefanvermeent/liss_ef_2024)
+
+## Directory Structure {#structure}
+
+The names of each folder are intended to be self-explanatory.
+There are eight top-level folders to organize the inputs and outputs of this project:
+
+1.  [`Preregistration`](https://stefanvermeent.github.io/liss_ef_2024/preregistration/README.html): The preregistration for the main analyses.
+3.  [`Manuscript`](https://stefanvermeent.github.io/liss_ef_2024/manuscript/README.html): The manuscript written in Quarto.
+4.  [`Supplement`](https://stefanvermeent.github.io/liss_ef_2024/supplement/README.html): a supplemental text (to be submitted with the manuscript) documenting all secondary analyses in detail.
+5.  [`Scripts`](https://stefanvermeent.github.io/liss_ef_2024/scripts/README.html): R-scripts that read, analyze, and produce all analysis objects.
+6.  [`Data`](https://stefanvermeent.github.io/abcd_ddm/data/README.html): Folder in which real LISS data can be placed to make the analyses fully reproducible. Note that we cannot openly share the raw data on the open repository. 
+7.  [`Analysis Objects`](https://stefanvermeent.github.io/liss_ef_2024/analysis_objects/README.html): Folder containing all analysis objects.
+8.  [`Codebooks`](https://stefanvermeent.github.io/liss_ef_2024/codebooks/README.html): lists of variable names, labels, and value labels (where applicable).
+
+Click on each of the folders to get more details.
+
+## Overview of project milestones
+
+Below is an overview of all the project milestones, such as first-time data access, submissions, and revisions.
+Data access events were automatically captured using custom code, which over the course of this project was collected in the R package `projectlog` [https://stefanvermeent.github.io/projectlog/](https://stefanvermeent.github.io/projectlog/).
+
+
+```{r}
+#| results: 'asis'
+#| echo: false
+
+x <- gert::git_log(max = 10000) |> 
+  select(commit, author, time, message) |>
+  # Some custom coding because we switched to using the projectlog package for the final data_access event
+  mutate(message = ifelse(str_detect(message, "first-time access to ivs"), str_c("[[data_access]] ", message), message)) |> 
+  mutate(message = ifelse(str_detect(message, "Submission of Stage 2 manuscript"), str_c("[[submission]] ", message), message)) |>
+  mutate(message = ifelse(str_detect(message, "Stage 2 accepted manuscript at Developmental Science"), str_c("[[accepted]] ", message), message)) |>
+  (function(.) filter(., str_detect(string = .$message, pattern = "^\\[\\[")))() |> 
+  separate(message, into = c("message", "data_hash", 'code'), sep = "\n") |> 
+  separate(message, into = c("milestone", "description"), sep = "\\]\\]\\s") %>% 
+  distinct(data_hash, description, .keep_all = TRUE) %>%
+  mutate(
+    milestone = map_chr(milestone, function(milestone) {
+      milestone |> 
+        str_remove("\\[\\[") |>
+        str_replace("_", " ") |> 
+        str_to_title()
+    }),
+    data_hash = str_remove(data_hash, "^object_hash ")
+  ) |> 
+  select(time, commit, milestone, description, code, data_hash) |> 
+  mutate(
+    code = str_replace_all(code, "\\|\\>", "\\|\\>\\\n"),
+    link_to_git = paste0(
+       gert::git_remote_list()$url |> str_remove(string = _, pattern = "\\.git$"), "/tree/", commit)
+    ) |>
+  arrange(desc(time)) |> 
+  glue_data("  - **[{time}]({link_to_git}): {description}**
+        - **Milestone:** {milestone}
+        - **Data MD5 hash**: {data_hash}
+        - [Link to code snippet](https\\://github.com/StefanVermeent/abcd_ddm/blob/main/.projectlog/{commit}.R)
+        \n
+    ")
+x
+
+```
+
+
+### Contact
+
+For questions or comments, feel free to contact me at p.c.s.vermeent@gmail.com.

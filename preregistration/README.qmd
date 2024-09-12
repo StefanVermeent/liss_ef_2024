@@ -1,0 +1,634 @@
+---
+title: ""
+format: 
+  html:
+    css: ../assets/style.css
+    template: ../assets/template.html
+bibliography: ../manuscript/references.bib
+csl: ../manuscript/apa.csl
+link-citations: true
+editor: 
+  markdown: 
+    wrap: sentence
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(lmerTest)
+library(flextable)
+library(ftExtra)
+
+load("../analysis_objects/dag_localtests.RData")
+
+
+# set up flextable for tables
+set_flextable_defaults(
+  font.family = "Times", 
+  font.size = 10,
+  font.color = "black",
+  line_spacing = 1,
+  padding.bottom = 1, 
+  padding.top = 1,
+  padding.left = 1,
+  padding.right = 1
+)
+```
+
+*Last updated `r format(Sys.time(), "on %A, %B %d, %Y at %I:%M %p")`*
+
+
+[click here to download a pdf version](https://github.com/StefanVermeent/liss_ef_2024/blob/main/preregistration/preregistration.pdf)
+
+
+
+## Overview
+
+This study will be based on data collected within the Longitudinal Internet Studies for the Social Sciences (LISS) panel.
+Most of the independent measures will be drawn from previous LISS panel studies, which are openly available in their data archive after signing an agreement with LISS.
+Some independent measures and all dependent measures will be part of a new data collection in the LISS panel which is scheduled in May and June 2024.
+
+As this study partly uses secondary data, this preregistration document is based on the template by @akker_2021.
+Where necessary, we make clear which decisions relate to/are based on secondary data, and which decisions relate to/are based on newly collected data.
+
+There are six parts, which you can jump to following the links below:
+
+-   [Part 1 - Study information]
+-   [Part 2 - Data Description]
+-   [Part 3 - Variables]
+-   [Part 4 - Knowledge of Data]
+-   [Part 5 - Analyses]
+-   [Part 6 - Statement of Integrity]
+
+## Part 1 - Study Information
+
+### Q1: Preliminary title
+
+"Attention shifting and inhibition abilities among people from adverse conditions"
+
+### Q2: Authors
+
+-   Stefan Vermeent^1,2^
+-   Anna-Lena Schubert^3^
+-   Willem E. Frankenhuis^2,4^
+
+^1^Utrecht University, Utrecht, The Netherlands
+
+^2^Max Planck Institute for the Study of Crime, Security and Law, Freiburg, Germany
+
+^3^University of Mainz, Mainz, Germany
+
+^3^University of Amsterdam, Amsterdam, The Netherlands
+
+### Q3: Research Questions
+
+-   **R1:** How is adversity associated with general speed of processing that is shared across all cognitive tasks?
+
+-   **R2:** How is adversity associated with inhibition and attention shifting abilities after accounting for general speed of processing?
+
+-   **R3:** How is adversity associated with task-general and domain-specific response caution?
+
+### Q4: Hypotheses
+
+Results would be consistent with hypotheses generated from a **deficit framework** if:
+
+-   **A1.** Adversity is negatively associated with general speed of processing.
+
+-   **A2.** Adversity is negatively associated with either or both latent estimates of inhibition and attention shifting, after accounting for general speed of processing.
+
+-   **A3.** If latent estimates of inhibition and attention shifting are highly correlated, adversity is negatively associated with a general EF factor spanning both.
+
+Results would be consistent with hypotheses generated from **adaptation frameworks** if:
+
+-   **B1.** Adversity is positively associated with the latent estimate of attention shifting *regardless of the association with inhibition*, after accounting for general speed of processing.
+A positive association with inhibition would be unexpected yet interesting, and would require revising existing adaptation theoretical frameworks.
+
+-   **B2.** The association between adversity and the latent estimate of attention shifting is practically equivalent to zero *and* the association between adversity and the latent estimate of inhibition is negative.
+
+Finally, we have the following hypothesis about response caution:
+
+-   **C1.** Adversity is associated with more task-general response caution.
+
+Go back to [Overview].
+
+## Part 2 - Data Description
+
+### Q5: Dataset
+
+The LISS panel is a representative probability sample of roughly 5,000 Dutch households (\~7,500 individuals) drawn from the population register by Statistics Netherlands on an invite-only basis [@scherpenzeel_2011].
+Households without a computer or internet connection are provided with these facilities by LISS.
+Each year, participants complete the same core battery of questionnaires about---among other topics---their financial situation in the past year.
+In addition, participants can complete additional online questionnaires every month, with variable content.
+
+The current study integrates two data sources.
+First, we will sample 1,000 participants in a new LISS study, collected between May and June 2024 (hereafter referred to as 'newly collected data'), in which we will include measures of neighborhood threat and deprivation, three cognitive tasks measuring attention shifting, two cognitive tasks measuring inhibition, and one cognitive task measuring processing speed.
+Second, we will access data that were previously collected in LISS (hereafter referred to as 'the LISS archive').
+This preregistration is submitted before completion of (and access to) the newly collected data.
+
+### Q6: Public Availability
+
+All previously collected LISS data are available in the LISS data archive.
+Researchers who want to access the data are required to sign a statement confirming that information about individual persons, households, etc., will not be released to others (go to <https://statements.centerdata.nl> for more information).
+
+### Q7: Data Access
+
+Data can be accessed through the following links.
+
+-   [Convential and Computer Crime Victimization study](https://www.dataarchive.lissdata.nl/study-units/view/25), doi: https://doi.org/10.17026/dans-zch-j8xt
+-   [Economic Situation: Income](https://www.dataarchive.lissdata.nl/study-units/view/35), doi: https://doi.org/10.17026/dans-24y-dkqk
+-   [Background variables](https://www.dataarchive.lissdata.nl/study-units/view/322), doi: https://doi.org/10.57990/qn3k-as78
+
+After the new data have been collected, they will become available in the general overview at <https://www.dataarchive.lissdata.nl/study-units/view/1>.
+
+### Q8: Date of Download
+
+-   Stefan Vermeent (lead author and data analyst)
+    -   For a full overview of when specific independent variables in the LISS data archive were previously accessed, see the 'Overview of project milestones' section at <https://github.com/StefanVermeent/liss_ef_2024>.
+-   Anna-Lena Schubert will not access the data.
+-   Willem E. Frankenhuis will not access the data.
+
+### Q9: Data Collection
+
+General information about recruitment of participants into the LISS study can be found at <https://www.lissdata.nl/methodology>.
+The inclusion criteria for the new data collection are that people are between 16 and 55 years old and have given permission for their data to be linked to data from the Dutch Central Bureau of Statistics (CBS\; not relevant for this study).
+
+### Q10: Codebooks
+
+Detailed codebooks for existing data in the LISS archive can be downloaded at the following links:
+
+-   [Convential and Computer Crime Victimization study](https://www.dataarchive.lissdata.nl/study-units/view/25), doi: https://doi.org/10.17026/dans-zch-j8xt
+-   [Economic Situation: Income](https://www.dataarchive.lissdata.nl/study-units/view/35), doi: https://doi.org/10.17026/dans-24y-dkqk
+-   [Background variables](https://www.dataarchive.lissdata.nl/study-units/view/322), doi: https://doi.org/10.57990/qn3k-as78
+
+Codebooks for the newly collected data will become available later at <https://www.dataarchive.lissdata.nl/study-units/view> and <https://github.com/StefanVermeent/liss_ef_2024>.
+
+Go back to [Overview].
+
+## Part 3 - Variables
+
+### Q11: Manipulated Variables
+
+**Not applicable**
+
+### Q12: Measured Variables
+
+#### Independent Variables
+
+The IVs included in this study are identical to a subset of IVs used in a previous project using LISS data (see Q17 and Q18).
+Each IV consists of several indicators.
+If all indicators correlate .60 or higher, we will compute a uniformly weighted average.
+If indicators correlate less than .60, we will use Principal Component Analysis (PCA) to extract only the first component.
+
+*Material deprivation.* Consists of three measures taken from the LISS archive, measured yearly between 2008 and 2023 ([https://doi.org/10.57990/1gr4-bf42](https://doi.org/10.57990/1gr4-bf42)).
+First, participants answered how hard or easy it currently is to live off the income of their household, on a scale from 0 (very hard) to 10 (very easy) (reverse-coded).
+Second, participants indicated which of the following best applied to their current situation: (1) "we are accumulating debt"; (2) "we are somewhat eating into savings"; (3) "we are just managing to make ends meet"; (4) "we have a little bit of money to spare"; (5) "we have a lot of money to spare" (reverse-coded).
+Third, participants indicated which of the following issues they were currently confronted with (0 = no, 1 = yes): (1) "having trouble making ends meet"; (2) unable to quickly replace things that break"; (3) "having to lend money for necessary expenditures"; (4) "running behind in paying rent/mortgage or general utilities"; (5) "debt collector/bailiff at the door in the last month"; (6) "received financial support from family or friends in the last month".
+
+We will separately average each item across time, before combining them into a single composite.
+
+*Threat.* Consists of two measures taken from the LISS archive, measured across six waves between 2008 and 2018 ([https://doi.org/10.17026/dans-zch-j8xt](https://doi.org/10.17026/dans-zch-j8xt)), and one measure included in the newly collected data.
+
+First, participants answered four questions about the safety of their neighborhood (e.g., "[How often do you] avoid certain areas in your place of residence because you perceive them as unsafe?"), on a scale of 1 ("(Almost) never), 2 ("Sometimes"), or 3 ("Often"). 
+We will sum the responses within each non-missing wave, and calculate an average across waves. 
+Second, participants indicated whether they had been the victim of eight types of crime in the two years prior (0 = no, 1 = yes).
+We will include seven items concerning exposure to crime: (1) burglary or attempted burglary; (2) theft from their car; (3) theft of their wallet or purse, handbag, or other personal possession; (4) wreckage of their car or other private property; (5) intimidation by any other means; (6) maltreatment of such serious nature that it required medical attention; (7) maltreatment that did not require medical attention.
+We will compute a variety score by summing the exposures to *unique* types of crime across all waves.
+If a participant reports exposure to the same crime multiple times, this will count as one unique exposure [@sweeten_2012]..
+
+Third, we included the Neighborhood Violence Scale [NVS\; @frankenhuis_2018; @frankenhuis_2020] in the newly collected data, consisting of seven items measuring perceived exposure to neighborhood violence (e.g., "Crime is common in the neighborhood where I live"; "Where I live, it is important to be able to defend yourself against physical harm").
+Participants answered these questions on a scale of 1 ("Completely disagree") to 7 ("Completely agree").
+We will compute an average of the seven items.
+
+#### Potential confounders
+
+We used Directed Acyclic Graphs (DAG) to identify potential confounders of the key estimands (i.e., the association between self-reported threat and deprivation with cognitive outcomes).
+A DAG is a visual overview of our assumptions about how variables are causally related.
+They are graphs consisting of nodes (variables) and directed arrows (causal pathways).
+An arrow between two variables represents the assumption that experimentally manipulating the variable at the origin of the arrow will change the variable at the end of the arrow (but not the other way around).
+DAGs help in the identification of variables that need to be adjusted for in the statistical models (i.e., confounders with arrows to both the main predictor and the outcome), and, importantly, which variables should not be adjusted for (i.e., colliders and mediators).
+For more information on DAGs, see @rohrer_2018.
+
+We preregistered separate DAGs for threat and deprivation.
+As potential confounders of the effect of threat and deprivation on cognitive performance, we examined (1) age [@salthouse_2016; @salthouse_2019; @starns_2010], (2) education [@hofmarcher_2021], (3) sex [@ning_2023], and (4) childhood adversity exposure (material deprivation and threat combined) [@bos_2009; @goodman_2019].
+We also examined evidence for potential causal associations between threat and deprivation (more information below).
+Examinations were based on previous literature and/or our own assumptions.
+
+In the case of threat exposure, we were theoretically less sure about the potential effects of age and education.
+We also wanted to gather more empirical support for the assumption that material deprivation precedes threat exposure [@bywaters_2016; @lacey_2022; @ning_2023].
+Therefore, aside from the theoretical considerations outlined above, we also statistically tested support for parts of the DAG for threat involving age, education, and deprivation using data from a previous LISS study (see Q17 and Q18), using working memory capacity as the outcome variable in the DAG.
+Specifically, we used the `dagitty::localTests()` function to establish whether DAG-implied independencies between certain key variables (conditional on the other causal pathways) were supported by these data [@ankan_2021; @textor_2016].
+
+We removed the causal pathway between a single variable (e.g., age) and threat exposure from the DAG, and then tested whether this imposed independence (conditional on the other causal effects in the model) was consistent with the data.
+If the test was statistically significant, there was a non-zero correlation between the two variables, even after accounting for other variables related to both.
+As most variables were not normally distributed, we used LOESS (locally estimated scatterplot) regression with 5,000 bootstrap samples.
+The models did not include sex, as a combination of categorical and continuous predictors would not allow us to account for non-normally distributed data.
+Code for these analyses can be found at [https://github.com/StefanVermeent/liss_ef_2024/tree/main/scripts/00_dag.R](https://github.com/StefanVermeent/liss_ef_2024/tree/main/scripts/00_dag.R).
+
+**Estimand 1: Material deprivation -\> Cognitive performance.** See Figure 2A for a visualization of the DAG for material deprivation.
+On theoretical grounds, we will control for all four variables in models involving material deprivation as the main predictor.  
+Some recent work suggests that material deprivation precedes exposure to adversities such as threat [@bywaters_2016; @lacey_2022; @ning_2023].
+If so, threat exposure is a mediator of the effect of material deprivation on cognitive performance, and should therefore not be controlled for when testing the total effect of material deprivation.
+However, establishing this causal relationship is difficult in our study for two reasons.
+First, The studies listed above all focused on childhood adversity, while we focus on adversity in adulthood.
+Second, our measures of threat and deprivation were measured at the same time, making it difficult to establish causality.
+Therefore, we will present two sets of results for the association between material deprivation and cognitive performance:
+
+(1) The effect of material deprivation WITHOUT including threat exposure, and including age, education, sex, childhood adversity. *\*We consider these the primary results, in line with the DAG in Figure 2A\**.
+(2) The effect of material deprivation WITH threat exposure included. *\*We consider this a robustness check to assess the effect of our causal assumption\**.
+
+**Estimand 2: Threat exposure -\> Cognitive performance.** See Figure 2B for a visualization of the DAG for threat exposure.
+We considered the same set of confounders as for material deprivation.
+Table 1 offers an overview of conceptual and statistical evidence for and against each potential confounder in the threat models.
+We found evidence against independence between age and threat, suggesting that older people reported less exposure to threat.
+We also found evidence against independence between material deprivation and threat exposure, conditioned on age and childhood adversity, suggesting that people with more material deprivation also reported more exposure to threat.
+Finally, we did not find evidence against independence between education and threat, suggesting that people with lower education did not report more exposure to threat.
+Therefore, all models involving recent threat exposure as the main predictor will control for age, sex, childhood adversity, and recent material deprivation (but not for education).
+
+Similar to the deprivation models, we will present two sets of results for the association between threat and cognitive performance.
+
+(1) The effect of threat WITH material deprivation included as confounder. *\*We consider these the primary results, in line with the DAG in Figure 2B\**.
+(2) The effect of threat WITHOUT material deprivation included. *\*We consider this a robustness check to assess the effect of our causal assumption\**.
+
+
+```{r}
+#| label: Figure1
+#| echo: false
+#| dpi: 600
+#| out-width: 450
+#| fig-cap: |
+#|   **Figure 1.** Directed Acyclic Graph (DAG) depicting the empirical estimands (blue lines) and presumed confounding effects (red lines). We consider deprivation to be a confounder in the effect of threat on cognitive ability, and conversely, we consider threat to be a mediator of the effect of deprivation on cognitive ability [@bywaters_2016; @lacey_2022; @ning_2023]. From this, it follows that deprivation should be adjusted for when estimating the effect of threat on cognitive ability. However, threat should *not* be adjusted for when estimating the effect of deprivation on cognitive ability. 
+
+knitr::include_graphics("figures/fig1.png")
+```
+
+```{r}
+#| include: false
+
+table1 <- 
+  tibble(
+    `(Potential) confounder` = c(
+      "Age",
+      "Education",
+      "Sex",
+      "Childhood adversity",
+      "Recent material deprivation"
+    ),
+    `Causal effect on cognitive performance` = c(
+      "@salthouse_2016 \n @salthouse_2019 \n @starns_2010",
+      "@lovden_2020",
+      "@ning_2023", 
+      "@bos_2009 \n @goodman_2019",
+      "*Estimand of interest*"
+    ),
+    `Causal effect on recent threat` = c(
+      "*Unclear*",
+      "*Unclear*",
+      "@ning_2023", 
+      "@bywaters_2016",
+      "@bywaters_2016 \n @ning_2023"
+    ),
+    `Evidence for conditional independence` = c(
+      paste0("Conditional on childhood adversity and recent deprivation, \n *r* = ", localTest_dag03 |> pull(estimate), " SE = ", localTest_dag03 |> pull(std.error), ", 95% CI = ", localTest_dag03 |> pull(ci), "."),
+      
+      paste0("Conditional on childhood adversity, recent deprivation, and age, \n *r* = ", localTest_dag01 |> pull(estimate), " SE = ", localTest_dag01 |> pull(std.error), ", 95% CI = ", localTest_dag01 |> pull(ci), "."),
+      "", 
+      "",
+      paste0("conditional on childhood adversity and age, deprivation is a significant confounder of threat \n *r* = ", localTest_dag04 |> pull(estimate), " SE = ", localTest_dag04 |> pull(std.error), ", 95% CI = ", localTest_dag04 |> pull(ci), ".")
+    ),
+    `Confounder in threat model` = c(
+      "Yes",
+      "No",
+      "Yes", 
+      "Yes",
+      "Yes"
+    ),
+  ) |> 
+  flextable() |> 
+  ftExtra::colformat_md() |> 
+  mk_par(
+    j = 4,
+    value = as_paragraph(
+      gg_chunk(value = localTest_plot_list, width = 1, height = 1)
+    )
+  ) |> 
+  add_header_row(
+    values = " ",
+    colwidths = 5
+  ) |> # Add a new header row on top. We can use this new row to add the title
+  compose(
+    i = 1, j = 1,
+    as_paragraph(as_b("Table 1. "), "Conceptual and statistical confounder analysis for the threat exposure model."),
+    part = "header"
+  ) |>
+  add_footer_row(
+    values = " ",
+    colwidths = 5
+  ) %>% 
+  add_footer_row(
+    values = " ",
+    colwidths = 5
+  ) %>% 
+  compose(
+    i = 1, j = 1, 
+    as_paragraph(as_i("Note: "), "the second and third columns present conceptual support (based on previous literature and/or our own assumptions) in favor of a causal effect between the confounder and threat and cognitive performance. The embedded plots in column 4 present the outcome of statistical analyses that tested against independence between the confounder and threat exposure, conditional on other variables associated with both [see @ankan_2021 and the main text for more details]."), 
+    part = "footer"
+  ) |> 
+  autofit()
+```
+
+```{r}
+#| echo: false
+
+table1
+```
+
+#### Dependent Variables
+
+The exact nature and number of dependent variables will depend on the final latent model that we will select (see [Part 5 - Analyses]).
+As a rule, we will estimate associations between each measure of adversity and each latent factor that is estimate.
+
+We will account for two potential sources of measurement error: (1) environmental noise and (2) state anxiety.
+Both measures are repeated after each cognitive task.
+We measure environmental noise with a single item, rated on a scale of 1 to 5: "How much noise was there in your environment during the reaction game?"
+We measure state anxiety with the shortened version of the State-Trait Anxiety Inventory [STAI\; @bij_2003; @marteau_1992], which asks participants how calm, tense, upset, relaxed, content, and worried they currently feel, on a scale of 1 ("not al all") to 4 ("very much").
+We will recode (when necessary) and then sum the answers so that higher scores reflect more state anxiety.
+For each task, we will then calculate the deviation from the intraindividual mean anxiety score.
+We will account for noise and anxiety by residualizing them out of all the manifest drift diffusion estimates (e.g., for incongruent drift rate on the Flanker trial: `lm(flanker_v_inc ~ noise_flanker + stai_diff_flanker) |> residuals()`).
+
+### Q14: Missing data
+
+We will use Full Information Maximum Likelihood (FIML) to handle missing data.
+
+### Q15: Outliers
+
+For each cognitive task, we will remove trials with: (1) Response times (RTs) \< 250 ms; (2) RTs \> 3 SD above the participant-level average log-transformed mean RT, separately for different task conditions (e.g., congruent and incongruent).
+Finally, if a participant performs at chance level on a task, we will exclude task data of that particular task only.
+We will determine chance level using the accuracy rate at the 97.5% tail of a binomial distribution if a participant would be purely guessing.
+
+### Q16: Sample Weights
+
+**Not applicable**
+
+Go back to [Overview].
+
+## Part 4 - Knowledge of Data
+
+### Q17: Relevant Publications
+
+All authors have previously used the same independent adversity measures to measure their associations with working memory performance.
+The Registered Report associated with this project has received Stage 1 In-Principle Acceptance at *Peer Community in Registered Reports* (<https://osf.io/dp7wc>).
+The sample in this study consisted of \~800 people from the LISS panel.
+An unknown portion of these people is also expected to participate in the current study.
+
+### Q18: Prior Knowledge
+
+In a previous study (mentioned in Q17) we used the same independent adversity measures.
+From this study, we know that the perceived scarcity measures correlated \> .60 with each other, allowing computation of uniformly weighted averages.
+We also know that correlations among the three threat measures, a well as the perceived scarcity coefficients of variation, were low, thus requiring PCA.
+Although the current study will consist of a (partially) different sample, we expect to reach the same conclusions here.
+
+From this study, we know that none of the adversity measures were significantly associated with working memory capacity or working memory updating.
+The inhibition and attention shifting data have not yet been collected at the time of writing this preregistration.
+Therefore, we do not know how the adversity measures are associated with inhibition and attention shifting.
+
+Go back to [Overview].
+
+## Part 5 - Analyses
+
+### Q19: Hypotheses -\> Statistical Tests
+
+**Step 1: DDM estimation.** We will fit all DDM models as hierarchical Bayesian models in JAGS using the `runjags` package [@denwood_2016].
+
+For the Posner Task, we will estimate a single drift rate, non-decision time, and boundary separation across all trials:
+
+```{r}
+#| eval: false
+"model {
+  #likelihood function
+  for (t in 1:nTrials) {
+    y[t] ~ dwiener(alpha[subject[t]], 
+                   tau[subject[t]], 
+                   0.5, 
+                   delta[subject[t]])
+  }
+  
+  for (s in 1:nSubjects) {
+    tau[s]  ~ dnorm(muTau, precTau) T(.0001, 1)
+    delta[s] ~ dnorm(muDelta, precDelta) T(-10, 10)
+    alpha[s]  ~ dnorm(muAlpha, precAlpha) T(.1, 5)
+  }
+  
+  #priors
+  muTau ~ dunif(.0001, 1)
+  muDelta ~ dunif(-10, 10)
+  muAlpha~ dunif(.1, 5) 
+  
+  precAlpha  ~ dgamma(.001, .001)
+  precTau ~ dgamma(.001, .001)
+  precDelta ~ dgamma(.001, .001)
+}"
+```
+
+For all other tasks, we will estimate drift rate, boundary separation, and non-decision time separately for each task condition (e.g., incongruent and congruent):
+
+```{r}
+#| eval: false
+"model {
+  #likelihood function
+  for (t in 1:nTrials) {
+    y[t] ~ dwiener(alpha[condition[t], subject[t]], 
+                   tau[condition[t], subject[t]], 
+                   0.5, 
+                   delta[condition[t], subject[t]])
+  }
+  for (s in 1:nSubjects) {
+    for (c in 1:nCon) {
+      tau[c, s]  ~ dnorm(muTau[c], precTau) T(.0001, 1)
+      delta[c, s] ~ dnorm(muDelta[c] , precDelta) T(-10, 10)
+      alpha[c, s] ~ dnorm(muAlpha[c], precAlpha) T(.1, 5)
+    }
+    
+  }
+  #priors
+  for (c in 1:nCon){ 
+    muTau[c] ~ dunif(.0001, 1)
+    muDelta[c] ~ dunif(-10, 10)
+    muAlpha[c] ~ dunif(.1, 5) 
+  } 
+  
+  precAlpha  ~ dgamma(.001, .001)
+  precTau ~ dgamma(.001, .001)
+  precDelta ~ dgamma(.001, .001)
+}"
+```
+
+We will fit each model using three Markov Chain Monte Carlo (MCMC) chains.
+Each chain will start with 2,000 burn-in samples, followed by 10,000 additional samples.
+Of these 10,000 samples, we will retain every 10th sample to limit autocorrelation, resulting in a total of 3,000 posterior samples across all chains.
+
+We will assess model fit in three ways.
+First, we will visually inspect the traces of the group-level parameter estimates, which should not contain large jumps or drifts.
+Second, we will calculate the Gelman-Rubin statistic (R\^), which should be lower than 1.1 [@gelman_1992].
+Third, we will conduct simulation-based parameter recovery.
+From each participant's DDM parameter estimates, we will simulate 500 RTs and corresponding accuracies.
+We will calculate Pearson correlations between simulated and observed RTs (at the 25th, 50th, and 75th percentile) as well as simulated and observed accuracy rates.
+RT correlations need to be .80 or higher to indicate good fit.
+For accuracy rates, we will use the same cut-off, unless there are ceiling effects (\> 95%), which is likely for congruent/repeat trials.
+Thus, if accuracy for one condition shows poor recovery, but accuracy for the other condition and all RT quantiles are recovered well, we will still consider this good model fit.
+
+**Step 2: SEM.** We will construct the final SEM sequentially.
+First, we will optimize the fit of the drift rate, boundary separation, and non-decision time sub-models.
+Second, we will combine these three models into a single measurement model.
+Third, we will add the regression paths between measures of adversity and the latent factors.
+
+**Drift rate sub-model.** The baseline drift rate model will be a bi-factor model which accounts for general processing speed.
+A latent processing speed factor will load on all the manifest drift rates.
+A latent inhibition factor will load on the manifest drift rates of incongruent trials of the Flanker and Simon Task.
+A latent Attention Shifting Task will load on the manifest drift rates of switch trials of the Color-shape, Global-local, and Animacy-size Task.
+Finally, we will specify residual covariances between indicators of the same task (e.g., congruent and incongruent conditions of the Flanker Task).
+
+```{r}
+#| label: Figure2
+#| echo: false
+#| dpi: 600
+#| out-width: 450
+#| fig-cap: |
+#|   **Figure 2.** Overview of the drift rate models. Blue ovals represent latent factors that we will use as dependent variables. Rectangles represent manifest variables. Bidirectional arrows represent (co-)variances. Unidirectional arrows represent factor loadings. Covariances in red are constrained to 1. If a constrained version of the model provides better fit, the final model will collapse the latent factors into a single factor.
+
+knitr::include_graphics("figures/fig2.png")
+```
+
+<br>
+
+We will first fit the model as specified in Figure 2A (see `mod_v1a` in the code block below).
+Then, we will fit a second version of this model in which a single common EF factor is estimated, covering both inhibition and attention shifting tasks.
+Using `lavaan::anova`, we will then test whether the second, more constrained model leads to worse model fit, qualified as a significant chi squared change test, and an AIC value \> 10.
+If so, we will include sub-model 2 in our final model.
+
+```{r}
+#| eval: false
+
+# Drift rate model 1 (see Figure 1A)
+
+mod_v1a <- '
+  # Latent factors
+  ps   =~ 1*pos_v + flanker_inc_v + flanker_con_v + simon_inc_v + simon_con_v + cs_sw_v + cs_rep_v + gl_sw_v + gl_rep_v + as_sw_v + as_rep_v
+  inh  =~ 1*flanker_inc_v + simon_inc_v
+  as =~ 1*cs_sw_v + gl_sw_v + as_sw_v
+  
+  # Covariances
+  inh  ~~ as + 0*ps
+  as ~~ 0*ps
+'
+
+fit_v1a <- lavaan::sem(
+  model = mod_v1a, 
+  data = data
+)
+
+# Drift rate model 1, constrained version (see Figure 1B)
+
+mod_v1b <- '
+  # Latent factors
+  ps_v =~ 1*pos_v + flanker_inc_v + flanker_con_v + simon_inc_v + simon_con_v + cs_sw_v + cs_rep_v + gl_sw_v + gl_rep_v + ansi_sw_v + ansi_rep_v
+  ef_v =~ 1*flanker_inc_v + simon_inc_v + cs_sw_v + gl_sw_v + ansi_sw_v
+ 
+ # Covariances
+ ps_v ~~ 0*ef_v
+'
+
+fit_v1b <- lavaan::sem(
+  model = mod_v1b, 
+  data = data
+)
+
+lavaan::anova(fit_v1a, fit_v1b)
+```
+
+**Boundary separation sub-model.** Like the drift rate model, the baseline boundary separation model will be a bi-factor model containing a general boundary separation factor, as well as inhibition- and attention shifting-specific factors (see Figure 3A).
+We will use the same procedure to choose between the baseline model and a second model estimating a common boundary separation factor.
+
+```{r}
+#| label: Figure3
+#| dpi: 600
+#| echo: false
+#| out-width: 450
+#| fig-cap: |
+#|   **Figure 3.** Overview of the boundary separation models. Blue ovals represent latent factors that will be use as dependent variables. Rectangles represent manifest variables. Bidirectional arrows represent (co-)variances. Unidirectional arrows represent factor loadings. Covariances in red are constrained to 1. If a constrained version of the model provides better fit, the final model will collapse the latent factors into a single factor.
+
+knitr::include_graphics("figures/fig3.png")
+```
+
+**Non-decision time sub-model.** The baseline model for the non-decision time, as well as the model selection procedure, will be identical to the drift rate and boundary separation models (see Figure 3A).
+
+```{r}
+#| label: Figure4
+#| dpi: 600
+#| echo: false
+#| out-width: 450
+#| fig-cap: |
+#|   **Figure 4.** Overview of the drift rate models. Blue ovals represent latent factors that will be use as dependent variables. Rectangles represent manifest variables. Bidirectional arrows represent (co-)variances. Unidirectional arrows represent factor loadings. Covariances in red are constrained to 1. If a constrained version of the model provides better fit, the final model will collapse the latent factors into a single factor.
+
+knitr::include_graphics("figures/fig4.png")
+```
+
+<br>
+
+**Full measurement model.** After determining the final sub-model for all three DDM parameters, we will combine them all into a single model.
+We will specify residual covariances between the task-general latent factors (processing speed, general caution, and general non-decision time), as well as between the domain-specific latent factors (separately for inhibition and attention shifting, unless a common factors is favored instead).
+
+**Final model.** After finalizing the full measurement model, we will construct two versions of the final model: one to estimate the association between material deprivation and DDM parameters, and one to estimate the association between threat exposure and DDM parameters (see [Potential confounders] for more information on the set of predictors that we will include to each model]).
+Each adversity measure will be regressed on each latent factor.
+We will not report regression coefficients of control variables to prevent their over-interpretation.
+
+### Q20: Predicted effect sizes
+
+We do not have specific predictions for effect sizes but we deem standardized regression coefficients for effects .10 (or higher) and -.10 (or lower) as practically meaningful.
+Effects between -.10 and .10 are not of interest for determining differences between adversity and aspects of performance.
+However, we are interested in determining if effects falling between -.10 and .10 could be considered to be practically equivalent to zero.
+We will test this using Two One-Sided T-Tests (TOST) equivalence testing, using -.10 and .10 as bounds.
+
+### Q21: Statistical Power
+
+A power analysis based on @kretzschmar_2019 indicated that with an alpha of α = 0.05, we will have \> 90% power to detect small effect sizes (β = 0.1) with a sample size ranging between N = 730 and N = 980 when the reliability of the measures is at least moderate (0.6 -- 0.7).
+Therefore, we aim for a total sample size of N = 1,000.
+
+### Q22: Inferential Criteria
+
+We will use an alpha level of .05 throughout, and correct p-values for multiple testing using the false discovery rate.
+We will do so separately for tests involving drift rates, non-decision times, and boundary separations, as we have different hypotheses for each of these parameters.
+
+We will test for three types of associations between different types of adversity and cognitive ability (as indexed by the drift rates): enhanced ability, impaired ability, or intact ability.
+Enhanced cognitive ability is defined as a *positive* association between adversity and drift rate.
+Impaired cognitive ability is defined as a *negative* association between adversity and drift rate.
+intact ability is defined as an association that is practically equivalent to zero (see Q20).
+Any (practically equivalent) association between adversity and boundary separation or non-decision time will not be interpreted as a difference in cognitive ability, but rather a difference in strategies (in the case of boundary separation) or a difference in preparation/execution speed (in the case of non-decision time).
+
+### Q23: Assumption Violations/Model Non-Convergence
+
+In case of non-normally distributed variables, we will use maximum likelihood with robust (Huber-White) standard errors and a scaled test statistic (using the "MLR" setting in `lavaan`).
+We are likely to violate the assumption of independence, as some participants are nested within households.
+Such clustering will be accounted for in `lavaan` by adding the household ID as a cluster (`cluster = 'nohouse_encr'`).
+We do not anticipate any other serious assumption violations, but will report on them if necessary.
+
+It is possible that some preregistered SEM models will not converge or have suboptimal fit.
+If so, we will use modification indices to re-specify the model.
+We will take these steps before accessing the independent variables.
+
+### Q24: Reliability and Robustness Testing
+
+See [Q19: Hypotheses -\> Statistical Tests] for DDM model fit assessments.
+
+### Q25: Exploratory Analyses
+
+We do not preregister any exploratory analyses.
+
+Go back to [Overview].
+
+## Part 6 - Statement of Integrity
+
+We state that we filled out this preregistration to the best of our knowledge and that no other preregistration exists pertaining to the same hypotheses and dataset.
+
+## References
+
+::: {#refs}
+:::

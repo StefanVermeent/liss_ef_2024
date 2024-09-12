@@ -1,0 +1,298 @@
+<html>
+  <head>
+    <title>Cognitive Tasks</title>
+    <script src="https://unpkg.com/jspsych@7.3.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.1.1"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-categorize-html@1.1.1"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-multi-select@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-call-function@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-fullscreen@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-instructions@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-html-form@1.0.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-text@1.1.3"></script>
+
+
+    <script src="global_variables.js"></script>
+
+    <script src="P_posner/0_posner_setup.js"></script>
+    <script src="P_posner/1_posner_instructions.js"></script>
+    <script src="P_posner/2_posner_procedure.js"></script>
+
+    <script src="S_colorshape/0_colorshape_setup.js"></script>
+    <script src="S_colorshape/1_colorshape_practice.js"></script>
+    <script src="S_colorshape/2_colorshape_procedure.js"></script>
+    <script src="S_colorshape/3_colorshape_end.js"></script>
+
+    <script src="S_animacysize/0_animacysize_setup.js"></script>
+    <script src="S_animacysize/1_animacysize_practice.js"></script>
+    <script src="S_animacysize/2_animacysize_procedure.js"></script>
+    <script src="S_animacysize/3_animacysize_end.js"></script>
+
+    <script src="S_globallocal/0_globallocal_setup.js"></script>
+    <script src="S_globallocal/1_globallocal_instructions.js"></script>
+    <script src="S_globallocal/2_globallocal_procedure.js"></script>
+
+    <script src="I_simon/0_simon_setup.js"></script>
+    <script src="I_simon/1_simon_instructions.js"></script>
+    <script src="I_simon/2_simon_procedure.js"></script>
+
+    <script src="I_flanker/0_flanker_setup.js"></script>
+    <script src="I_flanker/1_flanker_instructions.js"></script>
+    <script src="I_flanker/2_flanker_procedure.js"></script>
+
+
+
+    <link href="https://unpkg.com/jspsych@7.3.2/css/jspsych.css" rel="stylesheet" type="text/css" />
+    <style>
+      body {
+        background-color: #bdc4ca;
+      }
+      .grid-container {
+        display: grid;
+        justify-content: space-evenly;
+        grid-template-columns: 100px 400px 100px;
+        height: 150px;
+        text-align: center;
+        align-items: center;
+      }
+
+      .grid-container-practice {
+        display: grid;
+        justify-content: space-evenly;
+        grid-template-columns: 200px 100px 200px;
+        height: 150px;
+        text-align: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body></body>
+  <script>
+
+
+
+// START OF TIMELINE
+  timeline_start = [
+    fullscreenmode,
+    preload_globloc01
+  ]
+
+// PROCESSING SPEED TASK
+
+posner_timeline = [
+  posner_welcome,
+  posner_instructions,
+  cursor_off,
+  posner_practice_start,
+  posner_practice_procedure,
+  posner_practice_finish,
+  posner_test_procedure01,
+  cursor_on,
+  posner_interblock,
+  cursor_off,
+  posner_test_start,
+  posner_test_procedure02,
+  cursor_on,
+  posner_end,
+  posner_pp_feedback
+]
+
+// INHIBITION TASKS
+
+simon_timeline = [
+  simon_welcome,
+  simon_instructions,
+  cursor_off,
+  simon_practice_start,
+  simon_practice_procedure,
+  simon_practice_finish,
+  simon_test_procedure01,
+  cursor_on,
+  simon_interblock,
+  cursor_off,
+  simon_test_start,
+  simon_test_procedure02,
+  cursor_on,
+  simon_end,
+  simon_pp_feedback
+]
+
+flanker_timeline = [
+  flanker_welcome,
+  flanker_instructions,
+  cursor_off,
+  flanker_practice_start,
+  flanker_practice_procedure,
+  flanker_practice_finish,
+  flanker_test_procedure01,
+  cursor_on,
+  flanker_interblock,
+  cursor_off,
+  flanker_test_start,
+  flanker_test_procedure02,
+  cursor_on,
+  flanker_end,
+  flanker_pp_feedback
+]
+
+// ATTENTION SHIFTING TASKS
+
+colorshape_timeline = [
+  colorshape_welcome,
+  colorshape_shape_instructions,
+  cursor_off,
+  colorshape_shape_practice_loop,
+  cursor_on,
+  colorshape_color_instructions,
+  cursor_off,
+  colorshape_color_practice_loop,
+  cursor_on,
+  colorshape_full_instructions,
+  cursor_off,
+  colorshape_test_start,
+  colorshape_procedure1,
+  cursor_on,
+  colorshape_interblock,
+  cursor_off,
+  colorshape_test_start,
+  colorshape_procedure2,
+  cursor_on,
+  colorshape_end,
+  colorshape_pp_feedback
+ ]
+
+animacysize_timeline = [
+  animacysize_welcome,
+  animacysize_animacy_instructions,
+  cursor_off,
+  animacysize_animacy_practice_loop,
+  cursor_on,
+  animacysize_size_instructions,
+  cursor_off,
+  animacysize_size_practice_loop,
+  cursor_on,
+  animacysize_full_instructions,
+  cursor_off,
+  animacysize_test_start,
+  animacysize_procedure01,
+  cursor_on,
+  animacysize_interblock,
+  cursor_off,
+  animacysize_test_start,
+  animacysize_procedure02,
+  cursor_on,
+  animacysize_end,
+  animacysize_pp_feedback
+ ]
+
+globallocal_timeline = [
+  globallocal_welcome,
+  preload_globloc02,
+  globallocal_instructions,
+  cursor_off,
+  globallocal_practice_start,
+  globallocal_practice,
+  cursor_on,
+  globallocal_practice_end,
+  cursor_off,
+  globallocal_test_start,
+  globallocal_procedure01,
+  cursor_on,
+  globallocal_interblock,
+  cursor_off,
+  globallocal_test_start,
+  globallocal_procedure02,
+  cursor_on,
+  globallocal_end,
+  globallocal_pp_feedback
+ ]
+
+// COMBINE ALL TASKS
+
+var full_timeline = [
+     globallocal_timeline,
+     animacysize_timeline,
+     colorshape_timeline,
+     flanker_timeline,
+     simon_timeline,
+     posner_timeline
+    ];
+
+
+// RANDOMIZE TASK ORDER
+
+var full_timeline_random = [timeline_start, shuffle(full_timeline)].flat(2)
+
+// INITIATE jsPsych
+
+var jsPsych = initJsPsych({
+  on_finish: function() {
+    tasks_start            = jsPsych.getStartTime();
+    tasks_end              = jsPsych.getTotalTime();;
+
+    data_globallocal_prac  = jsPsych.data.get().filter({task: 'globallocal_practice'});
+    data_globallocal       = jsPsych.data.get().filter({task: 'globallocal'});
+    data_globallocal_fb    = jsPsych.data.get().filter({task: 'globallocal_feedback'});
+
+    data_animacysize_prac  = jsPsych.data.get().filter({task: 'animacysize_practice'});
+    data_animacysize       = jsPsych.data.get().filter({task: 'animacysize'});
+    data_animacysize_fb    = jsPsych.data.get().filter({task: 'animacysize_feedback'});
+
+    data_colorshape_prac   = jsPsych.data.get().filter({task: 'colorshape_practice'});
+    data_colorshape        = jsPsych.data.get().filter({task: 'colorshape'});
+    data_colorshape_fb     = jsPsych.data.get().filter({task: 'colorshape_feedback'});
+
+    data_flanker_prac      = jsPsych.data.get().filter({task: 'flanker_practice'});
+    data_flanker           = jsPsych.data.get().filter({task: 'flanker'});
+    data_flanker_fb        = jsPsych.data.get().filter({task: 'flanker_feedback'});
+
+    data_simon_prac        = jsPsych.data.get().filter({task: 'simon_practice'});
+    data_simon             = jsPsych.data.get().filter({task: 'simon'});
+    data_simon_fb          = jsPsych.data.get().filter({task: 'simon_feedback'});
+
+    data_posner_prac       = jsPsych.data.get().filter({task: 'posner_practice'});
+    data_posner            = jsPsych.data.get().filter({task: 'posner'});
+    data_posner_fb         = jsPsych.data.get().filter({task: 'posner_feedback'});
+
+    tasks_browser          = jsPsych.data.getInteractionData().json();
+
+  window.parent.postMessage([
+      tasks_start,
+      tasks_end,
+
+      data_globallocal_prac.json(),
+      data_globallocal.json(),
+      data_globallocal_fb.json(),
+
+      data_animacysize_prac.json(),
+      data_animacysize.json(),
+      data_animacysize_fb.json(),
+
+      data_colorshape_prac.json(),
+      data_colorshape.json(),
+      data_colorshape_fb.json(),
+
+      data_flanker_prac.json(),
+      data_flanker.json(),
+      data_flanker_fb.json(),
+
+      data_simon_prac.json(),
+      data_simon.json(),
+      data_simon_fb.json(),
+
+      data_posner_prac.json(),
+      data_posner.json(),
+      data_posner_fb.json(),
+
+      tasks_browser
+      ],
+      "https://survey.uu.nl/jfe/form/SV_0Srsyx4Vh2UajhY");
+  }
+});
+
+jsPsych.run(full_timeline_random)
+</script>
+</html>
