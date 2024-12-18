@@ -1,0 +1,65 @@
+---
+bibliography: references.bib
+csl: apa.csl
+format: 
+  docx:
+    reference-doc: reference-doc.docx
+output:
+  officedown::rdocx_document:
+    page_margins:
+      bottom: 1
+      footer: 0
+      gutter: 0
+      header: 0.5
+      left: 1
+      right: 1
+      top: 1
+    plots:
+      align: center
+      caption:
+        pre: 'Figure '
+        sep: '. '
+        style: Image Caption
+    tables:
+      caption:
+        pre: 'Table '
+        sep: '. '
+        style: Table Caption
+  pdf_document: default
+  word_document: default
+---
+
+#### **Adversity is associated with lower general processing speed rather than specific executive functioning abilities**
+
+<br>
+
+#### Stefan Vermeent^1,2^, Anna-Lena Schubert^3^, & Willem E. Frankenhuis^2,4^
+
+#### ^1^ Department of Psychology, Utrecht University, Utrecht, The Netherlands
+
+#### ^2^ Max Planck Institute for the Study of Crime, Security, and Law, Freiburg, Germany
+
+#### ^3^ Department of Psychology, University of Mainz, Mainz, Germany
+
+#### ^4^ Evolutionary and Population Biology, Institute for Biodiversity and Ecosystem Dynamics, University of Amsterdam, Amsterdam, the Netherlands
+
+<br>
+
+# Author Note
+
+This research was conducted in part using ODISSEI, the Open Data Infrastructure for Social Science and Economic Innovations (<https://ror.org/03m8v6t10>).
+WEF’s contributions have been supported by the Dutch Research Council (V1.Vidi.195.130) and the James S. McDonnell Foundation (https://doi.org/10.37717/220020502).
+
+Stefan Vermeent served as lead for conceptualization, data curation, methodology, formal analysis, and writing the original draft. Anna-Lena Schubert served in a supporting role for conceptualization, formal analysis, methodology, and writing-review and editing. Willem E. Frankenhuis served in a supporting role for conceptualization, methodology, supervision, funding acquisition, and writing-review and editing.
+
+The preregistration, analysis scripts, and study materials are available on the article's Github repository ([https://stefanvermeent.github.io/liss_ef_2024/](https://stefanvermeent.github.io/liss_ef_2024/)).
+In this paper, we make use of data from the LISS panel (Longitudinal Internet studies for the Social Sciences) managed by the non-profit research institute Centerdata (Tilburg University, the Netherlands). 
+All datasets are available to researchers in the LISS data archive, after signing a data use agreement ([https://www.dataarchive.lissdata.nl/study-units/view/1](https://www.dataarchive.lissdata.nl/study-units/view/1)). 
+
+Correspondence concerning this article should be addressed to Stefan Vermeent, Department of Psychology, Utrecht University, Heidelberglaan 1, 3584 CS Utrecht, The Netherlands. Email: p.c.s.vermeent@gmail.com / p.c.s.vermeent@uu.nl.
+
+We have no conflict of interest to disclose.
+
+<br>
+
+**word count:** 9573
