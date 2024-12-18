@@ -508,9 +508,9 @@ Thus, it affords conclusions about practical equivalence based on significant *p
 ## Transparency and openness
 
 We have reported how we determined our sample size, all data exclusions, and all measures in the study.
-The preregistration, analysis code, and study materials, can be found on the article's GitHub repository (<https://github.com/stefanvermeent/liss_ef_2024>).
+The preregistration, analysis code, and study materials, can be found on the article's GitHub repository (<https://anonymous.4open.science/w/liss_ef_anon/>).
 The newly collected data will be available for other researchers in the LISS data archive, after signing a data use agreement (https://lissdata.nl).
-For more information on the LISS variables used, see the article's GitHub repository (<https://github.com/stefanvermeent/liss_ef_2024>).
+For more information on the LISS variables used, see the article's GitHub repository (<https://anonymous.4open.science/w/liss_ef_anon/>).
 Our study complies with Level 2 of the Transparency and Openness Promotion (TOP) guidelines.
 
 # Results
