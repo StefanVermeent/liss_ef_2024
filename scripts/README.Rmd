@@ -1,0 +1,25 @@
+---
+title: ""
+output: 
+  html_document:
+    template: ../assets/template.html
+    css: ../assets/style.css
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+# Data Processing Scripts
+
+There are four types of R-scripts in this repository, each with a separate folder.
+
+-   [`0_functions/`](https://github.com/StefanVermeent/liss_ef_2024/tree/main/scripts/0_functions): Custom R-functions written for this project.
+-   [`0_pilot/`](https://github.com/StefanVermeent/liss_ef_2024/tree/main/scripts/0_pilot): Scripts analyzing the Pilot data.
+-   [`1_study/`](https://github.com/StefanVermeent/liss_ef_2024/tree/main/scripts/1_study): The full pipeline for cleaning data, running models, and conducting all analyses.
+
+Each script takes an input(s) and produces output(s).
+All outputs are stored in [analysis_objects/](https://github.com/StefanVermeent/liss_ef_2024/tree/main/analysis_objects).
+These outputs include list with exclusions, DDM models, and SEM results.
+
+The analysis objects, in turn, are used to stage all the statistics, Tables, and Figures included in the manuscript and supplemental material.
+This is done in [`manuscript/scripts/staging.R`](https://github.com/StefanVermeent/liss_ef_2024/tree/main/manuscript/scripts/staging.R) and in [`supplement/stage_sup.R`](https://github.com/StefanVermeent/liss_ef_2024/tree/main/supplement/stage_sup.R).
