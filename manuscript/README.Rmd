@@ -14,5 +14,5 @@ editor_options:
 Below is the submitted version of the manuscript. 
 
 ```{=html}
-<iframe width="780" height="600" src="manuscript.pdf" title="Submitted manuscript"></iframe>
+<iframe width="780" height="600" src="masked_manuscript.pdf" title="Submitted manuscript"></iframe>
 ```
