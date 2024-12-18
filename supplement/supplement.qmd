@@ -1,0 +1,575 @@
+---
+bibliography: ../manuscript/references.bib
+csl: ../manuscript/apa.csl
+format: 
+  docx:
+    reference-doc: reference-doc.docx
+    toc: true
+    toc-location: left
+    toc-title: Table of Contents
+output:
+  officedown::rdocx_document:
+    page_margins:
+      bottom: 1
+      footer: 0
+      gutter: 0
+      header: 0.5
+      left: 1
+      right: 1
+      top: 1
+    plots:
+      align: center
+      caption:
+        pre: 'Figure '
+        sep: '. '
+        style: Image Caption
+    tables:
+      caption:
+        pre: 'Table '
+        sep: '. '
+        style: Table Caption
+  pdf_document: default
+  word_document: default
+editor: 
+  markdown: 
+    wrap: sentence
+---
+
+
+```{r}
+#| include: false
+#| echo: false
+library(flextable)
+library(tidyverse)
+
+load("../analysis_objects/task_reliability.RData")
+load("../analysis_objects/hddm_model_fit")
+load("../analysis_objects/env_effects.RData")
+load("../analysis_objects/iv_histograms.RData")
+load("../analysis_objects/confounder_coefficients.RData")
+load("../analysis_objects/ddm_correlations.RData")
+
+
+knitr::opts_chunk$set(
+  echo = F,
+  fig.align = "center",
+  fig.pos = "!t", 
+  out.extra = "",
+  fig.show = "asis",
+  message = FALSE,
+  tab.topcaption = T,
+  warning = FALSE
+)
+
+# set up flextable for tables
+set_flextable_defaults(
+  font.family = "Times", 
+  font.size = 10,
+  font.color = "black",
+  line_spacing = 1,
+  padding.bottom = 1, 
+  padding.top = 1,
+  padding.left = 1,
+  padding.right = 1
+)
+```
+
+# Relevance of supplemental materials
+
+This file contains the supplementary materials for the article entitled "Adversity is associated with lower general processing speed rather than specific executive functioning abilities", which was submitted for consideration at **Journal of Experimental Psychology: General**.
+The supplemental materials include supporting information relating to more detailed descriptive statistics, model convergence and fit, and details on confounders.
+
+# Section 1. Descriptive statistics of adversity measures
+
+Figures S1-S3 present histograms of each separate adversity measure, as well as the composite adversity measures used in the analyses.
+See the main text for more information on how the composites were calculated.
+
+<br>
+
+```{r}
+#| label: FigureS1
+#| fig-width: 6.5
+#| fig-height: 5
+#| dpi: 600
+#| out-width: 6in
+#| fig-cap: | 
+#|   **Figure S1.** Histograms of material deprivation measures
+p_scar_m_combn_hist
+```
+
+<br>
+
+```{r}
+#| label: FigureS2
+#| fig-width: 6.5
+#| fig-height: 5
+#| dpi: 600
+#| out-width: 6in
+#| fig-cap: | 
+#|   **Figure S2.** Histograms of threat measures
+threat_combn_hist
+```
+
+<br>
+
+```{r}
+#| label: FigureS3
+#| fig-width: 6.5
+#| fig-height: 5
+#| dpi: 600
+#| out-width: 6in
+#| fig-cap: | 
+#|   **Figure S3.** Histograms of threat measures
+child_adv_combn_hist
+```
+
+<br>
+
+# Section 2. Additional information on cognitive tasks
+
+## Distributions of response times and error rates
+
+Figure S4 and S5 show the distributions of mean response times and mean error rate for each cognitive task.
+
+<br>
+
+```{r}
+#| label: FigureS4
+#| fig-width: 6.5
+#| fig-height: 7
+#| dpi: 600
+#| out-width: 6in
+#| fig-cap: | 
+#|   **Figure S4.** Distributions of response times for all tasks.
+supp_fig_rt_hist +
+  theme_classic()
+```
+
+<br>
+
+```{r}
+#| label: FigureS5
+#| fig-width: 6.5
+#| fig-height: 7
+#| dpi: 600
+#| out-width: 6in
+#| fig-cap: | 
+#|   **Figure S5.** Distributions of error rates for all tasks.
+supp_fig_acc_hist +
+  theme_classic()
+```
+
+<br>
+
+## Condition manipulation checks
+
+Table S1 presents manipulation checks for response times for the inhibition and attention-shifting tasks.
+The manipulation checks were based on mean log-transformed response times using paired-sample *t*-tests.
+For each task, we tested whether there was a significant difference in mean log-transformed response time between the congruent (repeat) condition and the incongruent (switch) condition.
+All tasks showed a significant difference in the expected direction, with participants on average being faster on the congruent (repeat) condition compared to the incongruent (switch) condition (all *p*s < .001).
+
+<br>
+
+
+```{r}
+#| tab.id: tableS1
+#| results: markup
+man_checks |> 
+  flextable() |> 
+  add_header_row(
+    values = " ",
+    colwidths = 4
+  ) |> 
+  flextable::compose(
+    i = 1, j = 1,
+    as_paragraph(as_b("Table S1. "), "Log-transformed response time differences across conditions for each task."),
+    part = "header"
+  ) |> 
+  flextable::align(i = 2, align = "center", part = "header") |> 
+  border_remove() |> 
+  border(i = 2, border.top = fp_border_default(), part = "header") |>  
+  border(i = 2, border.bottom = fp_border_default(), part = "header") |> 
+  border(i = 5, border.bottom = fp_border_default(), part = "body") |> 
+  autofit()
+  
+```
+
+
+<br>
+
+
+## Split-half reliability
+
+For each cognitive task, we calculated split-half reliabilities using the `splithalf` package [@parsons_2021].
+We calculated split-half reliabilities for mean response times and error rates, separately for each condition (see Table S1).
+The split-half reliability of mean response times was high across all tasks and conditions.
+For error rates, the reliability estimates were generally lower, which is likely due to ceiling effects (see also Figure S5).
+
+<br>
+
+```{r}
+#| tab.id: tableS2
+#| results: markup
+sh_rel_rt_table |> 
+  mutate(empty = "") |> 
+  select(task, `sh_ci_congruent/repeat`, `sh_ci_incongruent/switch`, empty, `sb_ci_congruent/repeat`, `sb_ci_incongruent/switch`) |> 
+  flextable() |> 
+  flextable::set_header_labels(values = c("Task", "Congruent/Repeat", "Incongruent/Switch", "", "Congruent/Repeat", "Incongruent/Switch")) |> 
+  add_header_row(values = c("", "Split-half reliability", "", "", "Spearman-Brown corrected", "")) |> 
+  flextable::merge_at(i = 1, j = 2:3, part = "header") |> 
+  flextable::merge_at(i = 1, j = 5:6, part = "header") |> 
+  add_header_row(
+    values = " ",
+    colwidths = 6
+  ) |> 
+  flextable::compose(
+    i = 1, j = 1,
+    as_paragraph(as_b("Table S2. "), "Split-half reliabilities of mean response times for all cognitive tasks."),
+    part = "header"
+  ) |> 
+  flextable::align(i = 2, align = "center", part = "header") |> 
+  border_remove() |> 
+  border(i = 2, border.top = fp_border_default(), part = "header") |>  
+  border(i = 2, j = c(2:3, 5:6), border.bottom = fp_border_default(), part = "header") |> 
+  border(i = 3, j = c(1:6), border.bottom = fp_border_default(), part = "header") |> 
+  border(i = 6, border.bottom = fp_border_default(), part = "body") |> 
+  autofit()
+```
+
+<br>
+
+```{r}
+#| tab.id: tableS3
+#| results: markup
+sh_rel_acc_table |> 
+  mutate(empty = "") |> 
+  select(task, `sh_ci_congruent/repeat`, `sh_ci_incongruent/switch`, empty, `sb_ci_congruent/repeat`, `sb_ci_incongruent/switch`) |> 
+  flextable() |> 
+  flextable::set_header_labels(values = c("Task", "Congruent/Repeat", "Incongruent/Switch", "", "Congruent/Repeat", "Incongruent/Switch")) |> 
+  add_header_row(values = c("", "Split-half reliability", "", "", "Spearman-Brown corrected", "")) |> 
+  flextable::merge_at(i = 1, j = 2:3, part = "header") |> 
+  flextable::merge_at(i = 1, j = 5:6, part = "header") |> 
+  add_header_row(
+    values = " ",
+    colwidths = 6
+  ) |> 
+  flextable::compose(
+    i = 1, j = 1,
+    as_paragraph(as_b("Table S3. "), "Split-half reliabilities of error rates for all cognitive tasks."),
+    part = "header"
+  ) |> 
+  flextable::align(i = 2, align = "center", part = "header") |> 
+  border_remove() |> 
+  border(i = 2, border.top = fp_border_default(), part = "header") |>  
+  border(i = 2, j = c(2:3, 5:6), border.bottom = fp_border_default(), part = "header") |> 
+  border(i = 3, j = c(1:6), border.bottom = fp_border_default(), part = "header") |> 
+  border(i = 6, border.bottom = fp_border_default(), part = "body") |> 
+  autofit()
+```
+
+<br>
+
+# Section 3. Drift Diffusion Modeling
+
+## Model convergence
+
+Figures S6-S11 present the convergence of MCMC chains of the Hierarchical Drift Diffusion Models for all tasks.
+The figures should resemble a "fat, hairy caterpillar", which was the case for all tasks.
+
+<br>
+
+```{r}
+#| label: FigureS6
+#| fig-width: 6.5
+#| fig-height: 5
+#| dpi: 600
+#| out-width: 6in
+#| fig-cap: | 
+#|   **Figure S6.** Trace convergence across three chains for the Flanker Task.
+flanker_fit_trace
+```
+
+<br>
+
+```{r}
+#| label: FigureS7
+#| fig-width: 6.5
+#| fig-height: 5
+#| dpi: 600
+#| out-width: 6in
+#| fig-cap: | 
+#|   **Figure S7.** Trace convergence across three chains for the Simon Task.
+simon_fit_trace
+```
+
+<br>
+
+```{r}
+#| label: FigureS8
+#| fig-width: 6.5
+#| fig-height: 5
+#| dpi: 600
+#| out-width: 6in
+#| fig-cap: | 
+#|   **Figure S8.** Trace convergence across three chains for the Color-shape Task.
+colorshape_fit_trace
+```
+
+<br>
+
+```{r}
+#| label: FigureS9
+#| fig-width: 6.5
+#| fig-height: 5
+#| dpi: 600
+#| out-width: 6in
+#| fig-cap: | 
+#|   **Figure S9.** Trace convergence across three chains for the Global-local Task.
+globallocal_fit_trace
+```
+
+<br>
+
+```{r}
+#| label: FigureS10
+#| fig-width: 6.5
+#| fig-height: 5
+#| dpi: 600
+#| out-width: 6in
+#| fig-cap: | 
+#|   **Figure S10.** Trace convergence across three chains for the Animacy-size Task.
+animacysize_fit_trace
+```
+
+<br>
+
+```{r}
+#| label: FigureS11
+#| fig-width: 6.5
+#| fig-height: 3
+#| dpi: 600
+#| out-width: 6in
+#| fig-cap: | 
+#|   **Figure S11.** Trace convergence across three chains for the Posner Task.
+posner_fit_trace
+```
+
+<br>
+
+
+In addition, we calculated the R^ statistic (also known as the Gelman-Rubin statistic) [@gelman_1992].
+The R^ calculates the ratio between the variation between MCMC chains and the variation within MCMC chains.
+A general guideline is that R^ values should be smaller than 1.1.
+All R^ values are presented in Table S4 below.
+
+## Simulation-based model fit assessment
+
+Table S4 presents simulation-based model fit assessments for all tasks.
+The simulation procedure was as follows.
+First, we used the DDM parameter estimates for each participant and used them to simulate response times and accuracy data (100 trials per participant).
+Then, we computed correlations between the simulated and observed response times and accuracies.
+In the case of response times, we did so separately at the 25th, 50th, and 75th percentile.
+In the case of accuracy, we looked at mean accuracy.
+All correlations were > .89, indicating good model fit.
+
+<br>
+
+```{r}
+#| tab.id: tableS4
+#| results: markup
+ddm_fit_table |> 
+   add_header_row(
+    values = " ",
+    colwidths = 7
+  ) |> 
+  flextable::compose(
+    i = 1, j = 1,
+    as_paragraph(as_b("Table S4. "), "Model fit assessment"),
+    part = "header"
+  ) |> 
+  border_remove() |> 
+  border(i = 1, border.bottom = fp_border_default(), part = "header") |> 
+  border(i = 2, border.bottom = fp_border_default(), part = "header") |> 
+  border(i = 11, border.bottom = fp_border_default(), part = "body") |> 
+  add_footer_row(
+    values = " ",
+    colwidths = 7
+  ) |> 
+  add_footer_row(
+    values = " ",
+    colwidths = 7
+  ) |> 
+  flextable::compose(
+    i = 1, j = 1, 
+    as_paragraph(as_i("Note: "), "Simulation-based model fit assessment compared observed and predicted data using 100 simulated trials (accuracy, 25th, 50th, 75th percentile). In addition, We calculated R^ values, which should be below 1.1 to indicate adequate chain convergence."), 
+    part = "footer"
+  )
+```
+
+<br>
+
+# Section 4. Effects of environmental variables
+
+Table S5 presents effects of environmental noise and mean-centered state anxiety on Drift Diffusion parameters.
+Effects of environmental noise were mostly small non-significant.
+Mean-centered differences in state anxiety were negatively associated with drift rates across all tasks.
+In sessions where participants were more anxious than average, their drift rates across all tasks were lower.
+
+<br>
+
+::: {.landscape}
+
+```{r}
+#| tab.id: tableS5
+#| results: markup
+env_fit_table |> 
+  add_header_row(
+    values = " ",
+    colwidths = 9
+  ) |> # Add a new header row on top. We can use this new row to add the title
+  flextable::compose(
+    i = 1, j = 1,
+    as_paragraph(as_b("Table S5. "), "Effects of noise and anxiety on Drift Diffusion parameters."),
+    part = "header"
+  ) |>
+  border_remove() |> 
+  border(i = 2, border.top = fp_border_default(), part = "header") |> 
+  border(i = 3, j = c(2:3, 5:6, 8:9), border.top = fp_border_default(), part = "header") |> 
+  border(i = 3, border.bottom = fp_border_default(), part = "header") |> 
+  border(i = 33, border.bottom = fp_border_default(), part = "body") |> 
+  align(i = 1, align = "left", part = "header") |> 
+  add_footer_row(
+    values = " ",
+    colwidths = 9
+  ) %>% 
+  flextable::compose(
+    i = 1, j = 1, 
+    as_paragraph(as_i("Note: "), "State anxiety was mean-centered relative to the overall mean across test sessions. Bound. sep. = boundary separation, Con. = congruent condition, Inc. = incongruent condition, Non-dec. time = non-decision time, Rep. = repeat condition, Sw. = switch condition,"), 
+    part = "footer"
+  ) |> 
+  autofit()
+``` 
+
+:::
+
+<br>
+
+Table S6 presents Spearman correlations between preregistered and non-preregistered adversity measures with environmental noise and mean state anxiety.
+Note that S6 includes mean state anxiety, whereas the analyses (and Table S5) include the difference from the grand mean in specific testing sessions.
+
+<br>
+
+
+```{r}
+#| tab.id: tableS6
+#| results: markup
+env_cor_table |> 
+  flextable() |> 
+ add_header_row(
+    values = " ",
+    colwidths = 7
+  ) |> # Add a new header row on top. We can use this new row to add the title
+  flextable::compose(
+    i = 1, j = 1,
+    as_paragraph(as_b("Table S6. "), "Bivarate correlations between adversity measures, environmental noise, and mean state anxiety."),
+    part = "header"
+  ) |>
+  border_remove() |> 
+  border(i = 2, border.top = fp_border_default(), part = "header") |> 
+  border(i = 2, border.bottom = fp_border_default(), part = "header") |> 
+  border(i = 6, border.bottom = fp_border_default(), part = "body") |> 
+  autofit()
+```
+
+<br>
+
+# Section 5. Indirect effects of confounders
+
+Table S7 summarizes the indirect effects of confounders in the confirmatory models: age, education, sex, childhood adversity, and, in the case of threat as dependent variable, material deprivation.
+As explained in the section on confounders in the main article, we assume that these confounders are common causes of both adversity exposure in adulthood (the independent variable) and cognitive processes (the dependent variable).
+This means that the regression coefficients in Table S7 and S8 should *not* be interpreted as direct effects; rather, they should be interpreted as indirect effects (i.e., the effect at mean levels of adversity exposure).
+
+For both threat and deprivation in adulthood, we found a negative indirect effect of age on task-general drift rate, a positive indirect effect of age on task-general boundary separation, and a positive indirect of age on task-general non-decision time.
+Thus, older adults with average levels of adversity exposure in adulthood processed information more slowly across tasks, were generally more cautious, and were generally slower at encoding stimuli and/or executing responses.
+In addition, childhood adversity had a negative indirect effect on task-general drift rate.
+People with more exposure to childhood adversity, at average levels of adversity exposure in adulthood, processed information more slowly across tasks.
+Finally, we found a negative indirect effect of education on task-general drift rate, but not on task-general boundary separation or non-decision time.
+People with a higher completed education, at average levels of adversity exposure in adulthood, processed information faster across tasks.
+None of the other indirect effects were significant.
+
+<br>
+
+```{r}
+confound_coef_confirmatory |> 
+  flextable() |> 
+  set_header_labels(values = c(
+    "Confounder", "\u{03B2}", "SE","95% CI", "p", "",
+    "\u{03B2}", "SE","95% CI", "p"
+    )) |> 
+  add_header_row(values = c("", "Threat in adulthood", "", "", "", "", "Deprivation in adulthood", "", "", "")) |> 
+  merge_at(i = 1, j = 2:5, part = "header") |> 
+  merge_at(i = 1, j = 7:10, part = "header") |> 
+  align(i = 1, j = 2:5, align = "center", part = "header") |> 
+  align(i = 1, j = 7:10, align = "center", part = "header") |> 
+  
+  bold(i = c(1,7,13), j = 1, part = "body") |> 
+  padding(i = c(2:6, 8:12, 14:18), j=1, padding.left=15) |> 
+  add_header_row(values = " ", colwidths = 10) |> 
+  flextable::compose(
+    i = 1, j = 1,
+    as_paragraph(as_b("Table S7. "), "Standardized indirect effects of confounders in the confirmatory models."),
+    part = "header"
+  ) |>
+  border_remove() |> 
+  border(i = 2, border.top = fp_border_default(), part = "header") |>  
+  border(i = 2, j = c(2:5, 7:10), border.bottom = fp_border_default(), part = "header") |> 
+  border(i = 3, border.bottom = fp_border_default(), part = "header") |> 
+  border(i = 18, border.bottom = fp_border_default(), part = "body") |> 
+  autofit()
+```
+
+<br>
+
+Table S8 summarizes the indirect effects of confounders in the exploratory models: sex, and, in the case of childhood threat as dependent variable, childhood material deprivation.
+Childhood exposure to deprivation had a negative indirect effect on task-general drift rate and task-general boundary separation.
+People with more exposure to childhood deprivation, at average levels of childhood threat, processed information more slowly across tasks, and were generally more cautious.
+Sex did not have an indirect effect on either childhood threat or childhood deprivation.
+
+<br>
+
+```{r}
+confound_coef_ch |> 
+  flextable() |> 
+  set_header_labels(values = c(
+    "Confounder", "\u{03B2}", "SE","95% CI", "p", "",
+    "\u{03B2}", "SE","95% CI", "p"
+  )) |> 
+  add_header_row(values = c("", "Childhood threat", "", "", "", "", "Childhood deprivation", "", "", "")) |> 
+  merge_at(i = 1, j = 2:5, part = "header") |> 
+  merge_at(i = 1, j = 7:10, part = "header") |> 
+  align(i = 1, j = 2:5, align = "center", part = "header") |> 
+  align(i = 1, j = 7:10, align = "center", part = "header") |> 
+  bold(i = c(1,4, 7), j = 1, part = "body") |> 
+  padding(i = c(2:3, 5:6, 8:9), j=1, padding.left=15) |> 
+  add_header_row(values = " ", colwidths = 10) |> 
+  flextable::compose(
+    i = 1, j = 1,
+    as_paragraph(as_b("Table S8. "), "Standardized indirect effects of confounders in the exploratory models of childhood adversity."),
+    part = "header"
+  ) |>
+  border_remove() |> 
+  border(i = 2, border.top = fp_border_default(), part = "header") |>  
+  border(i = 2, j = c(2:5, 7:10), border.bottom = fp_border_default(), part = "header") |> 
+  border(i = 3, border.bottom = fp_border_default(), part = "header") |> 
+  border(i = 9, border.bottom = fp_border_default(), part = "body") |> 
+  autofit()
+```
+
+
+\pagebreak 
+
+# References
+
+::: {#refs}
+:::
+
