@@ -1,0 +1,15 @@
+---
+title: ""
+output: 
+  html_document:
+    template: ../assets/template.html
+    css: ../assets/style.css
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+# Codebooks
+
+To download the codebooks of the data sets used in this study, go [here](https://github.com/StefanVermeent/liss_ef_2024/tree/main/codebooks).
+

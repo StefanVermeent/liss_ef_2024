@@ -1,0 +1,54 @@
+---
+title: ""
+output: 
+  html_document:
+    template: assets/template.html
+    css: assets/style.css
+    keep_md: true
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+```{r}
+#| include: false
+#| echo: false
+#| 
+library(tidyverse)
+library(gert)
+library(glue)
+#source('scripts/dependencies.R')
+knitr::opts_chunk$set(echo = F, message = F, warning = F)
+
+```
+<br>
+
+This repository contains data, code, and output for a manuscript entitled "Adversity is associated with lower general processing speed rather than specific executive functioning abilities". This manuscript has been submitted for publication.
+
+Do you want to download or clone the materials for this project? Go to [https://github.com/stefanvermeent/liss_ef_2024](https://github.com/stefanvermeent/liss_ef_2024)
+
+## Directory Structure {#structure}
+
+The names of each folder are intended to be self-explanatory.
+There are eight top-level folders to organize the inputs and outputs of this project:
+
+1.  [`preregistration`](https://stefanvermeent.github.io/liss_ef_2024/preregistration/README.html): The preregistration for the main analyses.
+2.  [`manuscript`](https://stefanvermeent.github.io/liss_ef_2024/manuscript/README.html): The manuscript written in Quarto.
+3.  [`supplement`](https://stefanvermeent.github.io/liss_ef_2024/supplement/README.html): a supplemental text (to be submitted with the manuscript) documenting all secondary analyses in detail.
+4.  [`scripts`](https://stefanvermeent.github.io/liss_ef_2024/scripts/README.html): R-scripts that read, analyze, and produce all analysis objects.
+5.  [`data`](https://stefanvermeent.github.io/liss_ef_2024/data/README.html): Folder in which real LISS data can be placed to make the analyses fully reproducible. Note that we cannot openly share the raw data on the open repository. See the link for more information on how to include the correct variables from the LISS data archive into this folder. 
+6.  [`analysis Objects`](https://stefanvermeent.github.io/liss_ef_2024/analysis_objects/README.html): Folder containing all analysis objects.
+7.  [`codebooks`](https://stefanvermeent.github.io/liss_ef_2024/codebooks/README.html): lists of variable names, labels, and value labels (where applicable).
+
+Click on each of the folders to get more details.
+
+## Steps to reproduce our results
+
+There are two ways to reproduce our results. 
+
+1.  **Rerender manuscript using analysis objects**. This method uses the result objects that we saved under `analysis_objects/`. Analysis objects are the outcomes of the analysis scripts. Using this method, you can render the manuscript out-of-the-box, without having to rerun any of the analysis scripts under `scripts/`. 
+2.  **Rerun all data cleaning and analysis steps**. This method a few steps. First, you need to download the required data from the LISS data archive (<https://lissdata.nl>) and place them in the `data` folder. Second, you need to rerun the analysis scripts under `scripts/liss/`, in the specified order. Please note that `03_ddm.R` involves running six Hierarchical Bayesian Drift Diffusion models. This takes a substantial amount of time, even in a research cloud environment (in our own case, it would take around 2 hours per model).
+
+## Contact
+
+For questions or comments, please feel free to contact me at p.c.s.vermeent@gmail.com.

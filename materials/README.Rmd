@@ -1,0 +1,39 @@
+---
+title: ""
+output: 
+  html_document:
+    template: ../assets/template.html
+    css: ../assets/style.css
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+## Materials {#materials}
+
+This folder contains all the materials of the cognitive tasks.
+All tasks were programmed in [JsPsych 7.3.2](https://www.jspsych.org/7.3/).
+
+1.  [`pilot01/`](https://github.com/StefanVermeent/liss_wm_profiles_2023/tree/master/materials/pilot01): Folder containing the pilot materials for the Flanker, Simon, Posner, Animacy-size, Color-shape, and Global-local tasks. Note that the Global-local task used in this pilot study was different from the one used in the manuscript.
+2.  [`pilot02/`](https://github.com/StefanVermeent/liss_wm_profiles_2023/tree/master/materials/pilot02): Folder containing the pilot materials for the alternative Global-local task (as used in the manuscript).
+3.  [`pilot03/`](https://github.com/StefanVermeent/liss_wm_profiles_2023/tree/master/materials/pilot03): Folder containing the pilot materials for all six tasks used in the manuscript.
+4.  [`liss/`](https://github.com/StefanVermeent/liss_wm_profiles_2023/tree/master/materials/1_liss): Folder containing the final materials of all six tasks as used in the main study.
+
+Within each study folder, each task also has it's own folder.
+In each folder, you will find two files:
+`0_[task]_setup.js` contains the Javascript code for functions and stimulus set-up.
+`1_[task]_instructions.js` contains the Javascript code for all task instructions.
+`2_[task]_procedure.js` contains Javascript code defining the stimuli and trials for both practice and test blocks.
+
+In each of these study folders, you will find several additional files and folders:
+
+1.  `index.html`. Script which combines the trial blocks and initiates the tasks.
+2.  `img/`. Folder containing stimulus images.
+4.  `scripts`. Scripts handling trial rules.
+
+
+**Run tasks locally.** To run the tasks locally on your device, navigate to any task folder and open the `index.html` file in a browser. 
+This will automatically start the cognitive task.
+
+**Run tasks online.** The tasks are hosted online at [https://liss-ef-2024-pilot3.netlify.app/](https://liss-ef-2024-pilot3.netlify.app/).
+Navigating to this url will automatically start the tasks.

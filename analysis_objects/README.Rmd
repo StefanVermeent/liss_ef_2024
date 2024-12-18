@@ -1,0 +1,15 @@
+---
+title: ""
+output: 
+  html_document:
+    template: ../assets/template.html
+    css: ../assets/style.css
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+# Analysis objects
+
+This folder contains all [analysis objects](https://github.com/StefanVermeent/liss_ef_2024/tree/main/analysis_objects), i.e., the outputs of the various data processing scripts.
+The analysis objects are loaded by the `manuscript.qmd` and `supplement.qmd` file to fill in the statistics, Tables, and Figures in the manuscript and supplemental materials
