@@ -3,5 +3,5 @@
 .RData
 .Ruserdata
 
-data
-analysis_objects
+data/
+analysis_objects/
