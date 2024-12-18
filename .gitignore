@@ -3,4 +3,12 @@
 .RData
 .Ruserdata
 
-data/
+data/liss_data
+data/clean_data_long.RData
+data/ddm_clean.RData
+data/ddm_raw.csv
+data/exclusions.RData
+data/L_CognitiveAdversity_TASKDATA.csv
+data/liss_2024_data.sav
+data/pilot_data.RData
+data/raw_data_long.RData
