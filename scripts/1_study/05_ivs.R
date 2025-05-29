@@ -65,15 +65,15 @@ core_income01 <- core_income[1:11] |>
       rename_with(
         .cols = -nomem_encr,
         ~str_replace_all(string = ., pattern = "ci\\d\\d[a-z]_|ci\\d\\d[a-z]", "q_")
-      ) #%>%
+      ) %>%
       #in wave 1 to 11, net income was asked for each employer separately
-    #  mutate(net_inc_y = across(c(q_012, q_021, q_030)) %>% rowSums(na.rm = T))
+      mutate(net_inc_y = across(c(q_012, q_021, q_030)) %>% rowSums(na.rm = T))
   }) |>
   bind_rows() |>
   separate(col = q_m, into = c("year", "month"), sep = 4) |>
-  left_join(background_parsed |> select(nomem_encr, year, month, nohouse_encr))# |>
-#  group_by(year, nohouse_encr) |>
-#  mutate(net_inc_y = sum(net_inc_y, na.rm = T))
+  left_join(background_parsed |> select(nomem_encr, year, month, nohouse_encr)) |>
+  group_by(year, nohouse_encr) |>
+  mutate(net_inc_y = sum(net_inc_y, na.rm = T))
 
 # in wave 12 to 16, net income was asked across all employers
 core_income02 <- core_income[12:16] |>
@@ -81,19 +81,19 @@ core_income02 <- core_income[12:16] |>
     x |>
       sjlabelled::remove_all_labels() |>
       as_tibble() |>
-      select(nomem_encr, matches("(_m|339|244|245|246|247|248|249|250|252)$")) |>
+      select(nomem_encr, matches("(_m|339|244|245|246|247|248|249|250|252|378)$")) |>
       rename_with(
         .cols = -nomem_encr,
         ~str_replace_all(string = ., pattern = "ci\\d\\d[a-z]_|ci\\d\\d[a-z]", "q_")
-      ) #%>%
-      #rename(net_inc_y = q_339)
+      ) %>%
+      rename(net_inc_y = q_339,
+             q_244 = q_378)
   }) |>
   bind_rows() |>
   separate(col = q_m, into = c("year", "month"), sep = 4)
 
 core_income_parsed <- bind_rows(core_income01, core_income02) |>
-  select(-c(q_012, q_021, q_030)) #|>
-#  mutate(net_inc_y = ifelse(net_inc_y <= 0, NA, net_inc_y))
+  select(-c(q_012, q_021, q_030))
 
 # Sanity checks
 assertthat::assert_that(all(core_income_parsed$q_244 %in% c(0:10, NA)))
@@ -375,19 +375,12 @@ full_data <-
   full_join(p_scar, threat) |>
   left_join(new_data |> filter(nomem_encr %in% pp_ids) |> select(nomem_encr, DatumB, DatumE, nohouse_encr, prev_participated)) |>
   left_join(iv_data |> filter(nomem_encr %in% pp_ids) |> select(nomem_encr, age, edu, sex, child_dep, child_thr, child_adv)) |>
-  select(nomem_encr, nohouse_encr, prev_participated, everything())
-
-n_sessions <- full_data |>
-  ungroup() |>
-  mutate(one_session = ifelse(DatumB == DatumE, TRUE, FALSE)) |>
-  summarise(one_session = sum(one_session)/n()*100) |>
-  pull(one_session)
+  select(nomem_encr, nohouse_encr, prev_participated, everything()) |>
+  ungroup()
 
 # Participants who miss neighborhood safety data from the Crime and Victimization waves (addressed in manuscript)
 exclusions$sample$missing_crime_vict <- iv_data_2024$nomem_encr[!iv_data_2024$nomem_encr %in% c(iv_data_2023$nomem_encr, crime_waves_parsed$nomem_encr |> unique())] |> length()
 
-
-save(n_sessions, file = "analysis_objects/n_sessions.RData")
 save(exclusions, file = "data/exclusions.RData")
 save(pca_threat_fit, file = "analysis_objects/pca.RData")
 

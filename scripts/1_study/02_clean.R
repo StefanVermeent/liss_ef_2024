@@ -345,7 +345,70 @@ all_included_ids_n <- all_included_ids |>
 exclusions$sample$ids <- all_included_ids
 exclusions$sample$final <- all_included_ids_n
 
-# 3. Create codebooks
+
+# 3. Calculate raw performance measures -----------------------------------
+
+flanker_clean_mean <- flanker_clean |>
+  group_by(nomem_encr, condition) |>
+  summarize(
+    flanker_rt = mean(rt, na.rm = T),
+    flanker_ac = sum(correct)/n() * 100
+    ) |>
+  mutate(condition = ifelse(condition == 1, "con", "inc")) |>
+  pivot_wider(names_from = "condition", values_from = c("flanker_rt", "flanker_ac"))
+
+simon_clean_mean <- simon_clean |>
+  group_by(nomem_encr, condition) |>
+  summarize(
+    simon_rt = mean(rt, na.rm = T),
+    simon_ac = sum(correct)/n() * 100
+  ) |>
+  mutate(condition = ifelse(condition == 1, "con", "inc")) |>
+  pivot_wider(names_from = "condition", values_from = c("simon_rt", "simon_ac"))
+
+colorshape_clean_mean <- colorshape_clean |>
+  group_by(nomem_encr, condition) |>
+  summarize(
+    colorshape_rt = mean(rt, na.rm = T),
+    colorshape_ac = sum(correct)/n() * 100
+  ) |>
+  mutate(condition = ifelse(condition == 1, "rep", "sw")) |>
+  pivot_wider(names_from = "condition", values_from = c("colorshape_rt", "colorshape_ac"))
+
+globallocal_clean_mean <- globallocal_clean |>
+  group_by(nomem_encr, condition) |>
+  summarize(
+    globallocal_rt = mean(rt, na.rm = T),
+    globallocal_ac = sum(correct)/n() * 100
+  ) |>
+  mutate(condition = ifelse(condition == 1, "rep", "sw")) |>
+  pivot_wider(names_from = "condition", values_from = c("globallocal_rt", "globallocal_ac"))
+
+animacysize_clean_mean <- animacysize_clean |>
+  group_by(nomem_encr, condition) |>
+  summarize(
+    animacysize_rt = mean(rt, na.rm = T),
+    animacysize_ac = sum(correct)/n() * 100
+  ) |>
+  mutate(condition = ifelse(condition == 1, "rep", "sw")) |>
+  pivot_wider(names_from = "condition", values_from = c("animacysize_rt", "animacysize_ac"))
+
+posner_clean_mean <- posner_clean |>
+  group_by(nomem_encr) |>
+  summarize(
+    pos_rt = mean(rt, na.rm = T),
+    pos_ac = sum(correct)/n() * 100)
+
+clean_data_mean <- reduce(
+  list(flanker_clean_mean, simon_clean_mean, colorshape_clean_mean, globallocal_clean_mean, animacysize_clean_mean, posner_clean_mean),
+  full_join, by = "nomem_encr"
+) |>
+  ungroup()
+
+
+
+
+# 4. Create codebooks -----------------------------------------------------
 
 flanker_codebook <- create_codebook(flanker_clean)
 simon_codebook <- create_codebook(simon_clean)
@@ -354,9 +417,10 @@ animacysize_codebook <- create_codebook(animacysize_clean)
 globallocal_codebook <- create_codebook(globallocal_clean)
 posner_codebook <- create_codebook(posner_clean)
 
-# 4. Save cleaned data ----------------------------------------------------
+# 5. Save cleaned data ----------------------------------------------------
 
 save(flanker_clean, simon_clean, colorshape_clean, globallocal_clean, animacysize_clean, posner_clean, file = "data/clean_data_long.RData")
+save(clean_data_mean, file = "data/clean_data_mean.RData")
 save(exclusions, file = "data/exclusions.RData")
 
 openxlsx::write.xlsx(flanker_codebook, "codebooks/flanker_clean_codebook.xlsx")

@@ -9,66 +9,81 @@ library(sjlabelled)
 # 2. Data -----------------------------------------------------------------
 raw_data <- read_delim("data/L_CognitiveAdversity_TASKDATA.csv", delim = ";")
 
-
-
-raw_data <- raw_data |>
-  mutate(
-    data_simon = case_when(
-      volgorde__1 == '1' ~ JSON1.4,
-      volgorde__2 == '1' ~ JSON2.4,
-      volgorde__3 == '1' ~ JSON3.4,
-      volgorde__4 == '1' ~ JSON4.4,
-      volgorde__5 == '1' ~ JSON5.4,
-      volgorde__6 == '1' ~ JSON6.4
-    ),
-    data_flanker = case_when(
-      volgorde__1 == '2' ~ JSON1.4,
-      volgorde__2 == '2' ~ JSON2.4,
-      volgorde__3 == '2' ~ JSON3.4,
-      volgorde__4 == '2' ~ JSON4.4,
-      volgorde__5 == '2' ~ JSON5.4,
-      volgorde__6 == '2' ~ JSON6.4
-    ),
-    data_globallocal2 = case_when(
-      volgorde__1 == '3' ~ JSON1.4,
-      volgorde__2 == '3' ~ JSON2.4,
-      volgorde__3 == '3' ~ JSON3.4,
-      volgorde__4 == '3' ~ JSON4.4,
-      volgorde__5 == '3' ~ JSON5.4,
-      volgorde__6 == '3' ~ JSON6.4
-    ),
-    data_colorshape = case_when(
-      volgorde__1 == '4' ~ JSON1.4,
-      volgorde__2 == '4' ~ JSON2.4,
-      volgorde__3 == '4' ~ JSON3.4,
-      volgorde__4 == '4' ~ JSON4.4,
-      volgorde__5 == '4' ~ JSON5.4,
-      volgorde__6 == '4' ~ JSON6.4
-    ),
-    data_animacysize = case_when(
-      volgorde__1 == '5' ~ JSON1.4,
-      volgorde__2 == '5' ~ JSON2.4,
-      volgorde__3 == '5' ~ JSON3.4,
-      volgorde__4 == '5' ~ JSON4.4,
-      volgorde__5 == '5' ~ JSON5.4,
-      volgorde__6 == '5' ~ JSON6.4
-    ),
-    data_posner = case_when(
-      volgorde__1 == '6' ~ JSON1.4,
-      volgorde__2 == '6' ~ JSON2.4,
-      volgorde__3 == '6' ~ JSON3.4,
-      volgorde__4 == '6' ~ JSON4.4,
-      volgorde__5 == '6' ~ JSON5.4,
-      volgorde__6 == '6' ~ JSON6.4
+# JSON strings of task data are shuffled within variables due to randomized order. This function matches the json strings the the correct cognitive tasks.
+parse_json_data <- function(data, x) {
+  data <- data |>
+    mutate(
+      var = case_when(
+        volgorde__1 == x ~ JSON1.4,
+        volgorde__2 == x ~ JSON2.4,
+        volgorde__3 == x ~ JSON3.4,
+        volgorde__4 == x ~ JSON4.4,
+        volgorde__5 == x ~ JSON5.4,
+        volgorde__6 == x ~ JSON6.4
+      )
     )
+  return(data$var)
+}
+
+parse_json_timestamp <- function(data, x) {
+  data <- data |>
+    mutate(
+      var = case_when(
+        volgorde__1 == x ~ JSON1.1,
+        volgorde__2 == x ~ JSON2.1,
+        volgorde__3 == x ~ JSON3.1,
+        volgorde__4 == x ~ JSON4.1,
+        volgorde__5 == x ~ JSON5.1,
+        volgorde__6 == x ~ JSON6.1
+      )
+    )
+  return(data$var)
+}
+
+raw_data <- raw_data %>%
+  mutate(
+    data_simon        = parse_json_data(data = ., x = "1"),
+    data_flanker      = parse_json_data(data = ., x = "2"),
+    data_globallocal2 = parse_json_data(data = ., x = "3"),
+    data_colorshape   = parse_json_data(data = ., x = "4"),
+    data_animacysize  = parse_json_data(data = ., x = "5"),
+    data_posner       = parse_json_data(data = ., x = "6"),
+
+    timestamp_simon        = parse_json_timestamp(data = ., x = "1"),
+    timestamp_flanker      = parse_json_timestamp(data = ., x = "2"),
+    timestamp_globallocal2 = parse_json_timestamp(data = ., x = "3"),
+    timestamp_colorshape   = parse_json_timestamp(data = ., x = "4"),
+    timestamp_animacysize  = parse_json_timestamp(data = ., x = "5"),
+    timestamp_posner       = parse_json_timestamp(data = ., x = "6"),
+    ) |>
+  select(nomem_encr, starts_with('data'), starts_with("timestamp")) %>%
+  mutate(across(starts_with("timestamp"), ~lubridate::as_date(x = .))) |>
+  rowwise() |>
+  mutate(
+    n_sessions = unique(na.omit(c(timestamp_simon, timestamp_flanker, timestamp_colorshape, timestamp_animacysize, timestamp_globallocal2, timestamp_posner))) |> length()
+  )
+
+n_sessions <- raw_data |>
+  select(nomem_encr, starts_with('timestamp'), n_sessions) %>%
+  mutate(across(starts_with('timestamp'), ~as.numeric(.))) |>
+  rowwise() |>
+  mutate(
+    first_date      = min(c(timestamp_simon, timestamp_flanker, timestamp_globallocal2, timestamp_colorshape, timestamp_animacysize, timestamp_posner), na.rm = T),
+    session_flanker = ifelse(timestamp_flanker == first_date, "session1", "session2"),
+    session_simon   = ifelse(timestamp_simon == first_date, "session1", "session2"),
+    session_cs = ifelse(timestamp_colorshape == first_date, "session1", "session2"),
+    session_gl = ifelse(timestamp_globallocal2 == first_date, "session1", "session2"),
+    session_as = ifelse(timestamp_animacysize == first_date, "session1", "session2"),
+    session_pos = ifelse(timestamp_posner == first_date, "session1", "session2"),
   ) |>
-  select(nomem_encr, starts_with('data'))
+  ungroup()
+
 
 # 3. Flanker Task ---------------------------------------------------------
 
 flanker_raw <-
   raw_data |>
-  select(nomem_encr, data_flanker) |>
+  select(nomem_encr, data_flanker, n_sessions) |>
   filter(!is.na(data_flanker)) |>
   filter(data_flanker != "[]", data_flanker != "\"I\"") |>
   mutate(across(c(matches("data_flanker")), ~str_replace_all(., "^\\\"", ""))) |>
@@ -80,14 +95,14 @@ flanker_raw <-
     correct   = ifelse(correct == TRUE, 1, 0),
     condition = ifelse(str_detect(stimtype, "^congruent"), 1, 2)) |>
   filter(!variable %in% c("interblock", "test_start", "end")) |>
-  select(nomem_encr, rt, task, condition, correct)
+  select(nomem_encr, rt, task, condition, correct, n_sessions)
 
 
 # 4. Simon Task -----------------------------------------------------------
 
 simon_raw <-
   raw_data |>
-  select(nomem_encr, data_simon) |>
+  select(nomem_encr, data_simon, n_sessions) |>
   filter(!is.na(data_simon)) |>
   filter(data_simon != "[]", data_simon != "\"I\"") |>
   mutate(across(c(matches("data_simon")), ~str_replace_all(., "^\\\"", ""))) |>
@@ -99,13 +114,13 @@ simon_raw <-
     correct   = ifelse(correct == TRUE, 1, 0),
     condition = ifelse(str_detect(stimtype, "^congruent"), 1, 2)) |>
   filter(!variable %in% c("interblock", "test_start", "end")) |>
-  select(nomem_encr, rt, task, condition, correct)
+  select(nomem_encr, rt, task, condition, correct, n_sessions)
 
 # 5. Color Shape Task -----------------------------------------------------
 
 colorshape_raw <-
   raw_data |>
-  select(nomem_encr, data_colorshape) |>
+  select(nomem_encr, data_colorshape, n_sessions) |>
   filter(!is.na(data_colorshape)) |>
   filter(data_colorshape != "[]", data_colorshape != "\"I\"") |>
   mutate(across(c(matches("data_colorshape")), ~str_replace_all(., "^\\\"", ""))) |>
@@ -128,14 +143,14 @@ colorshape_raw <-
     rt        = rt / 1000,
     correct   = ifelse(correct == TRUE, 1, 0),
     condition = ifelse(condition == "repeat", 1, 2)) |>
-  select(nomem_encr, rt, task, condition, rule, correct)
+  select(nomem_encr, rt, task, condition, rule, correct, n_sessions)
 
 
 # 6. Animacy Size Task ----------------------------------------------------
 
 animacysize_raw <-
   raw_data |>
-  select(nomem_encr, data_animacysize) |>
+  select(nomem_encr, data_animacysize, n_sessions) |>
   filter(!is.na(data_animacysize)) |>
   filter(data_animacysize != "[]", data_animacysize != "\"I\"") |>
   mutate(across(c(matches("data_animacysize")), ~str_replace_all(., "^\\\"", ""))) |>
@@ -147,13 +162,13 @@ animacysize_raw <-
     rt        = rt / 1000,
     correct   = ifelse(correct == TRUE, 1, 0),
     condition = ifelse(condition == "repeat", 1, 2)) |>
-  select(nomem_encr, rt, task, condition, rule, correct)
+  select(nomem_encr, rt, task, condition, rule, correct, n_sessions)
 
 # 7. Posner Task ----------------------------------------------------------
 
 posner_raw <-
   raw_data |>
-  select(nomem_encr, data_posner) |>
+  select(nomem_encr, data_posner, n_sessions) |>
   filter(!is.na(data_posner)) |>
   filter(data_posner != "[]", data_posner != "\"I\"") |>
   mutate(across(c(matches("data_posner")), ~str_replace_all(., "^\\\"", ""))) |>
@@ -166,13 +181,13 @@ posner_raw <-
     correct   = ifelse(correct == TRUE, 1, 0),
     condition = ifelse(condition == "same", 1, 2)
   ) |>
-  select(nomem_encr, rt, task, condition, correct)
+  select(nomem_encr, rt, task, condition, correct, n_sessions)
 
 # 8. Global Local2 Task ----------------------------------------------------
 
 globallocal2_raw <-
   raw_data |>
-  select(nomem_encr, data_globallocal2) |>
+  select(nomem_encr, data_globallocal2, n_sessions) |>
   filter(!is.na(data_globallocal2)) |>
   filter(data_globallocal2 != "[]", data_globallocal2 != "\"I\"") |>
   mutate(across(c(matches("data_globallocal2")), ~str_replace_all(., "^\\\"", ""))) |>
@@ -185,7 +200,7 @@ globallocal2_raw <-
     rt        = ifelse(rt < 0, 0, rt), # Set negative RTs to zero to prevent later issues with log-transformations
     correct   = ifelse(correct == TRUE, 1, 0),
     condition = ifelse(condition == "repeat", 1, 2)) |>
-  select(nomem_encr, rt, task, condition, rule, correct)
+  select(nomem_encr, rt, task, condition, rule, correct, n_sessions)
 
 
 
@@ -232,4 +247,4 @@ posner_raw      <- posner_raw |> filter(nomem_encr %in% all_complete_ids)
 # 10. Write data ------------------------------------------------------------
 
 save(animacysize_raw, colorshape_raw, flanker_raw, posner_raw, simon_raw, globallocal2_raw, all_incomplete_ids, all_complete_ids, file = "data/raw_data_long.RData")
-
+save(n_sessions, file = "analysis_objects/n_sessions.RData")

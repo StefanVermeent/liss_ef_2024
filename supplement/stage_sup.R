@@ -208,6 +208,7 @@ flanker_rt_hist <- flanker_clean |>
   scale_x_continuous(breaks = seq(0, 5, 0.5)) +
   scale_color_uchicago() +
   scale_fill_uchicago() +
+  theme_classic() +
   labs(
     title = "Flanker task",
     x = "Response time"
@@ -223,6 +224,7 @@ simon_rt_hist <- simon_clean |>
   scale_x_continuous(breaks = seq(0, 5, 0.5)) +
   scale_color_uchicago() +
   scale_fill_uchicago() +
+  theme_classic() +
   labs(
     title = "Simon task",
     x = "Response time"
@@ -238,6 +240,7 @@ colorshape_rt_hist <- colorshape_clean |>
   scale_x_continuous(breaks = seq(0, 5, 1)) +
   scale_color_uchicago() +
   scale_fill_uchicago() +
+  theme_classic() +
   labs(
     title = "Color-shape task",
     x = "Response time"
@@ -253,6 +256,7 @@ animacysize_rt_hist <- animacysize_clean |>
   scale_x_continuous(breaks = seq(0, 5, 1)) +
   scale_color_uchicago() +
   scale_fill_uchicago() +
+  theme_classic() +
   labs(
     title = "Animacy-size task",
     x = "Response time"
@@ -268,6 +272,7 @@ globallocal_rt_hist <- globallocal_clean |>
   scale_x_continuous(breaks = seq(0, 5, 0.5)) +
   scale_color_uchicago() +
   scale_fill_uchicago() +
+  theme_classic() +
   labs(
     title = "Global-local task",
     x = "Response time"
@@ -283,6 +288,7 @@ posner_rt_hist <- posner_clean |>
   scale_fill_uchicago() +
   guides(color = 'none',
         fill = 'none') +
+  theme_classic() +
   labs(
     title = "Posner task",
     x = "Response time"
@@ -304,6 +310,7 @@ flanker_acc_hist <- flanker_clean |>
   geom_density(alpha = 0.5) +
   scale_color_uchicago() +
   scale_fill_uchicago() +
+  theme_classic() +
   labs(
     title = "Flanker task",
     x = "Accuracy"
@@ -318,6 +325,7 @@ simon_acc_hist <- simon_clean |>
   geom_density(alpha = 0.5) +
   scale_color_uchicago() +
   scale_fill_uchicago() +
+  theme_classic() +
   labs(
     title = "Simon task",
     x = "Accuracy"
@@ -332,6 +340,7 @@ colorshape_acc_hist <- colorshape_clean |>
   geom_density(alpha = 0.5) +
   scale_color_uchicago() +
   scale_fill_uchicago() +
+  theme_classic() +
   labs(
     title = "Color-shape task",
     x = "Accuracy"
@@ -346,6 +355,7 @@ animacysize_acc_hist <- animacysize_clean |>
   geom_density(alpha = 0.5) +
   scale_color_uchicago() +
   scale_fill_uchicago() +
+  theme_classic() +
   labs(
     title = "Animacy-size task",
     x = "Accuracy"
@@ -360,6 +370,7 @@ globallocal_acc_hist <- globallocal_clean |>
   geom_density(alpha = 0.5) +
   scale_color_uchicago() +
   scale_fill_uchicago() +
+  theme_classic() +
   labs(
     title = "Global-Local task",
     x = "Accuracy"
@@ -372,6 +383,7 @@ posner_acc_hist <- posner_clean |>
   geom_density(alpha = 0.5) +
   scale_color_uchicago() +
   scale_fill_uchicago() +
+  theme_classic() +
   labs(
     title = "Posner task",
     x = "Accuracy"
@@ -549,9 +561,132 @@ sh_rel_acc_table <- sh_rel_acc %>%
 save(supp_fig_acc_hist, supp_fig_rt_hist, man_checks, sh_rel_rt_table, sh_rel_acc_table, file = "analysis_objects/task_reliability.RData")
 
 
-# 4. HDDM model fit -------------------------------------------------------
+# 4. Distributions of DDM parameters --------------------------------------
 
-## 4.1 Traces ----
+hist_v <- ddm_clean |>
+  select(ends_with('v')) |>
+  pivot_longer(everything(), names_to = "parameter", values_to = "value") |>
+  separate(parameter, into = c("task", "condition", "parameter"), sep = "_") |>
+  mutate(
+    task = case_when(
+      task == "as" ~ "Animacy-size",
+      task == "cs" ~ "Color-shape",
+      task == "gl" ~ "Global-local",
+      task == "pos" ~ "Posner",
+      TRUE ~ task
+    ),
+    task = str_to_sentence(task)
+  ) %>%
+  unite(col = "task", c("task", "condition"), sep = " - ") |>
+  mutate(
+    task = ifelse(task == "Posner - v", "Posner", task),
+    task = factor(task, levels = c(
+      "Flanker - con",
+      "Flanker - inc",
+      "Simon - con",
+      "Simon - inc",
+      "Color-shape - rep",
+      "Color-shape - sw",
+      "Global-local - rep",
+      "Global-local - sw",
+      "Animacy-size - rep",
+      "Animacy-size - sw",
+      "Posner"))
+  ) |>
+  ggplot(aes(value)) +
+  geom_histogram(bins = 100) +
+  facet_wrap(~task, ncol = 2, axes = "all") +
+  theme_classic() +
+  labs(
+    x = "Drift rate",
+    y = "Frequency"
+  )
+
+
+hist_a <- ddm_clean |>
+  select(ends_with('a')) |>
+  pivot_longer(everything(), names_to = "parameter", values_to = "value") |>
+  separate(parameter, into = c("task", "condition", "parameter"), sep = "_") |>
+  mutate(
+    task = case_when(
+      task == "as" ~ "Animacy-size",
+      task == "cs" ~ "Color-shape",
+      task == "gl" ~ "Global-local",
+      task == "pos" ~ "Posner",
+      TRUE ~ task
+    ),
+    task = str_to_sentence(task)
+  ) %>%
+  unite(col = "task", c("task", "condition"), sep = " - ") |>
+  mutate(
+    task = ifelse(task == "Posner - a", "Posner", task),
+    task = factor(task, levels = c(
+      "Flanker - con",
+      "Flanker - inc",
+      "Simon - con",
+      "Simon - inc",
+      "Color-shape - rep",
+      "Color-shape - sw",
+      "Global-local - rep",
+      "Global-local - sw",
+      "Animacy-size - rep",
+      "Animacy-size - sw",
+      "Posner"))
+  ) |>
+  ggplot(aes(value)) +
+  geom_histogram(bins = 100) +
+  facet_wrap(~task, ncol = 2, axes = "all") +
+  theme_classic() +
+  labs(
+    x = "Boundary separation",
+    y = "Frequency"
+  )
+
+
+hist_t <- ddm_clean |>
+  select(ends_with('t')) |>
+  pivot_longer(everything(), names_to = "parameter", values_to = "value") |>
+  separate(parameter, into = c("task", "condition", "parameter"), sep = "_") |>
+  mutate(
+    task = case_when(
+      task == "as" ~ "Animacy-size",
+      task == "cs" ~ "Color-shape",
+      task == "gl" ~ "Global-local",
+      task == "pos" ~ "Posner",
+      TRUE ~ task
+    ),
+    task = str_to_sentence(task)
+  ) %>%
+  unite(col = "task", c("task", "condition"), sep = " - ") |>
+  mutate(
+    task = ifelse(task == "Posner - t", "Posner", task),
+    task = factor(task, levels = c(
+      "Flanker - con",
+      "Flanker - inc",
+      "Simon - con",
+      "Simon - inc",
+      "Color-shape - rep",
+      "Color-shape - sw",
+      "Global-local - rep",
+      "Global-local - sw",
+      "Animacy-size - rep",
+      "Animacy-size - sw",
+      "Posner"))
+  ) |>
+  ggplot(aes(value)) +
+  geom_histogram(bins = 100) +
+  facet_wrap(~task, ncol = 2, axes = "all") +
+  theme_classic() +
+  labs(
+    x = "Non-decision time",
+    y = "Frequency"
+  )
+
+save(hist_v, hist_a, hist_t, file = "analysis_objects/ddm_histograms.RData")
+
+# 5. HDDM model fit -------------------------------------------------------
+
+## 5.1 Traces ----
 
 flanker_fit_trace <- flanker_mod1_traces |>
   mutate(parameter = case_when(
@@ -677,7 +812,7 @@ posner_fit_trace <- posner_mod1_traces |>
     color = "Chain",
   )
 
-## 4.2 R^ values ----
+## 5.2 R^ values ----
 
 rhat <-
   tribble(
@@ -691,7 +826,7 @@ rhat <-
   ) |>
   mutate(rhat = formatC(x = rhat, digits = 3, width = 3, flag = "0", format = 'f'))
 
-## 5.2 Model fit statistics ----
+## 5.3 Model fit statistics ----
 
 ddm_fit_table <- bind_rows(
   flanker_mod1_fit |>
@@ -762,7 +897,7 @@ save(posner_fit_trace, flanker_fit_trace, simon_fit_trace, colorshape_fit_trace,
 
 
 
-# 5. Correlations between DDM parameters ----------------------------------
+# 6. Correlations between DDM parameters ----------------------------------
 
 ddm_cor <- ddm_clean |>
   select(ends_with("_v"), ends_with("_a"), ends_with("_t")
@@ -808,7 +943,7 @@ ddm_cor <- ddm_clean |>
 save(ddm_cor, file = "analysis_objects/ddm_correlations.RData")
 
 
-# 5. Influence of environmental variables ---------------------------------
+# 7. Influence of environmental variables ---------------------------------
 
 stai_noise <- haven::read_sav('data/L_CognitiveAdversity_1.0p.sav') |>
   mutate(
@@ -953,7 +1088,7 @@ save(env_fit_table, env_cor_table, file = "analysis_objects/env_effects.RData")
 
 
 
-# 6. Indirect effects of confounders --------------------------------------
+# 8. Indirect effects of confounders --------------------------------------
 
 confound_coef_confirmatory <-
   bind_rows(

@@ -477,7 +477,9 @@ stai_noise <- stai_noise |>
     stai_globallocal_diff = stai_globallocal - stai_mean,
     stai_colorshape_diff  = stai_colorshape - stai_mean,
     stai_animacysize_diff = stai_animacysize - stai_mean,
-    stai_posner_diff      = stai_posner - stai_mean
+    stai_posner_diff      = stai_posner - stai_mean,
+
+    one_session           = ifelse(DatumB == DatumE, 0, 1)
   ) |>
   rename(
     noise_simon       = Q1_1,

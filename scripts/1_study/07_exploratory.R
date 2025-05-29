@@ -7,16 +7,21 @@ library(lavaan)
 load('analysis_objects/results_confirmatory.RData')
 
 load("data/ddm_clean.RData")
+load("data/clean_data_mean.RData")
+
 iv_data <- read_csv('data/liss_data/full_data.csv') |>
   filter(nomem_encr %in% unique(ddm_clean$nomem_encr)) |>
-  mutate(across(c(child_dep, child_thr), ~scale(.) |> as.numeric()))
+  mutate(across(c(child_dep, child_thr, age, p_scar_m, threat_comp, edu, child_adv), ~scale(.) |> as.numeric()))
 
 ddm_clean <- ddm_clean |>
   mutate(across(-nomem_encr, ~scale(.) |> as.numeric()))
 
-full_data <- full_join(iv_data, ddm_clean)
+full_data <- full_join(iv_data, ddm_clean) |>
+  left_join(clean_data_mean |> mutate(across(-nomem_encr, ~scale(.) |> as.numeric())))
 
 data_long <- load("data/clean_data_long.RData")
+
+
 
 equivalence_test_ml = function(sesoi, ml_effect, ml_se){
   p1 = 1 - pnorm( ml_effect, mean = -sesoi, sd = ml_se)
@@ -611,10 +616,11 @@ mod2_expl_ts_adult_threat <-
     as_sw_v_c       ~~ 0*as_sw_v_c
     as_rep_v_c      ~~ 0*as_rep_v_c
 
-    age             ~~ threat_comp + p_scar_m + sex + child_adv
-    threat_comp     ~~ p_scar_m + sex + child_adv
-    p_scar_m        ~~ sex + child_adv
+    age             ~~ p_scar_m + threat_comp + sex + child_adv
+    p_scar_m        ~~ threat_comp + sex + child_adv
+    threat_comp     ~~ sex + child_adv
     sex             ~~ child_adv
+
 
     #### INTERCEPTS ####
 
@@ -978,7 +984,7 @@ expl_ts_ch_thr_reg_coef <- standardizedsolution(fit_expl_ts_ch_thr) |>
   ) |>
   mutate(
     pvalue_adj = p.adjust(pvalue, method = "fdr"),
-    adversity  = "Threat", "Deprivation",
+    adversity  = "Threat",
     timing     = "Childhood"
   ) |>
   ungroup()
@@ -998,7 +1004,7 @@ expl_ts_ch_thr_eqtests <- standardizedSolution(fit_expl_ts_ch_thr) |>
   unnest(eq_pvalue)
 
 
-# 3.5 Deprivation in childhood model --------------------------------------
+## 3.5 Deprivation in childhood model ----
 
 mod2_expl_ts_ch_dep <-
   '
@@ -1140,6 +1146,8 @@ expl_ts_ch_dep_eqtests <- standardizedSolution(fit_expl_ts_ch_dep) |>
   unnest(eq_pvalue)
 
 
+
+
 save(fit_expl_ch_thr_sum, expl_ch_thr_factor_loadings, expl_ch_thr_reg_coef, expl_ch_thr_eqtests,
      fit_expl_ch_dep_sum, expl_ch_dep_factor_loadings, expl_ch_dep_reg_coef, expl_ch_dep_eqtests,
      fit_expl_ts_mod2_fitstats, expl_ts_cor_inh, expl_ts_cor_sh,
@@ -1148,3 +1156,4 @@ save(fit_expl_ch_thr_sum, expl_ch_thr_factor_loadings, expl_ch_thr_reg_coef, exp
      fit_expl_ts_ch_thr_sum, expl_ts_ch_thr_factor_loadings, expl_ts_ch_thr_reg_coef, expl_ts_ch_thr_eqtests,
      fit_expl_ts_ch_dep_sum, expl_ts_ch_dep_factor_loadings, expl_ts_ch_dep_reg_coef, expl_ts_ch_dep_eqtests,
      file = "analysis_objects/results_exploratory.RData")
+

@@ -48,6 +48,7 @@ load("../analysis_objects/env_effects.RData")
 load("../analysis_objects/iv_histograms.RData")
 load("../analysis_objects/confounder_coefficients.RData")
 load("../analysis_objects/ddm_correlations.RData")
+load("../analysis_objects/ddm_histograms.RData")
 
 
 knitr::opts_chunk$set(
@@ -271,6 +272,11 @@ sh_rel_acc_table |>
 
 # Section 3. Drift Diffusion Modeling
 
+## Priors and model settings
+
+We drew individual-level DDM parameters from normal distributions, separately for each condition (except for the Posner task, which only contained one condition). The normal distributions were truncated based on reasonable parameter ranges (between -10 and 10 for drift rates, between 0.1 and 5 for boundary separation, and between 0.0001 and 1 for non-decision time).
+The normal distributions were given uninformative priors.
+
 ## Model convergence
 
 Figures S6-S11 present the convergence of MCMC chains of the Hierarchical Drift Diffusion Models for all tasks.
@@ -407,6 +413,51 @@ ddm_fit_table |>
 ```
 
 <br>
+
+## Distributions of DDM parameters
+
+Figures S12-S14 present histograms of individual estimates of the three DDM parameters.
+With a few exceptions (particularly in non-decision times), the DDM parameters were (approximately) normally distributed. 
+
+
+```{r}
+#| label: FigureS12
+#| fig-width: 6.5
+#| fig-height: 8
+#| dpi: 600
+#| out-width: 6in
+#| fig-cap: | 
+#|   **Figure S12.** Distribution of drift rates.
+hist_v
+```
+
+<br>
+
+```{r}
+#| label: FigureS13
+#| fig-width: 6.5
+#| fig-height: 8
+#| dpi: 600
+#| out-width: 6in
+#| fig-cap: | 
+#|   **Figure S12.** Distribution of boundary separations.
+hist_a
+```
+
+<br>
+
+```{r}
+#| label: FigureS14
+#| fig-width: 6.5
+#| fig-height: 8
+#| dpi: 600
+#| out-width: 6in
+#| fig-cap: | 
+#|   **Figure S14.** Distribution of non-decision times.
+hist_t
+```
+
+<br> 
 
 # Section 4. Effects of environmental variables
 

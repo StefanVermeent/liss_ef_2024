@@ -1,0 +1,26 @@
+---
+title: ""
+output: 
+  html_document:
+    template: ../assets/template.html
+    css: ../assets/style.css
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+## Data {#data}
+
+This folder contains all the data that serves as input for the analysis scripts.
+LISS data cannot be shared on open repositories.
+If you would like to reproduce our results from scratch, you will have to download the necessary LISS data files from the data archive. Below is an overview of the required folders and datafiles:
+
+1.  `data/liss_data/background`: All waves up until (and including) September 2023 (`avars_202309_EN_1.0p.zip`) documented at <https://www.dataarchive.lissdata.nl/study-units/view/322>
+2.  `data/liss_data/income`: Wave 1-16 documented at <https://www.dataarchive.lissdata.nl/study-units/view/35>
+3.  `data/liss_data/crime`: Wave 1-6 documented at <https://www.dataarchive.lissdata.nl/study-units/view/25>
+
+At this time, the cognitive data collected in the current study are not yet available in the LISS archive. 
+I expect them to be made available by LISS in spring 2025.
+If you would like to access them before then, please contact me (p.c.s.vermeent@gmail.com) or LISS directly.
+
+If you would like to render our manuscript without rerunning all analysis scripts, you can do so directly using the analysis objects in `analysis_objects/`. These are loaded automatically by the manuscript .qmd file.
